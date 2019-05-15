@@ -1,0 +1,106 @@
+apply plugin: 'com.android.application'
+
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.zzy.mall"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        multiDexEnabled true
+
+
+        ndk {
+            // 选择要添加的对应cpu类型的.so库
+            abiFilters 'armeabi',"x86"
+        }
+
+        // AutoLayoutParams
+        manifestPlaceholders = [
+                design_width : "750",
+                design_height : "1334",
+        ]
+
+        // SCM/ARouter
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+                arguments = [moduleName: project.getName()]
+            }
+        }
+    }
+
+
+    //配置keystore签名
+    signingConfigs {
+        config {
+            storeFile file("../mall.keystore")
+            storePassword signigConfig.storePassword
+            keyAlias signigConfig.keyAlias
+            keyPassword signigConfig.keyPassword
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+        disable 'GoogleAppIndexingWarning'
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.config
+            debuggable true
+            minifyEnabled false
+            shrinkResources false
+            zipAlignEnabled false
+            jniDebuggable true
+            renderscriptDebuggable true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            signingConfig signingConfigs.config
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+            jniDebuggable false
+            renderscriptDebuggable false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+    }
+}
+
+repositories {
+    flatDir {
+        dirs '../app/libs'
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "com.android.support:appcompat-v7:${supportLibraryVersion}"
+
+
+
+
+
+}
+

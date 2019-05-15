@@ -1,0 +1,1 @@
+include ':app', ':welcome', ':common', ':home', ':login', ':other', ':helper', ':scm', ':update', ':web', ':user'

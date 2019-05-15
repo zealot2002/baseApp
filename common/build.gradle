@@ -1,0 +1,56 @@
+apply plugin: 'com.android.library'
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+
+        //SCM
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+                arguments = [moduleName: project.getName()]
+            }
+        }
+    }
+    buildTypes {
+        release {
+            consumerProguardFiles 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    // support
+    api "com.android.support:recyclerview-v7:${supportLibraryVersion}"
+    api "com.android.support.constraint:constraint-layout:${thridLibs.constraintLayout}"
+    api "com.android.support:design:${supportLibraryVersion}"
+
+    // 美团打包工具
+    api "com.meituan.android.walle:library:${thridLibs.walle}"
+    // 基础库
+    api "com.github.zealot2002:ACommonLib:${thridLibs.ACommonLib}"
+    // sp
+    api "com.github.zealot2002.flySp:core:${thridLibs.flySp}"
+    // job schedule
+    api "com.evernote:android-job:${thridLibs.job}"
+
+    // glide
+    api 'com.github.bumptech.glide:glide:4.3.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.3.1'
+
+    // refresh layout
+    api "com.scwang.smartrefresh:SmartRefreshLayout:${thridLibs.refreshLayout}"
+    api "com.scwang.smartrefresh:SmartRefreshHeader:${thridLibs.refreshLayout}"
+
+    //banner
+    compile 'cn.bingoogolapple:bga-banner:2.2.4@aar'
+
+    // server-center
+    api project(':scm')
+}
