@@ -52,5 +52,5 @@ dependencies {
     compile 'cn.bingoogolapple:bga-banner:2.2.4@aar'
 
     // server-center
-    api project(':scm')
+    api project(':servercentre')
 }

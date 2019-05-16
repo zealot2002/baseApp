@@ -13,7 +13,7 @@ import com.zzy.commonlib.http.HInterface;
 import com.zzy.commonlib.utils.ToastUtils;
 import com.zzy.sc.core.serverCenter.ScAction;
 import com.zzy.sc.core.serverCenter.ScCallback;
-import com.zzy.scm.ActionConstants;
+import com.zzy.servercentre.ActionConstants;
 import com.zzy.update.DownloadService;
 import com.zzy.update.model.HttpProxy;
 import com.zzy.update.model.UpdateBean;

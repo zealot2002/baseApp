@@ -9,7 +9,7 @@ import com.zzy.annotations.ScActionAnnotation;
 import com.zzy.common.constants.ParamConstants;
 import com.zzy.sc.core.serverCenter.ScAction;
 import com.zzy.sc.core.serverCenter.ScCallback;
-import com.zzy.scm.ActionConstants;
+import com.zzy.servercentre.ActionConstants;
 import com.zzy.web.MyWebActivity;
 
 /**

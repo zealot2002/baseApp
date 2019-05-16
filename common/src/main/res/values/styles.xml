@@ -70,7 +70,6 @@
         <item name="android:layout_marginStart">15dp</item>
         <item name="android:layout_marginEnd">15dp</item>
         <item name="android:gravity">center</item>
-        <item name="android:background">@drawable/btn_base_selector</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">17sp</item>
     </style>
@@ -79,7 +78,7 @@
     <style name="split_line">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
-        <item name="android:background">@color/gray_FFEFEFF4</item>
+        <item name="android:background">@color/gray</item>
     </style>
 
 </resources>

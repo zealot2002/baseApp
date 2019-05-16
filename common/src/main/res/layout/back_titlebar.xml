@@ -48,7 +48,6 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="24px"
-        android:src="@drawable/loading_0"
         android:visibility="gone" />
 
     <View

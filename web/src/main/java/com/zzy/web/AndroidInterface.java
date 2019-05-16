@@ -15,7 +15,7 @@ import com.zzy.common.network.HttpUtils;
 import com.zzy.flysp.core.spHelper.SPHelper;
 import com.zzy.sc.core.serverCenter.SCM;
 import com.zzy.sc.core.serverCenter.ScCallback;
-import com.zzy.scm.ActionConstants;
+import com.zzy.servercentre.ActionConstants;
 import com.zzy.web.constants.H5ActionConstants;
 import com.zzy.web.utils.InnerUtils;
 

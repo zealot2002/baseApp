@@ -3,7 +3,7 @@
     android:layout_width="180dip"
     android:layout_height="120dip"
     android:alpha="100"
-    android:background="@drawable/bg_loading" >
+    android:background="@mipmap/bg_loading" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,7 +25,6 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="10dip"
-            android:src="@drawable/loading_0"
             android:scaleType="fitXY"
             />
     </LinearLayout>

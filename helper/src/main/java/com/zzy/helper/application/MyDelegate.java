@@ -6,7 +6,7 @@ import android.app.Application;
 import com.zzy.common.application.ApplicationDelegate;
 import com.zzy.commonlib.utils.ProcessUtils;
 import com.zzy.sc.core.serverCenter.SCM;
-import com.zzy.scm.ActionConstants;
+import com.zzy.servercentre.ActionConstants;
 
 public class MyDelegate implements ApplicationDelegate {
     @Override

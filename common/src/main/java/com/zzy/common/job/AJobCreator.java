@@ -19,9 +19,6 @@ public class AJobCreator implements JobCreator {
             case JPushInitJob.TAG:
                 return new JPushInitJob();
 
-            case ShareInitJob.TAG:
-                return new ShareInitJob();
-
             case H5ProtocolsInitJob.TAG:
                 return new H5ProtocolsInitJob();
             default:

@@ -1,8 +1,6 @@
 package com.zzy.common.application;
 
 import android.app.Application;
-import android.content.ComponentCallbacks2;
-import android.os.Environment;
 import android.util.Log;
 import android.view.Gravity;
 
@@ -10,7 +8,6 @@ import com.evernote.android.job.JobManager;
 import com.zhy.autolayout.config.AutoLayoutConifg;
 import com.zzy.common.constants.SPConstants;
 import com.zzy.common.job.AJobCreator;
-import com.zzy.common.job.ShareInitJob;
 import com.zzy.common.utils.CommonUtils;
 import com.zzy.commonlib.CommonLibHelper;
 import com.zzy.commonlib.log.MyLog;
@@ -19,7 +16,7 @@ import com.zzy.commonlib.utils.ProcessUtils;
 import com.zzy.commonlib.utils.ToastUtils;
 import com.zzy.flysp.core.spHelper.SPHelper;
 import com.zzy.sc.core.serverCenter.SCM;
-import com.zzy.scm.ActionConstants;
+import com.zzy.servercentre.ActionConstants;
 
 public class MyDelegate implements ApplicationDelegate {
 
@@ -72,7 +69,6 @@ public class MyDelegate implements ApplicationDelegate {
             /* job */
             JobManager.create(application).addJobCreator(new AJobCreator());
             //JPushInitJob.execute();
-            ShareInitJob.execute();
             // step counter
 
         }

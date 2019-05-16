@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="home_tab_text_color_normal">@color/text_black</color>
+    <color name="home_tab_text_color_checked">@color/orange</color>
+
+</resources>

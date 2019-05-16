@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.zzy.sc.core.serverCenter.SCM;
-import com.zzy.scm.ActionConstants;
+import com.zzy.servercentre.ActionConstants;
 import com.zzy.web.R;
 
 import java.net.URLDecoder;

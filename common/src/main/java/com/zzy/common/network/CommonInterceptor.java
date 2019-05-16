@@ -10,7 +10,7 @@ import com.zzy.commonlib.http.RequestCtx;
 import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.commonlib.utils.ToastUtils;
 import com.zzy.sc.core.serverCenter.SCM;
-import com.zzy.scm.ActionConstants;
+import com.zzy.servercentre.ActionConstants;
 
 import org.json.JSONObject;
 import org.json.JSONTokener;

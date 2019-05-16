@@ -10,7 +10,7 @@ import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.flysp.core.spHelper.SPHelper;
 import com.zzy.sc.core.serverCenter.SCM;
 import com.zzy.sc.core.serverCenter.ScCallback;
-import com.zzy.scm.ActionConstants;
+import com.zzy.servercentre.ActionConstants;
 
 
 /**
