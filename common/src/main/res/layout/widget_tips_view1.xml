@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    >
+    <TextView
+        android:id="@+id/tvText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="出借有风险，选择需谨慎"
+        android:textSize="22px"
+        android:textColor="@color/text_gray"
+        android:layout_centerInParent="true"
+        android:layout_margin="14px"
+        />
+</RelativeLayout>

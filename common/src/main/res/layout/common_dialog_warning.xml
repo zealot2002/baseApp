@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_dialog_warning">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="288dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38.3dp"
+        android:layout_marginBottom="22.7dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:src="@drawable/img_figure" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22.7dp"
+            android:text="@string/common_lend_has_risk"
+            android:textColor="@color/black_FF333333"
+            android:textSize="15.3sp" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16.7sp"
+            android:gravity="center"
+            android:text="@string/common_warning_rate"
+            android:textColor="@color/_FF646464"
+            android:textSize="12.3sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_warning_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/linearLayout"
+        android:contentDescription="@null"
+        android:padding="13.3dp"
+        android:src="@mipmap/dialog_close" />
+
+</RelativeLayout>

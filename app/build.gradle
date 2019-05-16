@@ -58,14 +58,7 @@ android {
 
     buildTypes {
         debug {
-            signingConfig signingConfigs.config
-            debuggable true
-            minifyEnabled false
-            shrinkResources false
-            zipAlignEnabled false
-            jniDebuggable true
-            renderscriptDebuggable true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
         }
         release {
             signingConfig signingConfigs.config
@@ -98,9 +91,17 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "com.android.support:appcompat-v7:${supportLibraryVersion}"
 
+    implementation project(':common')
+    implementation project(':helper')
+    implementation project(':home')
+    implementation project(':welcome')
+    implementation project(':login')
+    implementation project(':user')
+    implementation project(':other')
+    implementation project(':web')
+    implementation project(':update')
 
-
-
+    implementation project(':scm')
 
 }
 

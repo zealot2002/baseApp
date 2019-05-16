@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="trans">#00000000</color>
+
+    <!-- button -->
+    <color name="_FD4B17">#FD4B17</color>
+    <color name="_FE6427">#FE6427</color>
+    <color name="_FE9373">#FE9373</color>
+    <color name="_FFA27D">#FFA27D</color>
+
+    <color name="white_FFF5F5F5">#FFF5F5F5</color>
+    <color name="white_FFFFFEFE">#FFFFFEFE</color>
+    <color name="white_FFFFFFFF">#FFFFFFFF</color>
+    <color name="black_FF555555">#FF555555</color>
+    <color name="black_FF999999">#FF999999</color>
+    <color name="yellow_E3B76B">#E3B76B</color>
+    <color name="yellow_FFD95">#FFDD95</color>
+    <color name="gold_FFC9A861">#FFC9A861</color>
+    <color name="coupon_type1_color">#F66454</color>
+    <color name="coupon_type1_bg">#FEEBE9</color>
+    <color name="black_FF333333">#FF333333</color>
+    <color name="gray_FFEFEFF4">#FFEFEFF4</color>
+    <color name="black_999999">#999999</color>
+    <color name="gray_FF9698A4">#FF9698A4</color>
+    <color name="gray_FFDEE4E9">#FFDEE4E9</color>
+    <color name="gray_FFF6F6F6">#FFF6F6F6</color>
+    <color name="gray_FFEEEEEE">#FFEEEEEE</color>
+    <color name="black_FF414141">#FF414141</color>
+    <color name="gray_FFD7D7D7">#FFD7D7D7</color>
+    <color name="gray_FFE1E1E1">#FFE1E1E1</color>
+    <color name="gray_FF666666">#FF666666</color>
+    <color name="white_FFF0F0F0">#FFF0F0F0</color>
+    <color name="_FC481A">#FC481A</color>
+    <color name="gray_FFF9F8F7">#FFF9F8F7</color>
+    <color name="black_FF666666">#FF666666</color>
+    <color name="gray_FF999999">#FF999999</color>
+    <color name="_FE6528">#FE6528</color>
+    <color name="red_FFFE6528">#FFFE6528</color>
+    <color name="_F9BF4B">#F9BF4B</color>
+    <color name="gray_FFC1C1C1">#FFC1C1C1</color>
+    <color name="gray_FFF5F6F8">#FFF5F6F8</color>
+    <color name="gold_FFDAC79E">#FFDAC79E</color>
+    <color name="gold_FFECE0BD">#FFECE0BD</color>
+    <color name="gold_FFBE9E5A">#FFBE9E5A</color>
+    <color name="gold_FFE0CD93">#FFE0CD93</color>
+    <color name="home_FF666666">#FF666666</color>
+    <color name="home_FFE0E0E0">#FFE0E0E0</color>
+    <color name="_FF646464">#FF646464</color>
+    <color name="black_FF434C5D">#FF434C5D</color>
+    <color name="gray_FFEAEAEA">#FFEAEAEA</color>
+    <color name="gray_FFA3A4AA">#FFA3A4AA</color>
+    <color name="gray_FF727273">#FF727273</color>
+    <color name="gold_FFBF9F5B">#FFBF9F5B</color>
+    <color name="gray_FF808080">#FF808080</color>
+    <color name="FF666666">#FF666666</color>
+    <color name="yellow_FFC9A861">#FFC9A861</color>
+    <color name="black_FF000000">#FF000000</color>
+    <color name="asset_type_gray">#fff4f4f4</color>
+    <color name="asset_type_unable_gray">#FFE5E5E5 </color>
+    <color name="asset_type_select">#FFFE6528</color>
+    <color name="gray_FF9F9F9F">#FF9F9F9F</color>
+    <color name="gray_1E868686">#1E868686</color>
+    <color name="coupon_type2_bg">#F9EFD3</color>
+    <color name="coupon_type2_color">#D9A71E</color>
+    <color name="coupon_type3_bg">#FCF3E9</color>
+    <color name="coupon_type3_color">#ED9E53</color>
+    <color name="yellow_FFED9E53">#FFED9E53</color>
+
+    <!--good-->
+    <color name="text_black">#4F5160</color>
+    <color name="text_black2">#333333</color>
+    <color name="text_gray">#9F9FB0</color>
+    <color name="divider_gray">#F2F4F6</color>
+    <color name="gray">#A3A4AA</color>
+
+    <color name="red">#FC481A</color>
+    <color name="orange">#fe6226</color>
+    <color name="light_orange">#FFA27D</color>
+
+    <color name="green">#33CC00</color>
+    <color name="blue">#3A99FF</color>
+
+</resources>

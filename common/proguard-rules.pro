@@ -19,3 +19,9 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keep public class * implements com.zzy.common.application.ApplicationDelegate
+-keep public class * implements com.zzy.sc.core.serverCenter.ScAction
+
+-keep class com.zzy.common.application.ApplicationDelegate
+-keep class com.zzy.sc.core.serverCenter.**{*;}
