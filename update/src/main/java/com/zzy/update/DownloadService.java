@@ -22,7 +22,7 @@ import java.io.File;
  * Created by haoran on 2019/3/21.
  */
 public class DownloadService extends IntentService {
-
+    private static final String APK_NAME = "dk.apk";
     private BroadcastReceiver receiver;
 
     public DownloadService() {
@@ -50,7 +50,7 @@ public class DownloadService extends IntentService {
             DownloadManager.Request request = new DownloadManager
                     .Request(Uri.parse(intent.getExtras().getString(ParamConstants.URL)));
             request.setMimeType("application/vnd.android.package-archive");
-            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "hyr.apk");
+            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, APK_NAME);
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
             request.setTitle("下载新版本");
             //执行下载，并返回任务唯一id
@@ -91,7 +91,7 @@ public class DownloadService extends IntentService {
 
 
     private void install(Context context) {
-        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "hyr.apk");
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), APK_NAME);
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         if (Build.VERSION.SDK_INT >= 24) {
