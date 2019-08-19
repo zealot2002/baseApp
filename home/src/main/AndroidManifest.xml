@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.zzy.home">
+    package="com.zzy.login">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -10,7 +10,7 @@
         android:supportsRtl="true">
 
         <activity
-            android:name=".view.activity.HomeActivity"
+            android:name="com.zzy.login.view.activity.LoginActivity"
             android:theme="@style/activity_theme" />
     </application>
 

@@ -6,6 +6,7 @@ import android.view.Gravity;
 
 import com.evernote.android.job.JobManager;
 import com.zhy.autolayout.config.AutoLayoutConifg;
+import com.zzy.common.BuildConfig;
 import com.zzy.common.constants.SPConstants;
 import com.zzy.common.job.AJobCreator;
 import com.zzy.common.utils.CommonUtils;
@@ -32,7 +33,8 @@ public class MyDelegate implements ApplicationDelegate {
         /* auto layout */
         AutoLayoutConifg.getInstance().useDeviceSize().init(application);
         /* log */
-        MyLog.setLogEnable(true);
+//        MyLog.init(BuildConfig.DEBUG,application,"dk");
+        MyLog.init(true,application,"dk");
 
         ToastUtils.setGravity(Gravity.CENTER, 0, 0);
 

@@ -17,11 +17,5 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".GuideActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/welcome_full_screen"
-            android:process=":welcome"
-            />
     </application>
 </manifest>

@@ -12,7 +12,7 @@ public class ActionConstants {
 
     /* home */
 
-    public static final String ENTRY_HOME_ACTIVITY_ACTION = "entryHome";
+    public static final String ENTRY_HOME_ACTIVITY_ACTION = "entryLogin";
     public static final String GET_FUNDS_INFO_ACTION = "getFundsInfo";
     /*app update*/
     public static final String CHECK_UPDATE_ACTION = "checkUpdate";
