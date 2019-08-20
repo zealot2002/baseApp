@@ -16,6 +16,8 @@ public class ActionConstants {
     /* login */
     public static final String ENTRY_LOGIN_ACTIVITY_ACTION = "entryLogin";
 
+    /* mine */
+    public static final String ENTRY_MY_MAIN_ACTIVITY_ACTION = "entryMyMain";
 
     /* business */
     public static final String ENTRY_PHONE_BOOK_ACTIVITY_ACTION = "entryPhoneBook";

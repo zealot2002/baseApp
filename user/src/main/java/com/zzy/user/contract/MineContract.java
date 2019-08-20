@@ -1,4 +1,4 @@
-package com.zzy.login.contract;
+package com.zzy.user.contract;
 
 import com.zzy.commonlib.base.BaseLoadingView;
 import com.zzy.commonlib.base.BasePresenter;

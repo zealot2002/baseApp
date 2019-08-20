@@ -49,7 +49,7 @@ public class BottomNavBar extends RelativeLayout implements View.OnClickListener
             if(v.getId() == R.id.llPb){
                 SCM.getInstance().req(getContext(), ActionConstants.ENTRY_PHONE_BOOK_ACTIVITY_ACTION);
             }else if(v.getId() == R.id.llMine){
-                SCM.getInstance().req(getContext(), ActionConstants.ENTRY_HOME_ACTIVITY_ACTION);
+                SCM.getInstance().req(getContext(), ActionConstants.ENTRY_MY_MAIN_ACTIVITY_ACTION);
             }else if(v.getId() == R.id.btnHome){
                 SCM.getInstance().req(getContext(), ActionConstants.ENTRY_HOME_ACTIVITY_ACTION);
             }

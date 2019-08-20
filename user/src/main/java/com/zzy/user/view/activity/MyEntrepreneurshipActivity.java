@@ -1,4 +1,4 @@
-package com.zzy.login.view.activity;
+package com.zzy.user.view.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,9 +9,9 @@ import com.zzy.common.base.BaseToolbarActivity;
 import com.zzy.user.R;
 
 /**
- * 我的档案
+ * 我的创业
  */
-public class MyArchivesActivity extends BaseToolbarActivity implements View.OnClickListener {
+public class MyEntrepreneurshipActivity extends BaseToolbarActivity implements View.OnClickListener {
     private EditText etPhone,etPassword;
     private Button btnOk;
     private TextView tvToBePioneer,tvForgetPassword;
@@ -20,7 +20,7 @@ public class MyArchivesActivity extends BaseToolbarActivity implements View.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home_school_fragment);
+        setContentView(R.layout.user_my_main_activity);
         setupViews();
     }
 

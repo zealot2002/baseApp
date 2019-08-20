@@ -1,4 +1,4 @@
-package com.zzy.login.view.activity;
+package com.zzy.user.view.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,9 +9,9 @@ import com.zzy.common.base.BaseToolbarActivity;
 import com.zzy.user.R;
 
 /**
- * 我要买的东西
+ * 我要卖的东西
  */
-public class MyGoodsToBuyActivity extends BaseToolbarActivity implements View.OnClickListener {
+public class MyGoodsToSellActivity extends BaseToolbarActivity implements View.OnClickListener {
     private EditText etPhone,etPassword;
     private Button btnOk;
     private TextView tvToBePioneer,tvForgetPassword;
@@ -20,7 +20,7 @@ public class MyGoodsToBuyActivity extends BaseToolbarActivity implements View.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home_school_fragment);
+        setContentView(R.layout.user_my_main_activity);
         setupViews();
     }
 

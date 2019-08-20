@@ -1,14 +1,14 @@
-package com.zzy.login.presenter;
+package com.zzy.user.presenter;
 import android.support.annotation.NonNull;
 
 import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.http.HInterface;
 import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.commonlib.utils.NetUtils;
-import com.zzy.login.contract.MineContract;
-import com.zzy.login.model.HttpProxy;
-import com.zzy.login.model.bean.main.BannerBean;
-import com.zzy.login.model.wrapper.HfCtx;
+import com.zzy.user.contract.MineContract;
+import com.zzy.user.model.HttpProxy;
+import com.zzy.user.model.bean.main.BannerBean;
+import com.zzy.user.model.wrapper.HfCtx;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @date 2018/08/07 16:25:23
  */
 
-public class MainPresenter implements MineContract.Presenter{
+public class MainPresenter implements MineContract.Presenter {
     private final MineContract.View view;
     private HfCtx hfCtx;
     private AtomicInteger dog;

@@ -51,6 +51,7 @@
         android:layout_below="@+id/rlTitle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/margin120"
         />
     <com.zzy.common.widget.BottomNavBar
         android:layout_width="match_parent"

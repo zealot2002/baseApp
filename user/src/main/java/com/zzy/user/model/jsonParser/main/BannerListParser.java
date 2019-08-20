@@ -1,10 +1,10 @@
-package com.zzy.login.model.jsonParser.main;
+package com.zzy.user.model.jsonParser.main;
 
 import com.zzy.common.constants.HttpConstants;
 import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.http.HInterface;
 import com.zzy.commonlib.log.MyLog;
-import com.zzy.login.model.bean.main.BannerBean;
+import com.zzy.user.model.bean.main.BannerBean;
 
 import org.json.JSONArray;
 import org.json.JSONException;

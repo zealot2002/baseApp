@@ -1,4 +1,4 @@
-package com.zzy.login.model.bean.main;
+package com.zzy.user.model.bean.main;
 
 /**
  * @author zzy

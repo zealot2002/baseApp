@@ -1,11 +1,11 @@
-package com.zzy.login.action;
+package com.zzy.user.action;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.zzy.annotations.ScActionAnnotation;
-import com.zzy.login.view.activity.MyMainActivity;
+import com.zzy.user.view.activity.MyMainActivity;
 import com.zzy.sc.core.serverCenter.ScAction;
 import com.zzy.sc.core.serverCenter.ScCallback;
 import com.zzy.servercentre.ActionConstants;
@@ -15,8 +15,8 @@ import com.zzy.servercentre.ActionConstants;
  * @author zzy
  * @date 2018/8/13
  */
-@ScActionAnnotation(ActionConstants.GET_FUNDS_INFO_ACTION)
-public class HomeEntryAction implements ScAction {
+@ScActionAnnotation(ActionConstants.ENTRY_MY_MAIN_ACTIVITY_ACTION)
+public class MyMainEntryAction implements ScAction {
 
     @Override
     public void invoke(Context context, Bundle bundle, String s, ScCallback scCallback) {

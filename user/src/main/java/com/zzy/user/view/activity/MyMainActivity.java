@@ -1,17 +1,17 @@
-package com.zzy.login.view.activity;
+package com.zzy.user.view.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.zzy.common.base.BaseToolbarActivity;
+import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.user.R;
 
 /**
- * 系统设置
+ * 我的首页
  */
-public class SettingsActivity extends BaseToolbarActivity implements View.OnClickListener {
+public class MyMainActivity extends BaseTitleAndBottomBarActivity implements View.OnClickListener {
     private EditText etPhone,etPassword;
     private Button btnOk;
     private TextView tvToBePioneer,tvForgetPassword;
@@ -20,13 +20,12 @@ public class SettingsActivity extends BaseToolbarActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home_school_fragment);
-        setupViews();
+        setTitle("我的");
     }
 
     @Override
     protected int getLayoutId() {
-        return 0;
+        return R.layout.user_my_main_activity;
     }
 
     private void setupViews() {

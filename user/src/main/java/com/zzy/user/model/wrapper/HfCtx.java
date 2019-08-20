@@ -1,8 +1,8 @@
-package com.zzy.login.model.wrapper;
+package com.zzy.user.model.wrapper;
 
 
 
-import com.zzy.login.model.bean.main.BannerBean;
+import com.zzy.user.model.bean.main.BannerBean;
 
 import java.util.ArrayList;
 import java.util.List;

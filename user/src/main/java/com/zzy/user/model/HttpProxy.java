@@ -1,10 +1,10 @@
-package com.zzy.login.model;
+package com.zzy.user.model;
 
 
 import com.zzy.common.constants.HttpConstants;
 import com.zzy.common.network.HttpUtils;
 import com.zzy.commonlib.http.HInterface;
-import com.zzy.login.model.jsonParser.main.BannerListParser;
+import com.zzy.user.model.jsonParser.main.BannerListParser;
 
 import org.json.JSONObject;
 
