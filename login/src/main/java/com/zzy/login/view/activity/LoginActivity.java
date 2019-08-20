@@ -51,9 +51,9 @@ public class LoginActivity extends BaseAppActivity implements View.OnClickListen
             }
             finish();
         }else if(v.getId() == R.id.tvToBePioneer){
-            ToastUtils.showShort("进入首页");
+            startActivity(RegisterActivity.class);
         }else if(v.getId() == R.id.tvForgetPassword){
-            ToastUtils.showShort("进入首页");
+            startActivity(ForgetPasswordActivity.class);
         }
 
     }
