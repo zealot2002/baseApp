@@ -6,7 +6,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.zzy.common.base.BaseAppActivity;
+import com.zzy.commonlib.utils.ToastUtils;
 import com.zzy.login.R;
+import com.zzy.sc.core.serverCenter.SCM;
+import com.zzy.servercentre.ActionConstants;
 
 /**
  * login
@@ -40,11 +43,17 @@ public class LoginActivity extends BaseAppActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btnOk){
-            // TODO: 2019/8/19   to login 
+            // TODO: 2019/8/20  to login!
+            try {
+                SCM.getInstance().req(this, ActionConstants.ENTRY_HOME_ACTIVITY_ACTION);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            finish();
         }else if(v.getId() == R.id.tvToBePioneer){
-
+            ToastUtils.showShort("进入首页");
         }else if(v.getId() == R.id.tvForgetPassword){
-
+            ToastUtils.showShort("进入首页");
         }
 
     }

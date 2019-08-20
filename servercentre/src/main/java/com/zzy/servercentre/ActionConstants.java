@@ -11,8 +11,14 @@ public class ActionConstants {
     * */
 
     /* home */
+    public static final String ENTRY_HOME_ACTIVITY_ACTION = "entryHome";
 
-    public static final String ENTRY_HOME_ACTIVITY_ACTION = "entryLogin";
+    /* login */
+    public static final String ENTRY_LOGIN_ACTIVITY_ACTION = "entryLogin";
+
+
+    /* business */
+    public static final String ENTRY_PHONE_BOOK_ACTIVITY_ACTION = "entryPhoneBook";
     public static final String GET_FUNDS_INFO_ACTION = "getFundsInfo";
     /*app update*/
     public static final String CHECK_UPDATE_ACTION = "checkUpdate";
@@ -31,9 +37,7 @@ public class ActionConstants {
 
     public static final String INIT_PUSH_ACTION = "initJPush";
 
-    /* login */
 
-    public static final String ENTRY_LOGIN_ACTIVITY_ACTION = "entryLogin";
     public static final String ENTRY_MODIFY_GESTURES_PWD_ACTIVITY_ACTION = "updateGesture";
     public static final String ENTRY_CREATE_GESTURES_PWD_ACTIVITY_ACTION = "createGesture";
     public static final String ENTRY_MODIFY_LOGIN_PWD_ACTIVITY_ACTION = "updateLoginPwd";

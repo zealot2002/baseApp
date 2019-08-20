@@ -81,4 +81,8 @@
         <item name="android:background">@color/gray</item>
     </style>
 
+    <style name="welcome_full_screen" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowFullscreen">true</item>
+    </style>
 </resources>

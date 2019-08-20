@@ -1,23 +1,21 @@
 <resources>
 
     <!-- 首页tab新样式 -->
-    <style name="home_tab_style">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">center</item>
-        <item name="android:padding">5dp</item>
-        <item name="android:layout_weight">1.0</item>
-        <item name="android:orientation">vertical</item>
-        <item name="android:clickable">true</item>
-        <item name="android:focusable">true</item>
+    <style name="home_btn_style_1">
+        <item name="android:layout_width">150px</item>
+        <item name="android:layout_height">48px</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:background">@mipmap/home_btn1</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <!-- 首页tab的文字样式 -->
-    <style name="home_tab_tv_style">
-        <item name="android:textSize">10sp</item>
-        <item name="android:textColor">#999999</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:duplicateParentState">true</item>
+    <style name="home_btn_style_2">
+        <item name="android:layout_width">165px</item>
+        <item name="android:layout_height">165px</item>
+        <item name="android:background">@mipmap/home_btn2</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 </resources>
