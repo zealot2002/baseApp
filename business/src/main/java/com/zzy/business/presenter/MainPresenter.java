@@ -2,15 +2,9 @@ package com.zzy.business.presenter;
 import android.support.annotation.NonNull;
 
 import com.zzy.business.contract.LoginContract;
-import com.zzy.business.model.HttpProxy;
-import com.zzy.business.model.bean.main.BannerBean;
-import com.zzy.business.model.wrapper.HfCtx;
-import com.zzy.commonlib.http.HConstant;
-import com.zzy.commonlib.http.HInterface;
 import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.commonlib.utils.NetUtils;
 
-import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -21,12 +15,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class MainPresenter implements LoginContract.Presenter{
     private final LoginContract.View view;
-    private HfCtx hfCtx;
     private AtomicInteger dog;
 /****************************************************************************************************/
     public MainPresenter(@NonNull LoginContract.View view) {
         this.view = view;
-        hfCtx = new HfCtx();
         dog = new AtomicInteger(0);
     }
     @Override
@@ -47,19 +39,19 @@ public class MainPresenter implements LoginContract.Presenter{
 
 
     private void getBannerList() throws Exception{
-        HttpProxy.getBannerList(new HInterface.DataCallback() {
-            @Override
-            public void requestCallback(int result, Object o, Object o1) {
-                if (result == HConstant.SUCCESS) {
-                    hfCtx.setBannerList((List<BannerBean>) o);
-                    updateUI();
-                }else if(result == HConstant.INTERCEPTED) {
-                    //do nothing
-                }else{
-                    handleErrs((String) o);
-                }
-            }
-        });
+//        HttpProxy.getBannerList(new HInterface.DataCallback() {
+//            @Override
+//            public void requestCallback(int result, Object o, Object o1) {
+//                if (result == HConstant.SUCCESS) {
+//                    hfCtx.setBannerList((List<BannerBean>) o);
+//                    updateUI();
+//                }else if(result == HConstant.INTERCEPTED) {
+//                    //do nothing
+//                }else{
+//                    handleErrs((String) o);
+//                }
+//            }
+//        });
     }
 
     private void updateUI(){
@@ -73,7 +65,6 @@ public class MainPresenter implements LoginContract.Presenter{
         **/
         if(dog.incrementAndGet() == 1) {
             view.closeLoading();
-            view.updateUI(hfCtx);
         }
     }
     private void handleErrs(String s){

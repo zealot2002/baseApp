@@ -47,6 +47,7 @@
     <!--沉浸式满屏-->
     <style name="activity_theme" parent="translucentWithOpStyle">
         <item name="android:launchMode">singleTop</item>
+        <item name="android:screenOrientation">portrait</item>
     </style>
 
     <style name="common_dialog_warning" parent="@android:style/Theme.Dialog">

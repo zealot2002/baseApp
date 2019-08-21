@@ -30,27 +30,27 @@ public class FeedbackActivity extends BaseTitleAndBottomBarActivity implements V
     }
 
     private void setupViews() {
-        etPhone = findViewById(R.id.etPhone);
-        etPassword = findViewById(R.id.etPassword);
-        btnOk = findViewById(R.id.btnOk);
-        tvToBePioneer = findViewById(R.id.tvToBePioneer);
-        tvForgetPassword = findViewById(R.id.tvForgetPassword);
-
-        btnOk.setOnClickListener(this);
-        tvToBePioneer.setOnClickListener(this);
-        tvForgetPassword.setOnClickListener(this);
+//        etPhone = findViewById(R.id.etPhone);
+//        etPassword = findViewById(R.id.etPassword);
+//        btnOk = findViewById(R.id.btnOk);
+//        tvToBePioneer = findViewById(R.id.tvToBePioneer);
+//        tvForgetPassword = findViewById(R.id.tvForgetPassword);
+//
+//        btnOk.setOnClickListener(this);
+//        tvToBePioneer.setOnClickListener(this);
+//        tvForgetPassword.setOnClickListener(this);
     }
 
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.btnOk){
-            // TODO: 2019/8/19   to login 
-        }else if(v.getId() == R.id.tvToBePioneer){
-
-        }else if(v.getId() == R.id.tvForgetPassword){
-
-        }
+//        if(v.getId() == R.id.btnOk){
+//            // TODO: 2019/8/19   to login
+//        }else if(v.getId() == R.id.tvToBePioneer){
+//
+//        }else if(v.getId() == R.id.tvForgetPassword){
+//
+//        }
 
     }
 }

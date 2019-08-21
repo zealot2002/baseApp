@@ -20,7 +20,7 @@ public class GetRichInfoDetailActivity extends BaseToolbarActivity implements Vi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_main_activity);
+        setContentView(R.layout.busi_menu_list_item);
         setupViews();
     }
 
@@ -30,11 +30,11 @@ public class GetRichInfoDetailActivity extends BaseToolbarActivity implements Vi
     }
 
     private void setupViews() {
-        etPhone = findViewById(R.id.etPhone);
-        etPassword = findViewById(R.id.etPassword);
-        btnOk = findViewById(R.id.btnOk);
-        tvToBePioneer = findViewById(R.id.tvToBePioneer);
-        tvForgetPassword = findViewById(R.id.tvForgetPassword);
+//        etPhone = findViewById(R.id.etPhone);
+//        etPassword = findViewById(R.id.etPassword);
+//        btnOk = findViewById(R.id.btnOk);
+//        tvToBePioneer = findViewById(R.id.tvToBePioneer);
+//        tvForgetPassword = findViewById(R.id.tvForgetPassword);
 
         btnOk.setOnClickListener(this);
         tvToBePioneer.setOnClickListener(this);
@@ -44,13 +44,13 @@ public class GetRichInfoDetailActivity extends BaseToolbarActivity implements Vi
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.btnOk){
-            // TODO: 2019/8/19   to login 
-        }else if(v.getId() == R.id.tvToBePioneer){
-
-        }else if(v.getId() == R.id.tvForgetPassword){
-
-        }
+//        if(v.getId() == R.id.btnOk){
+//            // TODO: 2019/8/19   to login
+//        }else if(v.getId() == R.id.tvToBePioneer){
+//
+//        }else if(v.getId() == R.id.tvForgetPassword){
+//
+//        }
 
     }
 }

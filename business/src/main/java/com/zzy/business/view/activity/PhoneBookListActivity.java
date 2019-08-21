@@ -1,13 +1,11 @@
 package com.zzy.business.view.activity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.zzy.business.R;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
-import com.zzy.common.base.BaseToolbarActivity;
 
 /**
  * 通讯录
@@ -26,7 +24,7 @@ public class PhoneBookListActivity extends BaseTitleAndBottomBarActivity{
 
     @Override
     protected int getLayoutId() {
-        return R.layout.login_main_activity;
+        return R.layout.busi_menu_list_item;
     }
 
 }
