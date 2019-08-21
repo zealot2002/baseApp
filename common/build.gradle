@@ -53,4 +53,6 @@ dependencies {
 
     // server-center
     api project(':servercentre')
+
+    api 'com.github.ganfra:material-spinner:2.0.0'
 }

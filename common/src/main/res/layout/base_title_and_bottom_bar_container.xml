@@ -51,11 +51,12 @@
         android:layout_below="@+id/rlTitle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/margin120"
+        android:layout_marginBottom="89px"
         />
     <com.zzy.common.widget.BottomNavBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:background="@null"
         />
 </RelativeLayout>

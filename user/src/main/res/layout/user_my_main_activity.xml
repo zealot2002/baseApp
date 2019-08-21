@@ -127,6 +127,7 @@
            android:textSize="14sp"
            android:textColor="@color/white"
            android:layout_marginLeft="50px"
+           android:layout_marginBottom="20dp"
            />
     </LinearLayout>
 </ScrollView>

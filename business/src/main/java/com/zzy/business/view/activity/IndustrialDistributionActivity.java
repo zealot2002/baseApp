@@ -7,11 +7,12 @@ import android.widget.TextView;
 
 import com.zzy.business.R;
 import com.zzy.common.base.BaseAppActivity;
+import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 
 /**
  * 产业分布
  */
-public class IndustrialDistributionActivity extends BaseAppActivity implements View.OnClickListener {
+public class IndustrialDistributionActivity extends BaseTitleAndBottomBarActivity implements View.OnClickListener {
     private EditText etPhone,etPassword;
     private Button btnOk;
     private TextView tvToBePioneer,tvForgetPassword;
@@ -20,8 +21,12 @@ public class IndustrialDistributionActivity extends BaseAppActivity implements V
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_main_activity);
-        setupViews();
+        setTitle("产业分布");
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.busi_industrial_distribution_activity;
     }
 
     private void setupViews() {

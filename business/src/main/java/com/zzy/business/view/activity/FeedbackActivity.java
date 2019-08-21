@@ -6,12 +6,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.zzy.business.R;
+import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.base.BaseToolbarActivity;
 
 /**
  * 我有意见
  */
-public class FeedbackActivity extends BaseToolbarActivity implements View.OnClickListener {
+public class FeedbackActivity extends BaseTitleAndBottomBarActivity implements View.OnClickListener {
     private EditText etPhone,etPassword;
     private Button btnOk;
     private TextView tvToBePioneer,tvForgetPassword;
@@ -20,13 +21,12 @@ public class FeedbackActivity extends BaseToolbarActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_main_activity);
-        setupViews();
+        setTitle("我有意见");
     }
 
     @Override
     protected int getLayoutId() {
-        return 0;
+        return R.layout.busi_feedback_activity;
     }
 
     private void setupViews() {

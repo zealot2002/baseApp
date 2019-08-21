@@ -3,17 +3,20 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zzy.common.base.BaseAppActivity;
-import com.zzy.common.base.BaseToolbarActivity;
 import com.zzy.common.utils.StatusBarUtils;
 import com.zzy.commonlib.utils.ToastUtils;
 import com.zzy.commonlib.utils.ValidateUtils;
 import com.zzy.login.R;
+import java.util.ArrayList;
+import java.util.List;
+import fr.ganfra.materialspinner.MaterialSpinner;
 
 /**
  * register
@@ -22,7 +25,7 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
     private EditText etPhone,etSms,etPd1,etPd2;
     private Button btnNext,btnOk;
     private TextView tvSendSms;
-
+    private MaterialSpinner spinnerCounty,spinnerTown,spinnerVillage;
     /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +53,34 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
         etPd2 = findViewById(R.id.etPd2);
         tvSendSms = findViewById(R.id.tvSendSms);
         btnNext = findViewById(R.id.btnNext);
-//
+
         btnNext.setOnClickListener(this);
         tvSendSms.setOnClickListener(this);
+
+        setupSpinner();
+    }
+
+    private void setupSpinner() {
+        spinnerCounty = findViewById(R.id.spinnerCounty);
+        List<String> list1 = new ArrayList<>();
+        list1.add("景宁县");
+        list1.add("青田县");
+        list1.add("松阳县");
+        list1.add("云和县");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, list1);
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spinnerCounty = findViewById(R.id.spinnerCounty);
+        spinnerCounty.setAdapter(adapter);
+
+//        spinnerTown = findViewById(R.id.spinnerTown);
+//        List<String> list2 = new ArrayList<>();
+//        list2.add("景宁县");
+//        list2.add("青田县");
+//        list2.add("松阳县");
+//        list2.add("云和县");
+//
+//        spinnerTown.attachDataSource(list2);
     }
 
 

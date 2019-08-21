@@ -6,7 +6,94 @@
         android:supportsRtl="true">
 
         <activity
+            android:name=".view.activity.AssemblyDetailActivity"
+            android:theme="@style/activity_theme" />
+        <activity
+            android:name=".view.activity.BuyGoodsActivity"
+            android:theme="@style/activity_theme" />
+        <activity
+            android:name=".view.activity.BuyGoodsListActivity"
+            android:theme="@style/activity_theme" />
+        <activity
+            android:name=".view.activity.ContentDetailActivity"
+            android:theme="@style/activity_theme" />
+        <activity
+            android:name=".view.activity.EntrepreneurshipActivity"
+            android:theme="@style/activity_theme" />
+        <activity
+            android:name=".view.activity.EntrepreneurshipFriendsActivity"
+            android:theme="@style/activity_theme" />
+        <activity
+            android:name=".view.activity.EntrepreneurshipHelpActivity"
+            android:theme="@style/activity_theme" />
+        <activity
+            android:name=".view.activity.EntrepreneurshipListActivity"
+            android:theme="@style/activity_theme" />
+        <activity
+            android:name=".view.activity.EntrepreneurshipServiceActivity"
+            android:theme="@style/activity_theme" />
+        <activity
+            android:name=".view.activity.EntrepreneurshipVanguardActivity"
+            android:theme="@style/activity_theme" />
+        <activity
+            android:name=".view.activity.EntrepreneurshipVanguardDetailActivity"
+            android:theme="@style/activity_theme" />
+        <activity
+            android:name=".view.activity.ExpertDetailActivity"
+            android:theme="@style/activity_theme" />
+        <activity
+            android:name=".view.activity.FeedbackActivity"
+            android:theme="@style/activity_theme" />
+        <activity
+            android:name=".view.activity.GetRichInfoActivity"
+            android:theme="@style/activity_theme" />
+        <activity
+            android:name=".view.activity.GetRichInfoDetailActivity"
+            android:theme="@style/activity_theme" />
+        <activity
+            android:name=".view.activity.GoodsDetailActivity"
+            android:theme="@style/activity_theme" />
+        <activity
+            android:name=".view.activity.HelpDetailActivity"
+            android:theme="@style/activity_theme" />
+        <activity
+            android:name=".view.activity.IndustrialDistributionActivity"
+            android:theme="@style/activity_theme" />
+        <activity
+            android:name=".view.activity.PersonalArchivesActivity"
+            android:theme="@style/activity_theme" />
+        <activity
             android:name=".view.activity.PhoneBookListActivity"
+            android:theme="@style/activity_theme" />
+        <activity
+            android:name=".view.activity.PublishContentActivity"
+            android:theme="@style/activity_theme" />
+        <activity
+            android:name=".view.activity.PublishContentToFriendsActivity"
+            android:theme="@style/activity_theme" />
+        <activity
+            android:name=".view.activity.RecruitActivity"
+            android:theme="@style/activity_theme" />
+        <activity
+            android:name=".view.activity.RecruitDetailActivity"
+            android:theme="@style/activity_theme" />
+        <activity
+            android:name=".view.activity.RecruitListActivity"
+            android:theme="@style/activity_theme" />
+        <activity
+            android:name=".view.activity.SellGoodsActivity"
+            android:theme="@style/activity_theme" />
+        <activity
+            android:name=".view.activity.SellGoodsListActivity"
+            android:theme="@style/activity_theme" />
+        <activity
+            android:name=".view.activity.ShareExperienceActivity"
+            android:theme="@style/activity_theme" />
+        <activity
+            android:name=".view.activity.SkillDetailActivity"
+            android:theme="@style/activity_theme" />
+        <activity
+            android:name=".view.activity.SpecialDkActivity"
             android:theme="@style/activity_theme" />
     </application>
 

@@ -51,7 +51,8 @@
     <ScrollView
         android:id="@+id/svFirst"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -231,6 +232,7 @@
                 android:layout_marginLeft="@dimen/login_margin"
                 android:layout_marginRight="@dimen/login_margin"
                 android:layout_marginTop="10dp"
+                android:clipChildren="false"
                 >
                 <TextView
                     android:id="@+id/tvCounty"
@@ -242,6 +244,21 @@
                     android:layout_centerVertical="true"
                     />
 
+                <fr.ganfra.materialspinner.MaterialSpinner
+                    android:id="@+id/spinnerCounty"
+                    android:layout_toRightOf="@+id/tvCounty"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    app:ms_multiline="false"
+                    app:ms_enableFloatingLabel="false"
+                    app:ms_enableErrorLabel="false"
+                    app:ms_baseColor="@android:color/transparent"
+                    app:ms_arrowColor="@color/white"
+                    app:ms_arrowSize="16dp"
+                    app:ms_alignLabels="false"
+                    />
                 <View
                     android:layout_width="650px"
                     android:layout_height="17px"
@@ -491,5 +508,4 @@
                 />
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>

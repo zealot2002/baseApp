@@ -6,12 +6,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.zzy.business.R;
+import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.base.BaseToolbarActivity;
 
 /**
  * 分享经验
  */
-public class ShareExperienceActivity extends BaseToolbarActivity implements View.OnClickListener {
+public class ShareExperienceActivity extends BaseTitleAndBottomBarActivity implements View.OnClickListener {
     private EditText etPhone,etPassword;
     private Button btnOk;
     private TextView tvToBePioneer,tvForgetPassword;
@@ -20,13 +21,12 @@ public class ShareExperienceActivity extends BaseToolbarActivity implements View
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_main_activity);
-        setupViews();
+        setTitle("分享经验");
     }
 
     @Override
     protected int getLayoutId() {
-        return 0;
+        return R.layout.busi_share_experience_activity;
     }
 
     private void setupViews() {

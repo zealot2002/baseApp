@@ -6,12 +6,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.zzy.business.R;
+import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.base.BaseToolbarActivity;
 
 /**
  * 创业朋友圈
  */
-public class EntrepreneurshipFriendsActivity extends BaseToolbarActivity implements View.OnClickListener {
+public class EntrepreneurshipFriendsActivity extends BaseTitleAndBottomBarActivity implements View.OnClickListener {
     private EditText etPhone,etPassword;
     private Button btnOk;
     private TextView tvToBePioneer,tvForgetPassword;
@@ -20,13 +21,12 @@ public class EntrepreneurshipFriendsActivity extends BaseToolbarActivity impleme
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_main_activity);
-        setupViews();
+        setTitle("创业朋友圈");
     }
 
     @Override
     protected int getLayoutId() {
-        return 0;
+        return R.layout.busi_entrepreneurship_friends_activity;
     }
 
     private void setupViews() {
