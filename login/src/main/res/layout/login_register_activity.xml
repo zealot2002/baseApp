@@ -57,13 +57,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_marginLeft="@dimen/body_margin"
+            android:layout_marginRight="@dimen/body_margin"
             >
             <!--用户姓名-->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginLeft="@dimen/login_margin"
-                android:layout_marginRight="@dimen/login_margin"
                 android:layout_marginTop="10dp"
                 >
                 <TextView
@@ -91,8 +91,8 @@
                     android:background="@null"
                     />
                 <View
-                    android:layout_width="650px"
-                    android:layout_height="17px"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line2_height"
                     android:background="@mipmap/line2"
                     android:layout_alignParentBottom="true"
                     />
@@ -101,8 +101,6 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginLeft="@dimen/login_margin"
-                android:layout_marginRight="@dimen/login_margin"
                 android:layout_marginTop="10dp"
                 >
                 <TextView
@@ -130,8 +128,8 @@
                     android:background="@null"
                     />
                 <View
-                    android:layout_width="650px"
-                    android:layout_height="17px"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line2_height"
                     android:background="@mipmap/line2"
                     android:layout_alignParentBottom="true"
                     />
@@ -140,15 +138,13 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginLeft="@dimen/login_margin"
-                android:layout_marginRight="@dimen/login_margin"
                 android:layout_marginTop="10dp"
                 >
                 <TextView
                     android:id="@+id/tvSms"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="验证码 :   "
+                    android:text="验 证 码 :   "
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:layout_centerVertical="true"
@@ -178,10 +174,9 @@
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
                     />
-
                 <View
-                    android:layout_width="650px"
-                    android:layout_height="17px"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line2_height"
                     android:background="@mipmap/line2"
                     android:layout_alignParentBottom="true"
                     />
@@ -190,8 +185,6 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginLeft="@dimen/login_margin"
-                android:layout_marginRight="@dimen/login_margin"
                 android:layout_marginTop="10dp"
                 >
                 <TextView
@@ -219,8 +212,8 @@
                     android:background="@null"
                     />
                 <View
-                    android:layout_width="650px"
-                    android:layout_height="17px"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line2_height"
                     android:background="@mipmap/line2"
                     android:layout_alignParentBottom="true"
                     />
@@ -229,16 +222,13 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginLeft="@dimen/login_margin"
-                android:layout_marginRight="@dimen/login_margin"
                 android:layout_marginTop="10dp"
-                android:clipChildren="false"
                 >
                 <TextView
                     android:id="@+id/tvCounty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="所属县 :   "
+                    android:text="所 属 县 :   "
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:layout_centerVertical="true"
@@ -260,8 +250,8 @@
                     app:ms_alignLabels="false"
                     />
                 <View
-                    android:layout_width="650px"
-                    android:layout_height="17px"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line2_height"
                     android:background="@mipmap/line2"
                     android:layout_alignParentBottom="true"
                     />
@@ -270,23 +260,35 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginLeft="@dimen/login_margin"
-                android:layout_marginRight="@dimen/login_margin"
                 android:layout_marginTop="10dp"
                 >
                 <TextView
                     android:id="@+id/tvTown"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="所属镇 :   "
+                    android:text="所 属 镇 :   "
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:layout_centerVertical="true"
                     />
-
+                <fr.ganfra.materialspinner.MaterialSpinner
+                    android:id="@+id/spinnerTown"
+                    android:layout_toRightOf="@+id/tvTown"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    app:ms_multiline="false"
+                    app:ms_enableFloatingLabel="false"
+                    app:ms_enableErrorLabel="false"
+                    app:ms_baseColor="@android:color/transparent"
+                    app:ms_arrowColor="@color/white"
+                    app:ms_arrowSize="16dp"
+                    app:ms_alignLabels="false"
+                    />
                 <View
-                    android:layout_width="650px"
-                    android:layout_height="17px"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line2_height"
                     android:background="@mipmap/line2"
                     android:layout_alignParentBottom="true"
                     />
@@ -295,23 +297,35 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginLeft="@dimen/login_margin"
-                android:layout_marginRight="@dimen/login_margin"
                 android:layout_marginTop="10dp"
                 >
                 <TextView
                     android:id="@+id/tvVillage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="所属村 :   "
+                    android:text="所 属 村 :   "
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:layout_centerVertical="true"
                     />
-
+                <fr.ganfra.materialspinner.MaterialSpinner
+                    android:id="@+id/spinnerVillage"
+                    android:layout_toRightOf="@+id/tvVillage"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    app:ms_multiline="false"
+                    app:ms_enableFloatingLabel="false"
+                    app:ms_enableErrorLabel="false"
+                    app:ms_baseColor="@android:color/transparent"
+                    app:ms_arrowColor="@color/white"
+                    app:ms_arrowSize="16dp"
+                    app:ms_alignLabels="false"
+                    />
                 <View
-                    android:layout_width="650px"
-                    android:layout_height="17px"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line2_height"
                     android:background="@mipmap/line2"
                     android:layout_alignParentBottom="true"
                     />
@@ -320,8 +334,6 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginLeft="@dimen/login_margin"
-                android:layout_marginRight="@dimen/login_margin"
                 android:layout_marginTop="10dp"
                 >
                 <TextView
@@ -348,8 +360,8 @@
                     android:inputType="number"
                     />
                 <View
-                    android:layout_width="650px"
-                    android:layout_height="17px"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line2_height"
                     android:background="@mipmap/line2"
                     android:layout_alignParentBottom="true"
                     />
@@ -358,8 +370,6 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginLeft="@dimen/login_margin"
-                android:layout_marginRight="@dimen/login_margin"
                 android:layout_marginTop="10dp"
                 >
                 <TextView
@@ -386,8 +396,8 @@
                     android:inputType="number"
                     />
                 <View
-                    android:layout_width="650px"
-                    android:layout_height="17px"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line2_height"
                     android:background="@mipmap/line2"
                     android:layout_alignParentBottom="true"
                     />
@@ -396,23 +406,50 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginLeft="@dimen/login_margin"
-                android:layout_marginRight="@dimen/login_margin"
                 android:layout_marginTop="10dp"
                 >
                 <TextView
                     android:id="@+id/tvSex"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="性别 :   "
+                    android:text="性      别 :   "
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:layout_centerVertical="true"
                     />
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_toRightOf="@+id/tvSex"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <RadioButton
+                        android:id="@+id/btnMan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="男"
+                        android:padding="5dp"
+                        android:textColor="@color/white"
+                        android:checked="true"
+                        android:button="@drawable/radio_btn_selector"
+                        />
 
+                    <RadioButton
+                        android:id="@+id/btnWoman"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="女"
+                        android:padding="5dp"
+                        android:layout_marginLeft="20dp"
+                        android:textColor="@color/white"
+                        android:button="@drawable/radio_btn_selector"
+                        />
+                </RadioGroup>
                 <View
-                    android:layout_width="650px"
-                    android:layout_height="17px"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line2_height"
                     android:background="@mipmap/line2"
                     android:layout_alignParentBottom="true"
                     />
@@ -421,8 +458,6 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginLeft="@dimen/login_margin"
-                android:layout_marginRight="@dimen/login_margin"
                 android:layout_marginTop="10dp"
                 >
                 <TextView
@@ -449,8 +484,8 @@
                     android:inputType="number"
                     />
                 <View
-                    android:layout_width="650px"
-                    android:layout_height="17px"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line2_height"
                     android:background="@mipmap/line2"
                     android:layout_alignParentBottom="true"
                     />
@@ -459,8 +494,6 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginLeft="@dimen/login_margin"
-                android:layout_marginRight="@dimen/login_margin"
                 android:layout_marginTop="10dp"
                 >
                 <TextView
@@ -487,16 +520,16 @@
                     android:inputType="number"
                     />
                 <View
-                    android:layout_width="650px"
-                    android:layout_height="17px"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line2_height"
                     android:background="@mipmap/line2"
                     android:layout_alignParentBottom="true"
                     />
             </RelativeLayout>
             <Button
                 android:id="@+id/btnNext"
-                android:layout_width="320px"
-                android:layout_height="97px"
+                android:layout_width="@dimen/btn_width"
+                android:layout_height="@dimen/btn_height"
                 android:background="@mipmap/btn_login"
                 android:text="下一步"
                 android:textColor="@color/white"
@@ -504,7 +537,6 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="50dp"
                 android:layout_gravity="right"
-                android:layout_marginRight="@dimen/login_margin"
                 />
         </LinearLayout>
     </ScrollView>

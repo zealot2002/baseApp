@@ -61,9 +61,7 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
     }
 
     private void setupSpinner() {
-        spinnerCounty = findViewById(R.id.spinnerCounty);
         List<String> list1 = new ArrayList<>();
-        list1.add("景宁县");
         list1.add("青田县");
         list1.add("松阳县");
         list1.add("云和县");
@@ -73,14 +71,23 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
         spinnerCounty = findViewById(R.id.spinnerCounty);
         spinnerCounty.setAdapter(adapter);
 
-//        spinnerTown = findViewById(R.id.spinnerTown);
-//        List<String> list2 = new ArrayList<>();
-//        list2.add("景宁县");
-//        list2.add("青田县");
-//        list2.add("松阳县");
-//        list2.add("云和县");
-//
-//        spinnerTown.attachDataSource(list2);
+        List<String> list2 = new ArrayList<>();
+        list2.add("颍川镇");
+        list2.add("晋宁镇");
+
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, R.layout.spinner_item, list2);
+        adapter2.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spinnerTown = findViewById(R.id.spinnerTown);
+        spinnerTown.setAdapter(adapter2);
+
+        List<String> list3 = new ArrayList<>();
+        list3.add("大坑村");
+        list3.add("祖父村");
+
+        ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this, R.layout.spinner_item, list3);
+        adapter3.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spinnerVillage = findViewById(R.id.spinnerVillage);
+        spinnerVillage.setAdapter(adapter3);
     }
 
 

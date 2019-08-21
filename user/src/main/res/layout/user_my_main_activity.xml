@@ -11,8 +11,8 @@
        <RelativeLayout
            android:layout_width="match_parent"
            android:layout_height="100px"
-           android:layout_marginLeft="@dimen/margin50"
-           android:layout_marginRight="@dimen/margin50"
+           android:layout_marginLeft="@dimen/body_margin"
+           android:layout_marginRight="@dimen/body_margin"
            >
            <ImageView
                android:id="@+id/ivUserHead"
@@ -118,7 +118,6 @@
                style="@style/user_btn_style"
                android:text="分享\n软件" />
        </LinearLayout>
-
        <TextView
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
