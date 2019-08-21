@@ -6,13 +6,13 @@
 
     <color name="red">#cf5241</color>
     <color name="orange">#B98863</color>
-    <color name="blue">#303F9F</color>
+    <color name="blue">#192B7A</color>
     <color name="divider">#e2e4e5</color>
     <color name="black">#000000</color>
 
     <color name="text_black">#4d4b4d</color>
     <color name="text_gray">#acacac</color>
-
+    <color name="translucent">#00000000</color>
     <color name="translucent_black">#99000000</color>
     <color name="translucent_white">#22ffffff</color>
     <color name="blue_gray">#D30440B8</color>

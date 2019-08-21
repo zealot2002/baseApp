@@ -9,7 +9,7 @@
     <RelativeLayout
         android:id="@+id/rlTitle"
         android:layout_width="match_parent"
-        android:layout_height="120px">
+        android:layout_height="140px">
         <RelativeLayout
             android:id="@+id/rlBack"
             android:layout_width="100px"
@@ -28,7 +28,8 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:textSize="16sp"
-            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40px"
             />
         <View
             android:layout_width="500px"
