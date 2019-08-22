@@ -12,6 +12,7 @@ import com.zzy.business.view.activity.BuyGoodsListActivity;
 import com.zzy.business.view.activity.EntrepreneurshipActivity;
 import com.zzy.business.view.activity.EntrepreneurshipFriendsActivity;
 import com.zzy.business.view.activity.EntrepreneurshipHelpActivity;
+import com.zzy.business.view.activity.EntrepreneurshipListActivity;
 import com.zzy.business.view.activity.EntrepreneurshipServiceActivity;
 import com.zzy.business.view.activity.EntrepreneurshipVanguardActivity;
 import com.zzy.business.view.activity.FeedbackActivity;
@@ -121,7 +122,7 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
             }else if(v.getId() == R.id.btnRecruit){
                 startActivity(RecruitListActivity.class);
             }else if(v.getId() == R.id.btnEntrepreneurship){
-                startActivity(EntrepreneurshipActivity.class);
+                startActivity(EntrepreneurshipListActivity.class);
             }else if(v.getId() == R.id.btnBuyGoods){
                 startActivity(BuyGoodsListActivity.class);
             }else if(v.getId() == R.id.btnSellGoods){

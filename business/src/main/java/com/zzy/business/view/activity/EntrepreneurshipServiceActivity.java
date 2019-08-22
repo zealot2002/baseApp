@@ -10,6 +10,7 @@ import com.zzy.business.R;
 import com.zzy.business.model.bean.PbRecord;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.base.BaseToolbarActivity;
+import com.zzy.common.widget.PopupDialog;
 
 import java.util.List;
 
@@ -57,6 +58,11 @@ public class EntrepreneurshipServiceActivity extends BaseTitleAndBottomBarActivi
 
     @Override
     public void onClick(View v) {
+        if(v.getId() == R.id.btn7
+                ||v.getId() == R.id.btn8){
+            new PopupDialog.Builder(this,"正在开发中...","完成").create();
+            return;
+        }
         resetBtns();
         if(v.getId() == R.id.btn1){
             btn1.setSelected(true);
@@ -68,14 +74,10 @@ public class EntrepreneurshipServiceActivity extends BaseTitleAndBottomBarActivi
             btn4.setSelected(true);
         }else if(v.getId() == R.id.btn5){
             btn5.setSelected(true);
+            startActivity(IndustrialDistributionActivity.class);
         }else if(v.getId() == R.id.btn6){
             btn6.setSelected(true);
-        }else if(v.getId() == R.id.btn7){
-            btn7.setSelected(true);
-        }else if(v.getId() == R.id.btn8){
-            btn8.setSelected(true);
         }
-
     }
 
     private void resetBtns() {
@@ -85,7 +87,5 @@ public class EntrepreneurshipServiceActivity extends BaseTitleAndBottomBarActivi
         btn4.setSelected(false);
         btn5.setSelected(false);
         btn6.setSelected(false);
-        btn7.setSelected(false);
-        btn8.setSelected(false);
     }
 }

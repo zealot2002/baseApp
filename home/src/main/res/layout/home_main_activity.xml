@@ -149,7 +149,7 @@
             <Button
                 android:id="@+id/btnFeedback"
                 style="@style/home_btn_style_2"
-                android:text="我有\n意见" />
+                android:text="创业\n点子" />
             <Button
                 android:id="@+id/btnShareExperience"
                 style="@style/home_btn_style_2"

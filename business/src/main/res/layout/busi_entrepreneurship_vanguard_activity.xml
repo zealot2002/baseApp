@@ -1,15 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     >
-    <TextView
-        android:layout_width="wrap_content"
+    <!--menu1-->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="创业先锋"
-        android:textColor="@color/white"
-        android:layout_centerInParent="true"
+        android:layout_marginLeft="15px"
+        android:layout_marginRight="15px"
+        >
+        <Button
+            android:id="@+id/btn1"
+            android:layout_width="@dimen/btn2_width"
+            android:layout_height="@dimen/btn2_height"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:text="全部"
+            android:background="@drawable/blue_btn_selector"
+            />
+        <Button
+            android:id="@+id/btn2"
+            android:layout_width="@dimen/btn2_width"
+            android:layout_height="@dimen/btn2_height"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:text="先进村"
+            android:background="@drawable/blue_btn_selector"
+            />
+        <Button
+            android:id="@+id/btn3"
+            android:layout_width="@dimen/btn2_width"
+            android:layout_height="@dimen/btn2_height"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:text="党员示范"
+            android:background="@drawable/blue_btn_selector"
+            />
+        <Button
+            android:id="@+id/btn4"
+            android:layout_width="@dimen/btn2_width"
+            android:layout_height="@dimen/btn2_height"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:text="资本进乡"
+            android:background="@drawable/blue_btn_selector"
+            />
+    </LinearLayout>
+    <!--menu2-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15px"
+        android:layout_marginRight="15px"
+        >
+        <Button
+            android:id="@+id/btn5"
+            android:layout_width="@dimen/btn2_width"
+            android:layout_height="@dimen/btn2_height"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:text="乡贤回归"
+            android:background="@drawable/blue_btn_selector"
+            />
+        <Button
+            android:id="@+id/btn6"
+            android:layout_width="@dimen/btn2_width"
+            android:layout_height="@dimen/btn2_height"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:text="居家创业"
+            android:background="@drawable/blue_btn_selector"
+            />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/light_blue"
+        android:layout_alignParentBottom="true"
+        />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvDataList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/body_margin"
+        android:layout_marginRight="@dimen/body_margin"
+        android:layout_marginBottom="100px"
         />
 
-</RelativeLayout>
+</LinearLayout>

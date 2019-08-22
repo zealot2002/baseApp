@@ -1,44 +1,41 @@
 package com.zzy.business.view.activity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.zzy.business.R;
+import com.zzy.business.model.bean.PbRecord;
 import com.zzy.common.base.BaseToolbarActivity;
+
+import java.util.List;
 
 /**
  * 我要创业列表
  */
 public class EntrepreneurshipListActivity extends BaseToolbarActivity implements View.OnClickListener {
-    private EditText etPhone,etPassword;
-    private Button btnOk;
-    private TextView tvToBePioneer,tvForgetPassword;
-
-/***********************************************************************************************/
+    private Button btnNew;
+    private RecyclerView rvDataList;
+    private List<PbRecord> dataList;
+    /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.busi_menu_list_item);
+        setTitle("我要创业");
         setupViews();
     }
 
     @Override
     protected int getLayoutId() {
-        return 0;
+        return R.layout.busi_page_template2_activity;
     }
 
     private void setupViews() {
-//        etPhone = findViewById(R.id.etPhone);
-//        etPassword = findViewById(R.id.etPassword);
-//        btnOk = findViewById(R.id.btnOk);
-//        tvToBePioneer = findViewById(R.id.tvToBePioneer);
-//        tvForgetPassword = findViewById(R.id.tvForgetPassword);
-
-        btnOk.setOnClickListener(this);
-        tvToBePioneer.setOnClickListener(this);
-        tvForgetPassword.setOnClickListener(this);
+        btnNew = findViewById(R.id.btnNew);
+        btnNew.setText("发布创业信息");
+        btnNew.setOnClickListener(this);
     }
 
 

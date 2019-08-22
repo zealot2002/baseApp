@@ -108,6 +108,15 @@
     <style name="tv_style_white_16" parent="tv_style_white">
         <item name="android:textSize">16sp</item>
     </style>
+    <style name="tv_style_white_18" parent="tv_style_white">
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="tv_style_white_20" parent="tv_style_white">
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="tv_style_white_24" parent="tv_style_white">
+        <item name="android:textSize">24sp</item>
+    </style>
 
     <!--gray text-->
     <style name="tv_style_gray" parent="tv_style">

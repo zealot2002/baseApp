@@ -10,7 +10,7 @@ import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.base.BaseToolbarActivity;
 
 /**
- * 我要创业
+ * 发布创业信息
  */
 public class EntrepreneurshipActivity extends BaseTitleAndBottomBarActivity implements View.OnClickListener {
     private EditText etPhone,etPassword;
