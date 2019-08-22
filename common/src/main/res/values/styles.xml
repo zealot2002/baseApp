@@ -122,6 +122,9 @@
     <style name="tv_style_gray" parent="tv_style">
         <item name="android:textColor">@color/text_gray</item>
     </style>
+    <style name="tv_style_gray_10" parent="tv_style_gray">
+        <item name="android:textSize">10sp</item>
+    </style>
     <style name="tv_style_gray_12" parent="tv_style_gray">
         <item name="android:textSize">12sp</item>
     </style>
@@ -132,4 +135,28 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="tv_style_black1" parent="tv_style">
+        <item name="android:textColor">@color/text_black</item>
+    </style>
+
+    <style name="tv_style_black1_14" parent="tv_style_black1">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="tv_style_black1_16" parent="tv_style_black1">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="tv_style_black2" parent="tv_style">
+        <item name="android:textColor">@color/text_black</item>
+    </style>
+    <style name="tv_style_black2_12" parent="tv_style_black2">
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="tv_style_black2_14" parent="tv_style_black2">
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="tv_style_black2_16" parent="tv_style_black2">
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>

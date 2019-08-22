@@ -15,15 +15,18 @@
     <color name="divider">#e2e4e5</color>
     <color name="black">#000000</color>
 
-    <color name="text_black">#4d4b4d</color>
-    <color name="text_gray">#acacac</color>
+    <color name="text_black">#2E3439</color>
+    <color name="text_black2">#2E263A</color>
+    <color name="text_gray">#9D99A0</color>
+    <color name="gray">#EFEFEF</color>
+
+
     <color name="translucent">#00000000</color>
     <color name="translucent_black">#99000000</color>
     <color name="translucent_white">#22ffffff</color>
     <color name="blue_gray">#D30440B8</color>
     <!--good-->
     <color name="divider_gray">#F2F4F6</color>
-    <color name="gray">#A3A4AA</color>
 
     <color name="light_orange">#FFA27D</color>
 

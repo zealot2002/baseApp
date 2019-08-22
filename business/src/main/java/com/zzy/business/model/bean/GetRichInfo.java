@@ -8,15 +8,15 @@ package com.zzy.business.model.bean;
 public class GetRichInfo {
     private String title;
     private String from;
-    private String time;
+    private String date;
     private String content;
     private String goodNum;
     private String lookNum;
 
-    public GetRichInfo(String title, String from, String time) {
+    public GetRichInfo(String title, String from, String date) {
         this.title = title;
         this.from = from;
-        this.time = time;
+        this.date = date;
     }
 
     public String getTitle() {
@@ -35,12 +35,12 @@ public class GetRichInfo {
         this.from = from;
     }
 
-    public String getTime() {
-        return time;
+    public String getDate() {
+        return date;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getContent() {

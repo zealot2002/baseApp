@@ -6,39 +6,41 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.zzy.business.R;
+import com.zzy.business.model.bean.Expert;
+import com.zzy.business.model.bean.GetRichInfo;
 import com.zzy.common.base.BaseToolbarActivity;
 
 /**
  * 专家详情
  */
 public class ExpertDetailActivity extends BaseToolbarActivity implements View.OnClickListener {
-    private EditText etPhone,etPassword;
-    private Button btnOk;
-    private TextView tvToBePioneer,tvForgetPassword;
+    private TextView tvTitle,tvContent;
+    private Expert bean;
 
 /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.busi_menu_list_item);
         setupViews();
     }
 
     @Override
     protected int getLayoutId() {
-        return 0;
+        return R.layout.busi_expert_detail_activity;
     }
 
     private void setupViews() {
-//        etPhone = findViewById(R.id.etPhone);
-//        etPassword = findViewById(R.id.etPassword);
-//        btnOk = findViewById(R.id.btnOk);
-//        tvToBePioneer = findViewById(R.id.tvToBePioneer);
-//        tvForgetPassword = findViewById(R.id.tvForgetPassword);
+        tvTitle = findViewById(R.id.tvTitle);
+        tvContent = findViewById(R.id.tvContent);
 
-        btnOk.setOnClickListener(this);
-        tvToBePioneer.setOnClickListener(this);
-        tvForgetPassword.setOnClickListener(this);
+        tvTitle.setText("\n" +
+                "胡小平专家介绍");
+
+        tvContent.setText("专家简介：胡小平，男，汉族，副教授，硕士研究生导师，日本冈山大学资源生物科学研究所博士后；有画家胡小平，1955年出生，1978年毕业于安徽师范大学美术系；有杭州电子科技大学教务处副处长\n" +
+                "\n" +
+                "\n" +
+                "\n" +
+                "联系方式：18888888888");
     }
 
 

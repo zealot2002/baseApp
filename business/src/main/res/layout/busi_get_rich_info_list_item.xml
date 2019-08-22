@@ -32,7 +32,7 @@
                 />
         </LinearLayout>
         <TextView
-            android:id="@+id/tvTime"
+            android:id="@+id/tvDate"
             style="@style/tv_style_gray_12"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="5dp"

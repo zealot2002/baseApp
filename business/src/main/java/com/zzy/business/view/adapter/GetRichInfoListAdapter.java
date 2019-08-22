@@ -11,8 +11,6 @@ import android.widget.TextView;
 
 import com.zzy.business.R;
 import com.zzy.business.model.bean.GetRichInfo;
-import com.zzy.business.model.bean.PbRecord;
-import com.zzy.common.glide.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,14 +30,14 @@ public class GetRichInfoListAdapter extends
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvTitle,tvTime,tvFrom;
+        private TextView tvTitle, tvDate,tvFrom;
         private ImageView ivPic;
         private RelativeLayout rlRoot;
 
         public ViewHolder(View view) {
             super(view);
             tvTitle = view.findViewById(R.id.tvTitle);
-            tvTime = view.findViewById(R.id.tvTime);
+            tvDate = view.findViewById(R.id.tvDate);
             tvFrom = view.findViewById(R.id.tvFrom);
             ivPic = view.findViewById(R.id.ivPic);
             rlRoot = view.findViewById(R.id.rlRoot);
@@ -64,7 +62,7 @@ public class GetRichInfoListAdapter extends
         try{
             GetRichInfo bean = mDataSet.get(position);
             holder.tvTitle.setText(bean.getTitle());
-            holder.tvTime.setText(bean.getTime());
+            holder.tvDate.setText(bean.getDate());
             holder.tvFrom.setText(bean.getFrom());
 
             holder.ivPic.setVisibility(position == 0?View.VISIBLE:View.GONE);

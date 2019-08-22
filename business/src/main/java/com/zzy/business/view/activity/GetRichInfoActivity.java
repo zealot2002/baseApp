@@ -3,18 +3,11 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import com.zzy.business.R;
 import com.zzy.business.model.bean.GetRichInfo;
-import com.zzy.business.model.bean.PbRecord;
 import com.zzy.business.view.adapter.GetRichInfoListAdapter;
-import com.zzy.business.view.adapter.PbListAdapter;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
-import com.zzy.common.base.BaseToolbarActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +22,9 @@ public class GetRichInfoActivity extends BaseTitleAndBottomBarActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("通讯录列表");
+        setTitle("致富信息");
 
-        repairPb();
+        repairData();
         setupViews();
     }
 
@@ -48,18 +41,14 @@ public class GetRichInfoActivity extends BaseTitleAndBottomBarActivity{
             adapter.setOnItemClickedListener(new GetRichInfoListAdapter.Listener() {
                 @Override
                 public void onItemClicked(int position) {
-//                    //todo  get data
-//                    for(int i=0;i<menuList.size();i++){
-//                        menuList.get(i).setSelected(i==position?true:false);
-//                    }
-//                    adapter.notifyDataSetChanged();
+                    startActivity(GetRichInfoDetailActivity.class);
                 }
             });
             adapter.swapData(dataList);
         }
     }
 
-    private void repairPb() {
+    private void repairData() {
         dataList = new ArrayList<>();
         dataList.add(new GetRichInfo("《景宁畲族自治县人民政府关于同意东坑镇行政村规模调整方案的批复》的政策解","省农业技术推广总部","2019-02-19"));
         dataList.add(new GetRichInfo("6月20号 白鹤文化节需要帮忙妇女5人","省农业技术推广总部","2019-02-19"));
