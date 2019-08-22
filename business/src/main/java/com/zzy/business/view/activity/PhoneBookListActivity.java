@@ -24,7 +24,7 @@ public class PhoneBookListActivity extends BaseTitleAndBottomBarActivity{
         super.onCreate(savedInstanceState);
         setTitle("通讯录列表");
 
-        repairPb();
+        prepareData();
         setupViews();
     }
 
@@ -52,7 +52,7 @@ public class PhoneBookListActivity extends BaseTitleAndBottomBarActivity{
         }
     }
 
-    private void repairPb() {
+    private void prepareData() {
         dataList = new ArrayList<>();
         dataList.add(new PbRecord("张三1","http://img0.imgtn.bdimg.com/it/u=626895405,3008362059&fm=26&gp=0.jpg","东坑代表","15010889999"));
         dataList.add(new PbRecord("张三2","http://img0.imgtn.bdimg.com/it/u=626895405,3008362059&fm=26&gp=0.jpg","东坑代表","15010889999"));

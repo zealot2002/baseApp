@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zzy.business.view.activity.BuyGoodsListActivity;
-import com.zzy.business.view.activity.EntrepreneurshipActivity;
 import com.zzy.business.view.activity.EntrepreneurshipFriendsActivity;
 import com.zzy.business.view.activity.EntrepreneurshipHelpActivity;
 import com.zzy.business.view.activity.EntrepreneurshipListActivity;
@@ -18,7 +17,7 @@ import com.zzy.business.view.activity.EntrepreneurshipVanguardActivity;
 import com.zzy.business.view.activity.FeedbackActivity;
 import com.zzy.business.view.activity.GetRichInfoActivity;
 import com.zzy.business.view.activity.IndustrialDistributionActivity;
-import com.zzy.business.view.activity.RecruitListActivity;
+import com.zzy.business.view.activity.JobListActivity;
 import com.zzy.business.view.activity.SellGoodsListActivity;
 import com.zzy.business.view.activity.ShareExperienceActivity;
 import com.zzy.business.view.activity.SpecialDkActivity;
@@ -120,7 +119,7 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
             }else if(v.getId() == R.id.btnEntrepreneurshipVanguard){
                 startActivity(EntrepreneurshipVanguardActivity.class);
             }else if(v.getId() == R.id.btnRecruit){
-                startActivity(RecruitListActivity.class);
+                startActivity(JobListActivity.class);
             }else if(v.getId() == R.id.btnEntrepreneurship){
                 startActivity(EntrepreneurshipListActivity.class);
             }else if(v.getId() == R.id.btnBuyGoods){

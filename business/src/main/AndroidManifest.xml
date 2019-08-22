@@ -75,10 +75,10 @@
             android:name=".view.activity.RecruitActivity"
             android:theme="@style/activity_theme" />
         <activity
-            android:name=".view.activity.RecruitDetailActivity"
+            android:name=".view.activity.JobDetailActivity"
             android:theme="@style/activity_theme" />
         <activity
-            android:name=".view.activity.RecruitListActivity"
+            android:name=".view.activity.JobListActivity"
             android:theme="@style/activity_theme" />
         <activity
             android:name=".view.activity.SellGoodsActivity"
