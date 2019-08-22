@@ -1,56 +1,85 @@
 package com.zzy.business.view.activity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.zzy.business.R;
+import com.zzy.business.model.bean.GetRichInfo;
+import com.zzy.business.model.bean.PbRecord;
+import com.zzy.business.view.adapter.GetRichInfoListAdapter;
+import com.zzy.business.view.adapter.PbListAdapter;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.base.BaseToolbarActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 致富信息
  */
-public class GetRichInfoActivity extends BaseTitleAndBottomBarActivity implements View.OnClickListener {
-    private EditText etPhone,etPassword;
-    private Button btnOk;
-    private TextView tvToBePioneer,tvForgetPassword;
-
-/***********************************************************************************************/
+public class GetRichInfoActivity extends BaseTitleAndBottomBarActivity{
+    private RecyclerView rvDataList;
+    private List<GetRichInfo> dataList;
+    /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("致富信息");
+        setTitle("通讯录列表");
+
+        repairPb();
+        setupViews();
+    }
+
+    private void setupViews() {
+        if(rvDataList == null){
+            rvDataList = findViewById(R.id.rvDataList);
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+            rvDataList.setLayoutManager(layoutManager);
+            rvDataList.setItemAnimator(new DefaultItemAnimator());
+
+            /*adapter*/
+            final GetRichInfoListAdapter adapter = new GetRichInfoListAdapter(this);
+            rvDataList.setAdapter(adapter);
+            adapter.setOnItemClickedListener(new GetRichInfoListAdapter.Listener() {
+                @Override
+                public void onItemClicked(int position) {
+//                    //todo  get data
+//                    for(int i=0;i<menuList.size();i++){
+//                        menuList.get(i).setSelected(i==position?true:false);
+//                    }
+//                    adapter.notifyDataSetChanged();
+                }
+            });
+            adapter.swapData(dataList);
+        }
+    }
+
+    private void repairPb() {
+        dataList = new ArrayList<>();
+        dataList.add(new GetRichInfo("《景宁畲族自治县人民政府关于同意东坑镇行政村规模调整方案的批复》的政策解","省农业技术推广总部","2019-02-19"));
+        dataList.add(new GetRichInfo("6月20号 白鹤文化节需要帮忙妇女5人","省农业技术推广总部","2019-02-19"));
+        dataList.add(new GetRichInfo("【特级东魁】正宗仙居杨梅新鲜东魁杨梅绿卡就是快乐","省农业技术推广总部","2019-02-19"));
+        dataList.add(new GetRichInfo("6月20号 白鹤文化节需要帮忙妇女5人","省农业技术推广总部","2019-02-19"));
+        dataList.add(new GetRichInfo("6月20号 白鹤文化节需要帮忙妇女5人","省农业技术推广总部","2019-02-19"));
+        dataList.add(new GetRichInfo("6月20号 白鹤文化节需要帮忙妇女5人","省农业技术推广总部","2019-02-19"));
+        dataList.add(new GetRichInfo("6月20号 白鹤文化节需要帮忙妇女5人","省农业技术推广总部","2019-02-19"));
+        dataList.add(new GetRichInfo("6月20号 白鹤文化节需要帮忙妇女5人","省农业技术推广总部","2019-02-19"));
+        dataList.add(new GetRichInfo("【特级东魁】正宗仙居杨梅新鲜东魁杨梅绿卡就是快乐","省农业技术推广总部","2019-02-19"));
+        dataList.add(new GetRichInfo("6月20号 白鹤文化节需要帮忙妇女5人","省农业技术推广总部","2019-02-19"));
+        dataList.add(new GetRichInfo("6月20号 白鹤文化节需要帮忙妇女5人","省农业技术推广总部","2019-02-19"));
+        dataList.add(new GetRichInfo("6月20号 白鹤文化节需要帮忙妇女5人","省农业技术推广总部","2019-02-19"));
+        dataList.add(new GetRichInfo("6月20号 白鹤文化节需要帮忙妇女5人","省农业技术推广总部","2019-02-19"));
+        dataList.add(new GetRichInfo("6月20号 白鹤文化节需要帮忙妇女5人","省农业技术推广总部","2019-02-19"));
+
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.busi_get_rich_info_activity;
-    }
-
-    private void setupViews() {
-//        etPhone = findViewById(R.id.etPhone);
-//        etPassword = findViewById(R.id.etPassword);
-//        btnOk = findViewById(R.id.btnOk);
-//        tvToBePioneer = findViewById(R.id.tvToBePioneer);
-//        tvForgetPassword = findViewById(R.id.tvForgetPassword);
-
-        btnOk.setOnClickListener(this);
-        tvToBePioneer.setOnClickListener(this);
-        tvForgetPassword.setOnClickListener(this);
-    }
-
-
-    @Override
-    public void onClick(View v) {
-//        if(v.getId() == R.id.btnOk){
-//            // TODO: 2019/8/19   to login
-//        }else if(v.getId() == R.id.tvToBePioneer){
-//
-//        }else if(v.getId() == R.id.tvForgetPassword){
-//
-//        }
-
+        return R.layout.busi_page_template1_activity;
     }
 }

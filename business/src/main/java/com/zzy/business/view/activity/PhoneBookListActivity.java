@@ -3,13 +3,9 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import com.zzy.business.R;
 import com.zzy.business.model.bean.PbRecord;
-import com.zzy.business.view.adapter.MenuListAdapter;
 import com.zzy.business.view.adapter.PbListAdapter;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 
@@ -20,7 +16,7 @@ import java.util.List;
  * 通讯录
  */
 public class PhoneBookListActivity extends BaseTitleAndBottomBarActivity{
-    private RecyclerView rvPbList;
+    private RecyclerView rvDataList;
     private List<PbRecord> dataList;
 /***********************************************************************************************/
     @Override
@@ -33,15 +29,15 @@ public class PhoneBookListActivity extends BaseTitleAndBottomBarActivity{
     }
 
     private void setupViews() {
-        if(rvPbList == null){
-            rvPbList = findViewById(R.id.rvPbList);
+        if(rvDataList == null){
+            rvDataList = findViewById(R.id.rvDataList);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-            rvPbList.setLayoutManager(layoutManager);
-            rvPbList.setItemAnimator(new DefaultItemAnimator());
+            rvDataList.setLayoutManager(layoutManager);
+            rvDataList.setItemAnimator(new DefaultItemAnimator());
 
             /*adapter*/
             final PbListAdapter adapter = new PbListAdapter(this);
-            rvPbList.setAdapter(adapter);
+            rvDataList.setAdapter(adapter);
             adapter.setOnItemClickedListener(new PbListAdapter.Listener() {
                 @Override
                 public void onItemClicked(int position) {
@@ -74,7 +70,7 @@ public class PhoneBookListActivity extends BaseTitleAndBottomBarActivity{
 
     @Override
     protected int getLayoutId() {
-        return R.layout.busi_pb_list_activity;
+        return R.layout.busi_page_template1_activity;
     }
 
 }
