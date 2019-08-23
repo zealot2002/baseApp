@@ -61,7 +61,7 @@ public class JobListActivity extends BaseTitleAndBottomBarActivity implements Vi
 
     @Override
     protected int getLayoutId() {
-        return R.layout.busi_page_template2_activity;
+        return R.layout.busi_list_with_btn_activity;
     }
 
     private void setupViews() {

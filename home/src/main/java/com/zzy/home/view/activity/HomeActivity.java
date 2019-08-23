@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.zzy.business.view.activity.BuyGoodsListActivity;
+import com.zzy.business.view.activity.GoodsListActivity;
 import com.zzy.business.view.activity.EntrepreneurshipFriendsActivity;
 import com.zzy.business.view.activity.EntrepreneurshipHelpActivity;
 import com.zzy.business.view.activity.EntrepreneurshipListActivity;
@@ -18,10 +18,10 @@ import com.zzy.business.view.activity.FeedbackActivity;
 import com.zzy.business.view.activity.GetRichInfoActivity;
 import com.zzy.business.view.activity.IndustrialDistributionActivity;
 import com.zzy.business.view.activity.JobListActivity;
-import com.zzy.business.view.activity.SellGoodsListActivity;
 import com.zzy.business.view.activity.ShareExperienceActivity;
 import com.zzy.business.view.activity.SpecialDkActivity;
 import com.zzy.common.base.BaseAppActivity;
+import com.zzy.common.constants.ParamConstants;
 import com.zzy.common.utils.StatusBarUtils;
 import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.commonlib.utils.ToastUtils;
@@ -123,9 +123,13 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
             }else if(v.getId() == R.id.btnEntrepreneurship){
                 startActivity(EntrepreneurshipListActivity.class);
             }else if(v.getId() == R.id.btnBuyGoods){
-                startActivity(BuyGoodsListActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt(ParamConstants.TYPE,0);
+                startActivity(GoodsListActivity.class,bundle);
             }else if(v.getId() == R.id.btnSellGoods){
-                startActivity(SellGoodsListActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt(ParamConstants.TYPE,1);
+                startActivity(GoodsListActivity.class,bundle);
             }else if(v.getId() == R.id.btnEntrepreneurshipHelp){
                 startActivity(EntrepreneurshipHelpActivity.class);
             }else if(v.getId() == R.id.btnFeedback){

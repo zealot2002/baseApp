@@ -6,12 +6,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.zzy.business.R;
-import com.zzy.common.base.BaseToolbarActivity;
+import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 
 /**
- * 发布求购信息
+ * 我要买东西
  */
-public class BuyGoodsActivity extends BaseToolbarActivity implements View.OnClickListener {
+public class GoodsDetailSellActivity extends BaseTitleAndBottomBarActivity implements View.OnClickListener {
     private EditText etPhone,etPassword;
     private Button btnOk;
     private TextView tvToBePioneer,tvForgetPassword;

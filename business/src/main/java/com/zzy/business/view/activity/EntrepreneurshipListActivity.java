@@ -3,22 +3,20 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import com.zzy.business.R;
-import com.zzy.business.model.bean.PbRecord;
-import com.zzy.common.base.BaseToolbarActivity;
+import com.zzy.business.model.bean.Entrepreneurship;
+import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 
 import java.util.List;
 
 /**
  * 我要创业列表
  */
-public class EntrepreneurshipListActivity extends BaseToolbarActivity implements View.OnClickListener {
+public class EntrepreneurshipListActivity extends BaseTitleAndBottomBarActivity implements View.OnClickListener {
     private Button btnNew;
     private RecyclerView rvDataList;
-    private List<PbRecord> dataList;
+    private List<Entrepreneurship> dataList;
     /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +27,7 @@ public class EntrepreneurshipListActivity extends BaseToolbarActivity implements
 
     @Override
     protected int getLayoutId() {
-        return R.layout.busi_page_template2_activity;
+        return R.layout.busi_list_with_btn_activity;
     }
 
     private void setupViews() {
@@ -41,13 +39,9 @@ public class EntrepreneurshipListActivity extends BaseToolbarActivity implements
 
     @Override
     public void onClick(View v) {
-//        if(v.getId() == R.id.btnOk){
-//            // TODO: 2019/8/19   to login
-//        }else if(v.getId() == R.id.tvToBePioneer){
-//
-//        }else if(v.getId() == R.id.tvForgetPassword){
-//
-//        }
+        if(v.getId() == R.id.btnNew){
+            startActivity(EntrepreneurshipNewActivity.class);
+        }
 
     }
 }

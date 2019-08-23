@@ -69,6 +69,6 @@ public class GetRichInfoActivity extends BaseTitleAndBottomBarActivity{
 
     @Override
     protected int getLayoutId() {
-        return R.layout.busi_page_template1_activity;
+        return R.layout.busi_list_activity;
     }
 }

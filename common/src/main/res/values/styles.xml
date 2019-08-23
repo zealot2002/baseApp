@@ -21,7 +21,11 @@
         <!-- 半透明 -->
     </style>
 
-
+    <style name="myRatingBar" parent="@android:style/Widget.RatingBar.Small">
+        <item name="android:progressDrawable">@drawable/rattingbar_drawable</item>
+        <item name="android:minHeight">10dp</item>
+        <item name="android:maxHeight">10dp</item>
+    </style>
     <!--沉浸式满屏-->
     <style name="translucentStyle" parent="AppTheme">
         <item name="android:windowTranslucentStatus">false</item>
@@ -158,5 +162,16 @@
     </style>
     <style name="tv_style_black2_16" parent="tv_style_black2">
         <item name="android:textSize">16sp</item>
+    </style>
+
+    <!--white text-->
+    <style name="tv_style_red" parent="tv_style">
+        <item name="android:textColor">@color/red</item>
+    </style>
+    <style name="tv_style_red_12" parent="tv_style_red">
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="tv_style_red_14" parent="tv_style_red">
+        <item name="android:textSize">14sp</item>
     </style>
 </resources>

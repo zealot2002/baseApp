@@ -9,16 +9,10 @@
             android:name=".view.activity.AssemblyDetailActivity"
             android:theme="@style/activity_theme" />
         <activity
-            android:name=".view.activity.BuyGoodsActivity"
-            android:theme="@style/activity_theme" />
-        <activity
-            android:name=".view.activity.BuyGoodsListActivity"
-            android:theme="@style/activity_theme" />
-        <activity
             android:name=".view.activity.ContentDetailActivity"
             android:theme="@style/activity_theme" />
         <activity
-            android:name=".view.activity.EntrepreneurshipActivity"
+            android:name=".view.activity.EntrepreneurshipNewActivity"
             android:theme="@style/activity_theme" />
         <activity
             android:name=".view.activity.EntrepreneurshipFriendsActivity"
@@ -51,8 +45,25 @@
             android:name=".view.activity.GetRichInfoDetailActivity"
             android:theme="@style/activity_theme" />
         <activity
-            android:name=".view.activity.GoodsDetailActivity"
+            android:name=".view.activity.GoodsDetailBuyActivity"
             android:theme="@style/activity_theme" />
+        <activity
+            android:name=".view.activity.GoodsDetailSellActivity"
+            android:theme="@style/activity_theme" />
+        <activity
+            android:name=".view.activity.GoodsNewBuyActivity"
+            android:theme="@style/activity_theme"
+            android:windowSoftInputMode="adjustPan"
+            />
+        <activity
+            android:name=".view.activity.GoodsNewSellActivity"
+            android:theme="@style/activity_theme"
+            android:windowSoftInputMode="adjustPan"
+            />
+        <activity
+            android:name=".view.activity.GoodsListActivity"
+            android:theme="@style/activity_theme" />
+
         <activity
             android:name=".view.activity.HelpDetailActivity"
             android:theme="@style/activity_theme" />
@@ -82,12 +93,7 @@
         <activity
             android:name=".view.activity.JobListActivity"
             android:theme="@style/activity_theme" />
-        <activity
-            android:name=".view.activity.SellGoodsActivity"
-            android:theme="@style/activity_theme" />
-        <activity
-            android:name=".view.activity.SellGoodsListActivity"
-            android:theme="@style/activity_theme" />
+
         <activity
             android:name=".view.activity.ShareExperienceActivity"
             android:theme="@style/activity_theme" />

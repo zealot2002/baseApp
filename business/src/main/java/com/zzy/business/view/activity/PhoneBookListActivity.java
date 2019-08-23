@@ -8,6 +8,7 @@ import com.zzy.business.R;
 import com.zzy.business.model.bean.PbRecord;
 import com.zzy.business.view.adapter.PbListAdapter;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
+import com.zzy.common.constants.CommonConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,23 +55,21 @@ public class PhoneBookListActivity extends BaseTitleAndBottomBarActivity{
 
     private void prepareData() {
         dataList = new ArrayList<>();
-        dataList.add(new PbRecord("张三1","http://img0.imgtn.bdimg.com/it/u=626895405,3008362059&fm=26&gp=0.jpg","东坑代表","15010889999"));
-        dataList.add(new PbRecord("张三2","http://img0.imgtn.bdimg.com/it/u=626895405,3008362059&fm=26&gp=0.jpg","东坑代表","15010889999"));
-        dataList.add(new PbRecord("张三3","http://img0.imgtn.bdimg.com/it/u=626895405,3008362059&fm=26&gp=0.jpg","东坑代表","15010889999"));
-        dataList.add(new PbRecord("张三4","http://img0.imgtn.bdimg.com/it/u=626895405,3008362059&fm=26&gp=0.jpg","东坑代表","15010889999"));
-        dataList.add(new PbRecord("张三1","http://img0.imgtn.bdimg.com/it/u=626895405,3008362059&fm=26&gp=0.jpg","东坑代表","15010889999"));
-        dataList.add(new PbRecord("张三2","http://img0.imgtn.bdimg.com/it/u=626895405,3008362059&fm=26&gp=0.jpg","东坑代表","15010889999"));
-        dataList.add(new PbRecord("张三3","http://img0.imgtn.bdimg.com/it/u=626895405,3008362059&fm=26&gp=0.jpg","东坑代表","15010889999"));
-        dataList.add(new PbRecord("张三4","http://img0.imgtn.bdimg.com/it/u=626895405,3008362059&fm=26&gp=0.jpg","东坑代表","15010889999"));
-        dataList.add(new PbRecord("张三1","http://img0.imgtn.bdimg.com/it/u=626895405,3008362059&fm=26&gp=0.jpg","东坑代表","15010889999"));
-        dataList.add(new PbRecord("张三2","http://img0.imgtn.bdimg.com/it/u=626895405,3008362059&fm=26&gp=0.jpg","东坑代表","15010889999"));
-        dataList.add(new PbRecord("张三3","http://img0.imgtn.bdimg.com/it/u=626895405,3008362059&fm=26&gp=0.jpg","东坑代表","15010889999"));
-        dataList.add(new PbRecord("张三4","http://img0.imgtn.bdimg.com/it/u=626895405,3008362059&fm=26&gp=0.jpg","东坑代表","15010889999"));
+        dataList.add(new PbRecord("张三1", CommonConstants.TEST_IMG_URL,"东坑代表","15010889999"));
+        dataList.add(new PbRecord("张三2", CommonConstants.TEST_IMG_URL,"东坑代表","15010889999"));
+        dataList.add(new PbRecord("张三3", CommonConstants.TEST_IMG_URL,"东坑代表","15010889999"));
+        dataList.add(new PbRecord("张三4", CommonConstants.TEST_IMG_URL,"东坑代表","15010889999"));
+        dataList.add(new PbRecord("张三5", CommonConstants.TEST_IMG_URL,"东坑代表","15010889999"));
+        dataList.add(new PbRecord("张三1", CommonConstants.TEST_IMG_URL,"东坑代表","15010889999"));
+        dataList.add(new PbRecord("张三2", CommonConstants.TEST_IMG_URL,"东坑代表","15010889999"));
+        dataList.add(new PbRecord("张三3", CommonConstants.TEST_IMG_URL,"东坑代表","15010889999"));
+        dataList.add(new PbRecord("张三4", CommonConstants.TEST_IMG_URL,"东坑代表","15010889999"));
+        dataList.add(new PbRecord("张三5", CommonConstants.TEST_IMG_URL,"东坑代表","15010889999"));
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.busi_page_template1_activity;
+        return R.layout.busi_list_activity;
     }
 
 }

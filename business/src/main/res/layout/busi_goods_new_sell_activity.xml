@@ -12,23 +12,23 @@
         android:layout_marginLeft="@dimen/body_margin"
         android:orientation="vertical"
         >
-        <!--单位名称-->
+        <!--标       题-->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="@dimen/item_height"
             >
             <TextView
-                android:id="@+id/tvCompanyName"
+                android:id="@+id/tvName"
                 style="@style/tv_style_white_14"
                 android:layout_centerVertical="true"
-                android:text="单位名称 :   "
+                android:text="标        题:"
                 />
             <EditText
-                android:id="@+id/etCompanyName"
+                android:id="@+id/etName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="2dp"
-                android:layout_toRightOf="@+id/tvCompanyName"
+                android:layout_toRightOf="@+id/tvName"
                 android:layout_centerVertical="true"
                 android:textColorHint="@color/white"
                 android:textColor="@color/white"
@@ -42,143 +42,23 @@
                 android:layout_alignParentBottom="true"
                 />
         </RelativeLayout>
-        <!--岗位名称-->
+        <!--联  系  人-->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="@dimen/item_height"
             >
             <TextView
-                android:id="@+id/tvJobName"
+                android:id="@+id/tvContact"
                 style="@style/tv_style_white_14"
                 android:layout_centerVertical="true"
-                android:text="岗位名称 :   "
+                android:text="联  系  人 :   "
                 />
             <EditText
-                android:id="@+id/etJobName"
+                android:id="@+id/etContact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="2dp"
-                android:layout_toRightOf="@+id/tvJobName"
-                android:layout_centerVertical="true"
-                android:textColorHint="@color/white"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                android:background="@null"
-                />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/line2_height"
-                android:background="@mipmap/line2"
-                android:layout_alignParentBottom="true"
-                />
-        </RelativeLayout>
-        <!--工作地址-->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            >
-            <TextView
-                android:id="@+id/tvAddress"
-                style="@style/tv_style_white_14"
-                android:layout_centerVertical="true"
-                android:text="工作地址 :   "
-                />
-            <EditText
-                android:id="@+id/etAddress"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:layout_toRightOf="@+id/tvAddress"
-                android:layout_centerVertical="true"
-                android:textColorHint="@color/white"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                android:background="@null"
-                />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/line2_height"
-                android:background="@mipmap/line2"
-                android:layout_alignParentBottom="true"
-                />
-        </RelativeLayout>
-        <!--招聘人数-->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            >
-            <TextView
-                android:id="@+id/tvHeadcount"
-                style="@style/tv_style_white_14"
-                android:layout_centerVertical="true"
-                android:text="招聘人数 :   "
-                />
-            <EditText
-                android:id="@+id/etHeadcount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:layout_toRightOf="@+id/tvHeadcount"
-                android:layout_centerVertical="true"
-                android:textColorHint="@color/white"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                android:background="@null"
-                />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/line2_height"
-                android:background="@mipmap/line2"
-                android:layout_alignParentBottom="true"
-                />
-        </RelativeLayout>
-        <!--学历要求-->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            >
-            <TextView
-                android:id="@+id/tvEducation"
-                style="@style/tv_style_white_14"
-                android:layout_centerVertical="true"
-                android:text="学历要求 :   "
-                />
-            <EditText
-                android:id="@+id/etEducation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:layout_toRightOf="@+id/tvEducation"
-                android:layout_centerVertical="true"
-                android:textColorHint="@color/white"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                android:background="@null"
-                />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/line2_height"
-                android:background="@mipmap/line2"
-                android:layout_alignParentBottom="true"
-                />
-        </RelativeLayout>
-        <!--职位薪资-->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            >
-            <TextView
-                android:id="@+id/tvSalary"
-                style="@style/tv_style_white_14"
-                android:layout_centerVertical="true"
-                android:text="职位薪资 :   "
-                />
-            <EditText
-                android:id="@+id/etSalary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:layout_toRightOf="@+id/tvSalary"
+                android:layout_toRightOf="@+id/tvContact"
                 android:layout_centerVertical="true"
                 android:textColorHint="@color/white"
                 android:textColor="@color/white"
@@ -195,7 +75,7 @@
         <!--联系电话-->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="@dimen/item_height"
             >
             <TextView
                 android:id="@+id/tvPhone"
@@ -224,23 +104,23 @@
                 android:layout_alignParentBottom="true"
                 />
         </RelativeLayout>
-        <!--联  系  人-->
+        <!--地        址-->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="@dimen/item_height"
             >
             <TextView
-                android:id="@+id/tvContact"
+                android:id="@+id/tvAddress"
                 style="@style/tv_style_white_14"
                 android:layout_centerVertical="true"
-                android:text="联  系  人 :   "
+                android:text="地         址:"
                 />
             <EditText
-                android:id="@+id/etContact"
+                android:id="@+id/etAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="2dp"
-                android:layout_toRightOf="@+id/tvContact"
+                android:layout_toRightOf="@+id/tvAddress"
                 android:layout_centerVertical="true"
                 android:textColorHint="@color/white"
                 android:textColor="@color/white"
@@ -254,14 +134,75 @@
                 android:layout_alignParentBottom="true"
                 />
         </RelativeLayout>
-        <!--工作要求-->
+        <!--价格-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/item_height"
+            >
+            <TextView
+                android:id="@+id/tvPrice"
+                style="@style/tv_style_white_14"
+                android:layout_centerVertical="true"
+                android:text="价        格:"
+                />
+            <EditText
+                android:id="@+id/etPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_toRightOf="@+id/tvPrice"
+                android:layout_centerVertical="true"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:background="@null"
+                android:inputType="numberDecimal"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line2_height"
+                android:background="@mipmap/line2"
+                android:layout_alignParentBottom="true"
+                />
+        </RelativeLayout>
+        <!--交易方式-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/item_height"
+            >
+            <TextView
+                android:id="@+id/tvDealWay"
+                style="@style/tv_style_white_14"
+                android:layout_centerVertical="true"
+                android:text="交易方式:"
+                />
+            <EditText
+                android:id="@+id/etDealWay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_toRightOf="@+id/tvDealWay"
+                android:layout_centerVertical="true"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:background="@null"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line2_height"
+                android:background="@mipmap/line2"
+                android:layout_alignParentBottom="true"
+                />
+        </RelativeLayout>
+        <!--物品描述-->
         <TextView
             style="@style/tv_style_white_14"
-            android:text="工作要求:   "
+            android:text="物品描述:   "
             android:layout_marginTop="10dp"
             />
         <com.zzy.common.widget.MyEditText
-            android:id="@+id/etJobContent"
+            android:id="@+id/etDesc"
             android:layout_width="match_parent"
             android:layout_height="300px"
             android:textColorHint="@color/white"
@@ -274,27 +215,13 @@
             android:layout_marginTop="5dp"
             android:background="@color/deep_blue"
             />
-        <!--岗位要求-->
+        <!--商品图片（最多6张）-->
         <TextView
             style="@style/tv_style_white_14"
-            android:text="岗位要求:   "
+            android:text="商品图片（最多6张）:"
             android:layout_marginTop="10dp"
             />
-        <com.zzy.common.widget.MyEditText
-            android:id="@+id/etJobRequirements"
-            android:layout_width="match_parent"
-            android:layout_height="300px"
-            android:textColorHint="@color/white"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            android:paddingTop="10dp"
-            android:paddingBottom="30dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:layout_marginTop="5dp"
-            android:background="@color/deep_blue"
 
-            />
         <!--完成-->
         <Button
             android:id="@+id/btnOk"

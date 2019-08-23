@@ -3,13 +3,10 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import com.zzy.business.R;
 import com.zzy.business.model.bean.PbRecord;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
-import com.zzy.common.base.BaseToolbarActivity;
 
 import java.util.List;
 
@@ -30,7 +27,7 @@ public class FeedbackActivity extends BaseTitleAndBottomBarActivity implements V
 
     @Override
     protected int getLayoutId() {
-        return R.layout.busi_page_template2_activity;
+        return R.layout.busi_list_with_btn_activity;
     }
 
     private void setupViews() {
