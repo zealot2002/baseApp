@@ -7,7 +7,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.hedgehog.ratingbar.RatingBar;
 import com.zzy.business.view.activity.GoodsListActivity;
 import com.zzy.business.view.activity.EntrepreneurshipFriendsActivity;
 import com.zzy.business.view.activity.EntrepreneurshipHelpActivity;
@@ -39,7 +41,7 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
             btnEntrepreneurshipService,btnEntrepreneurshipVanguard;
     private Button btnRecruit,btnEntrepreneurship,btnBuyGoods,btnSellGoods,
             btnEntrepreneurshipHelp,btnFeedback,btnShareExperience,btnEntrepreneurshipFriends;
-
+    private RatingBar ratingbar;
 /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +84,26 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
         btnFeedback.setOnClickListener(this);
         btnShareExperience.setOnClickListener(this);
         btnEntrepreneurshipFriends.setOnClickListener(this);
+
+        RatingBar mRatingBar = (RatingBar) findViewById(R.id.ratingbar);
+        mRatingBar.setStarEmptyDrawable(getResources().getDrawable(R.mipmap.rating_normal));
+        mRatingBar.setStarHalfDrawable(getResources().getDrawable(R.mipmap.rating_normal));
+        mRatingBar.setStarFillDrawable(getResources().getDrawable(R.mipmap.rating_checked));
+        mRatingBar.setStarCount(5);
+        mRatingBar.setStar(3f);
+        mRatingBar.halfStar(false);
+        mRatingBar.setmClickable(true);
+        mRatingBar.setStarImageWidth(20f);
+        mRatingBar.setStarImageHeight(20f);
+        mRatingBar.setImagePadding(5);
+        mRatingBar.setOnRatingChangeListener(
+                new RatingBar.OnRatingChangeListener() {
+                    @Override
+                    public void onRatingChange(float RatingCount) {
+                        Toast.makeText(HomeActivity.this, "the fill star is" + RatingCount, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
     }
 
 

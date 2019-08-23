@@ -36,6 +36,7 @@ public class WelcomeActivity extends BaseAppActivity {
             }else{
                 SCM.getInstance().req(this, ActionConstants.ENTRY_HOME_ACTIVITY_ACTION);
             }
+            finish();
         }catch (Exception e){
             e.printStackTrace();
         }

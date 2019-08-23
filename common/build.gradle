@@ -56,4 +56,6 @@ dependencies {
     api project(':servercentre')
 
     api 'com.github.ganfra:material-spinner:2.0.0'
+
+    api 'com.hedgehog.ratingbar:app:1.1.2'
 }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:hedgehog="http://schemas.android.com/tools"
     android:id="@+id/rlRoot"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+    android:layout_height="wrap_content">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="90dp"
@@ -32,19 +32,17 @@
             android:layout_below="@+id/tvName"
             android:layout_marginTop="5dp"
             >
-            <RatingBar
+            <com.hedgehog.ratingbar.RatingBar
                 android:id="@+id/rbScore"
-                style="@style/myRatingBar"
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-                android:numStars="5"
-                android:rating="5"
-                android:stepSize="1.0" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                hedgehog:clickable="true"
+                hedgehog:starCount="5"
+                />
             <TextView
                 android:id="@+id/tvPrice"
                 style="@style/tv_style_red_14"
+                android:layout_gravity="center_vertical"
                 />
         </LinearLayout>
         <TextView
