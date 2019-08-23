@@ -160,16 +160,6 @@
                 style="@style/home_btn_style_2"
                 android:text="创业\n朋友圈" />
         </LinearLayout>
-
-            <com.hedgehog.ratingbar.RatingBar
-                android:id="@+id/ratingbar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                hedgehog:clickable="true"
-                hedgehog:starCount="5"
-            />
-
     </LinearLayout>
     </ScrollView>
     <com.zzy.common.widget.BottomNavBar

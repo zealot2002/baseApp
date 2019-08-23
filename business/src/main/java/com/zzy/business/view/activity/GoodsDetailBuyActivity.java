@@ -5,29 +5,31 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.hedgehog.ratingbar.RatingBar;
 import com.zzy.business.R;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.base.BaseToolbarActivity;
+import com.zzy.common.widget.MyEditText;
 
 /**
  * 我要买东西
  */
 public class GoodsDetailBuyActivity extends BaseTitleAndBottomBarActivity implements View.OnClickListener {
-    private EditText etPhone,etPassword;
+    private EditText etName,etContact,etPhone,etAddress,etPrice,etDealWay;
+    private MyEditText etDesc;
     private Button btnOk;
-    private TextView tvToBePioneer,tvForgetPassword;
-
+    private TextView tvScore,tvReport;
+    private RatingBar rbScore;
 /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.busi_menu_list_item);
         setupViews();
     }
 
     @Override
     protected int getLayoutId() {
-        return 0;
+        return R.layout.busi_goods_new_buy_activity;
     }
 
     private void setupViews() {
@@ -38,8 +40,7 @@ public class GoodsDetailBuyActivity extends BaseTitleAndBottomBarActivity implem
 //        tvForgetPassword = findViewById(R.id.tvForgetPassword);
 
         btnOk.setOnClickListener(this);
-        tvToBePioneer.setOnClickListener(this);
-        tvForgetPassword.setOnClickListener(this);
+
     }
 
 

@@ -91,6 +91,9 @@ public class GoodsListActivity extends BaseTitleAndBottomBarActivity implements 
             g1.setStartPrice("80");
             g1.setEndPrice("90");
             g1.getImgUrlList().add(CommonConstants.TEST_IMG_URL);
+            g1.getImgUrlList().add(CommonConstants.TEST_IMG_URL);
+            g1.getImgUrlList().add(CommonConstants.TEST_IMG_URL);
+            g1.getImgUrlList().add(CommonConstants.TEST_IMG_URL);
             dataList.add(g1);
         }
     }

@@ -74,35 +74,8 @@ public class GoodsListAdapter extends
             if(bean.getScore()>0){
                 //卖
                 holder.rbScore.setVisibility(View.VISIBLE);
-                holder.rbScore.setStarEmptyDrawable(context.getResources().getDrawable(R.mipmap.rating_normal));
-                holder.rbScore.setStarHalfDrawable(context.getResources().getDrawable(R.mipmap.rating_normal));
-                holder.rbScore.setStarFillDrawable(context.getResources().getDrawable(R.mipmap.rating_checked));
                 holder.rbScore.setStar(bean.getScore());
-                holder.rbScore.halfStar(false);
-                holder.rbScore.setmClickable(true);
-                holder.rbScore.setStarImageWidth(20f);
-                holder.rbScore.setStarImageHeight(20f);
-                holder.rbScore.setImagePadding(5);
-                holder.rbScore.setStarCount(5);
-                holder.rbScore.setStar(3);
-//
-//                mRatingBar.setStarCount(5);
-//                mRatingBar.setStar(3f);
-//                mRatingBar.halfStar(false);
-//                mRatingBar.setmClickable(true);
-//                mRatingBar.setStarImageWidth(20f);
-//                mRatingBar.setStarImageHeight(20f);
-//                mRatingBar.setImagePadding(5);
-
-//                holder.rbScore.setOnRatingChangeListener(
-//                        new RatingBar.OnRatingChangeListener() {
-//                            @Override
-//                            public void onRatingChange(float RatingCount) {
-//                                Toast.makeText(HomeActivity.this, "the fill star is" + RatingCount, Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-//                );
-                holder.tvPrice.setText(bean.getPrice());
+                holder.tvPrice.setText("¥"+bean.getPrice());
             }else{
                 //买
                 holder.tvPrice.setText("¥"+bean.getStartPrice()+"-"+bean.getEndPrice());

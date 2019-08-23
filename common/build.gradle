@@ -50,7 +50,7 @@ dependencies {
     api "com.scwang.smartrefresh:SmartRefreshHeader:${thridLibs.refreshLayout}"
 
     //banner
-    compile 'cn.bingoogolapple:bga-banner:2.2.4@aar'
+    api 'com.bigkoo:ConvenientBanner:2.1.4'
 
     // server-center
     api project(':servercentre')
