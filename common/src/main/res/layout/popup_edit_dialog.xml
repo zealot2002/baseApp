@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg"
+    >
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="28px"
+        android:background="@mipmap/line3" />
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/tv_style_white_14"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        />
+    <EditText
+        android:id="@+id/etContent"
+        android:layout_below="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:padding="10dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/deep_blue"
+        />
+    <Button
+        android:id="@+id/btnOk"
+        android:layout_below="@+id/etContent"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:background="@mipmap/btn_login"
+        android:text="完成"
+        android:textColor="@color/white"
+        android:textSize="@dimen/btn_text_size"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        />
+</RelativeLayout>

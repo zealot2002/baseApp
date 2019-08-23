@@ -97,13 +97,9 @@ public class JobListActivity extends BaseTitleAndBottomBarActivity implements Vi
 
     @Override
     public void onClick(View v) {
-//        if(v.getId() == R.id.btnOk){
-//            // TODO: 2019/8/19   to login
-//        }else if(v.getId() == R.id.tvToBePioneer){
-//
-//        }else if(v.getId() == R.id.tvForgetPassword){
-//
-//        }
+        if(v.getId() == R.id.btnNew){
+            startActivity(JobNewActivity.class);
+        }
 
     }
 }

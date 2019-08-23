@@ -72,8 +72,10 @@
             android:name=".view.activity.PublishContentToFriendsActivity"
             android:theme="@style/activity_theme" />
         <activity
-            android:name=".view.activity.RecruitActivity"
-            android:theme="@style/activity_theme" />
+            android:name=".view.activity.JobNewActivity"
+            android:theme="@style/activity_theme"
+            android:windowSoftInputMode="adjustPan"
+            />
         <activity
             android:name=".view.activity.JobDetailActivity"
             android:theme="@style/activity_theme" />

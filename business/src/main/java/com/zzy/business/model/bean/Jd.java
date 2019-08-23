@@ -21,9 +21,11 @@ public class Jd implements Serializable {
     private String jobRequirements;
     private String publishTime;
 
-    public Jd(String companyName,String from, String jobName, String address, String headcount,
+    public Jd() {}
+
+    public Jd(String companyName, String from, String jobName, String address, String headcount,
               String education, String salary, String phone, String contact,
-              String jobContent, String jobRequirements,String publishTime) {
+              String jobContent, String jobRequirements, String publishTime) {
         this.companyName = companyName;
         this.from = from;
         this.jobName = jobName;

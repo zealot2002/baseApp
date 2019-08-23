@@ -1,32 +1,35 @@
 package com.zzy.business.view.activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.zzy.business.R;
 import com.zzy.business.model.bean.Jd;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
+import com.zzy.common.base.BaseToolbarActivity;
 import com.zzy.common.constants.ParamConstants;
-import com.zzy.common.widget.PopupDialog;
+import com.zzy.common.widget.MyEditText;
 import com.zzy.common.widget.PopupEditDialog;
 
 /**
- * 招聘信息详情
+ * 我要招聘
  */
-public class JobDetailActivity extends BaseTitleAndBottomBarActivity implements View.OnClickListener {
+public class JobNewActivity extends BaseTitleAndBottomBarActivity implements View.OnClickListener {
     private Jd bean;
     private EditText etCompanyName,etJobName,etAddress,etHeadcount,etEducation,
-            etSalary,etPhone,etContact,etJobContent,etJobRequirements;
+            etSalary,etPhone,etContact;
+    private MyEditText etJobContent,etJobRequirements;
     private TextView tvReport;
     private PopupEditDialog dialog;
-/***********************************************************************************************/
+    /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try{
-            setTitle("招聘信息详情");
-            bean = (Jd) getIntent().getSerializableExtra(ParamConstants.DATA);
+            setTitle("我要招聘");
+            bean = new Jd();
             setupViews();
         }catch (Exception e){
             e.printStackTrace();
@@ -35,7 +38,7 @@ public class JobDetailActivity extends BaseTitleAndBottomBarActivity implements 
 
     @Override
     protected int getLayoutId() {
-        return R.layout.busi_job_detail_activity;
+        return R.layout.busi_job_new_activity;
     }
 
     private void setupViews() {
