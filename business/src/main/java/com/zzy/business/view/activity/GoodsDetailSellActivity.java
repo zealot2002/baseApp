@@ -14,8 +14,7 @@ import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.constants.ParamConstants;
 import com.zzy.common.widget.BannerHolderView;
 import com.zzy.common.widget.MyEditText;
-
-
+import com.zzy.common.widget.PopupEditDialog;
 /**
  * 商品详情（卖）
  */
@@ -27,6 +26,7 @@ public class GoodsDetailSellActivity extends BaseTitleAndBottomBarActivity imple
     private RatingBar rbScore;
     private ConvenientBanner banner;
     private Goods bean;
+    private PopupEditDialog dialog;
     /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +71,6 @@ public class GoodsDetailSellActivity extends BaseTitleAndBottomBarActivity imple
         tvReport = findViewById(R.id.tvReport);
         rbScore = findViewById(R.id.rbScore);
         tvReport.setOnClickListener(this);
-
     }
 
     private void updateBanner() {
@@ -92,13 +91,19 @@ public class GoodsDetailSellActivity extends BaseTitleAndBottomBarActivity imple
 
     @Override
     public void onClick(View v) {
-//        if(v.getId() == R.id.btnOk){
-//            // TODO: 2019/8/19   to login
-//        }else if(v.getId() == R.id.tvToBePioneer){
-//
-//        }else if(v.getId() == R.id.tvForgetPassword){
-//
-//        }
-
+        if(v.getId() == R.id.tvReport){
+            if(dialog == null){
+                dialog = new PopupEditDialog.Builder(this, "举报原因：","完成",
+                        new PopupEditDialog.OnClickOkListener() {
+                            @Override
+                            public void clickOk(String content) {
+                                // TODO: 2019/8/23  report content
+                                dialog.dismiss();
+                            }
+                        }
+                ).create();
+            }
+            dialog.show();
+        }
     }
 }
