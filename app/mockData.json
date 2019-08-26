@@ -1,0 +1,27 @@
+//请求：
+{
+  "req":
+  {
+    "token":"DSAF212jsDASFASRQRC5C52ak3287"
+  },
+
+//返回：
+"rsp":
+  {
+    "code":"200",
+    "msg":"ok",
+    "data":{
+      "imageUrl":"http://icon.com/?www2adsfasdsajflkdj.png",
+      "infoList":[
+        {
+          "name":"首农.....",
+          "title":"kldsajfkldjsal"
+        },
+        {
+          "name":"首农.....",
+          "title":"kldsajfkldjsal"
+        }
+      ]
+    }
+  }
+}

@@ -51,6 +51,11 @@ public class LoadingHelper {
             rotateAnim.start();
             dialog.show();
         }
+        makeRotateAnim();
+    }
+
+    public void showLoading() {
+        showLoading("加载中...");
     }
 
     public void closeLoading() {
@@ -62,7 +67,7 @@ public class LoadingHelper {
         }
     }
 
-    public Animation makeRotateAnim() {
+    private Animation makeRotateAnim() {
         Animation anim = new RotateAnimation(0f, 360f,
                 Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         anim.setFillAfter(true); // 设置保持动画最后的状态

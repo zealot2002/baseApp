@@ -1,6 +1,9 @@
 package com.zzy.home.view.activity;
 
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hedgehog.ratingbar.RatingBar;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zzy.business.view.activity.GoodsListActivity;
 import com.zzy.business.view.activity.EntrepreneurshipFriendsActivity;
 import com.zzy.business.view.activity.EntrepreneurshipHelpActivity;
@@ -22,25 +28,39 @@ import com.zzy.business.view.activity.IndustrialDistributionActivity;
 import com.zzy.business.view.activity.JobListActivity;
 import com.zzy.business.view.activity.ShareExperienceActivity;
 import com.zzy.business.view.activity.SpecialDkActivity;
+import com.zzy.business.view.adapter.PbListAdapter;
 import com.zzy.common.base.BaseAppActivity;
 import com.zzy.common.constants.ParamConstants;
+import com.zzy.common.glide.ImageLoader;
 import com.zzy.common.utils.StatusBarUtils;
+import com.zzy.common.widget.LoadingHelper;
 import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.commonlib.utils.ToastUtils;
 import com.zzy.home.R;
+import com.zzy.home.contract.HomeContract;
+import com.zzy.home.model.wrapper.HomeCtx;
+import com.zzy.home.presenter.HomePresenter;
+import com.zzy.home.view.adapter.NewsListAdapter;
 
 
 /**
  * 首页
  */
-public class HomeActivity extends BaseAppActivity implements View.OnClickListener {
-
+public class HomeActivity extends BaseAppActivity implements View.OnClickListener, HomeContract.View, OnRefreshListener {
     private TextView tvUserName,tvScore;
     private ImageView ivPic;
     private Button btnSpecialDk,btnIndustrialDistribution,btnGetRichInfo,
             btnEntrepreneurshipService,btnEntrepreneurshipVanguard;
     private Button btnRecruit,btnEntrepreneurship,btnBuyGoods,btnSellGoods,
             btnEntrepreneurshipHelp,btnFeedback,btnShareExperience,btnEntrepreneurshipFriends;
+
+    private HomeContract.Presenter presenter;
+    private HomeCtx ctx;
+    private LoadingHelper loadingHelper;
+
+    private RecyclerView rvNewsList;
+    private NewsListAdapter adapter;
+    private SmartRefreshLayout smartRefreshLayout;
 /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +68,17 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
         setContentView(R.layout.home_main_activity);
         StatusBarUtils.setStatusBarFontIconLight(this, false);
         StatusBarUtils.fixStatusHeight(this, (ViewGroup) findViewById(R.id.rlRoot));
+        loadingHelper = new LoadingHelper(this);
         setupViews();
+        presenter = new HomePresenter(this);
+        presenter.start();
     }
 
     private void setupViews() {
+        smartRefreshLayout = findViewById(R.id.smartRefreshLayout);
+        smartRefreshLayout.setEnableRefresh(true);
+        smartRefreshLayout.setOnRefreshListener(this);
+
         tvUserName = findViewById(R.id.tvUserName);
         tvScore = findViewById(R.id.tvScore);
         ivPic = findViewById(R.id.ivPic);
@@ -84,27 +111,25 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
         btnShareExperience.setOnClickListener(this);
         btnEntrepreneurshipFriends.setOnClickListener(this);
 
-//        RatingBar mRatingBar = (RatingBar) findViewById(R.id.ratingbar);
-//        mRatingBar.setStarEmptyDrawable(getResources().getDrawable(R.mipmap.rating_normal));
-//        mRatingBar.setStarHalfDrawable(getResources().getDrawable(R.mipmap.rating_normal));
-//        mRatingBar.setStarFillDrawable(getResources().getDrawable(R.mipmap.rating_checked));
-//        mRatingBar.setStarCount(5);
-//        mRatingBar.setStar(3f);
-//        mRatingBar.halfStar(false);
-//        mRatingBar.setmClickable(true);
-//        mRatingBar.setStarImageWidth(20f);
-//        mRatingBar.setStarImageHeight(20f);
-//        mRatingBar.setImagePadding(5);
-//        mRatingBar.setOnRatingChangeListener(
-//                new RatingBar.OnRatingChangeListener() {
-//                    @Override
-//                    public void onRatingChange(float RatingCount) {
-//                        Toast.makeText(HomeActivity.this, "the fill star is" + RatingCount, Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//        );
-    }
+        rvNewsList = findViewById(R.id.rvNewsList);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        rvNewsList.setLayoutManager(layoutManager);
+        rvNewsList.setItemAnimator(new DefaultItemAnimator());
 
+        /*adapter*/
+        adapter = new NewsListAdapter(this);
+        rvNewsList.setAdapter(adapter);
+        adapter.setOnItemClickedListener(new NewsListAdapter.Listener() {
+            @Override
+            public void onItemClicked(int position) {
+//                    //todo  get data
+//                    for(int i=0;i<menuList.size();i++){
+//                        menuList.get(i).setSelected(i==position?true:false);
+//                    }
+//                    adapter.notifyDataSetChanged();
+            }
+        });
+    }
 
     private long exitTime = 0;
     @Override
@@ -163,5 +188,59 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void showError(String s) {
+        smartRefreshLayout.finishRefresh();
+        ToastUtils.showShort(s);
+    }
+
+    @Override
+    public void showLoading() {
+        loadingHelper.showLoading();
+    }
+
+    @Override
+    public void closeLoading() {
+        loadingHelper.closeLoading();
+    }
+
+    @Override
+    public void showDisconnect() {
+        smartRefreshLayout.finishRefresh();
+    }
+
+    @Override
+    public void showLoadingError() {
+
+    }
+
+    @Override
+    public void reload(boolean bShow) {
+
+    }
+
+    @Override
+    public void updateUI(Object o) {
+        try{
+            smartRefreshLayout.finishRefresh();
+            ctx = (HomeCtx) o;
+            updateViews();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private void updateViews() {
+        tvUserName.setText(ctx.getUser().getName());
+        tvScore.setText(ctx.getUser().getScore());
+        ImageLoader.loadImage(ivPic,ctx.getBannerList().get(0).getImgUrl());
+        adapter.swapData(ctx.getNewsList());
+    }
+
+    @Override
+    public void onRefresh(RefreshLayout refreshLayout) {
+        presenter.start();
     }
 }

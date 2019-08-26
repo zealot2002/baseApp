@@ -57,7 +57,6 @@ public class HttpUtils {
             jsonObject.put("ver", "1.1");
             jsonObject.put("access-token", SPHelper.getString(SPConstants.TOKEN, ""));
             jsonObject.put("client-version", AppUtils.getVersionName());
-            jsonObject.put("appsecret", HttpConstants.APP_SECRET_KEY);
             return jsonObject.toString();
         } catch (Exception e) {
             e.printStackTrace();
@@ -85,7 +84,6 @@ public class HttpUtils {
         String sign = actionName
                 + "|" + headerMap.get("x-v")
                 + "|" + headerMap.get("x-appid")
-                + "|" + HttpConstants.APP_SECRET_KEY
                 + "|" + headerMap.get("x-t")
                 + "|" + headerMap.get("x-access-token")
                 + "|" + headerMap.get("x-client-info")
@@ -116,9 +114,9 @@ public class HttpUtils {
                 .callback(callback)
                 .jsonParser(jsonParser)
                 .decrypter(decrypter)
-                .retryCount(3)
+                .retryCount(1)
                 .interceptor(new CommonInterceptor())
-                .timerout(30);
+                .timerout(15);
         Map<String,Object> tagMap = new HashMap<>();
         tagMap.put("actionName",actionName);
         tagMap.put("body",body.toString());

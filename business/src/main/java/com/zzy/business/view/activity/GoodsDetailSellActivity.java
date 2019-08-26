@@ -81,7 +81,6 @@ public class GoodsDetailSellActivity extends BaseTitleAndBottomBarActivity imple
                     public BannerHolderView createHolder(View itemView) {
                         return new BannerHolderView(itemView,R.mipmap.icon_default);
                     }
-
                     @Override
                     public int getLayoutId() {
                         return R.layout.banner_item;

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="80dp"
-        android:src="@mipmap/pig_icon"
+        android:src="@mipmap/no_network"
         android:scaleType="fitXY"
         />
 

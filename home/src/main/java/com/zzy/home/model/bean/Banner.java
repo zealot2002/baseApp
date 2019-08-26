@@ -1,11 +1,11 @@
-package com.zzy.home.model.bean.main;
+package com.zzy.home.model.bean;
 
 /**
  * @author zzy
  * @date 2018/11/30
  */
 
-public class BannerBean {
+public class Banner {
     private String imgUrl;
     private String linkUrl;
 

@@ -7,20 +7,18 @@ public class HttpConstants {
 
 
     // 测试环境13
-//    public static String SERVER_ADDRESS = "http://testapi13.hengyirong.com";
-//    public static final String APP_SECRET_KEY = "123456";
+    public static String SERVER_ADDRESS = "http://1486v8546j.imwork.net/Createcode";
 
     // 生产环境
-    public static String SERVER_ADDRESS = "https://aapi.hengyirong.com";
-    public static final String APP_SECRET_KEY = "AEGN*yL&Uoueeh3zWWiuqWZ2zV1#=Uu";
+//    public static String SERVER_ADDRESS = "https://aapi.hengyirong.com";
 
 
     /*********************************************  constants  **************************************************/
 
     // 状态码
-    public static final String NO_ERROR = "200";
+    public static final int NO_ERROR = 200;
     public static final String ERROR_CODE = "code";
-    public static final String ERROR_MESSAGE = "submsg";
+    public static final String ERROR_MESSAGE = "msg";
 
     /*************************************************************************************************************/
 
@@ -35,7 +33,8 @@ public class HttpConstants {
     public static final String SMS_SEND = "/v1/user/sms-send";
 
 
-    /****************************************************************************/
+    /**************************    home *******************************/
+    public static final String HOME_DATA = "/userinfo/index.do";
 
     /**********************            helper          ***************************/
 
