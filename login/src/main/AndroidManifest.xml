@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.zzy.login">
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:supportsRtl="true"
         >
         <activity

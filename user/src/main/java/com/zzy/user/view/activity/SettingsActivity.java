@@ -1,56 +1,67 @@
 package com.zzy.user.view.activity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.zzy.common.base.BaseToolbarActivity;
+import com.zzy.common.base.BaseTitleAndBottomBarActivity;
+import com.zzy.common.glide.GlideCacheUtil;
+import com.zzy.commonlib.utils.ToastUtils;
+import com.zzy.sc.core.serverCenter.SCM;
+import com.zzy.servercentre.ActionConstants;
 import com.zzy.user.R;
 
 /**
  * 系统设置
  */
-public class SettingsActivity extends BaseToolbarActivity implements View.OnClickListener {
-    private EditText etPhone,etPassword;
-    private Button btnOk;
-    private TextView tvToBePioneer,tvForgetPassword;
+public class SettingsActivity extends BaseTitleAndBottomBarActivity implements View.OnClickListener {
+    private RelativeLayout rlModifyPw,rlClearCache;
+    private TextView tvCacheSize;
 
 /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.user_my_main_activity);
+        setTitle("系统设置");
         setupViews();
     }
 
     @Override
     protected int getLayoutId() {
-        return 0;
+        return R.layout.user_settings_activity;
     }
 
     private void setupViews() {
-//        etPhone = findViewById(R.id.etPhone);
-//        etPassword = findViewById(R.id.etPassword);
-//        btnOk = findViewById(R.id.btnOk);
-//        tvToBePioneer = findViewById(R.id.tvToBePioneer);
-//        tvForgetPassword = findViewById(R.id.tvForgetPassword);
+        rlModifyPw = findViewById(R.id.rlModifyPw);
+        rlClearCache = findViewById(R.id.rlClearCache);
+        tvCacheSize = findViewById(R.id.tvCacheSize);
 
-        btnOk.setOnClickListener(this);
-        tvToBePioneer.setOnClickListener(this);
-        tvForgetPassword.setOnClickListener(this);
+        tvCacheSize.setText(GlideCacheUtil.getInstance().getCacheFormatSize(this));
+
+        rlModifyPw.setOnClickListener(this);
+        rlClearCache.setOnClickListener(this);
     }
 
 
     @Override
     public void onClick(View v) {
-//        if(v.getId() == R.id.btnOk){
-//            // TODO: 2019/8/19   to login
-//        }else if(v.getId() == R.id.tvToBePioneer){
-//
-//        }else if(v.getId() == R.id.tvForgetPassword){
-//
-//        }
+        try{
+            if(v.getId() == R.id.rlModifyPw){
+                SCM.getInstance().req(this, ActionConstants.ENTRY_LOGIN_ACTIVITY_ACTION);
+            }else if(v.getId() == R.id.rlClearCache){
+                if(GlideCacheUtil.getInstance().getCacheFloatSize(this)>0){
+                    ToastUtils.showShort("清理完成");
+                    tvCacheSize.setText("0MB");
+                    GlideCacheUtil.getInstance().clearImageDiskCache(this);
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void reload(boolean bShow) {
 
     }
 }

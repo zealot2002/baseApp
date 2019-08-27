@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -31,7 +30,6 @@ public class NewsListAdapter extends
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tvTitle, tvDate,tvFrom;
-        private ImageView ivPic;
         private RelativeLayout rlRoot;
 
         public ViewHolder(View view) {
@@ -39,7 +37,6 @@ public class NewsListAdapter extends
             tvTitle = view.findViewById(R.id.tvTitle);
             tvDate = view.findViewById(R.id.tvDate);
             tvFrom = view.findViewById(R.id.tvFrom);
-            ivPic = view.findViewById(R.id.ivPic);
             rlRoot = view.findViewById(R.id.rlRoot);
         }
     }
@@ -62,12 +59,12 @@ public class NewsListAdapter extends
         try{
             int index = 0;
             if(position!=0){
-//                index = position%mDataSet.size();
+                index = position%mDataSet.size();
             }
-//            News bean = mDataSet.get(index);
-//            holder.tvTitle.setText(bean.getTitle());
-//            holder.tvDate.setText(bean.getPublishTime());
-//            holder.tvFrom.setText(bean.getFrom());
+            News bean = mDataSet.get(index);
+            holder.tvTitle.setText(bean.getTitle());
+            holder.tvDate.setText(bean.getPublishTime());
+            holder.tvFrom.setText(bean.getFrom());
 
             holder.rlRoot.setOnClickListener(new View.OnClickListener() {
                 @Override

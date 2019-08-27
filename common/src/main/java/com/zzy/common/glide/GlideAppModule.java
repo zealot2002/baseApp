@@ -10,6 +10,7 @@ import com.bumptech.glide.GlideBuilder;
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.load.DecodeFormat;
 import com.bumptech.glide.load.engine.cache.DiskLruCacheFactory;
+import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory;
 import com.bumptech.glide.module.AppGlideModule;
 import com.bumptech.glide.request.RequestOptions;
 
@@ -35,8 +36,7 @@ public class GlideAppModule extends AppGlideModule {
         } else {
             dir = context.getCacheDir();
         }
-        File cache = new File(dir, "glide");
-        String path = cache.getAbsolutePath();
+        String path = context.getCacheDir() + "/"+ InternalCacheDiskCacheFactory.DEFAULT_DISK_CACHE_DIR;
         builder.setDiskCache(new DiskLruCacheFactory(path, 10 * 1024 * 1024));
         builder.setDefaultRequestOptions(defaultOptions);
     }

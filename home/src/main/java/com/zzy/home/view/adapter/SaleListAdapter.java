@@ -54,12 +54,10 @@ public class SaleListAdapter extends
         try{
             int index = 0;
             if(position!=0){
-//                index = position%mDataSet.size();
+                index = position%mDataSet.size();
             }
-//            News bean = mDataSet.get(index);
-//            holder.tvTitle.setText(bean.getTitle());
-//            holder.tvDate.setText(bean.getPublishTime());
-//            holder.tvFrom.setText(bean.getFrom());
+            SaleInfo bean = mDataSet.get(index);
+            holder.tvTitle.setText(bean.getDealFinishTime()+"  "+bean.getTitle());
         }catch (Exception e){
             e.printStackTrace();
         }

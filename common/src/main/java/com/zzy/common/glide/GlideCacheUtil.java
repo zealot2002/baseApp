@@ -74,13 +74,26 @@ public class GlideCacheUtil {
      *
      * @return CacheSize
      */
-    public String getCacheSize(Context context) {
+    public String getCacheFormatSize(Context context) {
         try {
             return getFormatSize(getFolderSize(new File(context.getCacheDir() + "/"+InternalCacheDiskCacheFactory.DEFAULT_DISK_CACHE_DIR)));
         } catch (Exception e) {
             e.printStackTrace();
         }
         return "";
+    }
+    /**
+     * 获取Glide造成的缓存大小
+     *
+     * @return CacheSize
+     */
+    public float getCacheFloatSize(Context context) {
+        try {
+            return (getFolderSize(new File(context.getCacheDir() + "/"+InternalCacheDiskCacheFactory.DEFAULT_DISK_CACHE_DIR)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     /**
@@ -148,7 +161,7 @@ public class GlideCacheUtil {
 
         double kiloByte = size / 1024;
         if (kiloByte < 1) {
-            return size + "Byte";
+            return size + "B";
         }
 
         double megaByte = kiloByte / 1024;

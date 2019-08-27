@@ -1,11 +1,49 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zzy.user" >
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:supportsRtl="true">
 
         <activity
             android:name=".view.activity.MyMainActivity"
             android:theme="@style/activity_theme" />
+
+        <activity
+            android:name=".view.activity.MyArchivesActivity"
+            android:theme="@style/activity_theme" />
+
+        <activity
+            android:name=".view.activity.MyCommentActivity"
+            android:theme="@style/activity_theme" />
+
+        <activity
+            android:name=".view.activity.MyEntrepreneurshipActivity"
+            android:theme="@style/activity_theme" />
+
+        <activity
+            android:name=".view.activity.MyEntrepreneurshipLogActivity"
+            android:theme="@style/activity_theme" />
+
+        <activity
+            android:name=".view.activity.MyGoodsToBuyActivity"
+            android:theme="@style/activity_theme" />
+
+        <activity
+            android:name=".view.activity.MyGoodsToSellActivity"
+            android:theme="@style/activity_theme" />
+
+        <activity
+            android:name=".view.activity.MyRecruitActivity"
+            android:theme="@style/activity_theme" />
+
+        <activity
+            android:name=".view.activity.SettingsActivity"
+            android:theme="@style/activity_theme" />
+
+        <activity
+            android:name=".view.activity.ShareSoftwareActivity"
+            android:theme="@style/activity_theme" />
+
+
     </application>
 </manifest>

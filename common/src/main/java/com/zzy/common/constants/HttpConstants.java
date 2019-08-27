@@ -2,19 +2,14 @@ package com.zzy.common.constants;
 
 public class HttpConstants {
 
-    // 是否开启测试标
-    public static final boolean OPEN_TEST_PROJECT = false;
-
-
-    // 测试环境13
-    public static String SERVER_ADDRESS = "http://1486v8546j.imwork.net/Createcode";
+    // 测试环境
+    public static String SERVER_ADDRESS = "http://grecode.vicp.cc:82";
 
     // 生产环境
 //    public static String SERVER_ADDRESS = "https://aapi.hengyirong.com";
 
 
     /*********************************************  constants  **************************************************/
-
     // 状态码
     public static final int NO_ERROR = 200;
     public static final String ERROR_CODE = "code";
@@ -26,10 +21,6 @@ public class HttpConstants {
     /*****************************     common         ***************************/
 
     // 短信验证
-    public static final int SMS_SCENE_REGISTER = 1; //注册
-    public static final int SMS_SCENE_FIND_PASSWORD = 3; //找回密码
-    public static final int SMS_SCENE_LOGIN = 10; //登录
-
     public static final String SMS_SEND = "/v1/user/sms-send";
 
 
@@ -67,7 +58,10 @@ public class HttpConstants {
 
 
 
-    /********************************************************************************/
+    /******************************* 创业帮扶******************************************/
+    public static final String help_info = "/help_info/selAll.do";
+
+
 
 
     /*********************************   user  **************************************/

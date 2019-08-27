@@ -11,7 +11,7 @@
     <color name="blue">#192B7A</color>
     <color name="light_blue">#267DC1</color>
     <color name="deep_blue">#0A2051</color>
-
+    <color name="blue_gray">#D30440B8</color>
 
 
     <color name="divider">#e2e4e5</color>
@@ -27,7 +27,9 @@
     <color name="translucent_black">#33000000</color>
     <color name="translucent_white">#22ffffff</color>
     <color name="translucent_gray">#33828186</color>
-    <color name="blue_gray">#D30440B8</color>
+    <color name="translucent_light_blue">#33267DC1</color>
+
+
     <!--good-->
     <color name="divider_gray">#F2F4F6</color>
 

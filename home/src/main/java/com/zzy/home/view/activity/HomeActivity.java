@@ -39,6 +39,7 @@ import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.commonlib.utils.ToastUtils;
 import com.zzy.home.R;
 import com.zzy.home.contract.HomeContract;
+import com.zzy.home.model.bean.Banner;
 import com.zzy.home.model.wrapper.HomeCtx;
 import com.zzy.home.presenter.HomePresenter;
 import com.zzy.home.view.adapter.NewsListAdapter;
@@ -142,8 +143,6 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
         /*newsListAdapter*/
         saleListAdapter = new SaleListAdapter(this);
         rvSaleList.setAdapter(saleListAdapter);
-
-        updateBanner();
     }
 
     private AnimRunnable mRunnable = new AnimRunnable();
@@ -151,7 +150,6 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
 
         @Override
         public void run() {
-            MyLog.e("run !");
             aniIndex +=5;
             rvNewsList.smoothScrollToPosition(aniIndex);
             rvSaleList.smoothScrollToPosition(aniIndex);
@@ -207,11 +205,9 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
 
     private void updateBanner() {
         List<String> list = new ArrayList<>();
-
-        list.add(CommonConstants.TEST_IMG_URL);
-        list.add(CommonConstants.TEST_IMG_URL);
-        list.add(CommonConstants.TEST_IMG_URL);
-        list.add(CommonConstants.TEST_IMG_URL);
+        for(Banner banner:ctx.getBannerList()){
+            list.add(banner.getImgUrl());
+        }
         banner = findViewById(R.id.banner);
         banner.setPages(
                 new CBViewHolderCreator() {
@@ -313,6 +309,7 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
         ImageLoader.loadImage(ivPic,ctx.getBannerList().get(0).getImgUrl());
         newsListAdapter.swapData(ctx.getNewsList());
         saleListAdapter.swapData(ctx.getSaleInfoList());
+        updateBanner();
     }
 
     @Override

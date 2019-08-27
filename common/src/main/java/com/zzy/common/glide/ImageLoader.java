@@ -12,9 +12,6 @@ import com.zzy.common.R;
 
 public class ImageLoader {
 
-    private static float defaultScale = 0.75f;
-    private static final int PLACEHOLDER = R.color.white;
-    private static final int ERROR = R.color.white;
 
     private ImageLoader() {
         throw new IllegalStateException(" cannot to new the Object ");

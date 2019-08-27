@@ -6,7 +6,7 @@
 
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:supportsRtl="true">
 
         <meta-data android:name="design_width" android:value="750"/>

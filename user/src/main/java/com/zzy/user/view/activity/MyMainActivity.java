@@ -2,7 +2,7 @@ package com.zzy.user.view.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
@@ -12,15 +12,18 @@ import com.zzy.user.R;
  * 我的首页
  */
 public class MyMainActivity extends BaseTitleAndBottomBarActivity implements View.OnClickListener {
-    private EditText etPhone,etPassword;
-    private Button btnOk;
-    private TextView tvToBePioneer,tvForgetPassword;
+    private ImageView ivUserHead;
+    private TextView tvUserName,tvUserRemarks,tvUserScore;
+    private Button btnMyArchives,btnMyRecruit,btnMyEntrepreneurship,
+            btnMyComment,btnMyGoodsToBuy,btnMyGoodsToSell,
+            btnMyEntrepreneurshipLog,btnSettings,btnShareSoftware;
 
 /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("我的");
+        setupViews();
     }
 
     @Override
@@ -29,27 +32,57 @@ public class MyMainActivity extends BaseTitleAndBottomBarActivity implements Vie
     }
 
     private void setupViews() {
-//        etPhone = findViewById(R.id.etPhone);
-//        etPassword = findViewById(R.id.etPassword);
-//        btnOk = findViewById(R.id.btnOk);
-//        tvToBePioneer = findViewById(R.id.tvToBePioneer);
-//        tvForgetPassword = findViewById(R.id.tvForgetPassword);
+        ivUserHead = findViewById(R.id.ivUserHead);
+        tvUserName = findViewById(R.id.tvUserName);
+        tvUserRemarks = findViewById(R.id.tvUserRemarks);
+        tvUserScore = findViewById(R.id.tvUserScore);
 
-        btnOk.setOnClickListener(this);
-        tvToBePioneer.setOnClickListener(this);
-        tvForgetPassword.setOnClickListener(this);
+        btnMyArchives = findViewById(R.id.btnMyArchives);
+        btnMyRecruit = findViewById(R.id.btnMyRecruit);
+        btnMyEntrepreneurship = findViewById(R.id.btnMyEntrepreneurship);
+        btnMyComment = findViewById(R.id.btnMyComment);
+        btnMyGoodsToBuy = findViewById(R.id.btnMyGoodsToBuy);
+        btnMyGoodsToSell = findViewById(R.id.btnMyGoodsToSell);
+        btnMyEntrepreneurshipLog = findViewById(R.id.btnMyEntrepreneurshipLog);
+        btnSettings = findViewById(R.id.btnSettings);
+        btnShareSoftware = findViewById(R.id.btnShareSoftware);
+
+
+        btnMyArchives.setOnClickListener(this);
+        btnMyRecruit.setOnClickListener(this);
+        btnMyEntrepreneurship.setOnClickListener(this);
+
+        btnMyComment.setOnClickListener(this);
+        btnMyGoodsToBuy.setOnClickListener(this);
+        btnMyGoodsToSell.setOnClickListener(this);
+
+        btnMyEntrepreneurshipLog.setOnClickListener(this);
+        btnSettings.setOnClickListener(this);
+        btnShareSoftware.setOnClickListener(this);
     }
 
 
     @Override
     public void onClick(View v) {
-//        if(v.getId() == R.id.btnOk){
-//            // TODO: 2019/8/19   to login
-//        }else if(v.getId() == R.id.tvToBePioneer){
-//
-//        }else if(v.getId() == R.id.tvForgetPassword){
-//
-//        }
+        if(v.getId() == R.id.btnMyArchives){
+
+        }else if(v.getId() == R.id.btnMyRecruit){
+
+        }else if(v.getId() == R.id.btnMyEntrepreneurship){
+
+        }else if(v.getId() == R.id.btnMyComment){
+
+        }else if(v.getId() == R.id.btnMyGoodsToBuy){
+
+        }else if(v.getId() == R.id.btnMyGoodsToSell){
+
+        }else if(v.getId() == R.id.btnMyEntrepreneurshipLog){
+
+        }else if(v.getId() == R.id.btnSettings){
+            startActivity(SettingsActivity.class);
+        }else if(v.getId() == R.id.btnShareSoftware){
+
+        }
 
     }
 
