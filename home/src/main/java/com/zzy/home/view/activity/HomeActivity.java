@@ -143,6 +143,9 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
         /*newsListAdapter*/
         saleListAdapter = new SaleListAdapter(this);
         rvSaleList.setAdapter(saleListAdapter);
+
+        rvSaleList.setNestedScrollingEnabled(false);//禁止滑动
+        rvSaleList.setEnabled(false);
     }
 
     private AnimRunnable mRunnable = new AnimRunnable();

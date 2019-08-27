@@ -22,12 +22,9 @@
 
     </style>
 
-    <!--沉浸式满屏-->
-    <style name="activity_theme" parent="AppTheme">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <item name="android:statusBarColor">@color/white</item>
+    <style name="activity_theme" parent="translucentWithOpStyle">
         <item name="android:launchMode">singleTop</item>
+        <item name="android:screenOrientation">portrait</item>
     </style>
 
 

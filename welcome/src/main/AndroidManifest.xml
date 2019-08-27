@@ -1,10 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zzy.welcome" >
 
-    <application
-        android:allowBackup="false"
-        android:supportsRtl="true">
-
+    <application>
         <activity
             android:name=".WelcomeActivity"
             android:screenOrientation="portrait"

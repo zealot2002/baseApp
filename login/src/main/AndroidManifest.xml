@@ -1,10 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.zzy.login">
-    <application
-        android:allowBackup="false"
-        android:supportsRtl="true"
-        >
+    <application>
         <activity
             android:name=".view.activity.LoginActivity"
             android:screenOrientation="portrait"
@@ -15,11 +12,13 @@
         <activity
             android:name=".view.activity.ForgetPasswordActivity"
             android:theme="@style/activity_theme"
+            android:screenOrientation="portrait"
             />
         <activity
             android:name=".view.activity.RegisterActivity"
             android:theme="@style/activity_theme"
             android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
             />
     </application>
 </manifest>

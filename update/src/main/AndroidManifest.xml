@@ -1,9 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zzy.update">
 
-    <application
-        android:allowBackup="false"
-        android:supportsRtl="true">
+    <application>
 
         <service android:name=".DownloadService" />
         <provider

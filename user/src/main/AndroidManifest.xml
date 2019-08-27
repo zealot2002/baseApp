@@ -1,47 +1,55 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zzy.user" >
-    <application
-        android:allowBackup="false"
-        android:supportsRtl="true">
+    <application>
 
         <activity
             android:name=".view.activity.MyMainActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
 
         <activity
             android:name=".view.activity.MyArchivesActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
 
         <activity
             android:name=".view.activity.MyCommentActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
 
         <activity
             android:name=".view.activity.MyEntrepreneurshipActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
 
         <activity
             android:name=".view.activity.MyEntrepreneurshipLogActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
 
         <activity
             android:name=".view.activity.MyGoodsToBuyActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
 
         <activity
             android:name=".view.activity.MyGoodsToSellActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
 
         <activity
             android:name=".view.activity.MyRecruitActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
 
         <activity
             android:name=".view.activity.SettingsActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
 
         <activity
             android:name=".view.activity.ShareSoftwareActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
 
 

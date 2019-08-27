@@ -1,107 +1,134 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zzy.business" >
 
-    <application
-        android:allowBackup="false"
-        android:supportsRtl="true">
-
+    <application>
         <activity
             android:name=".view.activity.AssemblyDetailActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
             android:name=".view.activity.ContentDetailActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
             android:name=".view.activity.EntrepreneurshipNewActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
             android:name=".view.activity.EntrepreneurshipFriendsActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
             android:name=".view.activity.EntrepreneurshipHelpActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
             android:name=".view.activity.EntrepreneurshipListActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
             android:name=".view.activity.EntrepreneurshipServiceActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
             android:name=".view.activity.EntrepreneurshipVanguardActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
             android:name=".view.activity.EntrepreneurshipVanguardDetailActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
             android:name=".view.activity.ExpertDetailActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
             android:name=".view.activity.FeedbackActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
             android:name=".view.activity.GetRichInfoListActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
             android:name=".view.activity.GetRichInfoDetailActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
             android:name=".view.activity.GoodsDetailBuyActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
             android:name=".view.activity.GoodsDetailSellActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
             android:name=".view.activity.GoodsNewBuyActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme"
             android:windowSoftInputMode="adjustPan"
             />
         <activity
             android:name=".view.activity.GoodsNewSellActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme"
             android:windowSoftInputMode="adjustPan"
             />
         <activity
             android:name=".view.activity.GoodsListActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
 
         <activity
             android:name=".view.activity.HelpDetailActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
             android:name=".view.activity.IndustrialDistributionActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
             android:name=".view.activity.PersonalArchivesActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
             android:name=".view.activity.PhoneBookListActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
             android:name=".view.activity.PublishContentActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
             android:name=".view.activity.PublishContentToFriendsActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
             android:name=".view.activity.JobNewActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme"
             android:windowSoftInputMode="adjustPan"
             />
         <activity
             android:name=".view.activity.JobDetailActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
             android:name=".view.activity.JobListActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
 
         <activity
             android:name=".view.activity.ShareExperienceActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
             android:name=".view.activity.SkillDetailActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
             android:name=".view.activity.SpecialDkActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
     </application>
 
