@@ -48,4 +48,9 @@ public class FeedbackActivity extends BaseTitleAndBottomBarActivity implements V
 //        }
 
     }
+
+    @Override
+    public void reload(boolean bShow) {
+
+    }
 }

@@ -88,4 +88,9 @@ public class EntrepreneurshipServiceActivity extends BaseTitleAndBottomBarActivi
         btn5.setSelected(false);
         btn6.setSelected(false);
     }
+
+    @Override
+    public void reload(boolean bShow) {
+
+    }
 }

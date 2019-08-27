@@ -13,7 +13,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="120px"
         >
         <LinearLayout
@@ -105,10 +105,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="28px"
                 android:background="@mipmap/line3" />
-            <ImageView
-                android:id="@+id/ivPic"
+            <com.bigkoo.convenientbanner.ConvenientBanner
+                android:id="@+id/banner"
                 android:layout_width="match_parent"
                 android:layout_height="240px"
+                app:canLoop="true"
+                android:background="@null"
                 />
             <View
                 android:layout_width="match_parent"
@@ -165,18 +167,51 @@
                     style="@style/home_btn_style_2"
                     android:text="创业\n朋友圈" />
             </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="260px"
+                >
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvSaleList"
+                    android:layout_width="match_parent"
+                    android:layout_height="120px"
+                    android:layout_marginLeft="99px"
+                    android:layout_marginRight="99px"
+                    android:layout_marginTop="90px"
+                    />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="90px"
+                    android:background="@color/translucent_gray"
+                    android:layout_marginLeft="99px"
+                    android:layout_marginRight="99px"
+                    android:layout_marginTop="120px"
+                    />
+                <ImageView
+                    android:layout_width="99px"
+                    android:layout_height="260px"
+                    android:src="@mipmap/home_left"
+                    android:scaleType="fitXY"
+                    />
+                <ImageView
+                    android:layout_width="99px"
+                    android:layout_height="260px"
+                    android:src="@mipmap/home_right"
+                    android:layout_alignParentRight="true"
+                    android:scaleType="fitXY"
+                    />
+            </RelativeLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvNewsList"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="200dp"
                 android:layout_marginLeft="@dimen/body_margin"
                 android:layout_marginRight="@dimen/body_margin"
                 android:layout_marginTop="50px"
                 android:layout_marginBottom="@dimen/bottom_margin"
                 />
-
-    </LinearLayout>
+        </LinearLayout>
     </ScrollView>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
     <com.zzy.common.widget.BottomNavBar

@@ -1,8 +1,6 @@
 package com.zzy.home.view.activity;
 
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.View;
@@ -10,9 +8,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.hedgehog.ratingbar.RatingBar;
+import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -23,17 +21,20 @@ import com.zzy.business.view.activity.EntrepreneurshipListActivity;
 import com.zzy.business.view.activity.EntrepreneurshipServiceActivity;
 import com.zzy.business.view.activity.EntrepreneurshipVanguardActivity;
 import com.zzy.business.view.activity.FeedbackActivity;
-import com.zzy.business.view.activity.GetRichInfoActivity;
+import com.zzy.business.view.activity.GetRichInfoListActivity;
 import com.zzy.business.view.activity.IndustrialDistributionActivity;
 import com.zzy.business.view.activity.JobListActivity;
 import com.zzy.business.view.activity.ShareExperienceActivity;
 import com.zzy.business.view.activity.SpecialDkActivity;
-import com.zzy.business.view.adapter.PbListAdapter;
+import com.zzy.business.view.adapter.SpeedyLinearLayoutManager;
 import com.zzy.common.base.BaseAppActivity;
+import com.zzy.common.constants.CommonConstants;
 import com.zzy.common.constants.ParamConstants;
 import com.zzy.common.glide.ImageLoader;
 import com.zzy.common.utils.StatusBarUtils;
+import com.zzy.common.widget.BannerHolderView;
 import com.zzy.common.widget.LoadingHelper;
+import com.zzy.commonlib.log.MyLog;
 import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.commonlib.utils.ToastUtils;
 import com.zzy.home.R;
@@ -41,6 +42,10 @@ import com.zzy.home.contract.HomeContract;
 import com.zzy.home.model.wrapper.HomeCtx;
 import com.zzy.home.presenter.HomePresenter;
 import com.zzy.home.view.adapter.NewsListAdapter;
+import com.zzy.home.view.adapter.SaleListAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -57,10 +62,14 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
     private HomeContract.Presenter presenter;
     private HomeCtx ctx;
     private LoadingHelper loadingHelper;
+    private ConvenientBanner banner;
 
-    private RecyclerView rvNewsList;
-    private NewsListAdapter adapter;
+    private RecyclerView rvNewsList,rvSaleList;
+    private NewsListAdapter newsListAdapter;
+    private SaleListAdapter saleListAdapter;
     private SmartRefreshLayout smartRefreshLayout;
+    private boolean bAniStart;
+    private int aniIndex = 0;
 /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,23 +121,68 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
         btnEntrepreneurshipFriends.setOnClickListener(this);
 
         rvNewsList = findViewById(R.id.rvNewsList);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        SpeedyLinearLayoutManager layoutManager = new SpeedyLinearLayoutManager(this);
+        layoutManager.setMillisecondsPerInch(4000f);
         rvNewsList.setLayoutManager(layoutManager);
-        rvNewsList.setItemAnimator(new DefaultItemAnimator());
-
-        /*adapter*/
-        adapter = new NewsListAdapter(this);
-        rvNewsList.setAdapter(adapter);
-        adapter.setOnItemClickedListener(new NewsListAdapter.Listener() {
+        /*newsListAdapter*/
+        newsListAdapter = new NewsListAdapter(this);
+        rvNewsList.setAdapter(newsListAdapter);
+        newsListAdapter.setOnItemClickedListener(new NewsListAdapter.Listener() {
             @Override
             public void onItemClicked(int position) {
-//                    //todo  get data
-//                    for(int i=0;i<menuList.size();i++){
-//                        menuList.get(i).setSelected(i==position?true:false);
-//                    }
-//                    adapter.notifyDataSetChanged();
+                ToastUtils.showShort(position);
             }
         });
+        rvNewsList.postDelayed(mRunnable,1000);
+
+        rvSaleList = findViewById(R.id.rvSaleList);
+        SpeedyLinearLayoutManager layoutManager2 = new SpeedyLinearLayoutManager(this);
+        layoutManager2.setMillisecondsPerInch(8000f);
+        rvSaleList.setLayoutManager(layoutManager2);
+        /*newsListAdapter*/
+        saleListAdapter = new SaleListAdapter(this);
+        rvSaleList.setAdapter(saleListAdapter);
+
+        updateBanner();
+    }
+
+    private AnimRunnable mRunnable = new AnimRunnable();
+    private class AnimRunnable implements Runnable{
+
+        @Override
+        public void run() {
+            MyLog.e("run !");
+            aniIndex +=5;
+            rvNewsList.smoothScrollToPosition(aniIndex);
+            rvSaleList.smoothScrollToPosition(aniIndex);
+            rvNewsList.postDelayed(this,10000);
+        }
+    }
+
+    private void startAni(){
+        if(rvNewsList!=null){
+            if(!bAniStart){
+                rvNewsList.postDelayed(mRunnable,2000);
+                bAniStart = true;
+            }
+        }
+    }
+    private void stopAni(){
+        if(rvNewsList!=null) {
+            rvNewsList.removeCallbacks(mRunnable);
+            bAniStart = false;
+        }
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        startAni();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        stopAni();
     }
 
     private long exitTime = 0;
@@ -151,6 +205,27 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
         super.onDestroy();
     }
 
+    private void updateBanner() {
+        List<String> list = new ArrayList<>();
+
+        list.add(CommonConstants.TEST_IMG_URL);
+        list.add(CommonConstants.TEST_IMG_URL);
+        list.add(CommonConstants.TEST_IMG_URL);
+        list.add(CommonConstants.TEST_IMG_URL);
+        banner = findViewById(R.id.banner);
+        banner.setPages(
+                new CBViewHolderCreator() {
+                    @Override
+                    public BannerHolderView createHolder(View itemView) {
+                        return new BannerHolderView(itemView, R.mipmap.icon_default);
+                    }
+                    @Override
+                    public int getLayoutId() {
+                        return R.layout.banner_item;
+                    }
+                }, list);
+    }
+
     @Override
     public void onClick(View v) {
         try{
@@ -159,7 +234,7 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
             }else if(v.getId() == R.id.btnIndustrialDistribution){
                 startActivity(IndustrialDistributionActivity.class);
             }else if(v.getId() == R.id.btnGetRichInfo){
-                startActivity(GetRichInfoActivity.class);
+                startActivity(GetRichInfoListActivity.class);
             }else if(v.getId() == R.id.btnEntrepreneurshipService){
                 startActivity(EntrepreneurshipServiceActivity.class);
             }else if(v.getId() == R.id.btnEntrepreneurshipVanguard){
@@ -236,7 +311,8 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
         tvUserName.setText(ctx.getUser().getName());
         tvScore.setText(ctx.getUser().getScore());
         ImageLoader.loadImage(ivPic,ctx.getBannerList().get(0).getImgUrl());
-        adapter.swapData(ctx.getNewsList());
+        newsListAdapter.swapData(ctx.getNewsList());
+        saleListAdapter.swapData(ctx.getSaleInfoList());
     }
 
     @Override

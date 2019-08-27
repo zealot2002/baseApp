@@ -72,4 +72,8 @@ public class PhoneBookListActivity extends BaseTitleAndBottomBarActivity{
         return R.layout.busi_list_activity;
     }
 
+    @Override
+    public void reload(boolean bShow) {
+
+    }
 }

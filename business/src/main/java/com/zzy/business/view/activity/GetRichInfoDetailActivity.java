@@ -95,4 +95,9 @@ public class GetRichInfoDetailActivity extends BaseTitleAndBottomBarActivity imp
 //        }
 
     }
+
+    @Override
+    public void reload(boolean bShow) {
+
+    }
 }

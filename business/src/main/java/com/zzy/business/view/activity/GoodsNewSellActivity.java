@@ -42,4 +42,9 @@ public class GoodsNewSellActivity extends BaseTitleAndBottomBarActivity implemen
         }
 
     }
+
+    @Override
+    public void reload(boolean bShow) {
+
+    }
 }

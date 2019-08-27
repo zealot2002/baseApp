@@ -33,7 +33,7 @@ public class GoodsDetailBuyActivity extends BaseTitleAndBottomBarActivity implem
     }
 
     private void setupViews() {
-//        etPhone = findViewById(R.id.etPhone);
+        btnOk = findViewById(R.id.btnOk);
 //        etPassword = findViewById(R.id.etPassword);
 //        btnOk = findViewById(R.id.btnOk);
 //        tvToBePioneer = findViewById(R.id.tvToBePioneer);
@@ -53,6 +53,11 @@ public class GoodsDetailBuyActivity extends BaseTitleAndBottomBarActivity implem
 //        }else if(v.getId() == R.id.tvForgetPassword){
 //
 //        }
+
+    }
+
+    @Override
+    public void reload(boolean bShow) {
 
     }
 }

@@ -24,8 +24,9 @@
 
 
     <color name="translucent">#00000000</color>
-    <color name="translucent_black">#99000000</color>
+    <color name="translucent_black">#33000000</color>
     <color name="translucent_white">#22ffffff</color>
+    <color name="translucent_gray">#33828186</color>
     <color name="blue_gray">#D30440B8</color>
     <!--good-->
     <color name="divider_gray">#F2F4F6</color>

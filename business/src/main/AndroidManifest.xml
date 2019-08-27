@@ -39,7 +39,7 @@
             android:name=".view.activity.FeedbackActivity"
             android:theme="@style/activity_theme" />
         <activity
-            android:name=".view.activity.GetRichInfoActivity"
+            android:name=".view.activity.GetRichInfoListActivity"
             android:theme="@style/activity_theme" />
         <activity
             android:name=".view.activity.GetRichInfoDetailActivity"

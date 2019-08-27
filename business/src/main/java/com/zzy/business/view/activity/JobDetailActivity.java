@@ -83,4 +83,9 @@ public class JobDetailActivity extends BaseTitleAndBottomBarActivity implements 
             dialog.show();
         }
     }
+
+    @Override
+    public void reload(boolean bShow) {
+
+    }
 }

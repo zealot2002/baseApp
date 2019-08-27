@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rlRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/tv_style_white_12"
+        android:layout_marginBottom="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_centerHorizontal="true"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:text="2019年4月23日  求职者王*一找到了心仪的工作；"
+        />
+</RelativeLayout>

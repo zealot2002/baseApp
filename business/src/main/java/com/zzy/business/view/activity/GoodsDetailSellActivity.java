@@ -105,4 +105,9 @@ public class GoodsDetailSellActivity extends BaseTitleAndBottomBarActivity imple
             dialog.show();
         }
     }
+
+    @Override
+    public void reload(boolean bShow) {
+
+    }
 }

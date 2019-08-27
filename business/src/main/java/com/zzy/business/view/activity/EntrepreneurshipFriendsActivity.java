@@ -53,4 +53,9 @@ public class EntrepreneurshipFriendsActivity extends BaseTitleAndBottomBarActivi
 //        }
 
     }
+
+    @Override
+    public void reload(boolean bShow) {
+
+    }
 }

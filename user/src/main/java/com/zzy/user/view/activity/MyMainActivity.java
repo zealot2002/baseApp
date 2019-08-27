@@ -52,4 +52,9 @@ public class MyMainActivity extends BaseTitleAndBottomBarActivity implements Vie
 //        }
 
     }
+
+    @Override
+    public void reload(boolean bShow) {
+
+    }
 }

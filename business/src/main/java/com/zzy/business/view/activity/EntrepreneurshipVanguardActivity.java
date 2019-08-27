@@ -78,4 +78,9 @@ public class EntrepreneurshipVanguardActivity extends BaseTitleAndBottomBarActiv
         btn5.setSelected(false);
         btn6.setSelected(false);
     }
+
+    @Override
+    public void reload(boolean bShow) {
+
+    }
 }

@@ -1,22 +1,25 @@
 package com.zzy.business.view.activity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.zzy.business.R;
+import com.zzy.business.model.bean.GetRichInfo;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.base.BaseToolbarActivity;
+
+import java.util.List;
 
 /**
  * 创业求助
  */
 public class EntrepreneurshipHelpActivity extends BaseTitleAndBottomBarActivity implements View.OnClickListener {
-    private EditText etPhone,etPassword;
-    private Button btnOk;
-    private TextView tvToBePioneer,tvForgetPassword;
-
+    private Button btnNew;
+    private RecyclerView rvDataList;
+    private List<GetRichInfo> dataList;
 /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,31 +29,27 @@ public class EntrepreneurshipHelpActivity extends BaseTitleAndBottomBarActivity 
 
     @Override
     protected int getLayoutId() {
-        return R.layout.busi_entrepreneurship_help_activity;
+        return R.layout.busi_list_with_btn_activity;
     }
 
     private void setupViews() {
-//        etPhone = findViewById(R.id.etPhone);
-//        etPassword = findViewById(R.id.etPassword);
-//        btnOk = findViewById(R.id.btnOk);
-//        tvToBePioneer = findViewById(R.id.tvToBePioneer);
-//        tvForgetPassword = findViewById(R.id.tvForgetPassword);
+        btnNew = findViewById(R.id.btnNew);
+        btnNew.setOnClickListener(this);
 
-        btnOk.setOnClickListener(this);
-        tvToBePioneer.setOnClickListener(this);
-        tvForgetPassword.setOnClickListener(this);
+        rvDataList = findViewById(R.id.rvDataList);
     }
 
 
     @Override
     public void onClick(View v) {
-//        if(v.getId() == R.id.btnOk){
-//            // TODO: 2019/8/19   to login
-//        }else if(v.getId() == R.id.tvToBePioneer){
-//
-//        }else if(v.getId() == R.id.tvForgetPassword){
-//
-//        }
+        if(v.getId() == R.id.btnNew){
+            // TODO: 2019/8/19   to login
+        }
+
+    }
+
+    @Override
+    public void reload(boolean bShow) {
 
     }
 }

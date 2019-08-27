@@ -124,4 +124,9 @@ public class SpecialDkActivity extends BaseTitleAndBottomBarActivity implements 
             }
         });
     }
+
+    @Override
+    public void reload(boolean bShow) {
+
+    }
 }

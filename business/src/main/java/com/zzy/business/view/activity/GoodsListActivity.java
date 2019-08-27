@@ -105,4 +105,9 @@ public class GoodsListActivity extends BaseTitleAndBottomBarActivity implements 
         }
 
     }
+
+    @Override
+    public void reload(boolean bShow) {
+
+    }
 }

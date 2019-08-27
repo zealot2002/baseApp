@@ -97,4 +97,9 @@ public class IndustrialDistributionActivity extends BaseTitleAndBottomBarActivit
 //        }
 
     }
+
+    @Override
+    public void reload(boolean bShow) {
+
+    }
 }

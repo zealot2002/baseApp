@@ -44,4 +44,9 @@ public class EntrepreneurshipNewActivity extends BaseTitleAndBottomBarActivity i
         }
 
     }
+
+    @Override
+    public void reload(boolean bShow) {
+
+    }
 }

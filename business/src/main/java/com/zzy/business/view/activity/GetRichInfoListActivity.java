@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * 致富信息
  */
-public class GetRichInfoActivity extends BaseTitleAndBottomBarActivity{
+public class GetRichInfoListActivity extends BaseTitleAndBottomBarActivity{
     private RecyclerView rvDataList;
     private List<GetRichInfo> dataList;
     /***********************************************************************************************/
@@ -70,5 +70,10 @@ public class GetRichInfoActivity extends BaseTitleAndBottomBarActivity{
     @Override
     protected int getLayoutId() {
         return R.layout.busi_list_activity;
+    }
+
+    @Override
+    public void reload(boolean bShow) {
+
     }
 }

@@ -102,4 +102,9 @@ public class JobListActivity extends BaseTitleAndBottomBarActivity implements Vi
         }
 
     }
+
+    @Override
+    public void reload(boolean bShow) {
+
+    }
 }

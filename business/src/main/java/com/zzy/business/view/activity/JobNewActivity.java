@@ -86,4 +86,9 @@ public class JobNewActivity extends BaseTitleAndBottomBarActivity implements Vie
             dialog.show();
         }
     }
+
+    @Override
+    public void reload(boolean bShow) {
+
+    }
 }

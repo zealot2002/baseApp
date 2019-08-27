@@ -48,4 +48,9 @@ public class ShareExperienceActivity extends BaseTitleAndBottomBarActivity imple
 //        }
 
     }
+
+    @Override
+    public void reload(boolean bShow) {
+
+    }
 }

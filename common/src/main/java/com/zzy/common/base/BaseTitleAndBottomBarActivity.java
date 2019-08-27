@@ -17,7 +17,6 @@ import com.zzy.common.widget.LoadingHelper;
 import com.zzy.commonlib.base.BaseLoadingView;
 import com.zzy.commonlib.utils.ToastUtils;
 
-
 /**
  */
 public abstract class BaseTitleAndBottomBarActivity extends BaseAppActivity implements BaseLoadingView {
