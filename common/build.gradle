@@ -58,4 +58,6 @@ dependencies {
     api 'com.github.ganfra:material-spinner:2.0.0'
 
     api 'com.hedgehog.ratingbar:app:1.1.2'
+
+    api 'com.github.iielse:ImageWatcher:1.1.5'
 }

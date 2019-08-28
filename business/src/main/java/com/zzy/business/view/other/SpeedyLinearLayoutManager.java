@@ -1,4 +1,4 @@
-package com.zzy.business.view.adapter;
+package com.zzy.business.view.other;
 
 import android.content.Context;
 import android.graphics.PointF;

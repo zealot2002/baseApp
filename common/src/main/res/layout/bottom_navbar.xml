@@ -7,7 +7,7 @@
     <View
         android:id="@+id/vLine"
         android:layout_width="match_parent"
-        android:layout_height="31px"
+        android:layout_height="@dimen/home_bottom_line_height"
         android:background="@mipmap/line4"
         />
     <RelativeLayout

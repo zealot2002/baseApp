@@ -15,7 +15,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
-            android:name=".view.activity.EntrepreneurshipFriendsActivity"
+            android:name=".view.activity.FriendsCircleActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity

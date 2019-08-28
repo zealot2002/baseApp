@@ -15,7 +15,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zzy.business.view.activity.GoodsListActivity;
-import com.zzy.business.view.activity.EntrepreneurshipFriendsActivity;
+import com.zzy.business.view.activity.FriendsCircleActivity;
 import com.zzy.business.view.activity.EntrepreneurshipHelpActivity;
 import com.zzy.business.view.activity.EntrepreneurshipListActivity;
 import com.zzy.business.view.activity.EntrepreneurshipServiceActivity;
@@ -26,15 +26,13 @@ import com.zzy.business.view.activity.IndustrialDistributionActivity;
 import com.zzy.business.view.activity.JobListActivity;
 import com.zzy.business.view.activity.ShareExperienceActivity;
 import com.zzy.business.view.activity.SpecialDkActivity;
-import com.zzy.business.view.adapter.SpeedyLinearLayoutManager;
+import com.zzy.business.view.other.SpeedyLinearLayoutManager;
 import com.zzy.common.base.BaseAppActivity;
-import com.zzy.common.constants.CommonConstants;
 import com.zzy.common.constants.ParamConstants;
 import com.zzy.common.glide.ImageLoader;
 import com.zzy.common.utils.StatusBarUtils;
 import com.zzy.common.widget.BannerHolderView;
 import com.zzy.common.widget.LoadingHelper;
-import com.zzy.commonlib.log.MyLog;
 import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.commonlib.utils.ToastUtils;
 import com.zzy.home.R;
@@ -134,11 +132,11 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
                 ToastUtils.showShort(position);
             }
         });
-        rvNewsList.postDelayed(mRunnable,1000);
+        rvNewsList.postDelayed(mRunnable,500);
 
         rvSaleList = findViewById(R.id.rvSaleList);
         SpeedyLinearLayoutManager layoutManager2 = new SpeedyLinearLayoutManager(this);
-        layoutManager2.setMillisecondsPerInch(8000f);
+        layoutManager2.setMillisecondsPerInch(6000f);
         rvSaleList.setLayoutManager(layoutManager2);
         /*newsListAdapter*/
         saleListAdapter = new SaleListAdapter(this);
@@ -156,14 +154,14 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
             aniIndex +=5;
             rvNewsList.smoothScrollToPosition(aniIndex);
             rvSaleList.smoothScrollToPosition(aniIndex);
-            rvNewsList.postDelayed(this,10000);
+            rvNewsList.postDelayed(this,5000);
         }
     }
 
     private void startAni(){
         if(rvNewsList!=null){
             if(!bAniStart){
-                rvNewsList.postDelayed(mRunnable,2000);
+                rvNewsList.postDelayed(mRunnable,500);
                 bAniStart = true;
             }
         }
@@ -257,7 +255,7 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
             }else if(v.getId() == R.id.btnShareExperience){
                 startActivity(ShareExperienceActivity.class);
             }else if(v.getId() == R.id.btnEntrepreneurshipFriends){
-                startActivity(EntrepreneurshipFriendsActivity.class);
+                startActivity(FriendsCircleActivity.class);
             }
         }catch (Exception e){
             e.printStackTrace();
