@@ -6,7 +6,6 @@ import com.zzy.business.model.jsonParser.GetRichInfoListParser;
 import com.zzy.business.model.jsonParser.GetRichInfoParser;
 import com.zzy.business.model.jsonParser.JobListParser;
 import com.zzy.business.model.jsonParser.JobParser;
-import com.zzy.business.model.jsonParser.LikeRichInfoParser;
 import com.zzy.business.model.jsonParser.MenuListParser;
 import com.zzy.business.model.jsonParser.PioneerListParser;
 import com.zzy.common.constants.CommonConstants;
@@ -47,7 +46,7 @@ public class HttpProxy {
                 HttpConstants.RICH_INFO_LIKE,
                 reqBody,
                 callback,
-                new LikeRichInfoParser());
+                new CommonParser());
     }
 
     public static void getJobList(int pageNum,final HInterface.DataCallback callback) throws Exception {
