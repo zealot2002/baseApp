@@ -5,66 +5,60 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zzy.business.R;
 import com.zzy.business.model.bean.Job;
+import com.zzy.business.model.bean.Menu;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class JobListAdapter extends
-        RecyclerView.Adapter<JobListAdapter.ViewHolder> {
+public class GridMenuListAdapter extends
+        RecyclerView.Adapter<GridMenuListAdapter.ViewHolder> {
     public interface Listener{
         void onItemClicked(int position);
     }
-    private List<Job> mDataSet = new ArrayList<>();
+    private List<Menu> mDataSet = new ArrayList<>();
     private Listener listener;
     private Context context;
 
     /******************************************************************************************************************/
-    public JobListAdapter(Context context){
+    public GridMenuListAdapter(Context context){
         this.context = context;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvTitle, tvDate,tvFrom;
-        private ImageView ivPic;
-        private RelativeLayout rlRoot;
-
+        private Button btn;
         public ViewHolder(View view) {
             super(view);
-            tvTitle = view.findViewById(R.id.tvTitle);
-            tvDate = view.findViewById(R.id.tvDate);
-            tvFrom = view.findViewById(R.id.tvFrom);
-            rlRoot = view.findViewById(R.id.rlRoot);
+            btn = view.findViewById(R.id.btn);
         }
     }
 
     public void setOnItemClickedListener(Listener listener ){
         this.listener = listener;
     }
-    public void swapData(List<Job> mNewDataSet) {
+    public void swapData(List<Menu> mNewDataSet) {
         mDataSet = mNewDataSet;
         notifyDataSetChanged();
     }
     @Override
-    public JobListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public GridMenuListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.busi_job_list_item, parent, false);
+                .inflate(R.layout.busi_grid_menu_list_item, parent, false);
         return new ViewHolder(view);
     }
     @Override
-    public void onBindViewHolder(final JobListAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(final GridMenuListAdapter.ViewHolder holder, final int position) {
         try{
-            Job bean = mDataSet.get(position);
-            holder.tvTitle.setText(bean.getJobName());
-            holder.tvDate.setText(bean.getPublishTime());
-            holder.tvFrom.setText(bean.getFrom());
-
-            holder.rlRoot.setOnClickListener(new View.OnClickListener() {
+            Menu menu = mDataSet.get(position);
+            holder.btn.setText(menu.getName());
+            holder.btn.setSelected(menu.isSelected());
+            holder.btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(listener!=null){

@@ -19,7 +19,7 @@ import com.zzy.business.view.activity.FriendsCircleActivity;
 import com.zzy.business.view.activity.EntrepreneurshipHelpActivity;
 import com.zzy.business.view.activity.EntrepreneurshipListActivity;
 import com.zzy.business.view.activity.EntrepreneurshipServiceActivity;
-import com.zzy.business.view.activity.EntrepreneurshipVanguardActivity;
+import com.zzy.business.view.activity.PioneerListActivity;
 import com.zzy.business.view.activity.FeedbackActivity;
 import com.zzy.business.view.activity.GetRichInfoListActivity;
 import com.zzy.business.view.activity.IndustrialDistributionActivity;
@@ -235,7 +235,7 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
             }else if(v.getId() == R.id.btnEntrepreneurshipService){
                 startActivity(EntrepreneurshipServiceActivity.class);
             }else if(v.getId() == R.id.btnEntrepreneurshipVanguard){
-                startActivity(EntrepreneurshipVanguardActivity.class);
+                startActivity(PioneerListActivity.class);
             }else if(v.getId() == R.id.btnRecruit){
                 startActivity(JobListActivity.class);
             }else if(v.getId() == R.id.btnEntrepreneurship){

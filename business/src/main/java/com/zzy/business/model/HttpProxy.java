@@ -7,6 +7,8 @@ import com.zzy.business.model.jsonParser.GetRichInfoParser;
 import com.zzy.business.model.jsonParser.JobListParser;
 import com.zzy.business.model.jsonParser.JobParser;
 import com.zzy.business.model.jsonParser.LikeRichInfoParser;
+import com.zzy.business.model.jsonParser.MenuListParser;
+import com.zzy.business.model.jsonParser.PioneerListParser;
 import com.zzy.common.constants.CommonConstants;
 import com.zzy.common.constants.HttpConstants;
 import com.zzy.common.jsonParser.CommonParser;
@@ -99,4 +101,28 @@ public class HttpProxy {
                 callback,
                 new CommonParser());
     }
+
+    public static void getPioneerTypeList(final HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", HttpConstants.TOKEN);
+        HttpUtils.getInstance().req(
+                HttpConstants.PIONEER_TYPE_LIST,
+                reqBody,
+                callback,
+                new MenuListParser());
+    }
+
+    public static void getPioneerList(String type,int pageNum,final HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", HttpConstants.TOKEN);
+        reqBody.put("CREATER_TYPE", type);
+        reqBody.put("rows", CommonConstants.PAGE_SIZE);
+        reqBody.put("page", pageNum);
+        HttpUtils.getInstance().req(
+                HttpConstants.PIONEER_LIST,
+                reqBody,
+                callback,
+                new PioneerListParser());
+    }
+
 }

@@ -41,6 +41,13 @@ public class HttpConstants {
     public static final String JOB_NEW = "/recruitment/insert.do";
     public static final String JOB_REPORT = "/recruitment/insertReport.do";
 
+
+    public static final String PIONEER_TYPE_LIST = "/news_information/selAllpioneerTYPE.do";
+    public static final String PIONEER_LIST = "/news_information/selAllpioneer.do";
+//    public static final String PIONEER_DETAIL = "/news_information/selById.do";
+//    public static final String JOB_LIST = "/news_information/selById.do";
+//    public static final String JOB_LIST = "/recruitment/selAll.do";
+
     /*****************************    login-register   ***************************/
 
     // 登录

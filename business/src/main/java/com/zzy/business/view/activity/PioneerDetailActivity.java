@@ -11,7 +11,7 @@ import com.zzy.common.base.BaseToolbarActivity;
 /**
  * 创业先锋详情
  */
-public class EntrepreneurshipVanguardDetailActivity extends BaseToolbarActivity implements View.OnClickListener {
+public class PioneerDetailActivity extends BaseToolbarActivity implements View.OnClickListener {
     private EditText etPhone,etPassword;
     private Button btnOk;
     private TextView tvToBePioneer,tvForgetPassword;

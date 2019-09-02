@@ -81,9 +81,9 @@ public class IndustrialDistributionActivity extends BaseTitleAndBottomBarActivit
 
     private void repairMenu() {
         menuList = new ArrayList<>();
-        menuList.add(new Menu("东坑村",true));
-        menuList.add(new Menu("北溪村",false));
-        menuList.add(new Menu("深阳村",false));
+//        menuList.add(new Menu("东坑村",true));
+//        menuList.add(new Menu("北溪村",false));
+//        menuList.add(new Menu("深阳村",false));
     }
 
     @Override

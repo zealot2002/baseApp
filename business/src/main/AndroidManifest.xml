@@ -31,11 +31,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
-            android:name=".view.activity.EntrepreneurshipVanguardActivity"
+            android:name=".view.activity.PioneerListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
-            android:name=".view.activity.EntrepreneurshipVanguardDetailActivity"
+            android:name=".view.activity.PioneerDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
