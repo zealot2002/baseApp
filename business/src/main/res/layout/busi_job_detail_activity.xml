@@ -184,8 +184,8 @@
                 android:text="职位薪资 :   "
                 />
             <EditText
-                android:id="@+id/etSalary"
-                android:layout_width="match_parent"
+                android:id="@+id/etSalaryMin"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="2dp"
                 android:layout_toRightOf="@+id/tvSalary"
@@ -196,6 +196,28 @@
                 android:background="@null"
                 android:enabled="false"
                 android:focusable="false"
+                android:gravity="center_horizontal"
+                />
+            <TextView
+                style="@style/tv_style_white_12"
+                android:layout_centerVertical="true"
+                android:text="~"
+                android:layout_toRightOf="@id/etSalaryMin"
+                />
+            <EditText
+                android:id="@+id/etSalaryMax"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/etSalaryMin"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:background="@null"
+                android:enabled="false"
+                android:focusable="false"
+                android:gravity="center_horizontal"
                 />
             <View
                 android:layout_width="match_parent"

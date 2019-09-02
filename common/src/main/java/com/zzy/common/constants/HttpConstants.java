@@ -2,6 +2,9 @@ package com.zzy.common.constants;
 
 public class HttpConstants {
 
+
+    public static String TOKEN = "95ffa88f010f1b577ef5f3cf5a1585e7";
+
     // 测试环境
     public static String SERVER_ADDRESS = "http://grecode.vicp.cc:82";
 
@@ -27,14 +30,16 @@ public class HttpConstants {
     /**************************    home *******************************/
     public static final String HOME_DATA = "/userinfo/index.do";
 
-    /**********************            helper          ***************************/
+    /**********************        rich info              ***************************/
 
-    public static final String GET_POPUP_CONTENT = "/v1/content/popup-tip-info";
+    public static final String RICH_INFO_LIST = "/news_information/selAllRich_information.do";
+    public static final String RICH_INFO_DETAIL = "/news_information/selById.do";
+    public static final String RICH_INFO_LIKE = "/news_information/update.do";
 
-    public static final String GET_GLOBAL_CONFIG = "/v1/content/get-global-config";
-
-    public static final String H5_PROTOCOL_INFO = "/v1/content/protocol-info";
-
+    public static final String JOB_LIST = "/recruitment/selAll.do";
+    public static final String JOB_DETAIL = "/recruitment/selById.do";
+    public static final String JOB_NEW = "/recruitment/insert.do";
+    public static final String JOB_REPORT = "/recruitment/insertReport.do";
 
     /*****************************    login-register   ***************************/
 

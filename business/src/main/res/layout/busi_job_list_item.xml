@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/rlRoot"
+    android:id="@+id/rootView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     >
@@ -30,6 +30,7 @@
             style="@style/tv_style_gray_12"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="5dp"
+            android:layout_toRightOf="@+id/tvDate"
             android:layout_marginLeft="100dp"
             />
         <View

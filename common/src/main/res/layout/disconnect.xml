@@ -32,6 +32,7 @@
         style="@style/no_network_btn_style"
         android:layout_marginTop="80dp"
         android:text="@string/reload"
+        android:background="@color/light_blue"
         />
 
 </LinearLayout>

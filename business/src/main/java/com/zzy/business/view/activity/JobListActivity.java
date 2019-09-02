@@ -1,5 +1,4 @@
 package com.zzy.business.view.activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,10 +7,19 @@ import android.view.View;
 import android.widget.Button;
 
 import com.zzy.business.R;
-import com.zzy.business.model.bean.Jd;
-import com.zzy.business.view.adapter.JobListAdapter;
+import com.zzy.business.contract.JobContract;
+import com.zzy.business.model.bean.GetRichInfo;
+import com.zzy.business.model.bean.Job;
+import com.zzy.business.presenter.JobPresenter;
+import com.zzy.business.view.itemViewDelegate.GetRichInfoDelegate;
+import com.zzy.business.view.itemViewDelegate.JobDelegate;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.constants.ParamConstants;
+import com.zzy.common.widget.recycleAdapter.MyMultiRecycleAdapter;
+import com.zzy.common.widget.recycleAdapter.OnItemChildClickListener;
+import com.zzy.common.widget.recycleAdapter.OnLoadMoreListener;
+import com.zzy.common.widget.recycleAdapter.ViewHolder;
+import com.zzy.commonlib.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,44 +27,23 @@ import java.util.List;
 /**
  * 我要招聘列表
  */
-public class JobListActivity extends BaseTitleAndBottomBarActivity implements View.OnClickListener {
+public class JobListActivity extends BaseTitleAndBottomBarActivity implements JobContract.View, View.OnClickListener {
     private Button btnNew;
     private RecyclerView rvDataList;
-    private List<Jd> dataList;
+    private List<Job> dataList = new ArrayList<>();
+    private JobContract.Presenter presenter;
+    private int pageNum = 1;
+    private OnLoadMoreListener onLoadMoreListener;
+    private MyMultiRecycleAdapter adapter;
+    private boolean isLoadOver = false;
+
 /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("我要招聘");
-        prepareData();
-        setupViews();
-    }
-
-    private void prepareData() {
-        dataList = new ArrayList<>();
-        dataList.add(new Jd("雅景多肉基地","省农业技术推广总部",
-                "分拣多肉工人","东坑镇深样村",
-                "10人","学历不限","2000.00元~3000.00元",
-                "13322245678","田女士",
-                "1，负责中央空调，冷却塔设备的维护、故障检修、配件更换、定期巡检、日常保养等工作；\n" +
-                "2、负责与客户及时沟通，处理客户的故障报修工作；",
-                "1、从事中央空调，冷却塔售后2年以上工作经验\n" +
-                        "2、可独立完成故障排查、机组保养、维修及主机维修工作，独立完成制冷机清洗；\n" +
-                        "3、工作认真踏实，态度积极乐观，具备一定沟通能力及良好的服务意识；\n" +
-                        "4、持有电工证、制冷证、司炉证、驾照等条件优秀者可适当放宽要求，公司提供培训机会。",
-                "2019-02-19"));
-
-        dataList.add(new Jd("雅景多2肉基地","省农业技术推广总部",
-                "分拣多肉工人","东坑镇深样村",
-                "10人","学历不限","2000.00元~3000.00元",
-                "13322245678","田女士",
-                "1，负责中央空调，冷却塔设备的维护、故障检修、配件更换、定期巡检、日常保养等工作；\n" +
-                        "2、负责与客户及时沟通，处理客户的故障报修工作；",
-                "1、从事中央空调，冷却塔售后2年以上工作经验\n" +
-                        "2、可独立完成故障排查、机组保养、维修及主机维修工作，独立完成制冷机清洗；\n" +
-                        "3、工作认真踏实，态度积极乐观，具备一定沟通能力及良好的服务意识；\n" +
-                        "4、持有电工证、制冷证、司炉证、驾照等条件优秀者可适当放宽要求，公司提供培训机会。",
-                "2019-02-19"));
+        presenter = new JobPresenter(this);
+        presenter.getJobList(pageNum);
     }
 
     @Override
@@ -65,46 +52,98 @@ public class JobListActivity extends BaseTitleAndBottomBarActivity implements Vi
     }
 
     private void setupViews() {
-        btnNew = findViewById(R.id.btnNew);
-        btnNew.setText("发布招聘信息");
-        btnNew.setOnClickListener(this);
-
         if(rvDataList == null){
+            btnNew = findViewById(R.id.btnNew);
+            btnNew.setText("发布招聘信息");
+            btnNew.setOnClickListener(this);
+
             rvDataList = findViewById(R.id.rvDataList);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
             rvDataList.setLayoutManager(layoutManager);
             rvDataList.setItemAnimator(new DefaultItemAnimator());
 
             /*adapter*/
-            final JobListAdapter adapter = new JobListAdapter(this);
-            rvDataList.setAdapter(adapter);
-            adapter.setOnItemClickedListener(new JobListAdapter.Listener() {
+            adapter = new MyMultiRecycleAdapter(this,dataList,true);
+            //设置不满一屏幕，自动加载第二页
+            adapter.openAutoLoadMore();
+            //加载更多的事件监听
+            onLoadMoreListener = new OnLoadMoreListener() {
                 @Override
-                public void onItemClicked(int position) {
-                    Jd bean = dataList.get(position);
+                public void onLoadMore(boolean isReload) {
+                    if(isLoadOver){
+                        return;
+                    }
+                    if(isReload){
+                        presenter.getJobList(pageNum);
+                    }else{
+                        presenter.getJobList(++pageNum);
+                    }
+                }
+            };
+            adapter.setOnLoadMoreListener(onLoadMoreListener);
+            adapter.addItemViewDelegate(new JobDelegate(this));
+            adapter.setOnItemChildClickListener(R.id.rootView, new OnItemChildClickListener() {
+                @Override
+                public void onItemChildClick(ViewHolder viewHolder, Object data, int position) {
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable(ParamConstants.DATA,bean);
-                    Intent it = new Intent();
-                    it.putExtras(bundle);
-                    it.setClass(JobListActivity.this, JobDetailActivity.class);
-                    startActivity(it);
+                    bundle.putInt(ParamConstants.ID,dataList.get(position).getId());
+                    startActivity(JobDetailActivity.class,bundle);
                 }
             });
-            adapter.swapData(dataList);
+            rvDataList.setAdapter(adapter);
         }
     }
 
-
+    @Override
+    public void updateUI(Object o) {
+        super.updateUI(o);
+        try{
+            if(pageNum!=1){
+                appendList((List<Job>) o);
+                return;
+            }
+            dataList.addAll((List<Job>) o);
+            setupViews();
+            adapter.notifyDataSetChanged();
+        }catch (Exception e){
+            e.printStackTrace();
+            ToastUtils.showShort(e.toString());
+        }
+    }
+    private void appendList(List<Job> list) {
+        if(list == null
+                ||list.isEmpty()
+        ){
+            adapter.loadEnd();
+        }
+        if(list.isEmpty()){
+            isLoadOver = true;
+            return;
+        }
+        adapter.setLoadMoreData(list);
+    }
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btnNew){
             startActivity(JobNewActivity.class);
         }
-
     }
 
     @Override
     public void reload(boolean bShow) {
+        presenter.getJobList(pageNum);
+    }
+
+    @Override
+    public void showError(String s) {
+        ToastUtils.showShort(s);
+        if(adapter!=null){
+            adapter.loadFailed();
+        }
+    }
+
+    @Override
+    public void onSuccess() {
 
     }
 }

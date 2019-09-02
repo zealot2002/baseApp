@@ -7,37 +7,30 @@ import java.io.Serializable;
  * @date 2018/11/30
  */
 
-public class Jd implements Serializable {
+public class Job implements Serializable {
+    private int id;
     private String companyName;
-    private String from;
+    private String from; //用于列表
     private String jobName;
     private String address;
     private String headcount;
     private String education;
-    private String salary;
+    private String salaryMin;
+    private String salaryMax;
     private String phone;
     private String contact;
     private String jobContent;
     private String jobRequirements;
     private String publishTime;
 
-    public Jd() {}
+    public Job() {}
 
-    public Jd(String companyName, String from, String jobName, String address, String headcount,
-              String education, String salary, String phone, String contact,
-              String jobContent, String jobRequirements, String publishTime) {
-        this.companyName = companyName;
-        this.from = from;
-        this.jobName = jobName;
-        this.address = address;
-        this.headcount = headcount;
-        this.education = education;
-        this.salary = salary;
-        this.phone = phone;
-        this.contact = contact;
-        this.jobContent = jobContent;
-        this.jobRequirements = jobRequirements;
-        this.publishTime = publishTime;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCompanyName() {
@@ -88,14 +81,6 @@ public class Jd implements Serializable {
         this.education = education;
     }
 
-    public String getSalary() {
-        return salary;
-    }
-
-    public void setSalary(String salary) {
-        this.salary = salary;
-    }
-
     public String getPhone() {
         return phone;
     }
@@ -134,5 +119,21 @@ public class Jd implements Serializable {
 
     public void setPublishTime(String publishTime) {
         this.publishTime = publishTime;
+    }
+
+    public String getSalaryMin() {
+        return salaryMin;
+    }
+
+    public void setSalaryMin(String salaryMin) {
+        this.salaryMin = salaryMin;
+    }
+
+    public String getSalaryMax() {
+        return salaryMax;
+    }
+
+    public void setSalaryMax(String salaryMax) {
+        this.salaryMax = salaryMax;
     }
 }

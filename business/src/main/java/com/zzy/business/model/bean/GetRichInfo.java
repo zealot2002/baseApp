@@ -6,17 +6,47 @@ package com.zzy.business.model.bean;
  */
 
 public class GetRichInfo {
+    private int id;
     private String title;
+    private boolean isPlaceTop;
     private String from;
     private String date;
     private String content;
-    private String goodNum;
+    private String likeNum;
     private String lookNum;
+    private boolean isLike;
+
+    public GetRichInfo() {
+    }
 
     public GetRichInfo(String title, String from, String date) {
         this.title = title;
         this.from = from;
         this.date = date;
+    }
+
+    public boolean isLike() {
+        return isLike;
+    }
+
+    public void setLike(boolean like) {
+        isLike = like;
+    }
+
+    public boolean isPlaceTop() {
+        return isPlaceTop;
+    }
+
+    public void setPlaceTop(boolean placeTop) {
+        isPlaceTop = placeTop;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -51,12 +81,12 @@ public class GetRichInfo {
         this.content = content;
     }
 
-    public String getGoodNum() {
-        return goodNum;
+    public String getLikeNum() {
+        return likeNum;
     }
 
-    public void setGoodNum(String goodNum) {
-        this.goodNum = goodNum;
+    public void setLikeNum(String likeNum) {
+        this.likeNum = likeNum;
     }
 
     public String getLookNum() {

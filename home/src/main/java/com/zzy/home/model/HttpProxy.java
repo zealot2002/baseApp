@@ -14,7 +14,7 @@ public class HttpProxy {
     // 获取banner列表
     public static void getHomeData(final HInterface.DataCallback callback) throws Exception {
         JSONObject reqBody = new JSONObject();
-        reqBody.put("TOKEN", "test token");
+        reqBody.put("TOKEN", HttpConstants.TOKEN);
         HttpUtils.getInstance().req(
                  HttpConstants.HOME_DATA,
                 reqBody,
@@ -23,5 +23,4 @@ public class HttpProxy {
     }
 
 
-    /*homeFragment end*/
 }

@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zzy.business.R;
-import com.zzy.business.model.bean.Jd;
+import com.zzy.business.model.bean.Job;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ public class JobListAdapter extends
     public interface Listener{
         void onItemClicked(int position);
     }
-    private List<Jd> mDataSet = new ArrayList<>();
+    private List<Job> mDataSet = new ArrayList<>();
     private Listener listener;
     private Context context;
 
@@ -46,7 +46,7 @@ public class JobListAdapter extends
     public void setOnItemClickedListener(Listener listener ){
         this.listener = listener;
     }
-    public void swapData(List<Jd> mNewDataSet) {
+    public void swapData(List<Job> mNewDataSet) {
         mDataSet = mNewDataSet;
         notifyDataSetChanged();
     }
@@ -59,7 +59,7 @@ public class JobListAdapter extends
     @Override
     public void onBindViewHolder(final JobListAdapter.ViewHolder holder, final int position) {
         try{
-            Jd bean = mDataSet.get(position);
+            Job bean = mDataSet.get(position);
             holder.tvTitle.setText(bean.getJobName());
             holder.tvDate.setText(bean.getPublishTime());
             holder.tvFrom.setText(bean.getFrom());
