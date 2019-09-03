@@ -11,8 +11,8 @@ public interface GetRichInfoContract {
     }
 
     interface Presenter extends BasePresenter {
-        void getRichInfoList(int pageNum);
-        void getRichInfoDetail(int id);
+        void getList(int pageNum);
+        void getDetail(int id);
         void like(int id);
     }
 }

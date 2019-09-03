@@ -33,7 +33,7 @@ public class PbPresenter implements PbContract.Presenter{
     }
 
     @Override
-    public void getDataList(int pageNum) {
+    public void getList(int pageNum) {
         if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {
             view.showDisconnect();
             return;

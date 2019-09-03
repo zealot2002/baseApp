@@ -5,6 +5,8 @@ import com.zzy.business.model.bean.Job;
 import com.zzy.business.model.bean.Pioneering;
 import com.zzy.business.model.jsonParser.GetRichInfoListParser;
 import com.zzy.business.model.jsonParser.GetRichInfoParser;
+import com.zzy.business.model.jsonParser.GoodsListParser;
+import com.zzy.business.model.jsonParser.GoodsParser;
 import com.zzy.business.model.jsonParser.JobListParser;
 import com.zzy.business.model.jsonParser.JobParser;
 import com.zzy.business.model.jsonParser.MenuListParser;
@@ -16,6 +18,7 @@ import com.zzy.business.model.jsonParser.PioneeringParser;
 import com.zzy.common.constants.CommonConstants;
 import com.zzy.common.constants.HttpConstants;
 import com.zzy.common.jsonParser.CommonParser;
+import com.zzy.common.network.CommonDataCallback;
 import com.zzy.common.network.HttpUtils;
 import com.zzy.commonlib.http.HInterface;
 
@@ -178,12 +181,57 @@ public class HttpProxy {
         JSONObject reqBody = new JSONObject();
         reqBody.put("TOKEN", HttpConstants.TOKEN);
         reqBody.put("CONNECT_PERSON",bean.getContact());
-        reqBody.put("CONNECT_PERSON", bean.getPhone());
+        reqBody.put("MOBILE_NO", bean.getPhone());
         reqBody.put("RELEASE_TEXT", bean.getContent());
         HttpUtils.getInstance().req(
                 HttpConstants.PIONEERING_NEW,
                 reqBody,
                 callback,
                 new CommonParser());
+    }
+
+    public static void getGoodsBuyList(int pageNum, final HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", HttpConstants.TOKEN);
+        reqBody.put("rows", CommonConstants.PAGE_SIZE);
+        reqBody.put("page", pageNum);
+        HttpUtils.getInstance().req(
+                HttpConstants.GOODS_BUY_LIST,
+                reqBody,
+                callback,
+                new GoodsListParser());
+    }
+
+    public static void getGoodsBuyDetail(int id, final HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", HttpConstants.TOKEN);
+        reqBody.put("SALE_ID", id);
+        HttpUtils.getInstance().req(
+                HttpConstants.GOODS_BUY_DETAIL,
+                reqBody,
+                callback,
+                new GoodsParser());
+    }
+    public static void getGoodsSellList(int pageNum, final HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", HttpConstants.TOKEN);
+        reqBody.put("rows", CommonConstants.PAGE_SIZE);
+        reqBody.put("page", pageNum);
+        HttpUtils.getInstance().req(
+                HttpConstants.GOODS_SELL_LIST,
+                reqBody,
+                callback,
+                new GoodsListParser());
+    }
+
+    public static void getGoodsSellDetail(int id, final HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", HttpConstants.TOKEN);
+        reqBody.put("SALE_ID", id);
+        HttpUtils.getInstance().req(
+                HttpConstants.GOODS_SELL_DETAIL,
+                reqBody,
+                callback,
+                new GoodsParser());
     }
 }

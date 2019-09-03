@@ -12,7 +12,6 @@ import com.zzy.business.model.bean.Menu;
 import com.zzy.business.model.bean.Pioneer;
 import com.zzy.business.presenter.PioneerPresenter;
 import com.zzy.business.view.adapter.GridMenuListAdapter;
-import com.zzy.business.view.itemViewDelegate.JobDelegate;
 import com.zzy.business.view.itemViewDelegate.PioneerDelegate;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.constants.ParamConstants;
@@ -77,9 +76,9 @@ public class PioneerListActivity extends BaseTitleAndBottomBarActivity
                         return;
                     }
                     if(isReload){
-                        presenter.getPioneerList(menuList.get(menuIndex).getName(),pageNum);
+                        presenter.getList(menuList.get(menuIndex).getName(),pageNum);
                     }else{
-                        presenter.getPioneerList(menuList.get(menuIndex).getName(),++pageNum);
+                        presenter.getList(menuList.get(menuIndex).getName(),++pageNum);
                     }
                 }
             };
@@ -164,7 +163,7 @@ public class PioneerListActivity extends BaseTitleAndBottomBarActivity
                     refreshMenu(position);
                     pageNum = 1;
                     dataList.clear();
-                    presenter.getPioneerList(menuList.get(menuIndex).getName(),pageNum);
+                    presenter.getList(menuList.get(menuIndex).getName(),pageNum);
 
 //                    //todo  get data
 //                    for(int i=0;i<menuList.size();i++){

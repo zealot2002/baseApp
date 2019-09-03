@@ -10,6 +10,6 @@ public interface PbContract {
     }
 
     interface Presenter extends BasePresenter {
-        void getDataList(int pageNum);
+        void getList(int pageNum);
     }
 }

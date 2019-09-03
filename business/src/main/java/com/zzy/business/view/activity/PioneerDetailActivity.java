@@ -1,37 +1,22 @@
 package com.zzy.business.view.activity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.tencent.smtt.sdk.WebView;
 import com.zzy.business.R;
-import com.zzy.business.contract.GetRichInfoContract;
 import com.zzy.business.contract.PioneerContract;
-import com.zzy.business.model.bean.GetRichInfo;
 import com.zzy.business.model.bean.Menu;
 import com.zzy.business.model.bean.Pioneer;
-import com.zzy.business.presenter.GetRichInfoPresenter;
 import com.zzy.business.presenter.PioneerPresenter;
-import com.zzy.business.view.itemViewDelegate.PioneerDelegate;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
-import com.zzy.common.base.BaseToolbarActivity;
 import com.zzy.common.constants.ParamConstants;
-import com.zzy.common.utils.CommonUtils;
-import com.zzy.common.widget.recycleAdapter.MyMultiRecycleAdapter;
-import com.zzy.common.widget.recycleAdapter.OnItemChildClickListener;
-import com.zzy.common.widget.recycleAdapter.OnLoadMoreListener;
-import com.zzy.common.widget.recycleAdapter.ViewHolder;
 import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.commonlib.utils.ToastUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -55,7 +40,7 @@ public class PioneerDetailActivity extends BaseTitleAndBottomBarActivity
             setTitle("创业先锋");
             id = getIntent().getIntExtra(ParamConstants.ID,0);
             presenter = new PioneerPresenter(this);
-            presenter.getPioneerDetail(id);
+            presenter.getDetail(id);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -115,7 +100,7 @@ public class PioneerDetailActivity extends BaseTitleAndBottomBarActivity
 
     @Override
     public void reload(boolean bShow) {
-        presenter.getPioneerDetail(id);
+        presenter.getDetail(id);
     }
 
     @Override

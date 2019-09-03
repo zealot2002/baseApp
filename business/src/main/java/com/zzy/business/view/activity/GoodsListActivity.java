@@ -7,11 +7,19 @@ import android.view.View;
 import android.widget.Button;
 
 import com.zzy.business.R;
+import com.zzy.business.contract.GoodsBuyContract;
 import com.zzy.business.model.bean.Goods;
-import com.zzy.business.view.adapter.GoodsListAdapter;
+import com.zzy.business.model.bean.Pioneering;
+import com.zzy.business.presenter.GoodsBuyPresenter;
+import com.zzy.business.view.itemViewDelegate.GoodsDelegate;
+import com.zzy.business.view.itemViewDelegate.PioneeringDelegate;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
-import com.zzy.common.constants.CommonConstants;
 import com.zzy.common.constants.ParamConstants;
+import com.zzy.common.widget.recycleAdapter.MyMultiRecycleAdapter;
+import com.zzy.common.widget.recycleAdapter.OnItemChildClickListener;
+import com.zzy.common.widget.recycleAdapter.OnLoadMoreListener;
+import com.zzy.common.widget.recycleAdapter.ViewHolder;
+import com.zzy.commonlib.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,23 +27,30 @@ import java.util.List;
 /**
  * 我要买东西列表
  */
-public class GoodsListActivity extends BaseTitleAndBottomBarActivity implements View.OnClickListener {
+public class GoodsListActivity extends BaseTitleAndBottomBarActivity
+        implements View.OnClickListener , GoodsBuyContract.View {
     private Button btnNew;
-    private RecyclerView rvDataList;
-    private List<Goods> dataList;
     private int goodType = 0;
+    private RecyclerView rvDataList;
+    private List<Goods> dataList = new ArrayList<>();
+    private GoodsBuyContract.Presenter presenter;
+    private int pageNum = 1;
+    private OnLoadMoreListener onLoadMoreListener;
+    private MyMultiRecycleAdapter adapter;
+    private boolean isLoadOver = false;
+
     /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         try{
             goodType = getIntent().getIntExtra(ParamConstants.TYPE,0);
+            presenter = new GoodsBuyPresenter(this);
+            presenter.getList(pageNum);
         }catch (Exception e){
             e.printStackTrace();
+            ToastUtils.showShort(e.toString());
         }
-        prepareData();
-        setupViews();
     }
 
     @Override
@@ -45,8 +60,6 @@ public class GoodsListActivity extends BaseTitleAndBottomBarActivity implements 
 
     private void setupViews() {
         btnNew = findViewById(R.id.btnNew);
-        btnNew.setOnClickListener(this);
-
         if(goodType == 0){
             setTitle("我要买东西");
             btnNew.setText("发布求购信息");
@@ -54,7 +67,7 @@ public class GoodsListActivity extends BaseTitleAndBottomBarActivity implements 
             setTitle("我要卖东西");
             btnNew.setText("发布售卖信息");
         }
-
+        btnNew.setOnClickListener(this);
         if(rvDataList == null){
             rvDataList = findViewById(R.id.rvDataList);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -62,52 +75,88 @@ public class GoodsListActivity extends BaseTitleAndBottomBarActivity implements 
             rvDataList.setItemAnimator(new DefaultItemAnimator());
 
             /*adapter*/
-            final GoodsListAdapter adapter = new GoodsListAdapter(this);
-            rvDataList.setAdapter(adapter);
-            adapter.setOnItemClickedListener(new GoodsListAdapter.Listener() {
+            adapter = new MyMultiRecycleAdapter(this,dataList,true);
+            //设置不满一屏幕，自动加载第二页
+            adapter.openAutoLoadMore();
+            //加载更多的事件监听
+            onLoadMoreListener = new OnLoadMoreListener() {
                 @Override
-                public void onItemClicked(int position) {
-                    Goods bean = dataList.get(position);
+                public void onLoadMore(boolean isReload) {
+                    if(isLoadOver){
+                        return;
+                    }
+                    if(isReload){
+                        presenter.getList(pageNum);
+                    }else{
+                        presenter.getList(++pageNum);
+                    }
+                }
+            };
+            adapter.setOnLoadMoreListener(onLoadMoreListener);
+            adapter.addItemViewDelegate(new GoodsDelegate(this));
+            adapter.setOnItemChildClickListener(R.id.rootView, new OnItemChildClickListener() {
+                @Override
+                public void onItemChildClick(ViewHolder viewHolder, Object data, int position) {
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable(ParamConstants.DATA,bean);
+                    bundle.putInt(ParamConstants.ID,dataList.get(position).getId());
                     startActivity(goodType==0?GoodsDetailBuyActivity.class:GoodsDetailSellActivity.class,bundle);
                 }
             });
-            adapter.swapData(dataList);
+            rvDataList.setAdapter(adapter);
         }
     }
-    private void prepareData() {
-        dataList = new ArrayList<>();
-        for(int i=0;i<10;i++){
-            Goods g1 = new Goods();
-            g1.setName("【特级东魁】正宗仙居杨梅新鲜东魁杨梅现摘现发");
-            g1.setAddress("丽水市景宁县东坑镇上坑村一组80号");
-            g1.setContact("吴昌盛");
-            g1.setDesc("ivamus eu tellus eleifend, iaculis orci non, sollicitudin orci. Aenean orci leo, sodales a eleifend id, hendrerit eget nunc. Quisque tellus nulla, interdum quis magna vel, convallis rhoncus erat. Phasellus ac interdum est. Integer dapibus pharetra fermentum. Curabitur ut tellus tellus. Fusce viverra auctor placerat. Etiam nec volutpat enim. Aenean aliquam bibendum augue, vitae tincidunt mi. Aliquam efficitur nec nulla quis fermentum. In hac habitasse platea dictumst. Sed ac tellus vel dui porta hendrerit id a augue. Suspendisse potenti.");
-            g1.setDealWay("自提");
-            g1.setPhone("15855558888");
-            g1.setScore(3);
-            g1.setPrice("3,000");
-            g1.setStartPrice("80");
-            g1.setEndPrice("90");
-            g1.getImgUrlList().add(CommonConstants.TEST_IMG_URL);
-            g1.getImgUrlList().add(CommonConstants.TEST_IMG_URL);
-            g1.getImgUrlList().add(CommonConstants.TEST_IMG_URL);
-            g1.getImgUrlList().add(CommonConstants.TEST_IMG_URL);
-            dataList.add(g1);
-        }
-    }
+
 
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btnNew){
             startActivity(goodType==0?GoodsNewBuyActivity.class:GoodsNewSellActivity.class);
         }
-
     }
 
     @Override
     public void reload(boolean bShow) {
+        presenter.getList(pageNum);
+    }
+
+    @Override
+    public void updateUI(Object o) {
+        super.updateUI(o);
+        try{
+            if(pageNum!=1){
+                appendList((List<Goods>) o);
+                return;
+            }
+            dataList.addAll((List<Goods>) o);
+            setupViews();
+            adapter.notifyDataSetChanged();
+        }catch (Exception e){
+            e.printStackTrace();
+            ToastUtils.showShort(e.toString());
+        }
+    }
+    private void appendList(List<Goods> list) {
+        if(list == null
+                ||list.isEmpty()
+        ){
+            adapter.loadEnd();
+        }
+        if(list.isEmpty()){
+            isLoadOver = true;
+            return;
+        }
+        adapter.setLoadMoreData(list);
+    }
+    @Override
+    public void showError(String s) {
+        ToastUtils.showShort(s);
+        if(adapter!=null){
+            adapter.loadFailed();
+        }
+    }
+
+    @Override
+    public void onSuccess() {
 
     }
 }

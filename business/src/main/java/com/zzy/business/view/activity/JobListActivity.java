@@ -8,10 +8,8 @@ import android.widget.Button;
 
 import com.zzy.business.R;
 import com.zzy.business.contract.JobContract;
-import com.zzy.business.model.bean.GetRichInfo;
 import com.zzy.business.model.bean.Job;
 import com.zzy.business.presenter.JobPresenter;
-import com.zzy.business.view.itemViewDelegate.GetRichInfoDelegate;
 import com.zzy.business.view.itemViewDelegate.JobDelegate;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.constants.ParamConstants;
@@ -43,7 +41,7 @@ public class JobListActivity extends BaseTitleAndBottomBarActivity implements Jo
         super.onCreate(savedInstanceState);
         setTitle("我要招聘");
         presenter = new JobPresenter(this);
-        presenter.getJobList(pageNum);
+        presenter.getList(pageNum);
     }
 
     @Override
@@ -74,9 +72,9 @@ public class JobListActivity extends BaseTitleAndBottomBarActivity implements Jo
                         return;
                     }
                     if(isReload){
-                        presenter.getJobList(pageNum);
+                        presenter.getList(pageNum);
                     }else{
-                        presenter.getJobList(++pageNum);
+                        presenter.getList(++pageNum);
                     }
                 }
             };
@@ -131,7 +129,7 @@ public class JobListActivity extends BaseTitleAndBottomBarActivity implements Jo
 
     @Override
     public void reload(boolean bShow) {
-        presenter.getJobList(pageNum);
+        presenter.getList(pageNum);
     }
 
     @Override

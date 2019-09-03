@@ -117,7 +117,7 @@ public class PioneeringPresenter implements PioneeringContract.Presenter{
     }
 
     @Override
-    public void newPioneering(Pioneering bean) {
+    public void create(Pioneering bean) {
         if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {
             view.showError(AppUtils.getApp().getResources().getString(R.string.no_network_tips));
             return;

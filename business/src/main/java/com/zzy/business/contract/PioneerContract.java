@@ -17,8 +17,8 @@ public interface PioneerContract {
 
     interface Presenter extends BasePresenter {
         void getTypeList();
-        void getPioneerList(String type, int pageNum);
-        void getPioneerDetail(int id);
+        void getList(String type, int pageNum);
+        void getDetail(int id);
         void like(int id);
     }
 }

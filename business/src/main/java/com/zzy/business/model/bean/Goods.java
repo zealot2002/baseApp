@@ -10,6 +10,7 @@ import java.util.List;
  */
 
 public class Goods implements Serializable {
+    private int id;
     private String name;
     private String price;
     private String phone;
@@ -20,10 +21,11 @@ public class Goods implements Serializable {
     private String dealWay;
     private String startPrice;
     private String endPrice;
-    private List<String> imgUrlList;
-
+    private List<Image> imgList;
+    private List<Comment> commentList;
     public Goods() {
-        imgUrlList = new ArrayList<>();
+        imgList = new ArrayList<>();
+        commentList = new ArrayList<>();
     }
 
     public String getName() {
@@ -106,11 +108,27 @@ public class Goods implements Serializable {
         this.endPrice = endPrice;
     }
 
-    public List<String> getImgUrlList() {
-        return imgUrlList;
+    public List<Image> getImgList() {
+        return imgList;
     }
 
-    public void setImgUrlList(List<String> imgUrlList) {
-        this.imgUrlList = imgUrlList;
+    public void setImgList(List<Image> imgList) {
+        this.imgList = imgList;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public List<Comment> getCommentList() {
+        return commentList;
+    }
+
+    public void setCommentList(List<Comment> commentList) {
+        this.commentList = commentList;
     }
 }

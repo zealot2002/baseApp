@@ -59,7 +59,6 @@ public class GoodsDetailSellActivity extends BaseTitleAndBottomBarActivity imple
     }
 
     private void setupViews() {
-        setTitle("商品详情");
         etName = findViewById(R.id.etName);
         etContact = findViewById(R.id.etContact);
         etPhone = findViewById(R.id.etPhone);
@@ -75,17 +74,17 @@ public class GoodsDetailSellActivity extends BaseTitleAndBottomBarActivity imple
 
     private void updateBanner() {
         banner = findViewById(R.id.banner);
-        banner.setPages(
-                new CBViewHolderCreator() {
-                    @Override
-                    public BannerHolderView createHolder(View itemView) {
-                        return new BannerHolderView(itemView,R.mipmap.icon_default);
-                    }
-                    @Override
-                    public int getLayoutId() {
-                        return R.layout.banner_item;
-                    }
-                }, bean.getImgUrlList());
+//        banner.setPages(
+//                new CBViewHolderCreator() {
+//                    @Override
+//                    public BannerHolderView createHolder(View itemView) {
+//                        return new BannerHolderView(itemView,R.mipmap.icon_default);
+//                    }
+//                    @Override
+//                    public int getLayoutId() {
+//                        return R.layout.banner_item;
+//                    }
+//                }, bean.getImgList());
     }
 
     @Override

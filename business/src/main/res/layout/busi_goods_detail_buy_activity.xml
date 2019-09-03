@@ -10,10 +10,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
-        <cn.bingoogolapple.bgabanner.BGABanner
+        <com.bigkoo.convenientbanner.ConvenientBanner
             android:id="@+id/banner"
             android:layout_width="match_parent"
             android:layout_height="500px"
+            app:canLoop="true"
+            android:background="@null"
             />
         <!--标       题-->
         <RelativeLayout
@@ -97,6 +99,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/item_height"
+            android:layout_marginRight="@dimen/body_margin"
+            android:layout_marginLeft="@dimen/body_margin"
             >
             <TextView
                 android:id="@+id/tvContact"
@@ -127,6 +131,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/item_height"
+            android:layout_marginRight="@dimen/body_margin"
+            android:layout_marginLeft="@dimen/body_margin"
             >
             <TextView
                 android:id="@+id/tvPhone"
@@ -159,6 +165,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/item_height"
+            android:layout_marginRight="@dimen/body_margin"
+            android:layout_marginLeft="@dimen/body_margin"
             >
             <TextView
                 android:id="@+id/tvAddress"
@@ -189,6 +197,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/item_height"
+            android:layout_marginRight="@dimen/body_margin"
+            android:layout_marginLeft="@dimen/body_margin"
             >
             <TextView
                 android:id="@+id/tvPrice"
@@ -220,6 +230,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/item_height"
+            android:layout_marginRight="@dimen/body_margin"
+            android:layout_marginLeft="@dimen/body_margin"
             >
             <TextView
                 android:id="@+id/tvDealWay"
@@ -251,6 +263,8 @@
             style="@style/tv_style_white_14"
             android:text="物品描述:   "
             android:layout_marginTop="10dp"
+            android:layout_marginRight="@dimen/body_margin"
+            android:layout_marginLeft="@dimen/body_margin"
             />
         <com.zzy.common.widget.MyEditText
             android:id="@+id/etDesc"
@@ -265,12 +279,16 @@
             android:paddingRight="10dp"
             android:layout_marginTop="5dp"
             android:background="@color/deep_blue"
+            android:layout_marginRight="@dimen/body_margin"
+            android:layout_marginLeft="@dimen/body_margin"
             />
         <!--tips-->
         <TextView
             style="@style/tv_style_white_14"
             android:text="温馨提示，注意交易安全，谨防上当受骗！"
             android:layout_marginTop="10dp"
+            android:layout_marginRight="@dimen/body_margin"
+            android:layout_marginLeft="@dimen/body_margin"
             />
         <!--举报-->
         <TextView
@@ -280,6 +298,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="@dimen/bottom_margin"
             android:layout_gravity="right"
+            android:layout_marginRight="@dimen/body_margin"
+            android:layout_marginLeft="@dimen/body_margin"
             />
     </LinearLayout>
 </ScrollView>

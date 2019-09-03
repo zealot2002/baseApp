@@ -3,7 +3,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.zzy.business.R;
 import com.zzy.business.contract.JobContract;
@@ -11,7 +10,6 @@ import com.zzy.business.model.bean.Job;
 import com.zzy.business.presenter.JobPresenter;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.widget.MyEditText;
-import com.zzy.common.widget.PopupEditDialog;
 import com.zzy.commonlib.utils.ToastUtils;
 
 /**
@@ -76,7 +74,7 @@ public class JobNewActivity extends BaseTitleAndBottomBarActivity implements Vie
             bean.setSalaryMin(etSalaryMin.getText().toString().trim());
             bean.setSalaryMax(etSalaryMax.getText().toString().trim());
 
-            presenter.newJob(bean);
+            presenter.create(bean);
         }
     }
 

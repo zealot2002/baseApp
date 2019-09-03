@@ -2,12 +2,17 @@ package com.zzy.business.presenter;
 import android.support.annotation.NonNull;
 
 import com.zzy.business.R;
-import com.zzy.business.contract.GetRichInfoContract;
+import com.zzy.business.contract.GoodsBuyContract;
+import com.zzy.business.contract.PioneerContract;
 import com.zzy.business.model.HttpProxy;
+import com.zzy.business.model.bean.Goods;
+import com.zzy.business.model.bean.Menu;
 import com.zzy.common.network.CommonDataCallback;
 import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.commonlib.utils.NetUtils;
+
+import java.util.List;
 
 /**
  * @author dell-7020
@@ -15,10 +20,10 @@ import com.zzy.commonlib.utils.NetUtils;
  * @date 2018/08/07 16:25:23
  */
 
-public class GetRichInfoPresenter implements GetRichInfoContract.Presenter{
-    private final GetRichInfoContract.View view;
+public class GoodsBuyPresenter implements GoodsBuyContract.Presenter{
+    private final GoodsBuyContract.View view;
 /****************************************************************************************************/
-    public GetRichInfoPresenter(@NonNull GetRichInfoContract.View view) {
+    public GoodsBuyPresenter(@NonNull GoodsBuyContract.View view) {
         this.view = view;
     }
     @Override
@@ -35,12 +40,12 @@ public class GetRichInfoPresenter implements GetRichInfoContract.Presenter{
     @Override
     public void getList(int pageNum) {
         if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {
-            view.showDisconnect();
+            view.showError(AppUtils.getApp().getResources().getString(R.string.no_network_tips));
             return;
         }
         view.showLoading();
         try{
-            HttpProxy.getRichInfoList(pageNum,new CommonDataCallback() {
+            HttpProxy.getGoodsBuyList(pageNum,new CommonDataCallback() {
                 @Override
                 public void callback(int result, Object o, Object o1) {
                     view.closeLoading();
@@ -57,49 +62,23 @@ public class GetRichInfoPresenter implements GetRichInfoContract.Presenter{
             e.printStackTrace();
             handleErrs(e.toString());
         }
+
     }
 
     @Override
     public void getDetail(int id) {
-        if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {
-            view.showDisconnect();
-            return;
-        }
-        view.showLoading();
-        try{
-            HttpProxy.getRichInfoDetail(id,new CommonDataCallback() {
-                @Override
-                public void callback(int result, Object o, Object o1) {
-                    view.closeLoading();
-                    if (result == HConstant.SUCCESS) {
-                        view.updateUI(o);
-                    }else if(result == HConstant.FAIL
-                            ||result == HConstant.ERROR
-                    ){
-                        handleErrs((String) o);
-                    }
-                }
-            });
-        }catch(Exception e){
-            e.printStackTrace();
-            handleErrs(e.toString());
-        }
-    }
-
-    @Override
-    public void like(int id) {
         if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {
             view.showError(AppUtils.getApp().getResources().getString(R.string.no_network_tips));
             return;
         }
         view.showLoading();
         try{
-            HttpProxy.like(id,new CommonDataCallback() {
+            HttpProxy.getGoodsBuyDetail(id,new CommonDataCallback() {
                 @Override
                 public void callback(int result, Object o, Object o1) {
                     view.closeLoading();
                     if (result == HConstant.SUCCESS) {
-                        view.onSuccess();
+                        view.updateUI(o);
                     }else if(result == HConstant.FAIL
                             ||result == HConstant.ERROR
                     ){
@@ -111,5 +90,15 @@ public class GetRichInfoPresenter implements GetRichInfoContract.Presenter{
             e.printStackTrace();
             handleErrs(e.toString());
         }
+    }
+
+    @Override
+    public void report(int id, String content) {
+
+    }
+
+    @Override
+    public void create(Goods bean) {
+
     }
 }

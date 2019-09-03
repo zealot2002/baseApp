@@ -34,7 +34,7 @@ public class JobPresenter implements JobContract.Presenter{
     }
 
     @Override
-    public void getJobList(int pageNum) {
+    public void getList(int pageNum) {
         if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {
             view.showError(AppUtils.getApp().getResources().getString(R.string.no_network_tips));
             return;
@@ -61,7 +61,7 @@ public class JobPresenter implements JobContract.Presenter{
     }
 
     @Override
-    public void getJobDetail(int id) {
+    public void getDetail(int id) {
         if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {
             view.showError(AppUtils.getApp().getResources().getString(R.string.no_network_tips));
             return;
@@ -88,7 +88,7 @@ public class JobPresenter implements JobContract.Presenter{
     }
 
     @Override
-    public void newJob(Job job) {
+    public void create(Job job) {
         if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {
             view.showError(AppUtils.getApp().getResources().getString(R.string.no_network_tips));
             return;

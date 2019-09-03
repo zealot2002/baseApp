@@ -2,10 +2,8 @@ package com.zzy.business.presenter;
 import android.support.annotation.NonNull;
 
 import com.zzy.business.R;
-import com.zzy.business.contract.JobContract;
 import com.zzy.business.contract.PioneerContract;
 import com.zzy.business.model.HttpProxy;
-import com.zzy.business.model.bean.Job;
 import com.zzy.business.model.bean.Menu;
 import com.zzy.common.network.CommonDataCallback;
 import com.zzy.commonlib.http.HConstant;
@@ -52,7 +50,7 @@ public class PioneerPresenter implements PioneerContract.Presenter{
                     if (result == HConstant.SUCCESS) {
                         view.updateMenuList((List<Menu>) o);
                         //continue to get first list
-                        getPioneerList("全部",1);
+                        getList("全部",1);
                     }else if(result == HConstant.FAIL
                             ||result == HConstant.ERROR
                     ){
@@ -67,7 +65,7 @@ public class PioneerPresenter implements PioneerContract.Presenter{
     }
 
     @Override
-    public void getPioneerList(String type,int pageNum) {
+    public void getList(String type, int pageNum) {
         if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {
             view.showError(AppUtils.getApp().getResources().getString(R.string.no_network_tips));
             return;
@@ -94,7 +92,7 @@ public class PioneerPresenter implements PioneerContract.Presenter{
     }
 
     @Override
-    public void getPioneerDetail(int id) {
+    public void getDetail(int id) {
         if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {
             view.showError(AppUtils.getApp().getResources().getString(R.string.no_network_tips));
             return;

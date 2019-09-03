@@ -34,7 +34,7 @@ public class GetRichInfoDetailActivity extends BaseTitleAndBottomBarActivity
             setTitle("致富信息");
             id = getIntent().getIntExtra(ParamConstants.ID,0);
             presenter = new GetRichInfoPresenter(this);
-            presenter.getRichInfoDetail(id);
+            presenter.getDetail(id);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -93,7 +93,7 @@ public class GetRichInfoDetailActivity extends BaseTitleAndBottomBarActivity
 
     @Override
     public void reload(boolean bShow) {
-        presenter.getRichInfoDetail(id);
+        presenter.getDetail(id);
     }
 
     @Override

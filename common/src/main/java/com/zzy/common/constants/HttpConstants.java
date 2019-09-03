@@ -44,7 +44,6 @@ public class HttpConstants {
     public static final String JOB_NEW = "/recruitment/insert.do";
     public static final String JOB_REPORT = "/recruitment/insertReport.do";
 
-
     public static final String PIONEER_TYPE_LIST = "/news_information/selAllpioneerTYPE.do";
     public static final String PIONEER_LIST = "/news_information/selAllpioneer.do";
     public static final String PIONEER_DETAIL = "/news_information/selById.do";
@@ -55,6 +54,13 @@ public class HttpConstants {
     public static final String PIONEERING_DETAIL = "/recruitment/selByIdpioneer.do";
     public static final String PIONEERING_NEW = "/recruitment/insertpioneer.do";
 
+
+
+    public static final String GOODS_BUY_LIST = "/sale/selAllBuy.do";
+    public static final String GOODS_BUY_DETAIL = "/sale/selById.do";
+
+    public static final String GOODS_SELL_LIST = "/sale/selAllSale.do";
+    public static final String GOODS_SELL_DETAIL = "/sale/selByIdSale.do";
     /*****************************    login-register   ***************************/
 
     // 登录

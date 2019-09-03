@@ -53,7 +53,7 @@ public class PioneeringNewActivity extends BaseTitleAndBottomBarActivity
             bean.setPhone(etPhone.getText().toString().trim());
             bean.setContent(etContent.getText().toString().trim());
 
-            presenter.newPioneering(bean);
+            presenter.create(bean);
         }
     }
 

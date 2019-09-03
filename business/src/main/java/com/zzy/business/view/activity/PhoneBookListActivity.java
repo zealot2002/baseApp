@@ -37,7 +37,7 @@ public class PhoneBookListActivity extends BaseTitleAndBottomBarActivity impleme
         setTitle("通讯录");
 
         presenter = new PbPresenter(this);
-        presenter.getDataList(pageNum);
+        presenter.getList(pageNum);
     }
 
     private void setupViews() {
@@ -59,9 +59,9 @@ public class PhoneBookListActivity extends BaseTitleAndBottomBarActivity impleme
                         return;
                     }
                     if(isReload){
-                        presenter.getDataList(pageNum);
+                        presenter.getList(pageNum);
                     }else{
-                        presenter.getDataList(++pageNum);
+                        presenter.getList(++pageNum);
                     }
                 }
             };
@@ -90,7 +90,7 @@ public class PhoneBookListActivity extends BaseTitleAndBottomBarActivity impleme
 
     @Override
     public void reload(boolean bShow) {
-        presenter.getDataList(pageNum);
+        presenter.getList(pageNum);
     }
 
     @Override

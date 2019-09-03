@@ -12,9 +12,9 @@ public interface JobContract {
     }
 
     interface Presenter extends BasePresenter {
-        void getJobList(int pageNum);
-        void getJobDetail(int id);
-        void newJob(Job job);
+        void getList(int pageNum);
+        void getDetail(int id);
+        void create(Job job);
         void report(int id, String content);
     }
 }

@@ -8,7 +8,6 @@ import com.zzy.business.R;
 import com.zzy.business.contract.GetRichInfoContract;
 import com.zzy.business.model.bean.GetRichInfo;
 import com.zzy.business.presenter.GetRichInfoPresenter;
-import com.zzy.business.view.adapter.GetRichInfoListAdapter;
 import com.zzy.business.view.itemViewDelegate.GetRichInfoDelegate;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.constants.ParamConstants;
@@ -16,9 +15,7 @@ import com.zzy.common.widget.recycleAdapter.MyMultiRecycleAdapter;
 import com.zzy.common.widget.recycleAdapter.OnItemChildClickListener;
 import com.zzy.common.widget.recycleAdapter.OnLoadMoreListener;
 import com.zzy.common.widget.recycleAdapter.ViewHolder;
-import com.zzy.commonlib.log.MyLog;
 import com.zzy.commonlib.utils.ToastUtils;
-import com.zzy.sc.core.utils.ClassUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +38,7 @@ public class GetRichInfoListActivity extends BaseTitleAndBottomBarActivity imple
         setTitle("致富信息");
 
         presenter = new GetRichInfoPresenter(this);
-        presenter.getRichInfoList(pageNum);
+        presenter.getList(pageNum);
     }
 
     private void setupViews() {
@@ -63,9 +60,9 @@ public class GetRichInfoListActivity extends BaseTitleAndBottomBarActivity imple
                         return;
                     }
                     if(isReload){
-                        presenter.getRichInfoList(pageNum);
+                        presenter.getList(pageNum);
                     }else{
-                        presenter.getRichInfoList(++pageNum);
+                        presenter.getList(++pageNum);
                     }
                 }
             };
@@ -105,7 +102,7 @@ public class GetRichInfoListActivity extends BaseTitleAndBottomBarActivity imple
 
     @Override
     public void reload(boolean bShow) {
-        presenter.getRichInfoList(pageNum);
+        presenter.getList(pageNum);
     }
 
     @Override

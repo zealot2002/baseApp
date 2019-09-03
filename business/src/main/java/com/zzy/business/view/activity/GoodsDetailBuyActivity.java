@@ -5,44 +5,104 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.hedgehog.ratingbar.RatingBar;
 import com.zzy.business.R;
+import com.zzy.business.contract.GoodsBuyContract;
+import com.zzy.business.model.bean.Goods;
+import com.zzy.business.model.bean.Job;
+import com.zzy.business.presenter.GoodsBuyPresenter;
+import com.zzy.business.presenter.JobPresenter;
+import com.zzy.business.utils.InnerUtils;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.base.BaseToolbarActivity;
+import com.zzy.common.constants.ParamConstants;
 import com.zzy.common.widget.MyEditText;
+import com.zzy.commonlib.utils.ToastUtils;
 
 /**
- * 我要买东西
+ * 商品详情
  */
-public class GoodsDetailBuyActivity extends BaseTitleAndBottomBarActivity implements View.OnClickListener {
+public class GoodsDetailBuyActivity extends BaseTitleAndBottomBarActivity
+        implements View.OnClickListener, GoodsBuyContract.View {
     private EditText etName,etContact,etPhone,etAddress,etPrice,etDealWay;
     private MyEditText etDesc;
     private Button btnOk;
     private TextView tvScore,tvReport;
     private RatingBar rbScore;
+    private ConvenientBanner banner;
+    private GoodsBuyContract.Presenter presenter;
+    private int id;
+    private Goods bean;
 /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setupViews();
+        try{
+            setTitle("商品详情");
+            id = getIntent().getIntExtra(ParamConstants.ID,0);
+            presenter = new GoodsBuyPresenter(this);
+            presenter.getDetail(id);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.busi_goods_new_buy_activity;
+        return R.layout.busi_goods_detail_buy_activity;
     }
 
     private void setupViews() {
-        btnOk = findViewById(R.id.btnOk);
-//        etPassword = findViewById(R.id.etPassword);
-//        btnOk = findViewById(R.id.btnOk);
-//        tvToBePioneer = findViewById(R.id.tvToBePioneer);
-//        tvForgetPassword = findViewById(R.id.tvForgetPassword);
+        etName = findViewById(R.id.etName);
+        etContact = findViewById(R.id.etContact);
+        etPhone = findViewById(R.id.etPhone);
+        etAddress = findViewById(R.id.etAddress);
+        etPrice = findViewById(R.id.etPrice);
+        etDealWay = findViewById(R.id.etDealWay);
+        etDesc = findViewById(R.id.etDesc);
+        tvScore = findViewById(R.id.tvScore);
+        tvReport = findViewById(R.id.tvReport);
+        rbScore = findViewById(R.id.rbScore);
 
-        btnOk.setOnClickListener(this);
-
+        tvReport.setOnClickListener(this);
+        etName.setText(bean.getName());
+        etContact.setText(bean.getContact());
+        etPhone.setText(bean.getPhone());
+        etAddress.setText(bean.getAddress());
+        etPrice.setText(bean.getPrice());
+        etDealWay.setText(bean.getDealWay());
+        etDesc.setText(bean.getDesc());
+        rbScore.setStar(bean.getScore());
+        tvScore.setText(InnerUtils.getRatingString(bean.getScore()));
+        updateBanner();
     }
 
+    private void updateBanner() {
+        banner = findViewById(R.id.banner);
+//        banner.setPages(
+//                new CBViewHolderCreator() {
+//                    @Override
+//                    public BannerHolderView createHolder(View itemView) {
+//                        return new BannerHolderView(itemView,R.mipmap.icon_default);
+//                    }
+//                    @Override
+//                    public int getLayoutId() {
+//                        return R.layout.banner_item;
+//                    }
+//                }, bean.getImgList());
+    }
+    @Override
+    public void updateUI(Object o) {
+        super.updateUI(o);
+        try{
+            bean = (Goods) o;
+            setupViews();
+        }catch (Exception e){
+            e.printStackTrace();
+            ToastUtils.showShort(e.toString());
+        }
+    }
 
     @Override
     public void onClick(View v) {
@@ -58,6 +118,16 @@ public class GoodsDetailBuyActivity extends BaseTitleAndBottomBarActivity implem
 
     @Override
     public void reload(boolean bShow) {
+
+    }
+
+    @Override
+    public void showError(String s) {
+
+    }
+
+    @Override
+    public void onSuccess() {
 
     }
 }

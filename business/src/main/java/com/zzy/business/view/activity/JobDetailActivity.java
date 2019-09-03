@@ -5,11 +5,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.zzy.business.R;
-import com.zzy.business.contract.GetRichInfoContract;
 import com.zzy.business.contract.JobContract;
-import com.zzy.business.model.bean.GetRichInfo;
 import com.zzy.business.model.bean.Job;
-import com.zzy.business.presenter.GetRichInfoPresenter;
 import com.zzy.business.presenter.JobPresenter;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.constants.ParamConstants;
@@ -36,7 +33,7 @@ public class JobDetailActivity extends BaseTitleAndBottomBarActivity implements 
             setTitle("招聘信息详情");
             id = getIntent().getIntExtra(ParamConstants.ID,0);
             presenter = new JobPresenter(this);
-            presenter.getJobDetail(id);
+            presenter.getDetail(id);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -111,7 +108,7 @@ public class JobDetailActivity extends BaseTitleAndBottomBarActivity implements 
 
     @Override
     public void reload(boolean bShow) {
-        presenter.getJobDetail(id);
+        presenter.getDetail(id);
     }
 
     @Override
