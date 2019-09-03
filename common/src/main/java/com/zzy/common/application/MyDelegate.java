@@ -42,28 +42,11 @@ public class MyDelegate implements ApplicationDelegate {
             @Override
             public void onForeground() {
                 Log.e("zzy","onForeground");
-                String currentProcess = ProcessUtils.getCurrentProcessName(application);
-                String lastProcess = SPHelper.getString(SPConstants.LAST_PROCESS,"");
-                if(currentProcess.equals(lastProcess)){
-                    long now = System.currentTimeMillis();
-                    long lastTime = SPHelper.getLong(SPConstants.LAST_TIME, 0);
-                    try {
-                        if ((now - lastTime) > CommonUtils.getGesturesPwdTimerout()) {
-                            SCM.getInstance().req(AppUtils.getTopActivityOrApp(),
-                                    ActionConstants.ENTRY_GESTURES_PWD_ACTIVITY_ACTION);
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
             }
 
             @Override
             public void onBackground() {
-//                long lastTime = System.currentTimeMillis();
-//                SPHelper.save(SPConstants.LAST_TIME, lastTime);
-//                SPHelper.save(SPConstants.LAST_PROCESS,
-//                        ProcessUtils.getCurrentProcessName(application));
+
             }
         });
 

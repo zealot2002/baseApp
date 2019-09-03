@@ -21,12 +21,7 @@
                 android:layout_marginRight="@dimen/body_margin"
                 android:layout_marginTop="20dp"
                 android:textStyle="bold"
-                />
-            <TextView
-                android:id="@+id/tvDate"
-                style="@style/tv_style_gray_12"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="2dp"
                 />
             <TextView
                 android:layout_width="match_parent"
@@ -34,13 +29,6 @@
                 android:layout_marginTop="5dp"
                 android:layerType="software"
                 android:background="@drawable/dotted_line" />
-            <!--<TextView-->
-                <!--android:id="@+id/tvContent"-->
-                <!--style="@style/tv_style_black2_14"-->
-                <!--android:layout_marginLeft="@dimen/body_margin2"-->
-                <!--android:layout_marginRight="@dimen/body_margin2"-->
-                <!--android:layout_marginTop="5dp"-->
-                <!--/>-->
             <com.tencent.smtt.sdk.WebView
                 android:id="@+id/webView"
                 android:layout_width="match_parent"
@@ -48,6 +36,19 @@
                 android:scrollbarSize="3dp"
                 android:layout_marginTop="5dp"
                 />
+            <Button
+                android:id="@+id/btnStudy"
+                android:layout_width="@dimen/btn_width"
+                android:layout_height="@dimen/btn_height"
+                android:background="@mipmap/btn_login"
+                android:text="跟我学"
+                android:textColor="@color/white"
+                android:textSize="@dimen/btn_text_size"
+                android:layout_marginTop="100dp"
+                android:layout_gravity="right"
+                android:layout_marginRight="@dimen/body_margin"
+                />
+
             <RelativeLayout
                 android:id="@+id/rlLike"
                 android:layout_width="100dp"
@@ -80,15 +81,5 @@
                 android:layout_marginBottom="@dimen/bottom_margin"
                 />
         </LinearLayout>
-        <ImageView
-            android:id="@+id/ivPic"
-            android:layout_width="62px"
-            android:layout_height="32px"
-            android:src="@mipmap/place_top"
-            android:scaleType="fitXY"
-            android:layout_marginTop="22dp"
-            android:layout_marginLeft="@dimen/body_margin"
-            android:visibility="gone"
-            />
     </FrameLayout>
 </ScrollView>

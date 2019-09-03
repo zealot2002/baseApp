@@ -2,12 +2,17 @@ package com.zzy.business.model;
 
 
 import com.zzy.business.model.bean.Job;
+import com.zzy.business.model.bean.Pioneering;
 import com.zzy.business.model.jsonParser.GetRichInfoListParser;
 import com.zzy.business.model.jsonParser.GetRichInfoParser;
 import com.zzy.business.model.jsonParser.JobListParser;
 import com.zzy.business.model.jsonParser.JobParser;
 import com.zzy.business.model.jsonParser.MenuListParser;
+import com.zzy.business.model.jsonParser.PbListParser;
 import com.zzy.business.model.jsonParser.PioneerListParser;
+import com.zzy.business.model.jsonParser.PioneerParser;
+import com.zzy.business.model.jsonParser.PioneeringListParser;
+import com.zzy.business.model.jsonParser.PioneeringParser;
 import com.zzy.common.constants.CommonConstants;
 import com.zzy.common.constants.HttpConstants;
 import com.zzy.common.jsonParser.CommonParser;
@@ -17,6 +22,17 @@ import com.zzy.commonlib.http.HInterface;
 import org.json.JSONObject;
 
 public class HttpProxy {
+    public static void getPbList(int pageNum,final HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", HttpConstants.TOKEN);
+        reqBody.put("rows", CommonConstants.PAGE_SIZE);
+        reqBody.put("page", pageNum);
+        HttpUtils.getInstance().req(
+                HttpConstants.PB_LIST,
+                reqBody,
+                callback,
+                new PbListParser());
+    }
     public static void getRichInfoList(int pageNum,final HInterface.DataCallback callback) throws Exception {
         JSONObject reqBody = new JSONObject();
         reqBody.put("TOKEN", HttpConstants.TOKEN);
@@ -124,4 +140,50 @@ public class HttpProxy {
                 new PioneerListParser());
     }
 
+    public static void getPioneerDetail(int id,final HInterface.DataCallback callback) throws Exception{
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", HttpConstants.TOKEN);
+        reqBody.put("NEWS_INFORMATION_ID", id);
+        HttpUtils.getInstance().req(
+                HttpConstants.PIONEER_DETAIL,
+                reqBody,
+                callback,
+                new PioneerParser());
+    }
+
+    public static void getPioneeringList(int pageNum, final HInterface.DataCallback callback) throws Exception{
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", HttpConstants.TOKEN);
+        reqBody.put("rows", CommonConstants.PAGE_SIZE);
+        reqBody.put("page", pageNum);
+        HttpUtils.getInstance().req(
+                HttpConstants.PIONEERING_LIST,
+                reqBody,
+                callback,
+                new PioneeringListParser());
+    }
+
+    public static void getPioneeringDetail(int id,final HInterface.DataCallback callback) throws Exception{
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", HttpConstants.TOKEN);
+        reqBody.put("RECRUITMENT_ID", id);
+        HttpUtils.getInstance().req(
+                HttpConstants.PIONEERING_DETAIL,
+                reqBody,
+                callback,
+                new PioneeringParser());
+    }
+
+    public static void newPioneering(Pioneering bean, final HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", HttpConstants.TOKEN);
+        reqBody.put("CONNECT_PERSON",bean.getContact());
+        reqBody.put("CONNECT_PERSON", bean.getPhone());
+        reqBody.put("RELEASE_TEXT", bean.getContent());
+        HttpUtils.getInstance().req(
+                HttpConstants.PIONEERING_NEW,
+                reqBody,
+                callback,
+                new CommonParser());
+    }
 }

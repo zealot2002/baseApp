@@ -74,9 +74,18 @@ public class GetRichInfoListActivity extends BaseTitleAndBottomBarActivity imple
             adapter.setOnItemChildClickListener(R.id.rootView, new OnItemChildClickListener() {
                 @Override
                 public void onItemChildClick(ViewHolder viewHolder, Object data, int position) {
+                    GetRichInfo bean = dataList.get(position);
                     Bundle bundle = new Bundle();
-                    bundle.putInt(ParamConstants.ID,dataList.get(position).getId());
-                    startActivity(GetRichInfoDetailActivity.class,bundle);
+                    bundle.putInt(ParamConstants.ID,bean.getId());
+                    if(bean.getType().equals("致富信息")){
+                        startActivity(GetRichInfoDetailActivity.class,bundle);
+                    }else if(bean.getType().equals("招聘")){
+                        startActivity(JobDetailActivity.class,bundle);
+                    }else if(bean.getType().equals("买")){
+                        startActivity(GoodsDetailBuyActivity.class,bundle);
+                    }else if(bean.getType().equals("卖")){
+                        startActivity(GoodsDetailSellActivity.class,bundle);
+                    }
                 }
             });
             rvDataList.setAdapter(adapter);
@@ -136,7 +145,7 @@ public class GetRichInfoListActivity extends BaseTitleAndBottomBarActivity imple
     }
 
     @Override
-    public void onLikeSuccess() {
+    public void onSuccess() {
 
     }
 }

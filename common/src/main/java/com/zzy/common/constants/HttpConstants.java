@@ -30,6 +30,9 @@ public class HttpConstants {
     /**************************    home *******************************/
     public static final String HOME_DATA = "/userinfo/index.do";
 
+
+    public static final String PB_LIST = "/userinfo/selAllbook.do";
+
     /**********************        rich info              ***************************/
 
     public static final String RICH_INFO_LIST = "/news_information/selAllRich_information.do";
@@ -44,9 +47,13 @@ public class HttpConstants {
 
     public static final String PIONEER_TYPE_LIST = "/news_information/selAllpioneerTYPE.do";
     public static final String PIONEER_LIST = "/news_information/selAllpioneer.do";
-//    public static final String PIONEER_DETAIL = "/news_information/selById.do";
+    public static final String PIONEER_DETAIL = "/news_information/selById.do";
 //    public static final String JOB_LIST = "/news_information/selById.do";
 //    public static final String JOB_LIST = "/recruitment/selAll.do";
+
+    public static final String PIONEERING_LIST = "/recruitment/selAllpioneer.do";
+    public static final String PIONEERING_DETAIL = "/recruitment/selByIdpioneer.do";
+    public static final String PIONEERING_NEW = "/recruitment/insertpioneer.do";
 
     /*****************************    login-register   ***************************/
 

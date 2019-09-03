@@ -17,7 +17,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zzy.business.view.activity.GoodsListActivity;
 import com.zzy.business.view.activity.FriendsCircleActivity;
 import com.zzy.business.view.activity.EntrepreneurshipHelpActivity;
-import com.zzy.business.view.activity.EntrepreneurshipListActivity;
+import com.zzy.business.view.activity.PioneeringListActivity;
 import com.zzy.business.view.activity.EntrepreneurshipServiceActivity;
 import com.zzy.business.view.activity.PioneerListActivity;
 import com.zzy.business.view.activity.FeedbackActivity;
@@ -118,7 +118,9 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
         btnFeedback.setOnClickListener(this);
         btnShareExperience.setOnClickListener(this);
         btnEntrepreneurshipFriends.setOnClickListener(this);
+    }
 
+    private void setupList(){
         rvNewsList = findViewById(R.id.rvNewsList);
         SpeedyLinearLayoutManager layoutManager = new SpeedyLinearLayoutManager(this);
         layoutManager.setMillisecondsPerInch(4000f);
@@ -145,7 +147,6 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
         rvSaleList.setNestedScrollingEnabled(false);//禁止滑动
         rvSaleList.setEnabled(false);
     }
-
     private AnimRunnable mRunnable = new AnimRunnable();
     private class AnimRunnable implements Runnable{
 
@@ -239,7 +240,7 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
             }else if(v.getId() == R.id.btnRecruit){
                 startActivity(JobListActivity.class);
             }else if(v.getId() == R.id.btnEntrepreneurship){
-                startActivity(EntrepreneurshipListActivity.class);
+                startActivity(PioneeringListActivity.class);
             }else if(v.getId() == R.id.btnBuyGoods){
                 Bundle bundle = new Bundle();
                 bundle.putInt(ParamConstants.TYPE,0);
@@ -305,6 +306,7 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
     }
 
     private void updateViews() {
+        setupList();
         tvUserName.setText(ctx.getUser().getName());
         tvScore.setText(ctx.getUser().getScore());
         ImageLoader.loadImage(ivPic,ctx.getBannerList().get(0).getImgUrl());

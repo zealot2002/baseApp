@@ -11,6 +11,9 @@ public class PbRecord {
     private String remarks;
     private String phone;
 
+    public PbRecord() {
+    }
+
     public PbRecord(String name, String imgUrl, String remarks, String phone) {
         this.name = name;
         this.imgUrl = imgUrl;

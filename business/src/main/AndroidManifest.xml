@@ -11,7 +11,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
-            android:name=".view.activity.EntrepreneurshipNewActivity"
+            android:name=".view.activity.PioneeringNewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/activity_theme" />
+        <activity
+            android:name=".view.activity.PioneeringDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
@@ -23,7 +27,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
-            android:name=".view.activity.EntrepreneurshipListActivity"
+            android:name=".view.activity.PioneeringListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity

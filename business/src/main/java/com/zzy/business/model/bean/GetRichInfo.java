@@ -15,6 +15,7 @@ public class GetRichInfo {
     private String likeNum;
     private String lookNum;
     private boolean isLike;
+    private String type;
 
     public GetRichInfo() {
     }
@@ -95,5 +96,13 @@ public class GetRichInfo {
 
     public void setLookNum(String lookNum) {
         this.lookNum = lookNum;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

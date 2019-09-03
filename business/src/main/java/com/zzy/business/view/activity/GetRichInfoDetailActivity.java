@@ -5,6 +5,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.tencent.smtt.sdk.WebView;
 import com.zzy.business.R;
 import com.zzy.business.contract.GetRichInfoContract;
 import com.zzy.business.model.bean.GetRichInfo;
@@ -19,8 +20,9 @@ import com.zzy.commonlib.utils.ToastUtils;
 public class GetRichInfoDetailActivity extends BaseTitleAndBottomBarActivity
         implements View.OnClickListener, GetRichInfoContract.View {
     private RelativeLayout rlLike;
-    private TextView tvTitle,tvDate,tvContent, tvLikeNum,tvLookNum;
+    private TextView tvTitle,tvDate,tvLikeNum,tvLookNum;
     private ImageView ivPic;
+    private WebView webView;
     private int id;
     private GetRichInfoContract.Presenter presenter;
     private GetRichInfo bean;
@@ -58,13 +60,15 @@ public class GetRichInfoDetailActivity extends BaseTitleAndBottomBarActivity
     private void setupViews() {
         tvTitle = findViewById(R.id.rootView).findViewById(R.id.tvTitle);
         tvDate = findViewById(R.id.tvDate);
-        tvContent = findViewById(R.id.tvContent);
+        webView = findViewById(R.id.webView);
         tvLookNum = findViewById(R.id.tvLookNum);
         tvLikeNum = findViewById(R.id.tvLikeNum);
         ivPic = findViewById(R.id.ivPic);
         rlLike = findViewById(R.id.rlLike);
 
-        tvContent.setText(bean.getContent());
+//        webView.loadData(testHtml,"text/html","utf-8");
+        webView.loadData(bean.getContent(),"text/html","utf-8");
+
         tvDate.setText("时间: "+bean.getDate());
 
         tvLikeNum.setText("赞 ("+bean.getLikeNum()+")");
@@ -75,15 +79,15 @@ public class GetRichInfoDetailActivity extends BaseTitleAndBottomBarActivity
         }else{
             tvTitle.setText(bean.getTitle());
         }
-        if(!bean.isLike()){
+//        if(!bean.isLike()){
             rlLike.setOnClickListener(this);
-        }
+//        }
     }
 
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.rlLike){
-            presenter.like(bean.getId());
+            presenter.like(id);
         }
     }
 
@@ -98,7 +102,7 @@ public class GetRichInfoDetailActivity extends BaseTitleAndBottomBarActivity
     }
 
     @Override
-    public void onLikeSuccess() {
+    public void onSuccess() {
         reload(true);
     }
 }

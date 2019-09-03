@@ -1,6 +1,6 @@
 package com.zzy.business.model.jsonParser;
 
-import com.zzy.business.model.bean.GetRichInfo;
+import com.zzy.business.model.bean.PbRecord;
 import com.zzy.common.constants.HttpConstants;
 import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.http.HInterface;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class GetRichInfoListParser implements HInterface.JsonParser {
+public class PbListParser implements HInterface.JsonParser {
     @Override
     public Object[] parse(String s) throws JSONException {
         MyLog.e("服务返回:"+s);
@@ -27,17 +27,15 @@ public class GetRichInfoListParser implements HInterface.JsonParser {
         int errorCode = obj.getInt(HttpConstants.ERROR_CODE);
         if (errorCode == HttpConstants.NO_ERROR) {
             JSONArray infoArray = obj.getJSONArray("data");
-            List<GetRichInfo> dataList = new ArrayList<>();
+            List<PbRecord> dataList = new ArrayList<>();
 
             for(int i=0;i<infoArray.length();i++) {
                 JSONObject infoObj = infoArray.getJSONObject(i);
-                GetRichInfo bean = new GetRichInfo();
-                bean.setId(infoObj.getInt("NEWS_INFORMATION_ID"));
-                bean.setTitle(infoObj.getString("NEWS_TITLE"));
-                bean.setDate(infoObj.getString("RELEASE_DATE"));
-                bean.setFrom(infoObj.getString("RELEASE_DEPT"));
-                bean.setPlaceTop("置顶".equals(infoObj.getString("IS_TOP")));
-                bean.setType(infoObj.getString("TYPE"));
+                PbRecord bean = new PbRecord();
+                bean.setName(infoObj.getString("USERNAME"));
+                bean.setImgUrl(infoObj.getString("HEAD_PIC_ADDR"));
+                bean.setRemarks(infoObj.getString("USER_JOB"));
+                bean.setPhone(infoObj.getString("MOBILE_NO"));
                 dataList.add(bean);
             }
             return new Object[]{HConstant.SUCCESS,dataList};
