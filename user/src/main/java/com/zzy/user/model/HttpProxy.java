@@ -13,14 +13,14 @@ public class HttpProxy {
     /*homeFragment start*/
     // 获取banner列表
     public static void getBannerList(final HInterface.DataCallback callback) throws Exception {
-        JSONObject reqBody = new JSONObject();
-        reqBody.put("size", 640);
-        reqBody.put("apdid", 50);
-        HttpUtils.getInstance().req(
-                 HttpConstants.BANNER_LIST,
-                reqBody,
-                callback,
-                new BannerListParser());
+//        JSONObject reqBody = new JSONObject();
+//        reqBody.put("size", 640);
+//        reqBody.put("apdid", 50);
+//        HttpUtils.getInstance().req(
+//                 HttpConstants.BANNER_LIST,
+//                reqBody,
+//                callback,
+//                new BannerListParser());
     }
 
 

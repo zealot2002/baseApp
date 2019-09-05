@@ -151,11 +151,11 @@
                 android:layout_marginLeft="45px"
                 android:layout_marginRight="45px">
                 <Button
-                    android:id="@+id/btnEntrepreneurshipHelp"
+                    android:id="@+id/btnHelp"
                     style="@style/home_btn_style_2"
                     android:text="创业\n求助" />
                 <Button
-                    android:id="@+id/btnFeedback"
+                    android:id="@+id/btnIdea"
                     style="@style/home_btn_style_2"
                     android:text="创业\n点子" />
                 <Button

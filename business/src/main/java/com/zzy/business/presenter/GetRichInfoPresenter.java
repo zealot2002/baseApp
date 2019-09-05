@@ -94,7 +94,7 @@ public class GetRichInfoPresenter implements GetRichInfoContract.Presenter{
         }
         view.showLoading();
         try{
-            HttpProxy.like(id,new CommonDataCallback() {
+            HttpProxy.likeRichInfo(id,new CommonDataCallback() {
                 @Override
                 public void callback(int result, Object o, Object o1) {
                     view.closeLoading();

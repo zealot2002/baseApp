@@ -6,10 +6,12 @@ package com.zzy.business.model.bean;
  */
 
 public class Comment {
+    private String id;
     private String content;
     private String user;
     private String headUrl;
     private String reviewContent;
+    private String date;
 
     public Comment() {
     }
@@ -44,5 +46,21 @@ public class Comment {
 
     public void setReviewContent(String reviewContent) {
         this.reviewContent = reviewContent;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

@@ -23,7 +23,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
-            android:name=".view.activity.EntrepreneurshipHelpActivity"
+            android:name=".view.activity.ContentListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity

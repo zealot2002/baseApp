@@ -1,8 +1,12 @@
 package com.zzy.business.model;
 
 
+import com.zzy.business.model.bean.Content;
+import com.zzy.business.model.bean.Image;
 import com.zzy.business.model.bean.Job;
 import com.zzy.business.model.bean.Pioneering;
+import com.zzy.business.model.jsonParser.ContentListParser;
+import com.zzy.business.model.jsonParser.ContentParser;
 import com.zzy.business.model.jsonParser.GetRichInfoListParser;
 import com.zzy.business.model.jsonParser.GetRichInfoParser;
 import com.zzy.business.model.jsonParser.GoodsListParser;
@@ -18,10 +22,10 @@ import com.zzy.business.model.jsonParser.PioneeringParser;
 import com.zzy.common.constants.CommonConstants;
 import com.zzy.common.constants.HttpConstants;
 import com.zzy.common.jsonParser.CommonParser;
-import com.zzy.common.network.CommonDataCallback;
 import com.zzy.common.network.HttpUtils;
 import com.zzy.commonlib.http.HInterface;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class HttpProxy {
@@ -57,7 +61,7 @@ public class HttpProxy {
                 callback,
                 new GetRichInfoParser());
     }
-    public static void like(int id,final HInterface.DataCallback callback) throws Exception {
+    public static void likeRichInfo(int id, final HInterface.DataCallback callback) throws Exception {
         JSONObject reqBody = new JSONObject();
         reqBody.put("TOKEN", HttpConstants.TOKEN);
         reqBody.put("NEWS_INFORMATION_ID", id);
@@ -233,5 +237,85 @@ public class HttpProxy {
                 reqBody,
                 callback,
                 new GoodsParser());
+    }
+    public static void getContentList(int type,int pageNum,final HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", HttpConstants.TOKEN);
+        reqBody.put("rows", CommonConstants.PAGE_SIZE);
+        reqBody.put("page", pageNum);
+        String action = HttpConstants.HELP_LIST;
+        if(type == CommonConstants.CONTENT_HELP){
+            action = HttpConstants.HELP_LIST;
+        }else if(type == CommonConstants.CONTENT_IDEA){
+            action = HttpConstants.IDEA_LIST;
+        }else if(type == CommonConstants.CONTENT_EXPERIENCE){
+            action = HttpConstants.EXPERIENCE_LIST;
+        }
+        HttpUtils.getInstance().req(
+                action,
+                reqBody,
+                callback,
+                new ContentListParser());
+    }
+    public static void getContentDetail(int id,final HInterface.DataCallback callback) throws Exception{
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", HttpConstants.TOKEN);
+        reqBody.put("FORUM_ID", id);
+        HttpUtils.getInstance().req(
+                HttpConstants.CONTENT_DETAIL,
+                reqBody,
+                callback,
+                new ContentParser());
+    }
+
+    public static void newContent(int type, Content bean, final HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", HttpConstants.TOKEN);
+        reqBody.put("FORUM_NAME",bean.getTitle());
+        reqBody.put("RELEASE_TEXT", bean.getContent());
+
+        JSONArray imgArr = new JSONArray();
+        for(Image image:bean.getImgList()){
+            JSONObject obj = new JSONObject();
+            obj.put("PIC_NAME",image.getName());
+            obj.put("PIC_ADDR",image.getPath());
+            imgArr.put(obj);
+        }
+        reqBody.put("IMAGES",imgArr);
+
+        String action = HttpConstants.HELP_NEW;
+        if(type == CommonConstants.CONTENT_HELP){
+            action = HttpConstants.HELP_NEW;
+        }else if(type == CommonConstants.CONTENT_IDEA){
+            action = HttpConstants.IDEA_NEW;
+        }else if(type == CommonConstants.CONTENT_EXPERIENCE){
+            action = HttpConstants.EXPERIENCE_NEW;
+        }
+        HttpUtils.getInstance().req(
+                action,
+                reqBody,
+                callback,
+                new CommonParser());
+    }
+    public static void reportContent(int id, String content, final HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", HttpConstants.TOKEN);
+        reqBody.put("FORUM_ID", id);
+        reqBody.put("COMPLAINT_REASON", content);
+        HttpUtils.getInstance().req(
+                HttpConstants.CONTENT_REPORT,
+                reqBody,
+                callback,
+                new CommonParser());
+    }
+    public static void likeContent(int id,final HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", HttpConstants.TOKEN);
+        reqBody.put("FORUM_ID", id);
+        HttpUtils.getInstance().req(
+                HttpConstants.CONTENT_LIKE,
+                reqBody,
+                callback,
+                new CommonParser());
     }
 }

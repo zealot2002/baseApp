@@ -16,7 +16,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zzy.business.view.activity.GoodsListActivity;
 import com.zzy.business.view.activity.FriendsCircleActivity;
-import com.zzy.business.view.activity.EntrepreneurshipHelpActivity;
+import com.zzy.business.view.activity.ContentListActivity;
 import com.zzy.business.view.activity.PioneeringListActivity;
 import com.zzy.business.view.activity.EntrepreneurshipServiceActivity;
 import com.zzy.business.view.activity.PioneerListActivity;
@@ -28,6 +28,7 @@ import com.zzy.business.view.activity.ShareExperienceActivity;
 import com.zzy.business.view.activity.SpecialDkActivity;
 import com.zzy.business.view.other.SpeedyLinearLayoutManager;
 import com.zzy.common.base.BaseAppActivity;
+import com.zzy.common.constants.CommonConstants;
 import com.zzy.common.constants.ParamConstants;
 import com.zzy.common.glide.ImageLoader;
 import com.zzy.common.utils.StatusBarUtils;
@@ -100,8 +101,8 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
         btnEntrepreneurship = findViewById(R.id.btnEntrepreneurship);
         btnBuyGoods = findViewById(R.id.btnBuyGoods);
         btnSellGoods = findViewById(R.id.btnSellGoods);
-        btnEntrepreneurshipHelp = findViewById(R.id.btnEntrepreneurshipHelp);
-        btnFeedback = findViewById(R.id.btnFeedback);
+        btnEntrepreneurshipHelp = findViewById(R.id.btnHelp);
+        btnFeedback = findViewById(R.id.btnIdea);
         btnShareExperience = findViewById(R.id.btnShareExperience);
         btnEntrepreneurshipFriends = findViewById(R.id.btnEntrepreneurshipFriends);
 
@@ -227,6 +228,7 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
     @Override
     public void onClick(View v) {
         try{
+            Bundle bundle = new Bundle();
             if(v.getId() == R.id.btnSpecialDk){
                 startActivity(SpecialDkActivity.class);
             }else if(v.getId() == R.id.btnIndustrialDistribution){
@@ -242,19 +244,20 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
             }else if(v.getId() == R.id.btnEntrepreneurship){
                 startActivity(PioneeringListActivity.class);
             }else if(v.getId() == R.id.btnBuyGoods){
-                Bundle bundle = new Bundle();
                 bundle.putInt(ParamConstants.TYPE,0);
                 startActivity(GoodsListActivity.class,bundle);
             }else if(v.getId() == R.id.btnSellGoods){
-                Bundle bundle = new Bundle();
                 bundle.putInt(ParamConstants.TYPE,1);
                 startActivity(GoodsListActivity.class,bundle);
-            }else if(v.getId() == R.id.btnEntrepreneurshipHelp){
-                startActivity(EntrepreneurshipHelpActivity.class);
-            }else if(v.getId() == R.id.btnFeedback){
-                startActivity(FeedbackActivity.class);
+            }else if(v.getId() == R.id.btnHelp){
+                bundle.putInt(ParamConstants.TYPE, CommonConstants.CONTENT_HELP);
+                startActivity(ContentListActivity.class,bundle);
+            }else if(v.getId() == R.id.btnIdea){
+                bundle.putInt(ParamConstants.TYPE, CommonConstants.CONTENT_IDEA);
+                startActivity(ContentListActivity.class,bundle);
             }else if(v.getId() == R.id.btnShareExperience){
-                startActivity(ShareExperienceActivity.class);
+                bundle.putInt(ParamConstants.TYPE, CommonConstants.CONTENT_EXPERIENCE);
+                startActivity(ContentListActivity.class,bundle);
             }else if(v.getId() == R.id.btnEntrepreneurshipFriends){
                 startActivity(FriendsCircleActivity.class);
             }
