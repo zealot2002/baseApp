@@ -14,6 +14,9 @@ import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.yanzhenjie.permission.Action;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.Permission;
 import com.zzy.business.view.activity.GoodsListActivity;
 import com.zzy.business.view.activity.FriendsCircleActivity;
 import com.zzy.business.view.activity.ContentListActivity;
@@ -43,6 +46,8 @@ import com.zzy.home.model.wrapper.HomeCtx;
 import com.zzy.home.presenter.HomePresenter;
 import com.zzy.home.view.adapter.NewsListAdapter;
 import com.zzy.home.view.adapter.SaleListAdapter;
+import com.zzy.sc.core.serverCenter.SCM;
+import com.zzy.sc.core.serverCenter.ScCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,8 +86,32 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
         setupViews();
         presenter = new HomePresenter(this);
         presenter.start();
+        questionPermissions();
     }
+    private void questionPermissions() {
+        AndPermission.with(this)
+                .runtime()
+                .permission(new String[]{Permission.READ_EXTERNAL_STORAGE,
+                        Permission.WRITE_EXTERNAL_STORAGE,
+                        Permission.READ_PHONE_STATE})
+                .onGranted(new Action<List<String>>() {
+                    @Override
+                    public void onAction(List<String> data) {
 
+                    }
+                }).onDenied(new Action<List<String>>() {
+                    @Override
+                    public void onAction(List<String> data) {
+                        ToastUtils.showShort("您必须授权才能使用app");
+                        tvUserName.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                finish();
+                            }
+                        },1000);
+                    }
+                }).start();
+    }
     private void setupViews() {
         smartRefreshLayout = findViewById(R.id.smartRefreshLayout);
         smartRefreshLayout.setEnableRefresh(true);

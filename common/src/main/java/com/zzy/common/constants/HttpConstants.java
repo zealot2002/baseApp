@@ -8,6 +8,9 @@ public class HttpConstants {
     // 测试环境
     public static String SERVER_ADDRESS = "http://grecode.vicp.cc:82";
 
+
+    public static String FILE_SERVER_URL = SERVER_ADDRESS+"/forum_pic/upload.do";
+
     // 生产环境
 //    public static String SERVER_ADDRESS = "https://aapi.hengyirong.com";
 

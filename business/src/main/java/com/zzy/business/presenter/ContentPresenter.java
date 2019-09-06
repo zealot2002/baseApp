@@ -8,9 +8,13 @@ import com.zzy.business.model.HttpProxy;
 import com.zzy.business.model.bean.Content;
 import com.zzy.business.model.bean.Job;
 import com.zzy.common.network.CommonDataCallback;
+import com.zzy.common.utils.FileUploader;
+import com.zzy.commonlib.core.ThreadPool;
 import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.commonlib.utils.NetUtils;
+
+import java.io.IOException;
 
 /**
  * @author dell-7020
@@ -90,26 +94,37 @@ public class ContentPresenter implements ContentContract.Presenter{
     }
 
     @Override
-    public void create(int type, Content content) {
+    public void create(int type, final Content content) {
         if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {
             view.showError(AppUtils.getApp().getResources().getString(R.string.no_network_tips));
             return;
         }
         view.showLoading();
         try{
-            HttpProxy.newContent(type,content,new CommonDataCallback() {
-                @Override
-                public void callback(int result, Object o, Object o1) {
-                    view.closeLoading();
-                    if (result == HConstant.SUCCESS) {
-                        view.onSuccess();
-                    }else if(result == HConstant.FAIL
-                            ||result == HConstant.ERROR
-                    ){
-                        handleErrs((String) o);
-                    }
-                }
-            });
+//            ThreadPool.getInstance().getPool().submit(new Runnable() {
+//                @Override
+//                public void run() {
+//                    try {
+//                        FileUploader.post(content.getImgList().get(0).getPath());
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            });
+
+//            HttpProxy.newContent(type,content,new CommonDataCallback() {
+//                @Override
+//                public void callback(int result, Object o, Object o1) {
+//                    view.closeLoading();
+//                    if (result == HConstant.SUCCESS) {
+//                        view.onSuccess();
+//                    }else if(result == HConstant.FAIL
+//                            ||result == HConstant.ERROR
+//                    ){
+//                        handleErrs((String) o);
+//                    }
+//                }
+//            });
         }catch(Exception e){
             e.printStackTrace();
             handleErrs(e.toString());
