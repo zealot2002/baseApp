@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.zzy.business.R;
-import com.zzy.business.model.bean.PbRecord;
+import com.zzy.common.model.bean.PbRecord;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 
 import java.util.List;

@@ -3,13 +3,11 @@ package com.zzy.business.view.itemViewDelegate;
 import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hedgehog.ratingbar.RatingBar;
 import com.zzy.business.R;
-import com.zzy.business.model.bean.Goods;
-import com.zzy.business.model.bean.Pioneering;
+import com.zzy.common.model.bean.Goods;
 import com.zzy.common.glide.ImageLoader;
 import com.zzy.common.widget.recycleAdapter.ItemViewDelegate;
 import com.zzy.common.widget.recycleAdapter.ViewHolder;

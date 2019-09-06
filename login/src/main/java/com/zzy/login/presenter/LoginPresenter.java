@@ -1,10 +1,12 @@
 package com.zzy.login.presenter;
 import android.support.annotation.NonNull;
 
+import com.zzy.common.network.CommonDataCallback;
 import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.http.HInterface;
 import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.commonlib.utils.NetUtils;
+import com.zzy.login.R;
 import com.zzy.login.contract.LoginContract;
 import com.zzy.login.model.HttpProxy;
 import com.zzy.login.model.bean.main.BannerBean;
@@ -21,61 +23,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class LoginPresenter implements LoginContract.Presenter{
     private final LoginContract.View view;
-    private HfCtx hfCtx;
-    private AtomicInteger dog;
 /****************************************************************************************************/
     public LoginPresenter(@NonNull LoginContract.View view) {
         this.view = view;
-        hfCtx = new HfCtx();
-        dog = new AtomicInteger(0);
-    }
-    @Override
-    public void start() {
-        if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {
-            view.showDisconnect();
-            return;
-        }
-        view.showLoading();
-        dog.set(0);
-        try{
-            getBannerList();
-        }catch(Exception e){
-            e.printStackTrace();
-            handleErrs(e.toString());
-        }
     }
 
-
-    private void getBannerList() throws Exception{
-        HttpProxy.getBannerList(new HInterface.DataCallback() {
-            @Override
-            public void requestCallback(int result, Object o, Object o1) {
-                if (result == HConstant.SUCCESS) {
-                    hfCtx.setBannerList((List<BannerBean>) o);
-                    updateUI();
-                }else if(result == HConstant.INTERCEPTED) {
-                    //do nothing
-                }else{
-                    handleErrs((String) o);
-                }
-            }
-        });
-    }
-
-    private void updateUI(){
-        /**
-        getBannerList();
-        getNoticeList();
-        getProjectInfo();
-        getUpperShortcutList();
-        getUnderShortcutList();
-        都回来之后，刷新ui
-        **/
-        if(dog.incrementAndGet() == 1) {
-            view.closeLoading();
-            view.updateUI(hfCtx);
-        }
-    }
     private void handleErrs(String s){
         view.closeLoading();
         view.showDisconnect();
@@ -84,6 +36,33 @@ public class LoginPresenter implements LoginContract.Presenter{
 
     @Override
     public void login(String un, String pw) {
+        if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {
+            view.showError(AppUtils.getApp().getResources().getString(R.string.no_network_tips));
+            return;
+        }
+        view.showLoading();
+        try{
+            HttpProxy.login(un,pw,new CommonDataCallback() {
+                @Override
+                public void callback(int result, Object o, Object o1) {
+                    view.closeLoading();
+                    if (result == HConstant.SUCCESS) {
+                        view.onSuccess();
+                    }else if(result == HConstant.FAIL
+                            ||result == HConstant.ERROR
+                    ){
+                        handleErrs((String) o);
+                    }
+                }
+            });
+        }catch(Exception e){
+            e.printStackTrace();
+            handleErrs(e.toString());
+        }
+    }
+
+    @Override
+    public void start() {
 
     }
 }

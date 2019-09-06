@@ -1,19 +1,14 @@
 package com.zzy.business.model.jsonParser;
 
-import com.zzy.business.model.bean.GetRichInfo;
-import com.zzy.business.model.bean.Job;
+import com.zzy.common.model.bean.Job;
 import com.zzy.common.constants.HttpConstants;
 import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.http.HInterface;
 import com.zzy.commonlib.log.MyLog;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class JobParser implements HInterface.JsonParser {

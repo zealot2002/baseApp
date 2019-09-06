@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.zzy.business.R;
-import com.zzy.business.model.bean.FriendsCircle;
+import com.zzy.common.model.bean.FriendsCircle;
 import com.zzy.business.view.other.MessagePicturesLayout;
 
 import java.util.ArrayList;

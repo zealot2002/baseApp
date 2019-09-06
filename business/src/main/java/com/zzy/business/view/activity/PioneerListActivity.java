@@ -8,8 +8,8 @@ import android.view.View;
 
 import com.zzy.business.R;
 import com.zzy.business.contract.PioneerContract;
-import com.zzy.business.model.bean.Menu;
-import com.zzy.business.model.bean.Pioneer;
+import com.zzy.common.model.bean.Menu;
+import com.zzy.common.model.bean.Pioneer;
 import com.zzy.business.presenter.PioneerPresenter;
 import com.zzy.business.view.adapter.GridMenuListAdapter;
 import com.zzy.business.view.itemViewDelegate.PioneerDelegate;

@@ -6,7 +6,7 @@ import android.widget.EditText;
 
 import com.zzy.business.R;
 import com.zzy.business.contract.JobContract;
-import com.zzy.business.model.bean.Job;
+import com.zzy.common.model.bean.Job;
 import com.zzy.business.presenter.JobPresenter;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.widget.MyEditText;

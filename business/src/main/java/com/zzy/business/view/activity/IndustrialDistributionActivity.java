@@ -9,9 +9,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.zzy.business.R;
-import com.zzy.business.model.bean.Menu;
+import com.zzy.common.model.bean.Menu;
 import com.zzy.business.view.adapter.MenuListAdapter;
-import com.zzy.common.base.BaseAppActivity;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 
 import java.util.ArrayList;

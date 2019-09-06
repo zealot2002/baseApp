@@ -3,13 +3,10 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import com.zzy.business.R;
-import com.zzy.business.model.bean.PbRecord;
+import com.zzy.common.model.bean.PbRecord;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
-import com.zzy.common.base.BaseToolbarActivity;
 import com.zzy.common.widget.PopupDialog;
 
 import java.util.List;

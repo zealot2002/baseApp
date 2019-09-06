@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zzy.business.R;
-import com.zzy.business.model.bean.GetRichInfo;
+import com.zzy.common.model.bean.GetRichInfo;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -3,18 +3,12 @@ import android.support.annotation.NonNull;
 
 import com.zzy.business.R;
 import com.zzy.business.contract.ContentContract;
-import com.zzy.business.contract.JobContract;
 import com.zzy.business.model.HttpProxy;
-import com.zzy.business.model.bean.Content;
-import com.zzy.business.model.bean.Job;
+import com.zzy.common.model.bean.Content;
 import com.zzy.common.network.CommonDataCallback;
-import com.zzy.common.utils.FileUploader;
-import com.zzy.commonlib.core.ThreadPool;
 import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.commonlib.utils.NetUtils;
-
-import java.io.IOException;
 
 /**
  * @author dell-7020

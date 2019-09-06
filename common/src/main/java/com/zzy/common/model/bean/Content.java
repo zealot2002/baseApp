@@ -1,4 +1,4 @@
-package com.zzy.business.model.bean;
+package com.zzy.common.model.bean;
 
 import java.util.ArrayList;
 import java.util.List;

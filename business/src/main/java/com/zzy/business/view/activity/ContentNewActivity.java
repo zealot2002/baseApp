@@ -11,8 +11,8 @@ import com.jaiky.imagespickers.ImageSelector;
 import com.jaiky.imagespickers.ImageSelectorActivity;
 import com.zzy.business.R;
 import com.zzy.business.contract.ContentContract;
-import com.zzy.business.model.bean.Content;
-import com.zzy.business.model.bean.Image;
+import com.zzy.common.model.bean.Content;
+import com.zzy.common.model.bean.Image;
 import com.zzy.business.presenter.ContentPresenter;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.constants.CommonConstants;
@@ -21,7 +21,6 @@ import com.zzy.common.utils.GlideLoader;
 import com.zzy.commonlib.utils.ToastUtils;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 发布内容

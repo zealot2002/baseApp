@@ -1,12 +1,8 @@
 package com.zzy.business.contract;
 
-import com.zzy.business.model.bean.Job;
-import com.zzy.business.model.bean.Menu;
-import com.zzy.business.model.bean.Pioneering;
+import com.zzy.common.model.bean.Pioneering;
 import com.zzy.commonlib.base.BaseLoadingView;
 import com.zzy.commonlib.base.BasePresenter;
-
-import java.util.List;
 
 
 public interface PioneeringContract {

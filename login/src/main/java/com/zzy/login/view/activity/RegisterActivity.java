@@ -9,12 +9,17 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bigkoo.pickerview.builder.TimePickerBuilder;
+import com.bigkoo.pickerview.listener.OnTimeSelectListener;
+import com.bigkoo.pickerview.view.TimePickerView;
 import com.zzy.common.base.BaseAppActivity;
 import com.zzy.common.utils.StatusBarUtils;
 import com.zzy.commonlib.utils.ToastUtils;
 import com.zzy.commonlib.utils.ValidateUtils;
 import com.zzy.login.R;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import fr.ganfra.materialspinner.MaterialSpinner;
 
@@ -22,10 +27,12 @@ import fr.ganfra.materialspinner.MaterialSpinner;
  * register
  */
 public class RegisterActivity extends BaseAppActivity implements View.OnClickListener {
-    private EditText etPhone,etSms,etPd1,etPd2;
+    private EditText etName,etPhone,etSms,etInviter,etIdNo,etPd,etAddress;
     private Button btnNext,btnOk;
-    private TextView tvSendSms;
+    private TextView tvSendSms,tvBirthday;
     private MaterialSpinner spinnerCounty,spinnerTown,spinnerVillage;
+    private RelativeLayout rlBirthday;
+    private TimePickerView pvTime;
     /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +54,20 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
             }
         });
 
+        etName = findViewById(R.id.etName);
         etPhone = findViewById(R.id.etPhone);
         etSms = findViewById(R.id.etSms);
-        etPd1 = findViewById(R.id.etPd1);
-        etPd2 = findViewById(R.id.etPd2);
+        etInviter = findViewById(R.id.etInviter);
+        etIdNo = findViewById(R.id.etIdNo);
+        etPd = findViewById(R.id.etPd);
+        etAddress = findViewById(R.id.etAddress);
+
         tvSendSms = findViewById(R.id.tvSendSms);
         btnNext = findViewById(R.id.btnNext);
+        tvBirthday = findViewById(R.id.tvBirthday);
+        rlBirthday = findViewById(R.id.rlBirthday);
 
+        rlBirthday.setOnClickListener(this);
         btnNext.setOnClickListener(this);
         tvSendSms.setOnClickListener(this);
 
@@ -108,16 +122,27 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
             // TODO: 2019/8/19   to get sms
             cdTimer.start();
             tvSendSms.setOnClickListener(null);
+        }else if(v.getId() == R.id.rlBirthday){
+            //时间选择器
+            if(pvTime == null){
+                pvTime = new TimePickerBuilder(this, new OnTimeSelectListener() {
+                    @Override
+                    public void onTimeSelect(Date date, View v) {
+                        Calendar cal = Calendar.getInstance();
+                        cal.setTime(date);
+                        tvBirthday.setText(cal.get(Calendar.YEAR)+"年"
+                                +(1+cal.get(Calendar.MONTH))+"月"
+                                +cal.get(Calendar.DAY_OF_MONTH)+"日");
+                    }
+                }).build();
+            }
+            pvTime.show();
         }
     }
 
     private boolean checkData() {
         if(!ValidateUtils.isMobileNO(etPhone.getText().toString().trim())){
             ToastUtils.showShort("无效的手机号码");
-            return false;
-        }
-        if(!etPd1.getText().toString().trim().equals(etPd2.getText().toString().trim())){
-            ToastUtils.showShort("您设置的两次密码不一致");
             return false;
         }
         return true;

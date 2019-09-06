@@ -9,11 +9,10 @@ import com.zzy.commonlib.utils.ToastUtils;
 
 abstract public class CommonDataCallback implements HInterface.DataCallback {
 
-
     @Override
     public void requestCallback(int result, Object data, Object tagData) {
         if (result == HConstant.FAIL) {
-            ToastUtils.showShort(AppUtils.getApp().getString(R.string.server_error));
+            ToastUtils.showShort(AppUtils.getApp().getString(R.string.server_error)+" :"+data.toString());
         } else if (result == HConstant.ERROR) {
             ToastUtils.showShort((String)data);
         }else if (result == HConstant.INTERCEPTED) {

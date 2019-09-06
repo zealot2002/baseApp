@@ -85,7 +85,7 @@
             />
     </RelativeLayout>
     <TextView
-        android:id="@+id/tvToBePioneer"
+        android:id="@+id/tvRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="我要成为创业者"

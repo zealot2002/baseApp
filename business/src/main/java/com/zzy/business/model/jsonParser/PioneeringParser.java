@@ -1,6 +1,6 @@
 package com.zzy.business.model.jsonParser;
 
-import com.zzy.business.model.bean.Pioneering;
+import com.zzy.common.model.bean.Pioneering;
 import com.zzy.common.constants.HttpConstants;
 import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.http.HInterface;

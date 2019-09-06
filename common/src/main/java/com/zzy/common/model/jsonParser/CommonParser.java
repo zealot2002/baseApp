@@ -1,4 +1,4 @@
-package com.zzy.common.jsonParser;
+package com.zzy.common.model.jsonParser;
 
 import com.zzy.common.constants.HttpConstants;
 import com.zzy.commonlib.http.HConstant;

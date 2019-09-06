@@ -6,13 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.zzy.business.R;
-import com.zzy.business.model.bean.Job;
-import com.zzy.business.model.bean.Menu;
+import com.zzy.common.model.bean.Menu;
 
 import java.util.ArrayList;
 import java.util.List;

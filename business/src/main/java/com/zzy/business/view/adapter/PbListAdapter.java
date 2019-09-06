@@ -10,8 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zzy.business.R;
-import com.zzy.business.model.bean.Menu;
-import com.zzy.business.model.bean.PbRecord;
+import com.zzy.common.model.bean.PbRecord;
 import com.zzy.common.glide.ImageLoader;
 
 import java.util.ArrayList;

@@ -1,13 +1,10 @@
 package com.zzy.business.view.itemViewDelegate;
 
 import android.content.Context;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zzy.business.R;
-import com.zzy.business.model.bean.GetRichInfo;
-import com.zzy.business.model.bean.Job;
+import com.zzy.common.model.bean.Job;
 import com.zzy.common.widget.recycleAdapter.ItemViewDelegate;
 import com.zzy.common.widget.recycleAdapter.ViewHolder;
 

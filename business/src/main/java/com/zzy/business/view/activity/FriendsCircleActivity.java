@@ -7,11 +7,10 @@ import android.util.SparseArray;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.github.ielse.imagewatcher.ImageWatcher;
 import com.zzy.business.R;
-import com.zzy.business.model.bean.FriendsCircle;
+import com.zzy.common.model.bean.FriendsCircle;
 import com.zzy.business.view.adapter.MessageAdapter;
 import com.zzy.business.view.other.GlideSimpleLoader;
 import com.zzy.business.view.other.MessagePicturesLayout;

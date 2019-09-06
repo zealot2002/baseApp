@@ -6,7 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zzy.business.R;
-import com.zzy.business.model.bean.GetRichInfo;
+import com.zzy.common.model.bean.GetRichInfo;
 import com.zzy.common.widget.recycleAdapter.ItemViewDelegate;
 import com.zzy.common.widget.recycleAdapter.ViewHolder;
 

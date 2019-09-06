@@ -8,11 +8,9 @@ import android.widget.Button;
 
 import com.zzy.business.R;
 import com.zzy.business.contract.GoodsBuyContract;
-import com.zzy.business.model.bean.Goods;
-import com.zzy.business.model.bean.Pioneering;
+import com.zzy.common.model.bean.Goods;
 import com.zzy.business.presenter.GoodsBuyPresenter;
 import com.zzy.business.view.itemViewDelegate.GoodsDelegate;
-import com.zzy.business.view.itemViewDelegate.PioneeringDelegate;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.constants.ParamConstants;
 import com.zzy.common.widget.recycleAdapter.MyMultiRecycleAdapter;

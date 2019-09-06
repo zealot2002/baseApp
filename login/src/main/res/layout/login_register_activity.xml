@@ -368,12 +368,13 @@
             </RelativeLayout>
             <!--出生日期-->
             <RelativeLayout
+                android:id="@+id/rlBirthday"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 >
                 <TextView
-                    android:id="@+id/tvBirthday"
+                    android:id="@+id/tvBirthdayT"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="出生日期 :   "
@@ -381,19 +382,14 @@
                     android:textSize="14sp"
                     android:layout_centerVertical="true"
                     />
-                <EditText
-                    android:id="@+id/etBirthday"
+                <TextView
+                    android:id="@+id/tvBirthday"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
-                    android:layout_toRightOf="@+id/tvBirthday"
+                    android:layout_toRightOf="@+id/tvBirthdayT"
                     android:layout_centerVertical="true"
-                    android:text=""
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
-                    android:textSize="14sp"
-                    android:background="@null"
-                    android:inputType="number"
+                    style="@style/tv_style_white_14"
                     />
                 <View
                     android:layout_width="match_parent"

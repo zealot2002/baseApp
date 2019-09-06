@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.zzy.business.R;
 import com.zzy.business.contract.GetRichInfoContract;
-import com.zzy.business.model.bean.GetRichInfo;
+import com.zzy.common.model.bean.GetRichInfo;
 import com.zzy.business.presenter.GetRichInfoPresenter;
 import com.zzy.business.view.itemViewDelegate.GetRichInfoDelegate;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;

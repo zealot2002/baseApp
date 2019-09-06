@@ -1,7 +1,6 @@
 package com.zzy.business.contract;
 
-import com.zzy.business.model.bean.Goods;
-import com.zzy.business.model.bean.Pioneering;
+import com.zzy.common.model.bean.Goods;
 import com.zzy.commonlib.base.BaseLoadingView;
 import com.zzy.commonlib.base.BasePresenter;
 

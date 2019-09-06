@@ -23,5 +23,83 @@
         }
       ]
     }
+  },
+
+
+  "msg":"OK",
+  "code":"200",
+  "data":{
+    "areaList": [
+      {
+        "name": "青田县",
+        "code": 1,
+        "children": [
+          {
+            "name": "东坑镇",
+            "code": 10,
+            "children": [
+              {
+                "name": "村1",
+                "code": 100
+              },
+              {
+                "name": "村2",
+                "code": 100
+              }
+            ]
+          },
+          {
+            "name": "颍川镇",
+            "code": 10,
+            "children": [
+              {
+                "name": "村1",
+                "code": 100
+              },
+              {
+                "name": "村2",
+                "code": 100
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "考拉县",
+        "code": 1,
+        "children": [
+          {
+            "name": "东坑镇",
+            "code": 10,
+            "children": [
+              {
+                "name": "村1",
+                "code": 100
+              },
+              {
+                "name": "村2",
+                "code": 100
+              }
+            ]
+          },
+          {
+            "name": "颍川镇",
+            "code": 10,
+            "children": [
+              {
+                "name": "村1",
+                "code": 100
+              },
+              {
+                "name": "村2",
+                "code": 100
+              }
+            ]
+          }
+        ]
+      }
+    ]
   }
+
+
 }

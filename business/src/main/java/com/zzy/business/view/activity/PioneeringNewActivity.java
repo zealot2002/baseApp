@@ -6,7 +6,7 @@ import android.widget.EditText;
 
 import com.zzy.business.R;
 import com.zzy.business.contract.PioneeringContract;
-import com.zzy.business.model.bean.Pioneering;
+import com.zzy.common.model.bean.Pioneering;
 import com.zzy.business.presenter.PioneeringPresenter;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.commonlib.utils.ToastUtils;

@@ -5,14 +5,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
-import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.hedgehog.ratingbar.RatingBar;
 import com.zzy.business.R;
-import com.zzy.business.model.bean.Goods;
+import com.zzy.common.model.bean.Goods;
 import com.zzy.business.utils.InnerUtils;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.constants.ParamConstants;
-import com.zzy.common.widget.BannerHolderView;
 import com.zzy.common.widget.MyEditText;
 import com.zzy.common.widget.PopupEditDialog;
 /**

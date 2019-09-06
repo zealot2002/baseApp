@@ -1,10 +1,10 @@
 package com.zzy.business.model;
 
 
-import com.zzy.business.model.bean.Content;
-import com.zzy.business.model.bean.Image;
-import com.zzy.business.model.bean.Job;
-import com.zzy.business.model.bean.Pioneering;
+import com.zzy.common.model.bean.Content;
+import com.zzy.common.model.bean.Image;
+import com.zzy.common.model.bean.Job;
+import com.zzy.common.model.bean.Pioneering;
 import com.zzy.business.model.jsonParser.ContentListParser;
 import com.zzy.business.model.jsonParser.ContentParser;
 import com.zzy.business.model.jsonParser.GetRichInfoListParser;
@@ -21,8 +21,7 @@ import com.zzy.business.model.jsonParser.PioneeringListParser;
 import com.zzy.business.model.jsonParser.PioneeringParser;
 import com.zzy.common.constants.CommonConstants;
 import com.zzy.common.constants.HttpConstants;
-import com.zzy.common.jsonParser.CommonParser;
-import com.zzy.common.network.CommonDataCallback;
+import com.zzy.common.model.jsonParser.CommonParser;
 import com.zzy.common.network.HttpUtils;
 import com.zzy.commonlib.http.HInterface;
 

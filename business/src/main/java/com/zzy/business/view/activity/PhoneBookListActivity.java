@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.zzy.business.R;
 import com.zzy.business.contract.PbContract;
-import com.zzy.business.model.bean.PbRecord;
+import com.zzy.common.model.bean.PbRecord;
 import com.zzy.business.presenter.PbPresenter;
 import com.zzy.business.view.itemViewDelegate.PbDelegate;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;

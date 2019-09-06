@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.tencent.smtt.sdk.WebView;
 import com.zzy.business.R;
 import com.zzy.business.contract.GetRichInfoContract;
-import com.zzy.business.model.bean.GetRichInfo;
+import com.zzy.common.model.bean.GetRichInfo;
 import com.zzy.business.presenter.GetRichInfoPresenter;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.constants.ParamConstants;

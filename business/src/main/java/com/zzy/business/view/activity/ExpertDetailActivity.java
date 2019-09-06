@@ -1,13 +1,10 @@
 package com.zzy.business.view.activity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.zzy.business.R;
-import com.zzy.business.model.bean.Expert;
-import com.zzy.business.model.bean.GetRichInfo;
+import com.zzy.common.model.bean.Expert;
 import com.zzy.common.base.BaseToolbarActivity;
 
 /**

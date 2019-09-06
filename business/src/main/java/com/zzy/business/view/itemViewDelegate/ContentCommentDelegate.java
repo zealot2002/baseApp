@@ -4,7 +4,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.zzy.business.R;
-import com.zzy.business.model.bean.Comment;
+import com.zzy.common.model.bean.Comment;
 import com.zzy.common.widget.recycleAdapter.ItemViewDelegate;
 import com.zzy.common.widget.recycleAdapter.ViewHolder;
 

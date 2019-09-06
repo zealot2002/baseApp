@@ -3,16 +3,12 @@ import android.support.annotation.NonNull;
 
 import com.zzy.business.R;
 import com.zzy.business.contract.GoodsBuyContract;
-import com.zzy.business.contract.PioneerContract;
 import com.zzy.business.model.HttpProxy;
-import com.zzy.business.model.bean.Goods;
-import com.zzy.business.model.bean.Menu;
+import com.zzy.common.model.bean.Goods;
 import com.zzy.common.network.CommonDataCallback;
 import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.commonlib.utils.NetUtils;
-
-import java.util.List;
 
 /**
  * @author dell-7020
