@@ -37,10 +37,10 @@ import java.util.List;
 public class ContentListActivity extends BaseTitleAndBottomBarActivity
         implements View.OnClickListener , ContentContract.View {
     private Button btnNew;
-    private RecyclerView rvDataList;
     private List<Content> dataList = new ArrayList<>();
     private ContentContract.Presenter presenter;
     private int pageNum = 1;
+    private RecyclerView rvDataList;
     private OnLoadMoreListener onLoadMoreListener;
     private MyMultiRecycleAdapter adapter;
     private boolean isLoadOver = false;
@@ -150,7 +150,9 @@ public class ContentListActivity extends BaseTitleAndBottomBarActivity
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btnNew){
-            startActivity(JobNewActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt(ParamConstants.TYPE,type);
+            startActivity(ContentNewActivity.class,bundle);
         }
     }
 

@@ -10,6 +10,7 @@ import java.util.List;
 
 public class Content {
     private int id;
+    private int userId;
     private String title;
     private boolean isPlaceTop;
     private String from;
@@ -125,5 +126,13 @@ public class Content {
 
     public void setCommentList(List<Comment> commentList) {
         this.commentList = commentList;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

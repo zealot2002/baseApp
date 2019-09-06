@@ -22,6 +22,7 @@ import com.zzy.business.model.jsonParser.PioneeringParser;
 import com.zzy.common.constants.CommonConstants;
 import com.zzy.common.constants.HttpConstants;
 import com.zzy.common.jsonParser.CommonParser;
+import com.zzy.common.network.CommonDataCallback;
 import com.zzy.common.network.HttpUtils;
 import com.zzy.commonlib.http.HInterface;
 
@@ -314,6 +315,33 @@ public class HttpProxy {
         reqBody.put("FORUM_ID", id);
         HttpUtils.getInstance().req(
                 HttpConstants.CONTENT_LIKE,
+                reqBody,
+                callback,
+                new CommonParser());
+    }
+
+    public static void createComment(int contentId, String content, HInterface.DataCallback callback) throws Exception{
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", HttpConstants.TOKEN);
+        reqBody.put("FORUM_ID",contentId);
+        reqBody.put("COMMENT_TEXT", content);
+
+        HttpUtils.getInstance().req(
+                HttpConstants.CONTENT_COMMENT,
+                reqBody,
+                callback,
+                new CommonParser());
+    }
+
+    public static void createReply(int contentId, int commentId, String content, HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", HttpConstants.TOKEN);
+        reqBody.put("FORUM_ID",contentId);
+        reqBody.put("COMMENT_ID",commentId);
+        reqBody.put("REVIEW_TEXT", content);
+
+        HttpUtils.getInstance().req(
+                HttpConstants.CONTENT_REPLY,
                 reqBody,
                 callback,
                 new CommonParser());

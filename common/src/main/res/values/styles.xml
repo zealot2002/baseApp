@@ -168,4 +168,12 @@
     <style name="tv_style_red_14" parent="tv_style_red">
         <item name="android:textSize">14sp</item>
     </style>
+
+    <!--blue text-->
+    <style name="tv_style_blue" parent="tv_style">
+        <item name="android:textColor">@color/blue</item>
+    </style>
+    <style name="tv_style_blue_14" parent="tv_style_blue">
+        <item name="android:textSize">14sp</item>
+    </style>
 </resources>

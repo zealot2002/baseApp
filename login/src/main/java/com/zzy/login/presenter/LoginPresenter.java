@@ -19,12 +19,12 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @date 2018/08/07 16:25:23
  */
 
-public class MainPresenter implements LoginContract.Presenter{
+public class LoginPresenter implements LoginContract.Presenter{
     private final LoginContract.View view;
     private HfCtx hfCtx;
     private AtomicInteger dog;
 /****************************************************************************************************/
-    public MainPresenter(@NonNull LoginContract.View view) {
+    public LoginPresenter(@NonNull LoginContract.View view) {
         this.view = view;
         hfCtx = new HfCtx();
         dog = new AtomicInteger(0);
@@ -80,5 +80,10 @@ public class MainPresenter implements LoginContract.Presenter{
         view.closeLoading();
         view.showDisconnect();
       //  ToastUtils.showShort(s);
+    }
+
+    @Override
+    public void login(String un, String pw) {
+
     }
 }

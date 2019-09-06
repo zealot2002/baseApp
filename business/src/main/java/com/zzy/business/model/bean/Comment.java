@@ -7,10 +7,11 @@ package com.zzy.business.model.bean;
 
 public class Comment {
     private String id;
+    private int userId;
+    private String userName;
+    private String userHeadUrl;
     private String content;
-    private String user;
-    private String headUrl;
-    private String reviewContent;
+    private String replyContent;
     private String date;
 
     public Comment() {
@@ -24,28 +25,28 @@ public class Comment {
         this.content = content;
     }
 
-    public String getUser() {
-        return user;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getHeadUrl() {
-        return headUrl;
+    public String getUserHeadUrl() {
+        return userHeadUrl;
     }
 
-    public void setHeadUrl(String headUrl) {
-        this.headUrl = headUrl;
+    public void setUserHeadUrl(String userHeadUrl) {
+        this.userHeadUrl = userHeadUrl;
     }
 
-    public String getReviewContent() {
-        return reviewContent;
+    public String getReplyContent() {
+        return replyContent;
     }
 
-    public void setReviewContent(String reviewContent) {
-        this.reviewContent = reviewContent;
+    public void setReplyContent(String replyContent) {
+        this.replyContent = replyContent;
     }
 
     public String getId() {
@@ -62,5 +63,13 @@ public class Comment {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

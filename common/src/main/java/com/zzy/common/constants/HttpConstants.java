@@ -59,6 +59,8 @@ public class HttpConstants {
     public static final String CONTENT_DETAIL = "/forum/selById.do";
     public static final String CONTENT_REPORT = "/forum/insertReport.do";
     public static final String CONTENT_LIKE = "/forum/update.do";
+    public static final String CONTENT_COMMENT = "/forum/insertLeave.do";
+    public static final String CONTENT_REPLY = "/forum/insertReply.do";
 
 
     public static final String HELP_LIST = "/forum/selAllHelp.do";

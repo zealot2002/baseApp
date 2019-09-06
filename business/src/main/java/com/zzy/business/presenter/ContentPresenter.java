@@ -169,4 +169,58 @@ public class ContentPresenter implements ContentContract.Presenter{
             handleErrs(e.toString());
         }
     }
+
+    @Override
+    public void createComment(int contentId, String content) {
+        if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {
+            view.showError(AppUtils.getApp().getResources().getString(R.string.no_network_tips));
+            return;
+        }
+        view.showLoading();
+        try{
+            HttpProxy.createComment(contentId,content,new CommonDataCallback() {
+                @Override
+                public void callback(int result, Object o, Object o1) {
+                    view.closeLoading();
+                    if (result == HConstant.SUCCESS) {
+                        view.onSuccess();
+                    }else if(result == HConstant.FAIL
+                            ||result == HConstant.ERROR
+                    ){
+                        handleErrs((String) o);
+                    }
+                }
+            });
+        }catch(Exception e){
+            e.printStackTrace();
+            handleErrs(e.toString());
+        }
+    }
+
+    @Override
+    public void reply(int contentId, int commentId, String content) {
+        if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {
+            view.showError(AppUtils.getApp().getResources().getString(R.string.no_network_tips));
+            return;
+        }
+        view.showLoading();
+        try{
+            HttpProxy.createReply(contentId,commentId,content,new CommonDataCallback() {
+                @Override
+                public void callback(int result, Object o, Object o1) {
+                    view.closeLoading();
+                    if (result == HConstant.SUCCESS) {
+                        view.onSuccess();
+                    }else if(result == HConstant.FAIL
+                            ||result == HConstant.ERROR
+                    ){
+                        handleErrs((String) o);
+                    }
+                }
+            });
+        }catch(Exception e){
+            e.printStackTrace();
+            handleErrs(e.toString());
+        }
+    }
 }

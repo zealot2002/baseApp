@@ -9,7 +9,15 @@
         <activity
             android:name=".view.activity.ContentDetailActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/activity_theme" />
+            android:theme="@style/activity_theme"
+            android:windowSoftInputMode="adjustPan"
+            />
+        <activity
+            android:name=".view.activity.ContentNewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/activity_theme"
+            android:windowSoftInputMode="adjustPan"
+            />
         <activity
             android:name=".view.activity.PioneeringNewActivity"
             android:screenOrientation="portrait"
@@ -25,7 +33,8 @@
         <activity
             android:name=".view.activity.ContentListActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/activity_theme" />
+            android:theme="@style/activity_theme"
+            />
         <activity
             android:name=".view.activity.PioneeringListActivity"
             android:screenOrientation="portrait"

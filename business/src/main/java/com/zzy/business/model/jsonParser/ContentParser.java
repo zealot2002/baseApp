@@ -34,6 +34,7 @@ public class ContentParser implements HInterface.JsonParser {
 
             bean.setLike(dataObj.getString("IS_LIKE").equals("是"));
             bean.setLikeNum(dataObj.getString("LIKE_TOTAL"));
+            bean.setUserId(dataObj.getInt("RELEASE_PERSON_ID"));
 
             JSONArray array = dataObj.getJSONArray("IMAGES");
             for(int i=0;i<array.length();i++) {
@@ -48,11 +49,11 @@ public class ContentParser implements HInterface.JsonParser {
                 JSONObject comObj = comArr.getJSONObject(i);
                 Comment comment = new Comment();
                 comment.setId(comObj.getString("COMMENT_ID"));
-                comment.setUser(comObj.getString("COMMENT_PERSON"));
+                comment.setUserName(comObj.getString("COMMENT_PERSON"));
+                comment.setUserId(dataObj.getInt("COMMENT_PERSON_ID"));
                 comment.setDate(comObj.getString("COMMENT_RELEASE_TIME"));
                 comment.setContent(comObj.getString("COMMENT_TEXT"));
-                comment.setHeadUrl(comObj.getString("HEAD_PIC_ADDR"));
-
+                comment.setUserHeadUrl(comObj.getString("HEAD_PIC_ADDR"));
                 bean.getCommentList().add(comment);
             }
             return new Object[]{HConstant.SUCCESS,bean};

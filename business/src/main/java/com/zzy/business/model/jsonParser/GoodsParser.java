@@ -44,9 +44,9 @@ public class GoodsParser implements HInterface.JsonParser {
                 JSONObject infoObj = commentArray.getJSONObject(i);
                 Comment comment = new Comment();
                 comment.setContent(infoObj.getString("COMMENT_TEXT"));
-                comment.setUser(infoObj.getString("COMMENT_PERSON"));
-                comment.setHeadUrl(infoObj.getString("HEAD_PIC_ADDR"));
-                comment.setReviewContent(infoObj.getString("REVIEW_TEXT"));
+                comment.setUserName(infoObj.getString("COMMENT_PERSON"));
+                comment.setUserHeadUrl(infoObj.getString("HEAD_PIC_ADDR"));
+                comment.setReplyContent(infoObj.getString("REVIEW_TEXT"));
 
                 bean.getCommentList().add(comment);
             }

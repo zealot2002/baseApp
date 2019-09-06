@@ -18,5 +18,7 @@ public interface ContentContract {
         void getDetail(int id);
         void like(int id);
         void report(int id,String content);
+        void createComment(int contentId,String content);
+        void reply(int contentId,int commentId,String content);
     }
 }
