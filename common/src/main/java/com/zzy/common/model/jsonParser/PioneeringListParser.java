@@ -1,6 +1,6 @@
-package com.zzy.business.model.jsonParser;
+package com.zzy.common.model.jsonParser;
 
-import com.zzy.common.model.bean.Pioneer;
+import com.zzy.common.model.bean.Pioneering;
 import com.zzy.common.constants.HttpConstants;
 import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.http.HInterface;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class PioneerListParser implements HInterface.JsonParser {
+public class PioneeringListParser implements HInterface.JsonParser {
     @Override
     public Object[] parse(String s) throws JSONException {
         MyLog.e("服务返回:"+s);
@@ -27,15 +27,14 @@ public class PioneerListParser implements HInterface.JsonParser {
         int errorCode = obj.getInt(HttpConstants.ERROR_CODE);
         if (errorCode == HttpConstants.NO_ERROR) {
             JSONArray infoArray = obj.getJSONArray("data");
-            List<Pioneer> dataList = new ArrayList<>();
+            List<Pioneering> dataList = new ArrayList<>();
 
             for(int i=0;i<infoArray.length();i++) {
                 JSONObject infoObj = infoArray.getJSONObject(i);
-                Pioneer bean = new Pioneer();
-                bean.setId(infoObj.getInt("NEWS_INFORMATION_ID"));
-                bean.setTitle(infoObj.getString("NEWS_TITLE"));
-                bean.setDate(infoObj.getString("RELEASE_DATE"));
-                bean.setLookNum(infoObj.getString("TOTAL_BROWSE"));
+                Pioneering bean = new Pioneering();
+                bean.setId(infoObj.getInt("RECRUITMENT_ID"));
+                bean.setTitle(infoObj.getString("RELEASE_PERSON"));
+                bean.setDate(infoObj.getString("RELEASE_TIME"));
                 dataList.add(bean);
             }
             return new Object[]{HConstant.SUCCESS,dataList};

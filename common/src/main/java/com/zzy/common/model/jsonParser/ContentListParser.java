@@ -1,6 +1,6 @@
-package com.zzy.business.model.jsonParser;
+package com.zzy.common.model.jsonParser;
 
-import com.zzy.common.model.bean.Menu;
+import com.zzy.common.model.bean.Content;
 import com.zzy.common.constants.HttpConstants;
 import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.http.HInterface;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MenuListParser implements HInterface.JsonParser {
+public class ContentListParser implements HInterface.JsonParser {
     @Override
     public Object[] parse(String s) throws JSONException {
         MyLog.e("服务返回:"+s);
@@ -27,15 +27,16 @@ public class MenuListParser implements HInterface.JsonParser {
         int errorCode = obj.getInt(HttpConstants.ERROR_CODE);
         if (errorCode == HttpConstants.NO_ERROR) {
             JSONArray infoArray = obj.getJSONArray("data");
-            List<Menu> dataList = new ArrayList<>();
-            Menu mAll = new Menu("全部",true);
+            List<Content> dataList = new ArrayList<>();
 
-            dataList.add(mAll);
             for(int i=0;i<infoArray.length();i++) {
                 JSONObject infoObj = infoArray.getJSONObject(i);
-                Menu bean = new Menu();
-                bean.setName(infoObj.getString("STATUS_NAME"));
-                bean.setSelected(false);
+                Content bean = new Content();
+                bean.setId(infoObj.getInt("FORUM_ID"));
+                bean.setFrom(infoObj.getString("RELEASE_PERSON"));
+                bean.setTitle(infoObj.getString("FORUM_NAME"));
+                bean.setDate(infoObj.getString("RELEASE_DATE"));
+                bean.setLookNum(infoObj.getString("TOTAL_BROWSE"));
                 dataList.add(bean);
             }
             return new Object[]{HConstant.SUCCESS,dataList};

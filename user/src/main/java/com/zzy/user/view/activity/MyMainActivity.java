@@ -6,24 +6,32 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
+import com.zzy.common.glide.ImageLoader;
+import com.zzy.common.model.bean.User;
 import com.zzy.user.R;
+import com.zzy.user.contract.MineContract;
+import com.zzy.user.presenter.MinePresenter;
 
 /**
  * 我的首页
  */
-public class MyMainActivity extends BaseTitleAndBottomBarActivity implements View.OnClickListener {
+public class MyMainActivity extends BaseTitleAndBottomBarActivity
+        implements View.OnClickListener , MineContract.View {
     private ImageView ivUserHead;
     private TextView tvUserName,tvUserRemarks,tvUserScore;
     private Button btnMyArchives,btnMyRecruit,btnMyEntrepreneurship,
             btnMyComment,btnMyGoodsToBuy,btnMyGoodsToSell,
             btnMyEntrepreneurshipLog,btnSettings,btnShareSoftware;
-
+    private MineContract.Presenter presenter;
+    private User user;
 /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("我的");
-        setupViews();
+
+        presenter = new MinePresenter(this);
+        presenter.getUserInfo();
     }
 
     @Override
@@ -59,13 +67,29 @@ public class MyMainActivity extends BaseTitleAndBottomBarActivity implements Vie
         btnMyEntrepreneurshipLog.setOnClickListener(this);
         btnSettings.setOnClickListener(this);
         btnShareSoftware.setOnClickListener(this);
+
+        tvUserName.setText(user.getName());
+        tvUserRemarks.setText(user.getTitle());
+        tvUserScore.setText(user.getScore()+"积分");
+        ImageLoader.loadImage(ivUserHead,user.getHeadUrl());
     }
 
+    @Override
+    public void updateUI(Object o) {
+        super.updateUI(o);
+        try{
+            user = (User) o;
+
+            setupViews();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btnMyArchives){
-
+            startActivity(MyArchivesActivity.class);
         }else if(v.getId() == R.id.btnMyRecruit){
 
         }else if(v.getId() == R.id.btnMyEntrepreneurship){
@@ -88,6 +112,6 @@ public class MyMainActivity extends BaseTitleAndBottomBarActivity implements Vie
 
     @Override
     public void reload(boolean bShow) {
-
+        presenter.getUserInfo();
     }
 }

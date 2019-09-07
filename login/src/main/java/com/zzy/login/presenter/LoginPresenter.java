@@ -1,19 +1,13 @@
 package com.zzy.login.presenter;
 import android.support.annotation.NonNull;
 
+import com.zzy.common.model.HttpProxy;
 import com.zzy.common.network.CommonDataCallback;
 import com.zzy.commonlib.http.HConstant;
-import com.zzy.commonlib.http.HInterface;
 import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.commonlib.utils.NetUtils;
 import com.zzy.login.R;
 import com.zzy.login.contract.LoginContract;
-import com.zzy.login.model.HttpProxy;
-import com.zzy.login.model.bean.main.BannerBean;
-import com.zzy.login.model.wrapper.HfCtx;
-
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author dell-7020

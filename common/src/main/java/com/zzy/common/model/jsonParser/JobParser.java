@@ -1,4 +1,4 @@
-package com.zzy.business.model.jsonParser;
+package com.zzy.common.model.jsonParser;
 
 import com.zzy.common.model.bean.Job;
 import com.zzy.common.constants.HttpConstants;

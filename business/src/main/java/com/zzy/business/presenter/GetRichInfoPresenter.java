@@ -3,7 +3,7 @@ import android.support.annotation.NonNull;
 
 import com.zzy.business.R;
 import com.zzy.business.contract.GetRichInfoContract;
-import com.zzy.business.model.HttpProxy;
+import com.zzy.common.model.HttpProxy;
 import com.zzy.common.network.CommonDataCallback;
 import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.utils.AppUtils;

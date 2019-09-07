@@ -1,7 +1,7 @@
-package com.zzy.business.model.jsonParser;
+package com.zzy.common.model.jsonParser;
 
-import com.zzy.common.model.bean.Job;
 import com.zzy.common.constants.HttpConstants;
+import com.zzy.common.model.bean.Log;
 import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.http.HInterface;
 import com.zzy.commonlib.log.MyLog;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class JobListParser implements HInterface.JsonParser {
+public class LogListParser implements HInterface.JsonParser {
     @Override
     public Object[] parse(String s) throws JSONException {
         MyLog.e("服务返回:"+s);
@@ -27,16 +27,14 @@ public class JobListParser implements HInterface.JsonParser {
         int errorCode = obj.getInt(HttpConstants.ERROR_CODE);
         if (errorCode == HttpConstants.NO_ERROR) {
             JSONArray infoArray = obj.getJSONArray("data");
-            List<Job> dataList = new ArrayList<>();
+            List<Log> dataList = new ArrayList<>();
 
             for(int i=0;i<infoArray.length();i++) {
                 JSONObject infoObj = infoArray.getJSONObject(i);
-                Job bean = new Job();
-                bean.setId(infoObj.getInt("RECRUITMENT_ID"));
-                bean.setFrom(infoObj.getString("RELEASE_PERSON"));
-                bean.setJobName(infoObj.getString("JOB_NAME"));
-                bean.setHeadcount(infoObj.getString("RECRUITMENT_PERSON_NUM"));
-                bean.setPublishTime(infoObj.getString("RELEASE_TIME"));
+                Log bean = new Log();
+                bean.setContent(infoObj.getString("LOG_CONTENT"));
+                bean.setDate(infoObj.getString("LOG_DATE"));
+                bean.setTime(infoObj.getString("LOG_TIME"));
                 dataList.add(bean);
             }
             return new Object[]{HConstant.SUCCESS,dataList};

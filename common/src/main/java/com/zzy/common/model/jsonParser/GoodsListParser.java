@@ -1,4 +1,4 @@
-package com.zzy.business.model.jsonParser;
+package com.zzy.common.model.jsonParser;
 
 import com.zzy.common.model.bean.Goods;
 import com.zzy.common.model.bean.Image;

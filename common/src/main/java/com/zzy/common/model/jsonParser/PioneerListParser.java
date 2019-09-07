@@ -1,4 +1,4 @@
-package com.zzy.business.model.jsonParser;
+package com.zzy.common.model.jsonParser;
 
 import com.zzy.common.model.bean.Pioneer;
 import com.zzy.common.constants.HttpConstants;
@@ -6,12 +6,16 @@ import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.http.HInterface;
 import com.zzy.commonlib.log.MyLog;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public class PioneerParser implements HInterface.JsonParser {
+
+public class PioneerListParser implements HInterface.JsonParser {
     @Override
     public Object[] parse(String s) throws JSONException {
         MyLog.e("服务返回:"+s);
@@ -22,16 +26,19 @@ public class PioneerParser implements HInterface.JsonParser {
         JSONObject obj = (JSONObject) jsonParser.nextValue();
         int errorCode = obj.getInt(HttpConstants.ERROR_CODE);
         if (errorCode == HttpConstants.NO_ERROR) {
-            JSONObject dataObj = obj.getJSONObject("data");
-            Pioneer bean = new Pioneer();
-            bean.setTitle(dataObj.getString("NEWS_TITLE"));
-            bean.setContent(dataObj.getString("NEWS_CONTENT"));
-            bean.setLike("是".equals(dataObj.getString("IS_LIKE")));
-            bean.setLikeNum(dataObj.getString("TOTAL_LIKE"));
-            bean.setLookNum(dataObj.getString("TOTAL_BROWSE"));
-            bean.setPlaceTop("置顶".equals(dataObj.getString("IS_TOP")));
-            bean.setPhone(dataObj.getString("CREATER_MOBILE_NO"));
-            return new Object[]{HConstant.SUCCESS,bean};
+            JSONArray infoArray = obj.getJSONArray("data");
+            List<Pioneer> dataList = new ArrayList<>();
+
+            for(int i=0;i<infoArray.length();i++) {
+                JSONObject infoObj = infoArray.getJSONObject(i);
+                Pioneer bean = new Pioneer();
+                bean.setId(infoObj.getInt("NEWS_INFORMATION_ID"));
+                bean.setTitle(infoObj.getString("NEWS_TITLE"));
+                bean.setDate(infoObj.getString("RELEASE_DATE"));
+                bean.setLookNum(infoObj.getString("TOTAL_BROWSE"));
+                dataList.add(bean);
+            }
+            return new Object[]{HConstant.SUCCESS,dataList};
         } else {
             String msg = obj.getString(HttpConstants.ERROR_MESSAGE);
             return new Object[]{HConstant.ERROR, msg};

@@ -13,6 +13,13 @@ public class Comment {
     private String content;
     private String replyContent;
     private String date;
+    //评论类型 资讯评论 售卖评论 求购评论 朋友圈 分享经验 求助 意见
+    private String type;
+    //原文ID（朋友圈 分享经验 求助 意见）
+    private String contentId;
+    //商品ID（售卖评论 求购评论）
+    private String goodsId;
+
 
     public Comment() {
     }
@@ -71,5 +78,29 @@ public class Comment {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getContentId() {
+        return contentId;
+    }
+
+    public void setContentId(String contentId) {
+        this.contentId = contentId;
+    }
+
+    public String getGoodsId() {
+        return goodsId;
+    }
+
+    public void setGoodsId(String goodsId) {
+        this.goodsId = goodsId;
     }
 }

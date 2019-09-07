@@ -1,23 +1,17 @@
-package com.zzy.business.presenter;
+package com.zzy.user.presenter;
 import android.support.annotation.NonNull;
 
-import com.zzy.business.contract.PbContract;
 import com.zzy.common.model.HttpProxy;
 import com.zzy.common.network.CommonDataCallback;
 import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.commonlib.utils.NetUtils;
+import com.zzy.user.contract.MineContract;
 
-/**
- * @author dell-7020
- * @Description:
- * @date 2018/08/07 16:25:23
- */
-
-public class PbPresenter implements PbContract.Presenter{
-    private final PbContract.View view;
+public class MinePresenter implements MineContract.Presenter{
+    private final MineContract.View view;
 /****************************************************************************************************/
-    public PbPresenter(@NonNull PbContract.View view) {
+    public MinePresenter(@NonNull MineContract.View view) {
         this.view = view;
     }
     @Override
@@ -31,14 +25,14 @@ public class PbPresenter implements PbContract.Presenter{
     }
 
     @Override
-    public void getList(int pageNum) {
+    public void getUserInfo() {
         if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {
             view.showDisconnect();
             return;
         }
         view.showLoading();
         try{
-            HttpProxy.getPbList(pageNum,new CommonDataCallback() {
+            HttpProxy.getUserInfo(new CommonDataCallback() {
                 @Override
                 public void callback(int result, Object o, Object o1) {
                     view.closeLoading();
