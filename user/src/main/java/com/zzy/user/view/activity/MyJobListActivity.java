@@ -1,44 +1,51 @@
-package com.zzy.business.view.activity;
+package com.zzy.user.view.activity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
-import com.zzy.business.R;
-import com.zzy.business.contract.GetRichInfoContract;
-import com.zzy.common.model.bean.GetRichInfo;
-import com.zzy.business.presenter.GetRichInfoPresenter;
-import com.zzy.business.view.itemViewDelegate.GetRichInfoDelegate;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.constants.ParamConstants;
+import com.zzy.common.model.bean.Job;
+import com.zzy.common.view.itemViewDelegate.JobDelegate;
 import com.zzy.common.widget.recycleAdapter.MyMultiRecycleAdapter;
 import com.zzy.common.widget.recycleAdapter.OnItemChildClickListener;
 import com.zzy.common.widget.recycleAdapter.OnLoadMoreListener;
 import com.zzy.common.widget.recycleAdapter.ViewHolder;
 import com.zzy.commonlib.utils.ToastUtils;
+import com.zzy.user.R;
+import com.zzy.user.contract.MyJobContract;
+import com.zzy.user.presenter.MyJobPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 致富信息
+ * 我的招聘
  */
-public class GetRichInfoListActivity extends BaseTitleAndBottomBarActivity implements GetRichInfoContract.View {
+public class MyJobListActivity extends BaseTitleAndBottomBarActivity
+        implements MyJobContract.View, View.OnClickListener {
     private RecyclerView rvDataList;
-    private List<GetRichInfo> dataList = new ArrayList<>();
-    private GetRichInfoContract.Presenter presenter;
+    private List<Job> dataList = new ArrayList<>();
+    private MyJobContract.Presenter presenter;
     private int pageNum = 1;
     private OnLoadMoreListener onLoadMoreListener;
     private MyMultiRecycleAdapter adapter;
     private boolean isLoadOver = false;
+
     /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("致富信息");
-
-        presenter = new GetRichInfoPresenter(this);
+        setTitle("我的招聘");
+        presenter = new MyJobPresenter(this);
         presenter.getList(pageNum);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.list_activity;
     }
 
     private void setupViews() {
@@ -67,22 +74,13 @@ public class GetRichInfoListActivity extends BaseTitleAndBottomBarActivity imple
                 }
             };
             adapter.setOnLoadMoreListener(onLoadMoreListener);
-            adapter.addItemViewDelegate(new GetRichInfoDelegate(this));
+            adapter.addItemViewDelegate(new JobDelegate(this));
             adapter.setOnItemChildClickListener(R.id.rootView, new OnItemChildClickListener() {
                 @Override
                 public void onItemChildClick(ViewHolder viewHolder, Object data, int position) {
-                    GetRichInfo bean = dataList.get(position);
                     Bundle bundle = new Bundle();
-                    bundle.putInt(ParamConstants.ID,bean.getId());
-                    if(bean.getType().equals("致富信息")){
-                        startActivity(GetRichInfoDetailActivity.class,bundle);
-                    }else if(bean.getType().equals("招聘")){
-                        startActivity(JobDetailActivity.class,bundle);
-                    }else if(bean.getType().equals("买")){
-                        startActivity(GoodsDetailBuyActivity.class,bundle);
-                    }else if(bean.getType().equals("卖")){
-                        startActivity(GoodsDetailSellActivity.class,bundle);
-                    }
+                    bundle.putInt(ParamConstants.ID,dataList.get(position).getId());
+                    startActivity(MyJobDetailActivity.class,bundle);
                 }
             });
             rvDataList.setAdapter(adapter);
@@ -90,30 +88,14 @@ public class GetRichInfoListActivity extends BaseTitleAndBottomBarActivity imple
     }
 
     @Override
-    protected int getLayoutId() {
-        return R.layout.list_activity;
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-//        reload(true);
-    }
-
-    @Override
-    public void reload(boolean bShow) {
-        presenter.getList(pageNum);
-    }
-
-    @Override
     public void updateUI(Object o) {
         super.updateUI(o);
         try{
             if(pageNum!=1){
-                appendList((List<GetRichInfo>) o);
+                appendList((List<Job>) o);
                 return;
             }
-            dataList.addAll((List<GetRichInfo>) o);
+            dataList.addAll((List<Job>) o);
             setupViews();
             adapter.notifyDataSetChanged();
         }catch (Exception e){
@@ -121,7 +103,7 @@ public class GetRichInfoListActivity extends BaseTitleAndBottomBarActivity imple
             ToastUtils.showShort(e.toString());
         }
     }
-    private void appendList(List<GetRichInfo> list) {
+    private void appendList(List<Job> list) {
         if(list == null
                 ||list.isEmpty()
         ){
@@ -133,6 +115,16 @@ public class GetRichInfoListActivity extends BaseTitleAndBottomBarActivity imple
         }
         adapter.setLoadMoreData(list);
     }
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    @Override
+    public void reload(boolean bShow) {
+        presenter.getList(pageNum);
+    }
+
     @Override
     public void showError(String s) {
         ToastUtils.showShort(s);

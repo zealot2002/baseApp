@@ -18,10 +18,16 @@
             android:theme="@style/activity_theme" />
 
         <activity
-            android:name=".view.activity.MyEntrepreneurshipActivity"
+            android:name=".view.activity.MyJobListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
 
+        <activity
+            android:name=".view.activity.MyJobDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/activity_theme"
+            android:windowSoftInputMode="adjustPan"
+            />
         <activity
             android:name=".view.activity.MyEntrepreneurshipLogActivity"
             android:screenOrientation="portrait"

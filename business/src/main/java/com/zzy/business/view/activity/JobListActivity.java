@@ -10,7 +10,7 @@ import com.zzy.business.R;
 import com.zzy.business.contract.JobContract;
 import com.zzy.common.model.bean.Job;
 import com.zzy.business.presenter.JobPresenter;
-import com.zzy.business.view.itemViewDelegate.JobDelegate;
+import com.zzy.common.view.itemViewDelegate.JobDelegate;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.constants.ParamConstants;
 import com.zzy.common.widget.recycleAdapter.MyMultiRecycleAdapter;

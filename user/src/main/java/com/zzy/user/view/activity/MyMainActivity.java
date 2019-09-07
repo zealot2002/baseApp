@@ -91,7 +91,7 @@ public class MyMainActivity extends BaseTitleAndBottomBarActivity
         if(v.getId() == R.id.btnMyArchives){
             startActivity(MyArchivesActivity.class);
         }else if(v.getId() == R.id.btnMyRecruit){
-
+            startActivity(MyJobListActivity.class);
         }else if(v.getId() == R.id.btnMyEntrepreneurship){
 
         }else if(v.getId() == R.id.btnMyComment){

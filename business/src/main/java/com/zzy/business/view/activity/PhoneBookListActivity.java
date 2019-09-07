@@ -79,7 +79,7 @@ public class PhoneBookListActivity extends BaseTitleAndBottomBarActivity impleme
 
     @Override
     protected int getLayoutId() {
-        return R.layout.busi_list_activity;
+        return R.layout.list_activity;
     }
 
     @Override
