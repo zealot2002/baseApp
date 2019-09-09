@@ -19,9 +19,9 @@ public class MyMainActivity extends BaseTitleAndBottomBarActivity
         implements View.OnClickListener , MineContract.View {
     private ImageView ivUserHead;
     private TextView tvUserName,tvUserRemarks,tvUserScore;
-    private Button btnMyArchives,btnMyRecruit,btnMyEntrepreneurship,
+    private Button btnMyArchives, btnMyJob, btnMyPioneering,
             btnMyComment,btnMyGoodsToBuy,btnMyGoodsToSell,
-            btnMyEntrepreneurshipLog,btnSettings,btnShareSoftware;
+            btnMyLog,btnSettings,btnShareSoftware;
     private MineContract.Presenter presenter;
     private User user;
 /***********************************************************************************************/
@@ -46,25 +46,25 @@ public class MyMainActivity extends BaseTitleAndBottomBarActivity
         tvUserScore = findViewById(R.id.tvUserScore);
 
         btnMyArchives = findViewById(R.id.btnMyArchives);
-        btnMyRecruit = findViewById(R.id.btnMyRecruit);
-        btnMyEntrepreneurship = findViewById(R.id.btnMyEntrepreneurship);
+        btnMyJob = findViewById(R.id.btnMyJob);
+        btnMyPioneering = findViewById(R.id.btnMyPioneering);
         btnMyComment = findViewById(R.id.btnMyComment);
         btnMyGoodsToBuy = findViewById(R.id.btnMyGoodsToBuy);
         btnMyGoodsToSell = findViewById(R.id.btnMyGoodsToSell);
-        btnMyEntrepreneurshipLog = findViewById(R.id.btnMyEntrepreneurshipLog);
+        btnMyLog = findViewById(R.id.btnMyLog);
         btnSettings = findViewById(R.id.btnSettings);
         btnShareSoftware = findViewById(R.id.btnShareSoftware);
 
 
         btnMyArchives.setOnClickListener(this);
-        btnMyRecruit.setOnClickListener(this);
-        btnMyEntrepreneurship.setOnClickListener(this);
+        btnMyJob.setOnClickListener(this);
+        btnMyPioneering.setOnClickListener(this);
 
         btnMyComment.setOnClickListener(this);
         btnMyGoodsToBuy.setOnClickListener(this);
         btnMyGoodsToSell.setOnClickListener(this);
 
-        btnMyEntrepreneurshipLog.setOnClickListener(this);
+        btnMyLog.setOnClickListener(this);
         btnSettings.setOnClickListener(this);
         btnShareSoftware.setOnClickListener(this);
 
@@ -90,24 +90,23 @@ public class MyMainActivity extends BaseTitleAndBottomBarActivity
     public void onClick(View v) {
         if(v.getId() == R.id.btnMyArchives){
             startActivity(MyArchivesActivity.class);
-        }else if(v.getId() == R.id.btnMyRecruit){
+        }else if(v.getId() == R.id.btnMyJob){
             startActivity(MyJobListActivity.class);
-        }else if(v.getId() == R.id.btnMyEntrepreneurship){
-
+        }else if(v.getId() == R.id.btnMyPioneering){
+            startActivity(MyPioneeringListActivity.class);
         }else if(v.getId() == R.id.btnMyComment){
 
         }else if(v.getId() == R.id.btnMyGoodsToBuy){
 
         }else if(v.getId() == R.id.btnMyGoodsToSell){
 
-        }else if(v.getId() == R.id.btnMyEntrepreneurshipLog){
-
+        }else if(v.getId() == R.id.btnMyLog){
+            startActivity(MyLogListActivity.class);
         }else if(v.getId() == R.id.btnSettings){
             startActivity(SettingsActivity.class);
         }else if(v.getId() == R.id.btnShareSoftware){
 
         }
-
     }
 
     @Override

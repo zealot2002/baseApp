@@ -27,7 +27,7 @@ public class ShareExperienceActivity extends BaseTitleAndBottomBarActivity imple
 
     @Override
     protected int getLayoutId() {
-        return R.layout.busi_list_with_btn_activity;
+        return R.layout.list_with_btn_activity;
     }
 
     private void setupViews() {

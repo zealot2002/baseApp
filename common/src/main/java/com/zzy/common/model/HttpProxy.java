@@ -291,15 +291,16 @@ public class HttpProxy {
                 callback,
                 new CommonParser());
     }
-    public static void getMyPioneeringList(int id,final HInterface.DataCallback callback) throws Exception{
+    public static void getMyPioneeringList(int pageNum,final HInterface.DataCallback callback) throws Exception{
         JSONObject reqBody = new JSONObject();
         reqBody.put("TOKEN", CommonUtils.getToken());
-        reqBody.put("RECRUITMENT_ID", id);
+        reqBody.put("rows", CommonConstants.PAGE_SIZE);
+        reqBody.put("page", pageNum);
         HttpUtils.getInstance().req(
                 HttpConstants.MY_PIONEERING_LIST,
                 reqBody,
                 callback,
-                new PioneeringParser());
+                new PioneeringListParser());
     }
 
     /**********************        先锋            ***************************/
@@ -615,9 +616,12 @@ public class HttpProxy {
     }
 
     /**********************        创业日志            ***************************/
-    public static void getLogList(final HInterface.DataCallback callback) throws Exception {
+    public static void getLogList(int pageNum,final HInterface.DataCallback callback) throws Exception {
         JSONObject reqBody = new JSONObject();
         reqBody.put("TOKEN", CommonUtils.getToken());
+        reqBody.put("TOKEN", CommonUtils.getToken());
+        reqBody.put("rows", CommonConstants.PAGE_SIZE);
+        reqBody.put("page", pageNum);
         HttpUtils.getInstance().req(
                 HttpConstants.MY_LOG_LIST,
                 reqBody,

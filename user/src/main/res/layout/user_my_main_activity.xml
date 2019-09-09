@@ -70,11 +70,11 @@
                style="@style/user_btn_style"
                android:text="我的\n档案" />
            <Button
-               android:id="@+id/btnMyRecruit"
+               android:id="@+id/btnMyJob"
                style="@style/user_btn_style"
                android:text="我的\n招聘" />
            <Button
-               android:id="@+id/btnMyEntrepreneurship"
+               android:id="@+id/btnMyPioneering"
                style="@style/user_btn_style"
                android:text="我的\n创业" />
        </LinearLayout>
@@ -106,7 +106,7 @@
            android:layout_marginLeft="45px"
            android:layout_marginRight="45px">
            <Button
-               android:id="@+id/btnMyEntrepreneurshipLog"
+               android:id="@+id/btnMyLog"
                style="@style/user_btn_style"
                android:text="我的创\n业日志" />
            <Button

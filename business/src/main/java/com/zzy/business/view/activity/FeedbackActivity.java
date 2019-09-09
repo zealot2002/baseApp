@@ -27,7 +27,7 @@ public class FeedbackActivity extends BaseTitleAndBottomBarActivity implements V
 
     @Override
     protected int getLayoutId() {
-        return R.layout.busi_list_with_btn_activity;
+        return R.layout.list_with_btn_activity;
     }
 
     private void setupViews() {

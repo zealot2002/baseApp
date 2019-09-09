@@ -10,7 +10,7 @@ import com.zzy.business.R;
 import com.zzy.business.contract.PioneeringContract;
 import com.zzy.common.model.bean.Pioneering;
 import com.zzy.business.presenter.PioneeringPresenter;
-import com.zzy.business.view.itemViewDelegate.PioneeringDelegate;
+import com.zzy.common.view.itemViewDelegate.PioneeringDelegate;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.constants.ParamConstants;
 import com.zzy.common.widget.recycleAdapter.MyMultiRecycleAdapter;
@@ -48,7 +48,7 @@ public class PioneeringListActivity extends BaseTitleAndBottomBarActivity
 
     @Override
     protected int getLayoutId() {
-        return R.layout.busi_list_with_btn_activity;
+        return R.layout.list_with_btn_activity;
     }
 
     private void setupViews() {

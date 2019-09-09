@@ -1,9 +1,9 @@
-package com.zzy.business.view.itemViewDelegate;
+package com.zzy.common.view.itemViewDelegate;
 
 import android.content.Context;
 import android.widget.TextView;
 
-import com.zzy.business.R;
+import com.zzy.common.R;
 import com.zzy.common.model.bean.Pioneering;
 import com.zzy.common.widget.recycleAdapter.ItemViewDelegate;
 import com.zzy.common.widget.recycleAdapter.ViewHolder;

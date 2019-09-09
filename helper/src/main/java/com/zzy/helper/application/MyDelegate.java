@@ -5,8 +5,6 @@ import android.app.Application;
 
 import com.zzy.common.application.ApplicationDelegate;
 import com.zzy.commonlib.utils.ProcessUtils;
-import com.zzy.sc.core.serverCenter.SCM;
-import com.zzy.servercentre.ActionConstants;
 
 public class MyDelegate implements ApplicationDelegate {
     @Override
@@ -14,11 +12,11 @@ public class MyDelegate implements ApplicationDelegate {
 
         if (!ProcessUtils.isMainProcess(application))
             return;
-        try {
-            SCM.getInstance().req(application, ActionConstants.GET_GLOBAL_CONFIG_ACTION);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            SCM.getInstance().req(application, ActionConstants.GET_GLOBAL_CONFIG_ACTION);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Override

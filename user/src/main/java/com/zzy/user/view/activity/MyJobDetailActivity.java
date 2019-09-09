@@ -20,7 +20,6 @@ import com.zzy.user.presenter.MyJobPresenter;
 public class MyJobDetailActivity extends BaseTitleAndBottomBarActivity implements View.OnClickListener,MyJobContract.View {
     private EditText etCompanyName,etJobName,etAddress,etHeadcount,etEducation,
             etSalaryMin,etSalaryMax,etPhone,etContact,etJobContent,etJobRequirements;
-    private TextView tvReport;
     private Button btnUpdate,btnStop;
 
     private int id;

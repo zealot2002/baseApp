@@ -28,8 +28,26 @@
             android:theme="@style/activity_theme"
             android:windowSoftInputMode="adjustPan"
             />
+
         <activity
-            android:name=".view.activity.MyEntrepreneurshipLogActivity"
+            android:name=".view.activity.MyPioneeringListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/activity_theme" />
+
+        <activity
+            android:name=".view.activity.MyPioneeringDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/activity_theme"
+            android:windowSoftInputMode="adjustPan"
+            />
+
+        <activity
+            android:name=".view.activity.MyLogListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/activity_theme" />
+
+        <activity
+            android:name=".view.activity.MyLogNewActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
 

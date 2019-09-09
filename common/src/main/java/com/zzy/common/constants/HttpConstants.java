@@ -6,7 +6,7 @@ public class HttpConstants {
     public static String TOKEN = "95ffa88f010f1b577ef5f3cf5a1585e7";
 
     // 测试环境
-    public static String SERVER_ADDRESS = "http://grecode.vicp.cc:82";
+    public static String SERVER_ADDRESS = "http://grecode.f3322.net:82";
 
 
     public static String FILE_SERVER_URL = SERVER_ADDRESS+"/forum_pic/upload.do";
