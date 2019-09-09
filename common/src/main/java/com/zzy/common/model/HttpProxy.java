@@ -41,7 +41,7 @@ public class HttpProxy {
     public static void login(String un, String pw, HInterface.DataCallback callback) throws Exception {
         JSONObject reqBody = new JSONObject();
         reqBody.put("MOBILE_NO", un);
-        reqBody.put("PASSWORD", MD5Utils.encode(pw));
+        reqBody.put("PASSWORD", CommonUtils.getPw(pw));
         HttpUtils.getInstance().req(
                 HttpConstants.LOGIN,
                 reqBody,
@@ -55,7 +55,7 @@ public class HttpProxy {
         reqBody.put("CHECK_CODE_NUM", bean.getSms());
         reqBody.put("MOBILE_NO_Y", bean.getInviter());
         reqBody.put("IDCARD", bean.getIdNo());
-        reqBody.put("PASSWORD", bean.getPw());
+        reqBody.put("PASSWORD", CommonUtils.getPw(bean.getPw()));
         reqBody.put("COUNTY", bean.getArea1());
         reqBody.put("TOWN", bean.getArea2());
         reqBody.put("VILLAGE", bean.getArea3());
@@ -100,13 +100,13 @@ public class HttpProxy {
                 HttpConstants.LOGOUT,
                 reqBody,
                 callback,
-                new UserParser());
+                new CommonParser());
     }
     public static void resetPw(String opw, String npw, HInterface.DataCallback callback) throws Exception {
         JSONObject reqBody = new JSONObject();
         reqBody.put("TOKEN", CommonUtils.getToken());
-        reqBody.put("OLDPASS", opw);
-        reqBody.put("NEWPASS", npw);
+        reqBody.put("OLDPASS", CommonUtils.getPw(opw));
+        reqBody.put("NEWPASS", CommonUtils.getPw(npw));
         HttpUtils.getInstance().req(
                 HttpConstants.RESET_PW,
                 reqBody,
@@ -117,7 +117,7 @@ public class HttpProxy {
         JSONObject reqBody = new JSONObject();
         reqBody.put("TOKEN", CommonUtils.getToken());
         reqBody.put("MOBILE_NO", phone);
-        reqBody.put("PASSWORD",pw);
+        reqBody.put("PASSWORD",CommonUtils.getPw(pw));
         reqBody.put("CHECK_CODE_NUM", sms);
         HttpUtils.getInstance().req(
                 HttpConstants.FORGET_PW,

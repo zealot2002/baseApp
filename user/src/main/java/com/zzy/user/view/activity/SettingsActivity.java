@@ -47,7 +47,7 @@ public class SettingsActivity extends BaseTitleAndBottomBarActivity implements V
     public void onClick(View v) {
         try{
             if(v.getId() == R.id.rlModifyPw){
-                SCM.getInstance().req(this, ActionConstants.ENTRY_LOGIN_ACTIVITY_ACTION);
+                SCM.getInstance().req(this, ActionConstants.ENTRY_RESET_PW_ACTIVITY_ACTION);
             }else if(v.getId() == R.id.rlClearCache){
                 if(GlideCacheUtil.getInstance().getCacheFloatSize(this)>0){
                     ToastUtils.showShort("清理完成");

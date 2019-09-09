@@ -15,6 +15,7 @@ public class ActionConstants {
 
     /* login */
     public static final String ENTRY_LOGIN_ACTIVITY_ACTION = "entryLogin";
+    public static final String ENTRY_RESET_PW_ACTIVITY_ACTION = "entryResetPw";
 
     /* mine */
     public static final String ENTRY_MY_MAIN_ACTIVITY_ACTION = "entryMyMain";

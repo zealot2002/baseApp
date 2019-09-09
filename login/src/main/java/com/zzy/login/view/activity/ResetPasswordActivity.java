@@ -1,6 +1,5 @@
 package com.zzy.login.view.activity;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -11,24 +10,22 @@ import android.widget.TextView;
 import com.zzy.common.base.BaseAppActivity;
 import com.zzy.common.utils.StatusBarUtils;
 import com.zzy.commonlib.utils.ToastUtils;
-import com.zzy.commonlib.utils.ValidateUtils;
 import com.zzy.login.R;
 import com.zzy.login.contract.LoginContract;
 import com.zzy.login.presenter.LoginPresenter;
 
 /**
- * forget password
+ * 修改密码
  */
-public class ForgetPasswordActivity extends BaseAppActivity implements View.OnClickListener, LoginContract.View  {
-    private EditText etPhone,etSms,etPd1,etPd2;
+public class ResetPasswordActivity extends BaseAppActivity implements View.OnClickListener, LoginContract.View  {
+    private EditText etOld,etPw1,etPw2;
     private Button btnOk;
-    private TextView tvSendSms;
     private LoginContract.Presenter presenter;
 /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_forget_password_activity);
+        setContentView(R.layout.login_reset_password_activity);
         StatusBarUtils.setStatusBarFontIconLight(this, false);
         StatusBarUtils.fixStatusHeight(this, (ViewGroup) findViewById(R.id.rootView));
         setupViews();
@@ -37,7 +34,7 @@ public class ForgetPasswordActivity extends BaseAppActivity implements View.OnCl
 
     private void setupViews() {
         TextView tvTitle = findViewById(R.id.tvTitle);
-        tvTitle.setText("忘记密码");
+        tvTitle.setText("修改密码");
         RelativeLayout rlBack = findViewById(R.id.rlBack);
         rlBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,15 +43,12 @@ public class ForgetPasswordActivity extends BaseAppActivity implements View.OnCl
             }
         });
 
-        etPhone = findViewById(R.id.etPhone);
-        etSms = findViewById(R.id.etSms);
-        etPd1 = findViewById(R.id.etPd1);
-        etPd2 = findViewById(R.id.etPd2);
-        tvSendSms = findViewById(R.id.tvSendSms);
+        etOld = findViewById(R.id.etOld);
+        etPw1 = findViewById(R.id.etPw1);
+        etPw2 = findViewById(R.id.etPw2);
         btnOk = findViewById(R.id.btnOk);
 //
         btnOk.setOnClickListener(this);
-        tvSendSms.setOnClickListener(this);
     }
 
 
@@ -66,20 +60,11 @@ public class ForgetPasswordActivity extends BaseAppActivity implements View.OnCl
                 if(!checkData()) {
                     return;
                 }
-                presenter.forgetPw(
-                        etPhone.getText().toString().trim(),
-                        etPd2.getText().toString().trim(),
-                        etSms.getText().toString().trim());
+                presenter.resetPw(
+                        etOld.getText().toString().trim(),
+                        etPw1.getText().toString().trim());
 //                startActivity(LoginActivity.class);
 //                finish();
-            }else if(v.getId() == R.id.tvSendSms){
-                if(!ValidateUtils.isMobileNO(etPhone.getText().toString().trim())) {
-                    ToastUtils.showShort("无效的手机号码");
-                    return;
-                }
-                // TODO: 2019/8/19   to get sms
-                cdTimer.start();
-                tvSendSms.setOnClickListener(null);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -87,11 +72,7 @@ public class ForgetPasswordActivity extends BaseAppActivity implements View.OnCl
     }
 
     private boolean checkData() {
-        if(!ValidateUtils.isMobileNO(etPhone.getText().toString().trim())){
-            ToastUtils.showShort("无效的手机号码");
-            return false;
-        }
-        if(!etPd1.getText().toString().trim().equals(etPd2.getText().toString().trim())){
+        if(!etPw1.getText().toString().trim().equals(etPw2.getText().toString().trim())){
             ToastUtils.showShort("您设置的两次密码不一致");
             return false;
         }
@@ -101,24 +82,9 @@ public class ForgetPasswordActivity extends BaseAppActivity implements View.OnCl
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(cdTimer!=null){
-            cdTimer.cancel();
-            cdTimer = null;
-        }
+
     }
 
-    private CountDownTimer cdTimer = new CountDownTimer(30*1000, 1000) {
-        @Override
-        public void onTick(long millisUntilFinished) {
-            tvSendSms.setText((millisUntilFinished / 1000) + " s");
-        }
-
-        @Override
-        public void onFinish() {
-            tvSendSms.setText("发送验证码");
-            tvSendSms.setOnClickListener(ForgetPasswordActivity.this);
-        }
-    };
 
     @Override
     public void showError(String s) {
@@ -127,7 +93,7 @@ public class ForgetPasswordActivity extends BaseAppActivity implements View.OnCl
 
     @Override
     public void onSuccess() {
-        startActivity(LoginActivity.class);
+        ToastUtils.showShort("成功");
         finish();
     }
 

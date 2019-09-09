@@ -15,7 +15,7 @@ public class Archives {
     private String area3;
     private String address;
     private String pw;
-    private String Inviter;
+    private String inviter;
     private String sms;
     private String birthday;
     private String sex;
@@ -167,11 +167,11 @@ public class Archives {
     }
 
     public String getInviter() {
-        return Inviter;
+        return inviter;
     }
 
     public void setInviter(String inviter) {
-        Inviter = inviter;
+        this.inviter = inviter;
     }
 
     public String getSms() {

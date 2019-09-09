@@ -49,11 +49,11 @@
             />
     </RelativeLayout>
     <ScrollView
-        android:id="@+id/svFirst"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
         <LinearLayout
+            android:id="@+id/lFirst"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -82,9 +82,6 @@
                     android:layout_marginLeft="2dp"
                     android:layout_toRightOf="@+id/tvName"
                     android:layout_centerVertical="true"
-                    android:inputType="phone"
-                    android:maxLength="11"
-                    android:text=""
                     android:textColorHint="@color/white"
                     android:textColor="@color/white"
                     android:textSize="14sp"
@@ -357,7 +354,6 @@
                     android:textColorHint="@color/white"
                     android:textSize="14sp"
                     android:background="@null"
-                    android:inputType="number"
                     />
                 <View
                     android:layout_width="match_parent"
@@ -414,7 +410,6 @@
                     android:layout_centerVertical="true"
                     />
                 <RadioGroup
-                    android:id="@+id/radioGroup"
                     android:layout_toRightOf="@+id/tvSex"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="5dp"
@@ -433,7 +428,6 @@
                         />
 
                     <RadioButton
-                        android:id="@+id/btnWoman"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="女"
@@ -502,7 +496,7 @@
                     android:layout_centerVertical="true"
                     />
                 <EditText
-                    android:id="@+id/etPd"
+                    android:id="@+id/etPw"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
@@ -513,7 +507,7 @@
                     android:textColorHint="@color/white"
                     android:textSize="14sp"
                     android:background="@null"
-                    android:inputType="number"
+                    android:inputType="textPassword"
                     />
                 <View
                     android:layout_width="match_parent"
@@ -534,6 +528,103 @@
                 android:layout_marginBottom="50dp"
                 android:layout_gravity="right"
                 />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/lNext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/body_margin"
+            android:layout_marginRight="@dimen/body_margin"
+            >
+            <!--用户类别-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                >
+                <TextView
+                    android:id="@+id/tvUserType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="用户类别:"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:layout_centerVertical="true"
+                    />
+
+                <fr.ganfra.materialspinner.MaterialSpinner
+                    android:id="@+id/spinnerUserType"
+                    android:layout_toRightOf="@+id/tvUserType"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    app:ms_multiline="false"
+                    app:ms_enableFloatingLabel="false"
+                    app:ms_enableErrorLabel="false"
+                    app:ms_baseColor="@android:color/transparent"
+                    app:ms_arrowColor="@color/white"
+                    app:ms_arrowSize="16dp"
+                    app:ms_alignLabels="false"
+                    />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line2_height"
+                    android:background="@mipmap/line2"
+                    android:layout_alignParentBottom="true"
+                    />
+            </RelativeLayout>
+            <!--是否企业注册-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                >
+                <TextView
+                    android:id="@+id/tvIsCompany"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="是否企业注册:"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:layout_centerVertical="true"
+                    />
+                <RadioGroup
+                    android:layout_toRightOf="@+id/tvIsCompany"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <RadioButton
+                        android:id="@+id/btnYes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="是"
+                        android:padding="5dp"
+                        android:textColor="@color/white"
+                        android:checked="true"
+                        android:button="@drawable/radio_btn_selector"
+                        />
+                    <RadioButton
+                        android:id="@+id/btnNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="否"
+                        android:padding="5dp"
+                        android:layout_marginLeft="20dp"
+                        android:textColor="@color/white"
+                        android:button="@drawable/radio_btn_selector"
+                        />
+                </RadioGroup>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line2_height"
+                    android:background="@mipmap/line2"
+                    android:layout_alignParentBottom="true"
+                    />
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
