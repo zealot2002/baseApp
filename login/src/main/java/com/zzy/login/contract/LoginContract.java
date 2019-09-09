@@ -8,6 +8,7 @@ import com.zzy.commonlib.base.BasePresenter;
 public interface LoginContract {
     interface View extends BaseLoadingView {
         void showError(String s);
+        void onFirstSuccess(String s);
         void onSuccess();
     }
 

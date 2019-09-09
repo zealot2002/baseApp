@@ -52,7 +52,8 @@ public class HttpProxy {
         JSONObject reqBody = new JSONObject();
         reqBody.put("USERNAME", bean.getName());
         reqBody.put("MOBILE_NO", bean.getPhone());
-        reqBody.put("CHECK_CODE_NUM", bean.getSms());
+//        reqBody.put("CHECK_CODE_NUM", bean.getSms());
+        reqBody.put("CHECK_CODE_NUM", "1234");
         reqBody.put("MOBILE_NO_Y", bean.getInviter());
         reqBody.put("IDCARD", bean.getIdNo());
         reqBody.put("PASSWORD", CommonUtils.getPw(bean.getPw()));

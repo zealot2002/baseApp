@@ -126,6 +126,11 @@ public class ForgetPasswordActivity extends BaseAppActivity implements View.OnCl
     }
 
     @Override
+    public void onFirstSuccess(String s) {
+
+    }
+
+    @Override
     public void onSuccess() {
         startActivity(LoginActivity.class);
         finish();

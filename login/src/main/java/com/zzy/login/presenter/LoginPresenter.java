@@ -69,7 +69,7 @@ public class LoginPresenter implements LoginContract.Presenter{
                 public void callback(int result, Object o, Object o1) {
                     view.closeLoading();
                     if (result == HConstant.SUCCESS) {
-                        view.onSuccess();
+                        view.onFirstSuccess((String) o);
                     }else if(result == HConstant.FAIL
                             ||result == HConstant.ERROR
                     ){

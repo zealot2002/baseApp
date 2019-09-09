@@ -71,6 +71,11 @@ public class LoginActivity extends BaseAppActivity implements View.OnClickListen
     }
 
     @Override
+    public void onFirstSuccess(String s) {
+
+    }
+
+    @Override
     public void onSuccess() {
         try {
             SCM.getInstance().req(this, ActionConstants.ENTRY_HOME_ACTIVITY_ACTION);

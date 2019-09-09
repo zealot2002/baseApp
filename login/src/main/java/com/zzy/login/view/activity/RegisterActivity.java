@@ -17,6 +17,7 @@ import com.bigkoo.pickerview.view.TimePickerView;
 import com.zzy.common.base.BaseAppActivity;
 import com.zzy.common.model.bean.Archives;
 import com.zzy.common.utils.StatusBarUtils;
+import com.zzy.common.widget.LoadingHelper;
 import com.zzy.commonlib.utils.ToastUtils;
 import com.zzy.commonlib.utils.ValidateUtils;
 import com.zzy.login.R;
@@ -33,7 +34,7 @@ import fr.ganfra.materialspinner.MaterialSpinner;
  * register
  */
 public class RegisterActivity extends BaseAppActivity implements View.OnClickListener , LoginContract.View {
-    private LinearLayout lFirst,lNext;
+    private View lFirst,lNext;
     private EditText etName,etPhone,etSms,etInviter,etIdNo, etPw,etAddress;
     private Button btnNext,btnOk;
     private TextView tvSendSms,tvBirthday;
@@ -43,6 +44,7 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
     private RadioButton btnMan;
     private LoginContract.Presenter presenter;
     private Archives bean;
+    private LoadingHelper loadingHelper;
     /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,7 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
         StatusBarUtils.fixStatusHeight(this, (ViewGroup) findViewById(R.id.rootView));
         setupViews();
 
+        loadingHelper = new LoadingHelper(this);
         presenter = new LoginPresenter(this);
         bean = new Archives();
     }
@@ -206,18 +209,23 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
     }
 
     @Override
+    public void onFirstSuccess(String s) {
+
+    }
+
+    @Override
     public void onSuccess() {
 
     }
 
     @Override
     public void showLoading() {
-
+        loadingHelper.showLoading();
     }
 
     @Override
     public void closeLoading() {
-
+        loadingHelper.closeLoading();
     }
 
     @Override

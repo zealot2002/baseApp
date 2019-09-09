@@ -92,6 +92,11 @@ public class ResetPasswordActivity extends BaseAppActivity implements View.OnCli
     }
 
     @Override
+    public void onFirstSuccess(String s) {
+
+    }
+
+    @Override
     public void onSuccess() {
         ToastUtils.showShort("成功");
         finish();
