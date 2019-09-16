@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="body_margin">60px</dimen>
+    <dimen name="body_margin2">40px</dimen>
+    <dimen name="bottom_margin">40dp</dimen>
+
+    <dimen name="btn_height">50dp</dimen>
+    <dimen name="btn_width">160dp</dimen>
+
+    <dimen name="btn2_height">73px</dimen>
+    <dimen name="btn2_width">180px</dimen>
+
+    <dimen name="line2_height">17px</dimen>
+    <dimen name="line2_width">650px</dimen>
+
+    <dimen name="home_bottom_line_height">31px</dimen>
+
+
+    <dimen name="item_height">40dp</dimen>
+
+    <dimen name="btn_text_size">16sp</dimen>
+</resources>
