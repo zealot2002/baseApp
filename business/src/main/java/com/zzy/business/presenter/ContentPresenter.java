@@ -6,9 +6,15 @@ import com.zzy.business.contract.ContentContract;
 import com.zzy.common.model.HttpProxy;
 import com.zzy.common.model.bean.Content;
 import com.zzy.common.network.CommonDataCallback;
+import com.zzy.common.utils.FileUploader;
+import com.zzy.commonlib.core.ThreadPool;
 import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.commonlib.utils.NetUtils;
+
+import org.json.JSONException;
+
+import java.io.IOException;
 
 /**
  * @author dell-7020
@@ -93,18 +99,18 @@ public class ContentPresenter implements ContentContract.Presenter{
             view.showError(AppUtils.getApp().getResources().getString(R.string.no_network_tips));
             return;
         }
-        view.showLoading();
+//        view.showLoading();
         try{
-//            ThreadPool.getInstance().getPool().submit(new Runnable() {
-//                @Override
-//                public void run() {
+            ThreadPool.getInstance().getPool().submit(new Runnable() {
+                @Override
+                public void run() {
 //                    try {
 //                        FileUploader.post(content.getImgList().get(0).getPath());
-//                    } catch (IOException e) {
+//                    } catch (Exception e) {
 //                        e.printStackTrace();
 //                    }
-//                }
-//            });
+                }
+            });
 
 //            HttpProxy.newContent(type,content,new CommonDataCallback() {
 //                @Override

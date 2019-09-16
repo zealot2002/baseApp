@@ -61,7 +61,6 @@ public class ForgetPasswordActivity extends BaseAppActivity implements View.OnCl
     @Override
     public void onClick(View v) {
         try{
-
             if(v.getId() == R.id.btnOk){
                 if(!checkData()) {
                     return;

@@ -18,5 +18,6 @@ public interface LoginContract {
         void register2(Archives bean);
         void forgetPw(String phone, String pw, String sms);
         void resetPw(String opw, String npw);
+        void getSms(String phone);
     }
 }

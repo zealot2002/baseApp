@@ -592,6 +592,7 @@
                 android:layout_centerVertical="true"
                 />
             <RadioGroup
+                android:id="@+id/rgIsCompany"
                 android:layout_toRightOf="@+id/tvIsCompany"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="5dp"
@@ -626,5 +627,123 @@
                 android:layout_alignParentBottom="true"
                 />
         </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/lCompany"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            >
+            <!--企业名称-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                >
+                <TextView
+                    android:id="@+id/tvCompanyName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="企业名称:"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:layout_centerVertical="true"
+                    />
+                <EditText
+                    android:id="@+id/etCompanyName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/tvCompanyName"
+                    android:layout_centerVertical="true"
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:background="@null"
+                    />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line2_height"
+                    android:background="@mipmap/line2"
+                    android:layout_alignParentBottom="true"
+                    />
+            </RelativeLayout>
+            <!--公司规模-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                >
+                <TextView
+                    android:id="@+id/tvCompanyScope"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="公司规模:"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:layout_centerVertical="true"
+                    />
+                <EditText
+                    android:id="@+id/etCompanyScope"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/tvCompanyScope"
+                    android:layout_centerVertical="true"
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:background="@null"
+                    />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line2_height"
+                    android:background="@mipmap/line2"
+                    android:layout_alignParentBottom="true"
+                    />
+            </RelativeLayout>
+            <TextView
+                style="@style/tv_style_white_14"
+                android:text="上传营业执照 / 门面图片:"
+                android:layout_marginTop="10dp"
+                />
+            <ImageView
+                android:id="@+id/ivPic"
+                android:layout_marginTop="10dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@mipmap/icon_default"
+                android:scaleType="centerCrop"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/lPersonal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginTop="10dp"
+            >
+            <TextView
+                style="@style/tv_style_white_14"
+                android:text="技能标签:"
+                />
+            <me.gujun.android.taggroup.TagGroup
+                android:id="@+id/tagView"
+                android:layout_marginTop="10dp"
+                app:atg_isAppendMode="true"
+                style="@style/TagGroup" />
+        </LinearLayout>
+        <Button
+            android:id="@+id/btnOk"
+            android:layout_width="@dimen/btn_width"
+            android:layout_height="@dimen/btn_height"
+            android:background="@mipmap/btn_login"
+            android:text="完成"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="50dp"
+            android:layout_gravity="right"
+            />
     </LinearLayout>
 </LinearLayout>

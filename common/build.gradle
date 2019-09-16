@@ -62,4 +62,6 @@ dependencies {
     api 'com.github.iielse:ImageWatcher:1.1.5'
 
     api 'com.jaikydota.imagespickers:imagespickers:1.0.6'
+
+    compile 'me.gujun.android.taggroup:library:1.4@aar'
 }

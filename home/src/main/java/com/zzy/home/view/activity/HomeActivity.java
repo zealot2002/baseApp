@@ -86,32 +86,8 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
         setupViews();
         presenter = new HomePresenter(this);
         presenter.start();
-        questionPermissions();
     }
-    private void questionPermissions() {
-        AndPermission.with(this)
-                .runtime()
-                .permission(new String[]{Permission.READ_EXTERNAL_STORAGE,
-                        Permission.WRITE_EXTERNAL_STORAGE,
-                        Permission.READ_PHONE_STATE})
-                .onGranted(new Action<List<String>>() {
-                    @Override
-                    public void onAction(List<String> data) {
 
-                    }
-                }).onDenied(new Action<List<String>>() {
-                    @Override
-                    public void onAction(List<String> data) {
-                        ToastUtils.showShort("您必须授权才能使用app");
-                        tvUserName.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                finish();
-                            }
-                        },1000);
-                    }
-                }).start();
-    }
     private void setupViews() {
         smartRefreshLayout = findViewById(R.id.smartRefreshLayout);
         smartRefreshLayout.setEnableRefresh(true);

@@ -8,6 +8,7 @@ import java.util.ArrayList;
  */
 
 public class Archives {
+    private String userId;
     private String name;
     private String phone;
     private String area1;
@@ -21,6 +22,7 @@ public class Archives {
     private String sex;
     private String idNo;
     private String userType;
+
     private String isCompany;
     private String companyName;
     private String companyScope;
@@ -180,5 +182,13 @@ public class Archives {
 
     public void setSms(String sms) {
         this.sms = sms;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

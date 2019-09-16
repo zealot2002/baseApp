@@ -27,11 +27,11 @@ import com.zzy.common.model.jsonParser.PioneeringParser;
 import com.zzy.common.constants.CommonConstants;
 import com.zzy.common.constants.HttpConstants;
 import com.zzy.common.model.jsonParser.CommonParser;
+import com.zzy.common.model.jsonParser.Register1Parser;
 import com.zzy.common.model.jsonParser.UserParser;
 import com.zzy.common.network.HttpUtils;
 import com.zzy.common.utils.CommonUtils;
 import com.zzy.commonlib.http.HInterface;
-import com.zzy.commonlib.utils.encryptUtils.MD5Utils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -68,17 +68,17 @@ public class HttpProxy {
                 HttpConstants.REGISTER1,
                 reqBody,
                 callback,
-                new CommonParser());
+                new Register1Parser());
     }
     public static void register2(Archives bean, HInterface.DataCallback callback) throws Exception {
         JSONObject reqBody = new JSONObject();
-        reqBody.put("USERINFO_ID", bean.getName());
-        reqBody.put("USER_TYPE", bean.getPhone());
-        reqBody.put("IS_COMPANY", bean.getSms());
-        reqBody.put("COMPANY_NAME", bean.getInviter());
-        reqBody.put("COMPANY_EMP_NUM", bean.getIdNo());
-        reqBody.put("BUSINESS_LICENSE_PIC_ADDR", bean.getPw());
-        reqBody.put("BUSINESS_LICENSE_PIC_NAME", bean.getArea1());
+        reqBody.put("USERINFO_ID", bean.getUserId());
+        reqBody.put("USER_TYPE", bean.getUserType());
+        reqBody.put("IS_COMPANY", bean.getIsCompany());
+        reqBody.put("COMPANY_NAME", bean.getCompanyName());
+        reqBody.put("COMPANY_EMP_NUM", bean.getCompanyScope());
+        reqBody.put("BUSINESS_LICENSE_PIC_ADDR", bean.getCompanyImgUrl());
+        reqBody.put("BUSINESS_LICENSE_PIC_NAME", bean.getCompanyImgName());
 
         JSONArray arr = new JSONArray();
         for(String s:bean.getSkills()){
@@ -126,7 +126,15 @@ public class HttpProxy {
                 callback,
                 new CommonParser());
     }
-
+    public static void getSms(String phone, HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("MOBILE_NO", phone);
+        HttpUtils.getInstance().req(
+                HttpConstants.GET_SMS,
+                reqBody,
+                callback,
+                new CommonParser());
+    }
 
     /**************************    电话本 *******************************/
     public static void getPbList(int pageNum,final HInterface.DataCallback callback) throws Exception {

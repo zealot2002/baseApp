@@ -1,0 +1,58 @@
+{
+  "areaList": [
+    {
+      "name": "青田县",
+      "children": [
+        {
+          "name": "东坑镇",
+          "children": [
+            {
+              "name": "村1"
+            },
+            {
+              "name": "村2"
+            }
+          ]
+        },
+        {
+          "name": "颍川镇",
+          "children": [
+            {
+              "name": "村1"
+            },
+            {
+              "name": "村2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "考拉县",
+      "children": [
+        {
+          "name": "东坑镇",
+          "children": [
+            {
+              "name": "村1"
+            },
+            {
+              "name": "村2"
+            }
+          ]
+        },
+        {
+          "name": "颍川镇",
+          "children": [
+            {
+              "name": "村1"
+            },
+            {
+              "name": "村2"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

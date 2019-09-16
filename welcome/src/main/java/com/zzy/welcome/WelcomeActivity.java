@@ -4,6 +4,8 @@ import android.os.Handler;
 import android.text.TextUtils;
 import com.zzy.common.base.BaseAppActivity;
 import com.zzy.common.constants.SPConstants;
+import com.zzy.commonlib.utils.AppUtils;
+import com.zzy.commonlib.utils.SPUtils;
 import com.zzy.flysp.core.spHelper.SPHelper;
 import com.zzy.sc.core.serverCenter.SCM;
 import com.zzy.servercentre.ActionConstants;
@@ -30,7 +32,7 @@ public class WelcomeActivity extends BaseAppActivity {
     }
     private void judgeNextEntry(){
         try{
-            String token = SPHelper.getString(SPConstants.TOKEN,"");
+            String token = SPUtils.getString(AppUtils.getApp(),SPConstants.TOKEN,"");
             if(TextUtils.isEmpty(token)){
                 SCM.getInstance().req(this, ActionConstants.ENTRY_LOGIN_ACTIVITY_ACTION);
             }else{

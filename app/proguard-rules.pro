@@ -201,23 +201,6 @@
     @com.hwangjr.rxbus.annotation.Produce public *;
 }
 
-
-#--------------------------------------------------------
-#--------------------------adapter --------------------------
--keep class com.woaiqw.adapter.** {
- *;
- }
- -keep public class * extends com.woaiqw.adapter.base.BaseSmartAdapter
- -keep public class * extends com.woaiqw.adapter.holder.BaseViewHolder
- -keep public class * extends com.woaiqw.adapter.multi.MultiItemEntity
- -keepclassmembers  class **$** extends com.woaiqw.adapter.holder.BaseViewHolder {
-      <init>(...);
- }
-
-
-#--------------------------------------------------------
-
-
 #--------------------------glide----------------------
 
 -keep class com.bumptech.glide.load.resource.gif.GifFrameLoader.**{*;}

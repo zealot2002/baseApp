@@ -6,7 +6,7 @@ public class HttpConstants {
     public static String TOKEN = "95ffa88f010f1b577ef5f3cf5a1585e7";
 
     // 测试环境
-    public static String SERVER_ADDRESS = "http://grecode.f3322.net:81";
+    public static String SERVER_ADDRESS = "http://grecode.gnway.cc:82";
 
 
     public static String FILE_SERVER_URL = SERVER_ADDRESS+"/forum_pic/upload.do";
@@ -41,6 +41,8 @@ public class HttpConstants {
     public static final String REGISTER2 = "/account/insertNext.do";
     public static final String FORGET_PW = "/account/forget.do";
     public static final String RESET_PW = "/userinfo/update.do";
+
+    public static final String GET_SMS = "/account/verification.do";
 
     /**********************        招聘            ***************************/
     public static final String JOB_LIST = "/recruitment/selAll.do";
