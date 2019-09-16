@@ -5,16 +5,20 @@ import com.zzy.business.R;
 import com.zzy.business.contract.ContentContract;
 import com.zzy.common.model.HttpProxy;
 import com.zzy.common.model.bean.Content;
+import com.zzy.common.model.bean.Image;
 import com.zzy.common.network.CommonDataCallback;
 import com.zzy.common.utils.FileUploader;
 import com.zzy.commonlib.core.ThreadPool;
 import com.zzy.commonlib.http.HConstant;
+import com.zzy.commonlib.http.HInterface;
+import com.zzy.commonlib.log.MyLog;
 import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.commonlib.utils.NetUtils;
 
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author dell-7020
@@ -94,40 +98,46 @@ public class ContentPresenter implements ContentContract.Presenter{
     }
 
     @Override
-    public void create(int type, final Content content) {
+    public void create(final int type, final Content content) {
         if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {
             view.showError(AppUtils.getApp().getResources().getString(R.string.no_network_tips));
             return;
         }
-//        view.showLoading();
+        view.showLoading();
         try{
-            ThreadPool.getInstance().getPool().submit(new Runnable() {
+            new FileUploader().post(content.getImgList(), new HInterface.DataCallback() {
                 @Override
-                public void run() {
-//                    try {
-//                        FileUploader.post(content.getImgList().get(0).getPath());
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
+                public void requestCallback(int result, Object data, Object tagData) {
+                    MyLog.e("result:" +data.toString());
+                    if (result == HConstant.SUCCESS) {
+                        content.setImgList((List<Image>) data);
+                        try {
+                            HttpProxy.newContent(type,content,new CommonDataCallback() {
+                                @Override
+                                public void callback(int result, Object o, Object o1) {
+                                    view.closeLoading();
+                                    if (result == HConstant.SUCCESS) {
+                                        view.onSuccess();
+                                    }else if(result == HConstant.FAIL
+                                            ||result == HConstant.ERROR
+                                    ){
+                                        handleErrs((String) o);
+                                    }
+                                }
+                            });
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            handleErrs(e.toString());
+                        }
+                    }else if(result == HConstant.FAIL){
+                        handleErrs((String) data);
+                    }
                 }
             });
-
-//            HttpProxy.newContent(type,content,new CommonDataCallback() {
-//                @Override
-//                public void callback(int result, Object o, Object o1) {
-//                    view.closeLoading();
-//                    if (result == HConstant.SUCCESS) {
-//                        view.onSuccess();
-//                    }else if(result == HConstant.FAIL
-//                            ||result == HConstant.ERROR
-//                    ){
-//                        handleErrs((String) o);
-//                    }
-//                }
-//            });
         }catch(Exception e){
             e.printStackTrace();
             handleErrs(e.toString());
+
         }
     }
 
