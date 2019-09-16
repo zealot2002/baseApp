@@ -21,9 +21,9 @@ import com.zzy.commonlib.utils.ToastUtils;
 import java.util.List;
 
 /**
- * 政策汇编详情
+ * 人才详情
  */
-public class AssemblyDetailActivity extends BaseTitleAndBottomBarActivity
+public class PersonDetailActivity extends BaseTitleAndBottomBarActivity
         implements View.OnClickListener , PioneerContract.View {
     private PioneerContract.Presenter presenter;
     private RelativeLayout rlLike;
@@ -38,7 +38,7 @@ public class AssemblyDetailActivity extends BaseTitleAndBottomBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try{
-            setTitle("政策汇编详情");
+            setTitle("人才详情");
             id = getIntent().getIntExtra(ParamConstants.ID,0);
             presenter = new PioneerPresenter(this);
             presenter.getDetail(id);

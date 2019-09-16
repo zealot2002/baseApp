@@ -65,10 +65,19 @@ public class HttpConstants {
     public static final String MY_PIONEERING_LIST = "/recruitment/selAllpioneerMy.do";
 
 
-    /**********************        先锋            ***************************/
+    /**********************        创业先锋            ***************************/
     public static final String PIONEER_TYPE_LIST = "/news_information/selAllpioneerTYPE.do";
     public static final String PIONEER_LIST = "/news_information/selAllpioneer.do";
     public static final String PIONEER_DETAIL = "/news_information/selById.do";
+
+    /**********************        创业服务            ***************************/
+    public static final String PIONEER_SERVICE_TYPE_LIST = "/news_information/selAllBusinessTYPE.do";
+    public static final String PIONEER_HELP_LIST = "/help_info/selAll.do";
+    public static final String PIONEER_ZCHB_LIST = "/news_information/selAll.do";
+    public static final String PIONEER_EXPERT_LIST = "/userinfo/selAll.do";
+
+    public static final String PIONEER_HELP_DETAIL = "/help_info/selHelp_InfoById.do";
+    public static final String PIONEER_HELP_JOIN = "/help_join/insert.do";
 
 
     /**********************        致富信息            ***************************/

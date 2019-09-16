@@ -3,10 +3,6 @@
 
     <application>
         <activity
-            android:name=".view.activity.AssemblyDetailActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/activity_theme" />
-        <activity
             android:name=".view.activity.ContentDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activity_theme"
@@ -22,6 +18,23 @@
             android:name=".view.activity.PioneeringNewActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
+
+        <activity
+            android:name=".view.activity.PioneerHelpDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/activity_theme" />
+
+        <activity
+            android:name=".view.activity.ExpertDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/activity_theme" />
+
+        <activity
+            android:name=".view.activity.AssemblyDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/activity_theme" />
+
+
         <activity
             android:name=".view.activity.PioneeringDetailActivity"
             android:screenOrientation="portrait"
@@ -40,7 +53,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
-            android:name=".view.activity.EntrepreneurshipServiceActivity"
+            android:name=".view.activity.PioneerServiceActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
@@ -49,10 +62,6 @@
             android:theme="@style/activity_theme" />
         <activity
             android:name=".view.activity.PioneerDetailActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/activity_theme" />
-        <activity
-            android:name=".view.activity.ExpertDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity

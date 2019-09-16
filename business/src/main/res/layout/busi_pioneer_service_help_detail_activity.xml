@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/gray"
+    >
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:id="@+id/tvTitle"
+                style="@style/tv_style_black1_16"
+                android:layout_marginLeft="@dimen/body_margin"
+                android:layout_marginRight="@dimen/body_margin"
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="5dp"
+                android:layerType="software"
+                android:background="@drawable/dotted_line" />
+
+            <TextView
+                android:id="@+id/tvTime"
+                style="@style/tv_style_black1_16"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:id="@+id/tvAddress"
+                style="@style/tv_style_black1_16"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:id="@+id/tvTeacher"
+                style="@style/tv_style_black1_16"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                />
+
+            <com.tencent.smtt.sdk.WebView
+                android:id="@+id/webView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbarSize="3dp"
+                android:layout_marginTop="5dp"
+                />
+
+            <Button
+                android:id="@+id/btnJoin"
+                android:layout_width="@dimen/btn_width"
+                android:layout_height="@dimen/btn_height"
+                android:background="@mipmap/btn_login"
+                android:text="报名参加"
+                android:textColor="@color/white"
+                android:textSize="@dimen/btn_text_size"
+                android:layout_marginTop="100dp"
+                android:layout_gravity="center_horizontal"
+                />
+            <TextView
+                android:id="@+id/tvJoinNum"
+                style="@style/tv_style_black1_16"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center_horizontal"
+                />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvDataList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="@dimen/bottom_margin"
+                />
+
+        </LinearLayout>
+    </FrameLayout>
+</ScrollView>

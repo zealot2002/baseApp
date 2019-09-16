@@ -14,20 +14,15 @@ import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import com.yanzhenjie.permission.Action;
-import com.yanzhenjie.permission.AndPermission;
-import com.yanzhenjie.permission.Permission;
 import com.zzy.business.view.activity.GoodsListActivity;
 import com.zzy.business.view.activity.FriendsCircleActivity;
 import com.zzy.business.view.activity.ContentListActivity;
 import com.zzy.business.view.activity.PioneeringListActivity;
-import com.zzy.business.view.activity.EntrepreneurshipServiceActivity;
+import com.zzy.business.view.activity.PioneerServiceActivity;
 import com.zzy.business.view.activity.PioneerListActivity;
-import com.zzy.business.view.activity.FeedbackActivity;
 import com.zzy.business.view.activity.GetRichInfoListActivity;
 import com.zzy.business.view.activity.IndustrialDistributionActivity;
 import com.zzy.business.view.activity.JobListActivity;
-import com.zzy.business.view.activity.ShareExperienceActivity;
 import com.zzy.business.view.activity.SpecialDkActivity;
 import com.zzy.business.view.other.SpeedyLinearLayoutManager;
 import com.zzy.common.base.BaseAppActivity;
@@ -46,8 +41,6 @@ import com.zzy.home.model.wrapper.HomeCtx;
 import com.zzy.home.presenter.HomePresenter;
 import com.zzy.home.view.adapter.NewsListAdapter;
 import com.zzy.home.view.adapter.SaleListAdapter;
-import com.zzy.sc.core.serverCenter.SCM;
-import com.zzy.sc.core.serverCenter.ScCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -241,7 +234,7 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
             }else if(v.getId() == R.id.btnGetRichInfo){
                 startActivity(GetRichInfoListActivity.class);
             }else if(v.getId() == R.id.btnEntrepreneurshipService){
-                startActivity(EntrepreneurshipServiceActivity.class);
+                startActivity(PioneerServiceActivity.class);
             }else if(v.getId() == R.id.btnEntrepreneurshipVanguard){
                 startActivity(PioneerListActivity.class);
             }else if(v.getId() == R.id.btnRecruit){

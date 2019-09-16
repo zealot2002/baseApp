@@ -20,8 +20,10 @@ import com.zzy.common.model.jsonParser.JobParser;
 import com.zzy.common.model.jsonParser.LogListParser;
 import com.zzy.common.model.jsonParser.MenuListParser;
 import com.zzy.common.model.jsonParser.PbListParser;
+import com.zzy.common.model.jsonParser.PioneerHelpParser;
 import com.zzy.common.model.jsonParser.PioneerListParser;
 import com.zzy.common.model.jsonParser.PioneerParser;
+import com.zzy.common.model.jsonParser.PioneerServiceListParser;
 import com.zzy.common.model.jsonParser.PioneeringListParser;
 import com.zzy.common.model.jsonParser.PioneeringParser;
 import com.zzy.common.constants.CommonConstants;
@@ -311,8 +313,99 @@ public class HttpProxy {
                 callback,
                 new PioneeringListParser());
     }
+    /**********************        创业服务            ***************************/
+    public static void getPioneerServiceTypeList(final HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", CommonUtils.getToken());
+        HttpUtils.getInstance().req(
+                HttpConstants.PIONEER_SERVICE_TYPE_LIST,
+                reqBody,
+                callback,
+                new MenuListParser());
+    }
+    public static void getHelpList(int pageNum,final HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", CommonUtils.getToken());
+        reqBody.put("rows", CommonConstants.PAGE_SIZE);
+        reqBody.put("page", pageNum);
+        HttpUtils.getInstance().req(
+                HttpConstants.PIONEER_HELP_LIST,
+                reqBody,
+                callback,
+                new PioneerServiceListParser());
+    }
+    public static void getZCHBList(int pageNum,final HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", CommonUtils.getToken());
+        reqBody.put("rows", CommonConstants.PAGE_SIZE);
+        reqBody.put("page", pageNum);
+        reqBody.put("NEWS_TYPE", "政策汇编");
+        HttpUtils.getInstance().req(
+                HttpConstants.PIONEER_ZCHB_LIST,
+                reqBody,
+                callback,
+                new PioneerServiceListParser());
+    }
+    public static void getContentJobList(int pageNum,final HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", CommonUtils.getToken());
+        reqBody.put("rows", CommonConstants.PAGE_SIZE);
+        reqBody.put("page", pageNum);
 
-    /**********************        先锋            ***************************/
+        HttpUtils.getInstance().req(
+                HttpConstants.HELP_LIST,
+                reqBody,
+                callback,
+                new PioneerServiceListParser());
+    }
+
+    public static void getExpertList(int pageNum,final HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", CommonUtils.getToken());
+        reqBody.put("rows", CommonConstants.PAGE_SIZE);
+        reqBody.put("page", pageNum);
+        reqBody.put("IS_EXPERT", "是");
+        HttpUtils.getInstance().req(
+                HttpConstants.PIONEER_EXPERT_LIST,
+                reqBody,
+                callback,
+                new PioneerServiceListParser());
+    }
+    public static void getUserList(int pageNum,final HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", CommonUtils.getToken());
+        reqBody.put("rows", CommonConstants.PAGE_SIZE);
+        reqBody.put("page", pageNum);
+        reqBody.put("TYPE", "技能人才");
+        HttpUtils.getInstance().req(
+                HttpConstants.JOB_LIST,
+                reqBody,
+                callback,
+                new PioneerServiceListParser());
+    }
+
+    public static void getHelpDetailList(int id,final HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", CommonUtils.getToken());
+        reqBody.put("HELP_INFO_ID", id);
+        HttpUtils.getInstance().req(
+                HttpConstants.PIONEER_HELP_DETAIL,
+                reqBody,
+                callback,
+                new PioneerHelpParser());
+    }
+    public static void joinClass(int id,final HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", CommonUtils.getToken());
+        reqBody.put("HELP_INFO_ID", id);
+        HttpUtils.getInstance().req(
+                HttpConstants.PIONEER_HELP_JOIN,
+                reqBody,
+                callback,
+                new CommonParser());
+    }
+
+    /**********************        创业先锋            ***************************/
     public static void getPioneerTypeList(final HInterface.DataCallback callback) throws Exception {
         JSONObject reqBody = new JSONObject();
         reqBody.put("TOKEN", CommonUtils.getToken());
