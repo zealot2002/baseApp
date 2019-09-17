@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 我要买东西列表
+ * 我要买|卖东西列表
  */
 public class GoodsListActivity extends BaseTitleAndBottomBarActivity
         implements View.OnClickListener , GoodsBuyContract.View {

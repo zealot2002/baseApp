@@ -41,7 +41,6 @@ public class ContentDetailActivity extends BaseTitleAndBottomBarActivity
     private RelativeLayout rlMsg;
     private EditText etMsg;
     private RecyclerView rvCommentList;
-    private OnLoadMoreListener onLoadMoreListener;
     private MyMultiRecycleAdapter adapter;
     private int msgType = 1;//1:new msg; 2:reply
     private int curCommitId;

@@ -47,6 +47,7 @@ public class GoodsDelegate implements ItemViewDelegate<Goods> {
             tvPhone.setText(bean.getPhone());
             tvContact.setText(bean.getContact());
 
+            rbScore.setmClickable(false);
             if(bean.getScore()>0){
                 //卖
                 rbScore.setVisibility(View.VISIBLE);
