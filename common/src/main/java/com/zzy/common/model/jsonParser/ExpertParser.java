@@ -1,6 +1,7 @@
 package com.zzy.common.model.jsonParser;
 
 import com.zzy.common.constants.HttpConstants;
+import com.zzy.common.model.bean.Expert;
 import com.zzy.common.model.bean.User;
 import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.http.HInterface;
@@ -23,13 +24,10 @@ public class ExpertParser implements HInterface.JsonParser {
         int errorCode = obj.getInt(HttpConstants.ERROR_CODE);
         if (errorCode == HttpConstants.NO_ERROR) {
             JSONObject dataObj = obj.getJSONObject("data");
-            User bean = new User();
-            if(dataObj.has("TOKEN")) bean.setToken(dataObj.getString("TOKEN"));
-            if(dataObj.has("USERINFO_ID")) bean.setId(dataObj.getString("USERINFO_ID"));
+            Expert bean = new Expert();
+            if(dataObj.has("USER_INTRODUCTION")) bean.setIntroduction(dataObj.getString("USER_INTRODUCTION"));
+            if(dataObj.has("MOBILE_NO")) bean.setPhone(dataObj.getString("MOBILE_NO"));
             if(dataObj.has("USERNAME")) bean.setName(dataObj.getString("USERNAME"));
-            if(dataObj.has("USER_JOB")) bean.setTitle(dataObj.getString("USER_JOB"));
-            if(dataObj.has("HEAD_PIC_ADDR")) bean.setHeadUrl(dataObj.getString("HEAD_PIC_ADDR"));
-            if(dataObj.has("USER_GARDE")) bean.setScore(dataObj.getString("USER_GARDE"));
 
             return new Object[]{HConstant.SUCCESS,bean};
         } else {

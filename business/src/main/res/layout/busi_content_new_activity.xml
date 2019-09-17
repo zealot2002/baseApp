@@ -72,25 +72,12 @@
             android:layout_marginTop="10dp"
             />
         <!--tup-->
-        <Button
-            android:id="@+id/btnAdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="添加图片"
-            android:textColor="@color/white"
-            android:textSize="@dimen/btn_text_size"
-            />
-
-        <LinearLayout
-            android:id="@+id/llContainer"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvPhotoPicker"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="vertical">
-
-        </LinearLayout>
+            />
         <Button
             android:id="@+id/btnOk"
             android:layout_width="@dimen/btn_width"

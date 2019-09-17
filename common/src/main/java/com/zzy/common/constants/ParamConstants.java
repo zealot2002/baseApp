@@ -29,6 +29,7 @@ public class ParamConstants {
     public static final String ADDRESS = "address";
     public static final String PASSWORD = "password";
     public static final String ID = "id";
+    public static final String CALLER = "caller";
     public static final String MONEY = "money";
 
     public static final String SUCCESS = "success";

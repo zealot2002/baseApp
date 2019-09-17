@@ -28,7 +28,6 @@ public class PioneerDetailActivity extends BaseTitleAndBottomBarActivity
     private RelativeLayout rlLike;
     private TextView tvTitle,tvLikeNum,tvLookNum;
     private Button btnStudy;
-    private ImageView ivPic;
     private WebView webView;
     private int id;
     private Pioneer bean;
@@ -69,7 +68,6 @@ public class PioneerDetailActivity extends BaseTitleAndBottomBarActivity
         webView = findViewById(R.id.webView);
         tvLookNum = findViewById(R.id.tvLookNum);
         tvLikeNum = findViewById(R.id.tvLikeNum);
-        ivPic = findViewById(R.id.ivPic);
         rlLike = findViewById(R.id.rlLike);
 
         webView.loadData(bean.getContent(),"text/html","utf-8");
@@ -77,7 +75,6 @@ public class PioneerDetailActivity extends BaseTitleAndBottomBarActivity
         tvLikeNum.setText("赞 ("+bean.getLikeNum()+")");
         tvLookNum.setText("浏览数 :"+bean.getLookNum());
         if(bean.isPlaceTop()){
-            ivPic.setVisibility(View.VISIBLE);
             tvTitle.setText("         "+bean.getTitle());
         }else{
             tvTitle.setText(bean.getTitle());

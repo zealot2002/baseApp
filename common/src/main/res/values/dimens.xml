@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="actionBarSize">32dp</dimen>
+
     <dimen name="body_margin">60px</dimen>
     <dimen name="body_margin2">40px</dimen>
     <dimen name="bottom_margin">40dp</dimen>

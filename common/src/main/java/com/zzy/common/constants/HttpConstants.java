@@ -78,7 +78,7 @@ public class HttpConstants {
 
     public static final String PIONEER_HELP_DETAIL = "/help_info/selHelp_InfoById.do";
     public static final String PIONEER_HELP_JOIN = "/help_join/insert.do";
-
+    public static final String PIONEER_EXPERT_DETAIL = "/userinfo/selById.do";
 
     /**********************        致富信息            ***************************/
     public static final String RICH_INFO_LIST = "/news_information/selAllRich_information.do";

@@ -10,10 +10,8 @@ public class Expert {
     private String introduction;
     private String phone;
 
-    public Expert(String name, String introduction, String phone) {
-        this.name = name;
-        this.introduction = introduction;
-        this.phone = phone;
+    public Expert() {
+
     }
 
     public String getName() {

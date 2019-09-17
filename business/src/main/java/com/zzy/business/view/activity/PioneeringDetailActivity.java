@@ -22,7 +22,7 @@ import com.zzy.commonlib.utils.ToastUtils;
 public class PioneeringDetailActivity extends BaseTitleAndBottomBarActivity
         implements View.OnClickListener, PioneeringContract.View {
     private EditText etPhone,etContact,etContent;
-    private TextView tvReport;
+    private TextView tvContent,tvContact,tvReport;
     private PopupEditDialog dialog;
 
     private RelativeLayout rlSkill1,rlSkill2,rlSkill3,rlSkill4,rlSkill5,rlSkill6;
@@ -32,13 +32,19 @@ public class PioneeringDetailActivity extends BaseTitleAndBottomBarActivity
     private int id;
     private PioneeringContract.Presenter presenter;
     private Pioneering bean;
+    private int caller; //1:  创业信息详情；2：技能详情
 /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try{
-            setTitle("创业信息详情");
             id = getIntent().getIntExtra(ParamConstants.ID,0);
+            caller = getIntent().getIntExtra(ParamConstants.CALLER,1);
+            if(1 == caller){
+                setTitle("创业信息详情");
+            }else if(2 == caller){
+                setTitle("技能详情");
+            }
             presenter = new PioneeringPresenter(this);
             presenter.getDetail(id);
 
@@ -53,10 +59,11 @@ public class PioneeringDetailActivity extends BaseTitleAndBottomBarActivity
     }
 
     private void setupViews() {
+        tvContact = findViewById(R.id.tvContact);
         etContent = findViewById(R.id.etContent);
-        etPhone = findViewById(R.id.etPhone);
+        tvContent = findViewById(R.id.tvContent);
         etContact = findViewById(R.id.etContact);
-
+        etPhone = findViewById(R.id.etPhone);
         rlSkill1 = findViewById(R.id.rlSkill1);
         rlSkill2 = findViewById(R.id.rlSkill2);
         rlSkill3 = findViewById(R.id.rlSkill3);
@@ -70,13 +77,21 @@ public class PioneeringDetailActivity extends BaseTitleAndBottomBarActivity
         tvSkill5 = findViewById(R.id.tvSkill5);
         tvSkill6 = findViewById(R.id.tvSkill6);
         ivPic = findViewById(R.id.ivPic);
+        tvReport = findViewById(R.id.tvReport);
+        tvReport.setOnClickListener(this);
+
 
         etPhone.setText(bean.getPhone());
         etContact.setText(bean.getContact());
-        etContent.setText(bean.getContent());
-
-        tvReport = findViewById(R.id.tvReport);
-        tvReport.setOnClickListener(this);
+        if(1 == caller){
+            etContent.setText(bean.getContent());
+            tvContact.setText("联  系  人 :   ");
+        }else {
+            tvContent.setVisibility(View.GONE);
+            etContent.setVisibility(View.GONE);
+            tvReport.setVisibility(View.GONE);
+            tvContact.setText("姓      名 :   ");
+        }
 
         bean.setHeadUrl("http://img4.imgtn.bdimg.com/it/u=3136075639,3338708347&fm=26&gp=0.jpg");
         ImageLoader.loadImage(ivPic,bean.getHeadUrl());

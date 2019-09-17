@@ -101,12 +101,17 @@ public class PioneerServiceActivity extends BaseTitleAndBottomBarActivity
                     if(bean.getType().equals(CommonConstants.PIONEER_SERVICE_HELP)){
                         startActivity(PioneerHelpDetailActivity.class,bundle);
                     }else if(bean.getType().equals(CommonConstants.PIONEER_SERVICE_ZCHB)){
-                        startActivity(AssemblyDetailActivity.class,bundle);
+                        //致富信息
+                        startActivity(GetRichInfoDetailActivity.class,bundle);
                     }else if(bean.getType().equals(CommonConstants.PIONEER_SERVICE_EXPERT)){
+
                         startActivity(ExpertDetailActivity.class,bundle);
                     }else if(bean.getType().equals(CommonConstants.PIONEER_SERVICE_PERSON)){
-                        startActivity(PersonDetailActivity.class,bundle);
+                        //技能详情
+                        bundle.putInt(ParamConstants.CALLER,2);
+                        startActivity(PioneeringDetailActivity.class,bundle);
                     }else if(bean.getType().equals(CommonConstants.PIONEER_SERVICE_PIONEER_HELP)){
+                        //创业求助
                         bundle.putInt(ParamConstants.TYPE, CommonConstants.CONTENT_HELP);
                         startActivity(ContentDetailActivity.class,bundle);
                     }

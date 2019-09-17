@@ -86,6 +86,7 @@ public class PioneeringListActivity extends BaseTitleAndBottomBarActivity
                 public void onItemChildClick(ViewHolder viewHolder, Object data, int position) {
                     Bundle bundle = new Bundle();
                     bundle.putInt(ParamConstants.ID,dataList.get(position).getId());
+                    bundle.putInt(ParamConstants.CALLER,1);
                     startActivity(PioneeringDetailActivity.class,bundle);
                 }
             });

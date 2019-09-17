@@ -17,12 +17,8 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
-import com.jaiky.imagespickers.ImageConfig;
-import com.jaiky.imagespickers.ImageSelector;
-import com.jaiky.imagespickers.ImageSelectorActivity;
 import com.zzy.common.base.BaseAppActivity;
 import com.zzy.common.model.bean.Archives;
-import com.zzy.common.utils.GlideLoader;
 import com.zzy.common.utils.StatusBarUtils;
 import com.zzy.common.widget.LoadingHelper;
 import com.zzy.common.widget.TagEditDialog;
@@ -68,8 +64,6 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
     private TagEditDialog dialog;
     private List<String> userTypeList;
 
-    private ImageConfig imageConfig;
-    public static final int REQUEST_CODE = 123;
     /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -206,17 +200,17 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
                 }
                 pvTime.show();
             }else if(v.getId() == R.id.ivPic){
-                imageConfig = new ImageConfig.Builder(
-                        new GlideLoader())
-                        .steepToolBarColor(getResources().getColor(R.color.titleBlue))
-                        .titleBgColor(getResources().getColor(R.color.titleBlue))
-                        .titleSubmitTextColor(getResources().getColor(R.color.white))
-                        .titleTextColor(getResources().getColor(R.color.white))
-                        // 开启单选   （默认为多选）
-                        .singleSelect()
-                        .requestCode(REQUEST_CODE)
-                        .build();
-                ImageSelector.open(RegisterActivity.this, imageConfig);
+//                imageConfig = new ImageConfig.Builder(
+//                        new GlideLoader())
+//                        .steepToolBarColor(getResources().getColor(R.color.titleBlue))
+//                        .titleBgColor(getResources().getColor(R.color.titleBlue))
+//                        .titleSubmitTextColor(getResources().getColor(R.color.white))
+//                        .titleTextColor(getResources().getColor(R.color.white))
+//                        // 开启单选   （默认为多选）
+//                        .singleSelect()
+//                        .requestCode(REQUEST_CODE)
+//                        .build();
+//                ImageSelector.open(RegisterActivity.this, imageConfig);
             }else if(v.getId() == R.id.btnOk){
                 if(tagView.getTags().length>6){
                     ToastUtils.showShort("最多可以添加6个技能");
@@ -236,14 +230,14 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK && data != null) {
-            List<String> pathList = data.getStringArrayListExtra(ImageSelectorActivity.EXTRA_RESULT);
-            for (String path : pathList) {
-                bean.setCompanyImgUrl(path);
-                break;
-            }
-            ivPic.setImageURI(Uri.fromFile(new File(bean.getCompanyImgUrl())));
-        }
+//        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+//            List<String> pathList = data.getStringArrayListExtra(ImageSelectorActivity.EXTRA_RESULT);
+//            for (String path : pathList) {
+//                bean.setCompanyImgUrl(path);
+//                break;
+//            }
+//            ivPic.setImageURI(Uri.fromFile(new File(bean.getCompanyImgUrl())));
+//        }
     }
 
     private boolean checkData() {

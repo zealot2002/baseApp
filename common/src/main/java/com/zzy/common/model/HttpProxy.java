@@ -11,6 +11,7 @@ import com.zzy.common.model.jsonParser.ArchivesParser;
 import com.zzy.common.model.jsonParser.CommentListParser;
 import com.zzy.common.model.jsonParser.ContentListParser;
 import com.zzy.common.model.jsonParser.ContentParser;
+import com.zzy.common.model.jsonParser.ExpertParser;
 import com.zzy.common.model.jsonParser.GetRichInfoListParser;
 import com.zzy.common.model.jsonParser.GetRichInfoParser;
 import com.zzy.common.model.jsonParser.GoodsListParser;
@@ -383,7 +384,17 @@ public class HttpProxy {
                 callback,
                 new PioneerServiceListParser());
     }
-
+    public static void getExpertDetail(int id,final HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", CommonUtils.getToken());
+        reqBody.put("USERINFO_ID", id);
+        reqBody.put("IS_EXPERT", "是");
+        HttpUtils.getInstance().req(
+                HttpConstants.PIONEER_EXPERT_DETAIL,
+                reqBody,
+                callback,
+                new ExpertParser());
+    }
     public static void getHelpDetailList(int id,final HInterface.DataCallback callback) throws Exception {
         JSONObject reqBody = new JSONObject();
         reqBody.put("TOKEN", CommonUtils.getToken());
