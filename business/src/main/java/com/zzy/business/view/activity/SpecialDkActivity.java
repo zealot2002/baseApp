@@ -12,6 +12,7 @@ import com.tencent.smtt.sdk.WebViewClient;
 import com.zzy.business.R;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.base.BaseToolbarActivity;
+import com.zzy.common.constants.HttpConstants;
 
 /**
  * 特色东坑
@@ -20,9 +21,6 @@ public class SpecialDkActivity extends BaseTitleAndBottomBarActivity implements 
     private RelativeLayout rlMenu1,rlMenu2,rlMenu3;
     private TextView tv1,tv2,tv3;
     private WebView webView;
-    private static final String URL1 = "http://www.baidu.com";
-    private static final String URL2 = "http://www.sohu.com";
-    private static final String URL3 = "http://www.sina.com";
 /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +47,7 @@ public class SpecialDkActivity extends BaseTitleAndBottomBarActivity implements 
         rlMenu3.setOnClickListener(this);
 
         initWebView();
-        webView.loadUrl(URL1);
+        webView.loadUrl(HttpConstants.DK_URL_1);
     }
     private void reset(){
         rlMenu1.setBackgroundResource(R.color.translucent);
@@ -66,17 +64,16 @@ public class SpecialDkActivity extends BaseTitleAndBottomBarActivity implements 
         if(v.getId() == R.id.rlMenu1){
             rlMenu1.setBackgroundResource(R.color.white);
             tv1.setTextColor(getResources().getColor(R.color.blue));
-            webView.loadUrl(URL1);
+            webView.loadUrl(HttpConstants.DK_URL_1);
         }else if(v.getId() == R.id.rlMenu2){
             rlMenu2.setBackgroundResource(R.color.white);
             tv2.setTextColor(getResources().getColor(R.color.blue));
-            webView.loadUrl(URL2);
+            webView.loadUrl(HttpConstants.DK_URL_2);
         }else if(v.getId() == R.id.rlMenu3){
             rlMenu3.setBackgroundResource(R.color.white);
             tv3.setTextColor(getResources().getColor(R.color.blue));
-            webView.loadUrl(URL3);
+            webView.loadUrl(HttpConstants.DK_URL_3);
         }
-
     }
 
     private void initWebView() {

@@ -106,6 +106,22 @@ public class LoginPresenter implements LoginContract.Presenter{
         }
         view.showLoading();
         try{
+            if(!bean.getIsCompany().equals("是")){
+                HttpProxy.register2(bean,new CommonDataCallback() {
+                    @Override
+                    public void callback(int result, Object o, Object o1) {
+                        view.closeLoading();
+                        if (result == HConstant.SUCCESS) {
+                            view.onSuccess();
+                        }else if(result == HConstant.FAIL
+                                ||result == HConstant.ERROR
+                        ){
+                            handleErrs((String) o);
+                        }
+                    }
+                });
+                return;
+            }
             FileUploader.post(bean.getCompanyImgUrl(), new HInterface.DataCallback() {
                 @Override
                 public void requestCallback(int result, Object o, Object tagData) {
@@ -115,7 +131,7 @@ public class LoginPresenter implements LoginContract.Presenter{
                             Image image = ImageParser.parse((String) o);
                             if(image!=null){
                                 bean.setCompanyImgName(image.getName());
-                                bean.setCompanyImgUrl(HttpConstants.SERVER_ADDRESS+"/"+image.getPath());
+                                bean.setCompanyImgUrl(image.getPath());
                             }
                             HttpProxy.register2(bean,new CommonDataCallback() {
                                 @Override

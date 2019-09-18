@@ -292,7 +292,7 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
 
     @Override
     public void reload(boolean bShow) {
-
+        presenter.start();
     }
 
     @Override

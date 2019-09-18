@@ -1,10 +1,13 @@
 package com.zzy.login.view.activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.v7.widget.OrientationHelper;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,24 +20,33 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
+import com.zzy.common.adapter.PhotoAdapter;
+import com.zzy.common.adapter.RecyclerItemClickListener;
 import com.zzy.common.base.BaseAppActivity;
 import com.zzy.common.model.bean.Archives;
+import com.zzy.common.model.bean.Image;
 import com.zzy.common.utils.StatusBarUtils;
 import com.zzy.common.widget.LoadingHelper;
 import com.zzy.common.widget.TagEditDialog;
+import com.zzy.commonlib.utils.FileUtils;
 import com.zzy.commonlib.utils.ToastUtils;
 import com.zzy.commonlib.utils.ValidateUtils;
 import com.zzy.login.R;
 import com.zzy.login.contract.LoginContract;
+import com.zzy.login.model.AreaTreeNode;
+import com.zzy.login.model.jsonParser.AreasParser;
 import com.zzy.login.presenter.LoginPresenter;
 
-import java.io.File;
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import fr.ganfra.materialspinner.MaterialSpinner;
 import me.gujun.android.taggroup.TagGroup;
+import me.iwf.photopicker.PhotoPicker;
+import me.iwf.photopicker.PhotoPreview;
 
 /**
  * register
@@ -54,7 +66,6 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
     private RadioButton btnYes;
     private View lCompany,lPersonal;
     private EditText etCompanyName,etCompanyScope;
-    private ImageView ivPic;
 
     //person
     private TagGroup tagView;
@@ -64,6 +75,14 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
     private TagEditDialog dialog;
     private List<String> userTypeList;
 
+    private PhotoAdapter photoAdapter;
+    private ArrayList<String> selectedPhotos = new ArrayList<>();
+
+    //area
+    private AreaTreeNode areaRoot, selectedNode;
+    private List<String> list1 = new ArrayList<>();
+    private List<String> list2 = new ArrayList<>();
+    private List<String> list3 = new ArrayList<>();
     /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,14 +90,17 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
         setContentView(R.layout.login_register_activity);
         StatusBarUtils.setStatusBarFontIconLight(this, false);
         StatusBarUtils.fixStatusHeight(this, (ViewGroup) findViewById(R.id.rootView));
-        setupViews();
-
-        loadingHelper = new LoadingHelper(this);
-        presenter = new LoginPresenter(this);
-        bean = new Archives();
+        try{
+            setupViews();
+            loadingHelper = new LoadingHelper(this);
+            presenter = new LoginPresenter(this);
+            bean = new Archives();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
-    private void setupViews() {
+    private void setupViews() throws JSONException {
         TextView tvTitle = findViewById(R.id.tvTitle);
         tvTitle.setText("创业之旅");
         RelativeLayout rlBack = findViewById(R.id.rlBack);
@@ -113,43 +135,65 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
         setupSpinner();
     }
 
-    private void setupSpinner() {
-//
-//
-//        try{
-//            String data = FileUtils.readFileFromAssets(context,"foundFragment.json");
-//            Page page = ElfJsonParser.parse(data);
-//            callback.onCallback(true,page);
-//        }catch(Exception e){
-//            e.printStackTrace();
-//            callback.onCallback(false,e.toString());
-//        }
-//
-        List<String> list1 = new ArrayList<>();
-        list1.add("青田县");
-        list1.add("松阳县");
-        list1.add("云和县");
+    private void setupSpinner() throws JSONException {
+        String data = FileUtils.readFileFromAssets(this,"areas.json");
+        areaRoot = AreasParser.parse(data);
+        selectedNode = areaRoot;
+        list1.clear();
+        for(int i=0;i<areaRoot.getChildren().size();i++){
+            list1.add(areaRoot.getChildren().get(i).getName());
+        }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, list1);
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinnerCounty = findViewById(R.id.spinnerCounty);
         spinnerCounty.setAdapter(adapter);
+        spinnerCounty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, final int p1, long id) {
+                list2.clear();
+                for(int i=0;i<areaRoot.getChildren().get(p1).getChildren().size();i++){
+                    list2.add(areaRoot.getChildren().get(p1).getChildren().get(i).getName());
+                }
+                ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(RegisterActivity.this, R.layout.spinner_item, list2);
+                adapter2.setDropDownViewResource(R.layout.spinner_dropdown_item);
+                spinnerTown = findViewById(R.id.spinnerTown);
+                spinnerTown.setAdapter(adapter2);
+                spinnerTown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, final int p2, long id) {
+                        list3.clear();
+                        for(int i=0;i<areaRoot.getChildren().get(p1).getChildren().get(p2).getChildren().size();i++){
+                            list3.add(areaRoot.getChildren().get(p1).getChildren().get(p2).getChildren().get(i).getName());
+                        }
+                        ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(RegisterActivity.this, R.layout.spinner_item, list3);
+                        adapter3.setDropDownViewResource(R.layout.spinner_dropdown_item);
+                        spinnerVillage = findViewById(R.id.spinnerVillage);
+                        spinnerVillage.setAdapter(adapter3);
+                        spinnerVillage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view, int p3, long id) {
+                                selectedNode = areaRoot.getChildren().get(p1).getChildren().get(p2).getChildren().get(p3);
+                            }
 
-        List<String> list2 = new ArrayList<>();
-        list2.add("颍川镇");
-        list2.add("晋宁镇");
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, R.layout.spinner_item, list2);
-        adapter2.setDropDownViewResource(R.layout.spinner_dropdown_item);
-        spinnerTown = findViewById(R.id.spinnerTown);
-        spinnerTown.setAdapter(adapter2);
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parent) {
 
-        List<String> list3 = new ArrayList<>();
-        list3.add("大坑村");
-        list3.add("祖父村");
-        ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this, R.layout.spinner_item, list3);
-        adapter3.setDropDownViewResource(R.layout.spinner_dropdown_item);
-        spinnerVillage = findViewById(R.id.spinnerVillage);
-        spinnerVillage.setAdapter(adapter3);
+                            }
+                        });
+                    }
 
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
 
@@ -164,9 +208,9 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
                 bean.setPhone(etPhone.getText().toString().trim());
                 bean.setSms(etSms.getText().toString().trim());
                 bean.setInviter(etInviter.getText().toString().trim());
-                bean.setArea1(spinnerCounty.getSelectedItemPosition()+"");
-                bean.setArea2(spinnerTown.getSelectedItemPosition()+"");
-                bean.setArea3(spinnerVillage.getSelectedItemPosition()+"");
+                bean.setArea1(selectedNode.getParent().getParent().getName());
+                bean.setArea2(selectedNode.getParent().getName());
+                bean.setArea3(selectedNode.getName());
                 bean.setAddress(etAddress.getText().toString().trim());
                 bean.setBirthday(tvBirthday.getText().toString().trim());
                 bean.setSex(btnMan.isChecked()?"男":"女");
@@ -220,24 +264,17 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
                 bean.setIsCompany(btnYes.isChecked()?"是":"否");
                 bean.setCompanyName(etCompanyName.getText().toString().trim());
                 bean.setCompanyScope(etCompanyScope.getText().toString().trim());
+                for(String s:tagView.getTags()){
+                    bean.getSkills().add(s);
+                }
+                for(String s:selectedPhotos){
+                    bean.setCompanyImgUrl(s);
+                }
                 presenter.register2(bean);
             }
         }catch (Exception e){
             e.printStackTrace();
         }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK && data != null) {
-//            List<String> pathList = data.getStringArrayListExtra(ImageSelectorActivity.EXTRA_RESULT);
-//            for (String path : pathList) {
-//                bean.setCompanyImgUrl(path);
-//                break;
-//            }
-//            ivPic.setImageURI(Uri.fromFile(new File(bean.getCompanyImgUrl())));
-//        }
     }
 
     private boolean checkData() {
@@ -280,6 +317,51 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
         bean.setUserId(s);
         showNext();
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK &&
+                (requestCode == PhotoPicker.REQUEST_CODE || requestCode == PhotoPreview.REQUEST_CODE)) {
+            List<String> photos = null;
+            if (data != null) {
+                photos = data.getStringArrayListExtra(PhotoPicker.KEY_SELECTED_PHOTOS);
+            }
+            selectedPhotos.clear();
+            if (photos != null) {
+                selectedPhotos.addAll(photos);
+            }
+            photoAdapter.notifyDataSetChanged();
+        }
+    }
+    private void setupPhotoPicker() {
+        RecyclerView recyclerView = findViewById(R.id.rvPhotoPicker);
+        photoAdapter = new PhotoAdapter(this, selectedPhotos);
+
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(3,
+                OrientationHelper.VERTICAL));
+        recyclerView.setAdapter(photoAdapter);
+
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this,
+                new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        if (photoAdapter.getItemViewType(position) == PhotoAdapter.TYPE_ADD) {
+                            PhotoPicker.builder()
+                                    .setPhotoCount(1)
+                                    .setShowCamera(true)
+                                    .setPreviewEnabled(false)
+                                    .setSelected(selectedPhotos)
+                                    .start(RegisterActivity.this);
+                        } else {
+                            PhotoPreview.builder()
+                                    .setPhotos(selectedPhotos)
+                                    .setCurrentItem(position)
+                                    .start(RegisterActivity.this);
+                        }
+                    }
+                }));
+
+    }
 
     private void showNext() {
         lFirst.setVisibility(View.GONE);
@@ -302,8 +384,7 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
         lCompany = findViewById(R.id.lCompany);
         etCompanyName = findViewById(R.id.etCompanyName);
         etCompanyScope = findViewById(R.id.etCompanyScope);
-        ivPic = findViewById(R.id.ivPic);
-        ivPic.setOnClickListener(this);
+        setupPhotoPicker();
 
         btnYes = findViewById(R.id.btnYes);
         rgIsCompany = findViewById(R.id.rgIsCompany);
@@ -338,7 +419,8 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
 
     @Override
     public void onSuccess() {
-
+        ToastUtils.showShort("注册成功");
+        startActivity(LoginActivity.class);
     }
 
     @Override

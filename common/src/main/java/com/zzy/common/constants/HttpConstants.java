@@ -2,12 +2,10 @@ package com.zzy.common.constants;
 
 public class HttpConstants {
 
-
     public static String TOKEN = "95ffa88f010f1b577ef5f3cf5a1585e7";
 
     // 测试环境
     public static String SERVER_ADDRESS = "http://grecode.gnway.cc:82";
-
 
     public static String FILE_SERVER_URL = SERVER_ADDRESS+"/forum_pic/upload.do";
 
@@ -24,15 +22,16 @@ public class HttpConstants {
     /*************************************************************************************************************/
     public static final String UPLOAD_FILE = "/forum_pic/upload.do";
 
+    /**************************    特色东坑 *******************************/
+    public static final String DK_URL_1 = SERVER_ADDRESS+"/page/characteristic/introduction.html";
+    public static final String DK_URL_2 = SERVER_ADDRESS+"/page/characteristic/industry.html";
+    public static final String DK_URL_3 = SERVER_ADDRESS+"/page/characteristic/programme.html";
+
     /**************************    主页 *******************************/
     public static final String HOME_DATA = "/userinfo/index.do";
 
-
-
     /**************************    电话本 *******************************/
     public static final String PB_LIST = "/userinfo/selAllbook.do";
-
-
 
     /**************************    登录相关 *******************************/
     public static final String LOGIN = "/Mobile_login.do";
