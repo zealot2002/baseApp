@@ -6,33 +6,21 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.tencent.smtt.sdk.WebView;
 import com.zzy.business.R;
-import com.zzy.business.contract.PioneerContract;
-import com.zzy.business.contract.PioneerServiceContract;
-import com.zzy.business.presenter.PioneerPresenter;
-import com.zzy.business.presenter.PioneerServicePresenter;
-import com.zzy.business.view.itemViewDelegate.ContentCommentDelegate;
 import com.zzy.business.view.itemViewDelegate.ExpertDelegate;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.constants.ParamConstants;
 import com.zzy.common.model.HttpProxy;
 import com.zzy.common.model.bean.HelpClass;
-import com.zzy.common.model.bean.Menu;
-import com.zzy.common.model.bean.Pioneer;
 import com.zzy.common.network.CommonDataCallback;
 import com.zzy.common.widget.recycleAdapter.MyMultiRecycleAdapter;
-import com.zzy.common.widget.recycleAdapter.OnLoadMoreListener;
 import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.commonlib.utils.NetUtils;
 import com.zzy.commonlib.utils.ToastUtils;
-
-import java.util.List;
 
 /**
  * 创业帮扶详情
@@ -68,7 +56,7 @@ public class PioneerHelpDetailActivity extends BaseTitleAndBottomBarActivity
         }
         showLoading();
         try{
-            HttpProxy.getHelpDetailList(id,new CommonDataCallback() {
+            HttpProxy.getHelpDetail(id,new CommonDataCallback() {
                 @Override
                 public void callback(int result, Object o, Object o1) {
                     closeLoading();
@@ -115,7 +103,7 @@ public class PioneerHelpDetailActivity extends BaseTitleAndBottomBarActivity
 
         tvTitle.setText(bean.getTitle());
         tvTime.setText("时间："+bean.getTime());
-        tvAddress.setText("地点："+bean.getAdress());
+        tvAddress.setText("地点："+bean.getAddress());
         tvTeacher.setText("专家简介："+bean.getTeacher());
         tvJoinNum.setText("目前已有"+bean.getParterNum()+"人报名参加");
 

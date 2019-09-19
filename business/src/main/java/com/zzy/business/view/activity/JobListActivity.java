@@ -128,6 +128,13 @@ public class JobListActivity extends BaseTitleAndBottomBarActivity implements Jo
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        pageNum = 1;
+        presenter.getList(pageNum);
+    }
+
+    @Override
     public void reload(boolean bShow) {
         presenter.getList(pageNum);
     }

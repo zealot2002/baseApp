@@ -50,7 +50,7 @@ public class ContentParser implements HInterface.JsonParser {
                 Comment comment = new Comment();
                 comment.setId(comObj.getString("COMMENT_ID"));
                 comment.setUserName(comObj.getString("COMMENT_PERSON"));
-                comment.setUserId(dataObj.getInt("COMMENT_PERSON_ID"));
+                comment.setUserId(comObj.getInt("COMMENT_PERSON_ID"));
                 comment.setDate(comObj.getString("COMMENT_RELEASE_TIME"));
                 comment.setContent(comObj.getString("COMMENT_TEXT"));
                 comment.setUserHeadUrl(comObj.getString("HEAD_PIC_ADDR"));

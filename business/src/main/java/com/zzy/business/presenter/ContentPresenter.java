@@ -105,6 +105,22 @@ public class ContentPresenter implements ContentContract.Presenter{
         }
         view.showLoading();
         try{
+            if(content.getImgList().isEmpty()){
+                HttpProxy.newContent(type,content,new CommonDataCallback() {
+                    @Override
+                    public void callback(int result, Object o, Object o1) {
+                        view.closeLoading();
+                        if (result == HConstant.SUCCESS) {
+                            view.onSuccess();
+                        }else if(result == HConstant.FAIL
+                                ||result == HConstant.ERROR
+                        ){
+                            handleErrs((String) o);
+                        }
+                    }
+                });
+                return;
+            }
             new FileUploader().post(content.getImgList(), new HInterface.DataCallback() {
                 @Override
                 public void requestCallback(int result, Object data, Object tagData) {
@@ -137,7 +153,6 @@ public class ContentPresenter implements ContentContract.Presenter{
         }catch(Exception e){
             e.printStackTrace();
             handleErrs(e.toString());
-
         }
     }
 

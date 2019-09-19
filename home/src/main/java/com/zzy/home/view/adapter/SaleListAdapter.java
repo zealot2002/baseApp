@@ -57,7 +57,7 @@ public class SaleListAdapter extends
                 index = position%mDataSet.size();
             }
             SaleInfo bean = mDataSet.get(index);
-            holder.tvTitle.setText(bean.getDealFinishTime()+"  "+bean.getTitle());
+            holder.tvTitle.setText(bean.getPublishTime()+"  "+bean.getTitle());
         }catch (Exception e){
             e.printStackTrace();
         }

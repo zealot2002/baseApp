@@ -68,6 +68,7 @@ public class ExpertDetailActivity extends BaseTitleAndBottomBarActivity
                 }
             });
         }catch(Exception e){
+            closeLoading();
             e.printStackTrace();
             ToastUtils.showShort(e.toString());
         }
@@ -88,7 +89,7 @@ public class ExpertDetailActivity extends BaseTitleAndBottomBarActivity
 
     @Override
     protected int getLayoutId() {
-        return R.layout.busi_pioneer_detail_activity;
+        return R.layout.busi_expert_detail_activity;
     }
 
     private void setupViews() {
@@ -97,7 +98,7 @@ public class ExpertDetailActivity extends BaseTitleAndBottomBarActivity
         webView = findViewById(R.id.webView);
 
         tvTitle.setText(bean.getName());
-        tvPhone.setText(bean.getPhone());
+        tvPhone.setText("联系方式："+bean.getPhone());
         webView.loadData(bean.getIntroduction(),"text/html","utf-8");
     }
 

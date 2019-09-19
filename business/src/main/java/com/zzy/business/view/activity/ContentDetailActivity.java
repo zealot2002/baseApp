@@ -101,7 +101,7 @@ public class ContentDetailActivity extends BaseTitleAndBottomBarActivity
 
         tvDate.setText("时间: "+bean.getDate());
 
-        String likeNum = TextUtils.isEmpty(bean.getLikeNum())?"":bean.getLikeNum();
+        String likeNum = TextUtils.isEmpty(bean.getLikeNum())?"0":bean.getLikeNum();
         tvLikeNum.setText("赞 ("+ likeNum +")");
         tvLookNum.setText("浏览数 :"+bean.getLookNum());
         if(bean.isPlaceTop()){
@@ -130,7 +130,7 @@ public class ContentDetailActivity extends BaseTitleAndBottomBarActivity
 
             /*adapter*/
             adapter = new MyMultiRecycleAdapter(this,bean.getCommentList(),false);
-            adapter.addItemViewDelegate(new ContentCommentDelegate(new ContentCommentDelegate.Listener() {
+            adapter.addItemViewDelegate(new ContentCommentDelegate(id+"",new ContentCommentDelegate.Listener() {
                 @Override
                 public void onReply(int position) {
                     curCommitId = Integer.valueOf(bean.getCommentList().get(position).getId());

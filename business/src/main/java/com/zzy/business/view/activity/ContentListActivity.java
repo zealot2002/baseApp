@@ -54,7 +54,7 @@ public class ContentListActivity extends BaseTitleAndBottomBarActivity
             setTitle("分享经验");
         }
         presenter = new ContentPresenter(this);
-        presenter.getList(type,pageNum);
+//        presenter.getList(type,pageNum);
     }
 
     @Override
@@ -112,6 +112,12 @@ public class ContentListActivity extends BaseTitleAndBottomBarActivity
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        reload(true);
+    }
+
+    @Override
     public void updateUI(Object o) {
         super.updateUI(o);
         try{
@@ -150,6 +156,8 @@ public class ContentListActivity extends BaseTitleAndBottomBarActivity
 
     @Override
     public void reload(boolean bShow) {
+        pageNum = 1;
+        dataList.clear();
         presenter.getList(type,pageNum);
     }
 

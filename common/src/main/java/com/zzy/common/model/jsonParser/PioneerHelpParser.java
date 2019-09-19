@@ -31,8 +31,10 @@ public class PioneerHelpParser implements HInterface.JsonParser {
             bean.setTime(dataObj.getString("START_TIME"));
             bean.setParterNum(dataObj.getInt("JOIN_PEOPLE_NUM"));
             bean.setIsJoined(dataObj.getString("IS_SIGNUP"));
+            bean.setAddress(dataObj.getString("PROJECT_ADDR"));
+            bean.setTeacher(dataObj.getString("USER_INTRODUCTION"));
 
-            JSONArray array = dataObj.getJSONArray("HEAD_PIC_ADDR");
+            JSONArray array = dataObj.getJSONArray("HELP_JOIN");
             for(int i=0;i<array.length();i++){
                 JSONObject po = array.getJSONObject(i);
                 HelpClass.Parter parter = new HelpClass.Parter(

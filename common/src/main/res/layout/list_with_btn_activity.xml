@@ -10,7 +10,7 @@
         android:layout_width="@dimen/btn_width"
         android:layout_height="@dimen/btn_height"
         android:background="@mipmap/btn_login"
-        android:text="完成"
+        android:text=""
         android:textColor="@color/white"
         android:textSize="14sp"
         android:layout_gravity="right"

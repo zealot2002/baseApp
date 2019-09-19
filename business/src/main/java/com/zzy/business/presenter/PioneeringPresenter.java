@@ -59,26 +59,45 @@ public class PioneeringPresenter implements PioneeringContract.Presenter{
     }
 
     @Override
-    public void getDetail(int id) {
+    public void getDetail(int type,int id) {
         if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {
             view.showError(AppUtils.getApp().getResources().getString(R.string.no_network_tips));
             return;
         }
         view.showLoading();
         try{
-            HttpProxy.getPioneeringDetail(id,new CommonDataCallback() {
-                @Override
-                public void callback(int result, Object o, Object o1) {
-                    view.closeLoading();
-                    if (result == HConstant.SUCCESS) {
-                        view.updateUI(o);
-                    }else if(result == HConstant.FAIL
-                            ||result == HConstant.ERROR
-                    ){
-                        handleErrs((String) o);
+            if(type == 1){
+                //创业信息详情
+                HttpProxy.getPioneeringDetail(id,new CommonDataCallback() {
+                    @Override
+                    public void callback(int result, Object o, Object o1) {
+                        view.closeLoading();
+                        if (result == HConstant.SUCCESS) {
+                            view.updateUI(o);
+                        }else if(result == HConstant.FAIL
+                                ||result == HConstant.ERROR
+                        ){
+                            handleErrs((String) o);
+                        }
                     }
-                }
-            });
+                });
+            }else{
+                //技能人才详情
+                HttpProxy.getUserDetail(id,new CommonDataCallback() {
+                    @Override
+                    public void callback(int result, Object o, Object o1) {
+                        view.closeLoading();
+                        if (result == HConstant.SUCCESS) {
+                            view.updateUI(o);
+                        }else if(result == HConstant.FAIL
+                                ||result == HConstant.ERROR
+                        ){
+                            handleErrs((String) o);
+                        }
+                    }
+                });
+            }
+
         }catch(Exception e){
             e.printStackTrace();
             handleErrs(e.toString());

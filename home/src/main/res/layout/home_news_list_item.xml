@@ -12,7 +12,6 @@
         <TextView
             android:id="@+id/tvTitle"
             style="@style/tv_style_white_16"
-            android:text="扶贫养殖特种动物养殖项目 提供补贴 提供"
             android:maxLines="1"
             android:ellipsize="end"
             android:layout_marginLeft="10dp"
@@ -24,7 +23,6 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="10dp"
-            android:text="2019-08-21"
             />
         <TextView
             android:id="@+id/tvFrom"
@@ -32,7 +30,6 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="100dp"
-            android:text="省农业技术推广总部"
             />
         <View
             android:layout_width="match_parent"

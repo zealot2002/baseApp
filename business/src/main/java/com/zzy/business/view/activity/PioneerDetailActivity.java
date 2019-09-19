@@ -79,10 +79,7 @@ public class PioneerDetailActivity extends BaseTitleAndBottomBarActivity
         }else{
             tvTitle.setText(bean.getTitle());
         }
-        if(!bean.isLike()){
-            rlLike.setOnClickListener(this);
-        }
-
+        rlLike.setOnClickListener(this);
         btnStudy.setOnClickListener(this);
     }
 

@@ -25,15 +25,18 @@ public class PioneeringParser implements HInterface.JsonParser {
         if (errorCode == HttpConstants.NO_ERROR) {
             JSONObject dataObj = obj.getJSONObject("data");
             Pioneering bean = new Pioneering();
-            bean.setContact(dataObj.getString("CONNECT_PERSON"));
-            bean.setPhone(dataObj.getString("MOBILE_NO"));
-            bean.setContent(dataObj.getString("RELEASE_TEXT"));
-            bean.setHeadUrl(dataObj.getString("HEAD_PIC_ADDR"));
+            if(dataObj.has("CONNECT_PERSON")) bean.setContact(dataObj.getString("CONNECT_PERSON"));
+            if(dataObj.has("USERNAME")) bean.setContact(dataObj.getString("USERNAME"));
+            if(dataObj.has("MOBILE_NO")) bean.setPhone(dataObj.getString("MOBILE_NO"));
+            if(dataObj.has("RELEASE_TEXT")) bean.setContent(dataObj.getString("RELEASE_TEXT"));
+            if(dataObj.has("HEAD_PIC_ADDR")) bean.setHeadUrl(HttpConstants.SERVER_ADDRESS+"/"+dataObj.getString("HEAD_PIC_ADDR"));
 
-            JSONArray array = dataObj.getJSONArray("USER_SKILL");
-            for(int i=0;i<array.length();i++) {
-                JSONObject infoObj = array.getJSONObject(i);
-                bean.getSkills().add(infoObj.getString("USER_SKILL"));
+            if(dataObj.has("SKILL_ARR")){
+                JSONArray array = dataObj.getJSONArray("SKILL_ARR");
+                for(int i=0;i<array.length();i++) {
+                    JSONObject infoObj = array.getJSONObject(i);
+                    bean.getSkills().add(infoObj.getString("USER_SKILL"));
+                }
             }
             return new Object[]{HConstant.SUCCESS,bean};
         } else {

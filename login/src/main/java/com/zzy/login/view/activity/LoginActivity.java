@@ -79,13 +79,6 @@ public class LoginActivity extends BaseAppActivity implements View.OnClickListen
         try{
             if(v.getId() == R.id.btnOk){
                 presenter.login(etPhone.getText().toString().trim(),etPassword.getText().toString().trim());
-                onSuccess();
-//                try {
-//                    SCM.getInstance().req(this, ActionConstants.ENTRY_HOME_ACTIVITY_ACTION);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//                finish();
             }else if(v.getId() == R.id.tvRegister){
                 startActivity(RegisterActivity.class);
             }else if(v.getId() == R.id.tvForgetPassword){
@@ -98,7 +91,7 @@ public class LoginActivity extends BaseAppActivity implements View.OnClickListen
 
     @Override
     public void showError(String s) {
-
+        ToastUtils.showShort(s);
     }
 
     @Override

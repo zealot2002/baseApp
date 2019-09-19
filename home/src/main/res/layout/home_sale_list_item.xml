@@ -13,6 +13,5 @@
         android:layout_centerHorizontal="true"
         android:maxLines="1"
         android:ellipsize="end"
-        android:text="2019年4月23日  求职者王*一找到了心仪的工作；"
         />
 </RelativeLayout>

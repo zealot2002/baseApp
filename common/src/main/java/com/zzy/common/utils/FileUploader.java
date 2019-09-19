@@ -94,7 +94,7 @@ public class FileUploader {
                     .build();
 
             Request request = new Request.Builder()
-                    .header("TOKEN", HttpConstants.TOKEN)//添加请求头的身份认证Token
+                    .header("TOKEN", CommonUtils.getToken())//添加请求头的身份认证Token
                     .url(HttpConstants.FILE_SERVER_URL)
                     .post(multipartBody)
                     .build();
@@ -143,7 +143,7 @@ public class FileUploader {
                 .build();
 
         Request request = new Request.Builder()
-                .header("TOKEN", HttpConstants.TOKEN)//添加请求头的身份认证Token
+                .header("TOKEN", CommonUtils.getToken())//添加请求头的身份认证Token
                 .url(HttpConstants.FILE_SERVER_URL)
                 .post(multipartBody)
                 .build();

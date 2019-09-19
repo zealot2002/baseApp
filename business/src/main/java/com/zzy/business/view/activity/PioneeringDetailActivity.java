@@ -46,7 +46,7 @@ public class PioneeringDetailActivity extends BaseTitleAndBottomBarActivity
                 setTitle("技能详情");
             }
             presenter = new PioneeringPresenter(this);
-            presenter.getDetail(id);
+            presenter.getDetail(caller,id);
 
         }catch (Exception e){
             e.printStackTrace();
@@ -93,8 +93,9 @@ public class PioneeringDetailActivity extends BaseTitleAndBottomBarActivity
             tvContact.setText("姓      名 :   ");
         }
 
-        bean.setHeadUrl("http://img4.imgtn.bdimg.com/it/u=3136075639,3338708347&fm=26&gp=0.jpg");
-        ImageLoader.loadImage(ivPic,bean.getHeadUrl());
+        if(!bean.getSkills().isEmpty()){
+            ImageLoader.loadImage(ivPic,bean.getHeadUrl());
+        }
         if(bean.getSkills().size() > 0){
             rlSkill1.setVisibility(View.VISIBLE);
             tvSkill1.setText(bean.getSkills().get(0));
@@ -156,7 +157,7 @@ public class PioneeringDetailActivity extends BaseTitleAndBottomBarActivity
 
     @Override
     public void reload(boolean bShow) {
-        presenter.getDetail(id);
+        presenter.getDetail(caller,id);
     }
 
     @Override

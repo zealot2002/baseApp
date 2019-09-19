@@ -2,8 +2,6 @@ package com.zzy.common.constants;
 
 public class HttpConstants {
 
-    public static String TOKEN = "95ffa88f010f1b577ef5f3cf5a1585e7";
-
     // 测试环境
     public static String SERVER_ADDRESS = "http://grecode.gnway.cc:82";
 
@@ -94,10 +92,10 @@ public class HttpConstants {
     public static final String HELP_NEW = "/forum/insert.do";
 
     public static final String IDEA_LIST = "/forum/selAllopinion.do";
-    public static final String IDEA_NEW = "/forum/insertopinion.do";
+    public static final String IDEA_NEW = "/forum/insertexperience.do";
 
     public static final String EXPERIENCE_LIST = "/forum/selAllexperience.do";
-    public static final String EXPERIENCE_NEW = "/forum/insertexperience.do";
+    public static final String EXPERIENCE_NEW = "/forum/insertopinion.do";
 
     public static final String FRIEND_LIST = "/forum/selAllfriend.do";
     public static final String FRIEND_NEW = "/forum/insertfriends.do";
@@ -105,9 +103,12 @@ public class HttpConstants {
     /**********************        买卖            ***************************/
     public static final String GOODS_BUY_LIST = "/sale/selAllBuy.do";
     public static final String GOODS_BUY_DETAIL = "/sale/selById.do";
+    public static final String GOODS_BUY_NEW = "/sale/insert.do";
+
 
     public static final String GOODS_SELL_LIST = "/sale/selAllSale.do";
     public static final String GOODS_SELL_DETAIL = "/sale/selByIdSale.do";
+    public static final String GOODS_SELL_NEW = "/sale/insertSale.do";
 
 
     /**********************        我的档案            ***************************/
@@ -116,7 +117,7 @@ public class HttpConstants {
 
 
     /**********************        用户信息            ***************************/
-    public static final String USER_INFO = "/userinfo/selById.do";
+    public static final String USER_INFO = "/userinfo/selUserInfo.do";
 
 
 

@@ -75,7 +75,7 @@ public class PioneerServiceActivity extends BaseTitleAndBottomBarActivity
             /*adapter*/
             adapter = new MyMultiRecycleAdapter(this,dataList,true);
             //设置不满一屏幕，自动加载第二页
-            adapter.openAutoLoadMore();
+//            adapter.openAutoLoadMore();
             //加载更多的事件监听
             onLoadMoreListener = new OnLoadMoreListener() {
                 @Override

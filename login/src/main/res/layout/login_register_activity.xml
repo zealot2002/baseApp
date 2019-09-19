@@ -729,7 +729,7 @@
                 android:id="@+id/tagView"
                 android:layout_marginTop="10dp"
                 app:atg_isAppendMode="true"
-                style="@style/TagGroup" />
+                style="@style/TagGroupStyle" />
         </LinearLayout>
         <Button
             android:id="@+id/btnOk"

@@ -2,6 +2,9 @@ package com.zzy.common.constants;
 
 public class CommonConstants {
 
+    public static final int GOODS_BUY = 1;
+    public static final int GOODS_SELL = 2;
+
     public static final int CONTENT_HELP = 1;
     public static final int CONTENT_IDEA = 2;
     public static final int CONTENT_EXPERIENCE = 3;

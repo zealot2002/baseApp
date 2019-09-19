@@ -309,8 +309,8 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
     private void updateViews() {
         setupList();
         tvUserName.setText(ctx.getUser().getName());
-        tvScore.setText(ctx.getUser().getScore());
-        ImageLoader.loadImage(ivPic,ctx.getBannerList().get(0).getImgUrl());
+        tvScore.setText(ctx.getUser().getScore()+"积分");
+//        ImageLoader.loadImage(ivPic,ctx.getBannerList().get(0).getImgUrl());
         newsListAdapter.swapData(ctx.getNewsList());
         saleListAdapter.swapData(ctx.getSaleInfoList());
         updateBanner();

@@ -3,6 +3,7 @@ package com.zzy.common.model;
 
 import com.zzy.common.model.bean.Archives;
 import com.zzy.common.model.bean.Content;
+import com.zzy.common.model.bean.Goods;
 import com.zzy.common.model.bean.Image;
 import com.zzy.common.model.bean.Job;
 import com.zzy.common.model.bean.Log;
@@ -395,7 +396,19 @@ public class HttpProxy {
                 callback,
                 new ExpertParser());
     }
-    public static void getHelpDetailList(int id,final HInterface.DataCallback callback) throws Exception {
+    //技能人才
+    public static void getUserDetail(int id,final HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", CommonUtils.getToken());
+        reqBody.put("USERINFO_ID", id);
+        reqBody.put("TYPE", "技能人才");
+        HttpUtils.getInstance().req(
+                HttpConstants.PIONEER_EXPERT_DETAIL,
+                reqBody,
+                callback,
+                new PioneeringParser());
+    }
+    public static void getHelpDetail(int id, final HInterface.DataCallback callback) throws Exception {
         JSONObject reqBody = new JSONObject();
         reqBody.put("TOKEN", CommonUtils.getToken());
         reqBody.put("HELP_INFO_ID", id);
@@ -732,7 +745,6 @@ public class HttpProxy {
     public static void getLogList(int pageNum,final HInterface.DataCallback callback) throws Exception {
         JSONObject reqBody = new JSONObject();
         reqBody.put("TOKEN", CommonUtils.getToken());
-        reqBody.put("TOKEN", CommonUtils.getToken());
         reqBody.put("rows", CommonConstants.PAGE_SIZE);
         reqBody.put("page", pageNum);
         HttpUtils.getInstance().req(
@@ -749,6 +761,37 @@ public class HttpProxy {
 
         HttpUtils.getInstance().req(
                 HttpConstants.LOG_ADD,
+                reqBody,
+                callback,
+                new CommonParser());
+    }
+
+    public static void newGoods(int type, Goods bean, final HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", CommonUtils.getToken());
+        reqBody.put("SALE_TITLE",bean.getName());
+        reqBody.put("RELEASE_PEOPLE", bean.getContact());
+        reqBody.put("SALE_TEL", bean.getPhone());
+        reqBody.put("SALE_PRICE", bean.getPrice());
+        reqBody.put("SALE_CONTENT", bean.getDesc());
+        reqBody.put("SALE_BUSINESS", bean.getDealWay());
+        reqBody.put("SALE_ADDRESS", bean.getAddress());
+
+        JSONArray imgArr = new JSONArray();
+        for(Image image:bean.getImgList()){
+            JSONObject obj = new JSONObject();
+            obj.put("PIC_NAME",image.getName());
+            obj.put("PIC_ADDR",image.getPath());
+            imgArr.put(obj);
+        }
+        reqBody.put("IMAGES",imgArr);
+
+        String action = HttpConstants.GOODS_BUY_NEW;
+        if(type == CommonConstants.GOODS_SELL){
+            action = HttpConstants.GOODS_SELL_NEW;
+        }
+        HttpUtils.getInstance().req(
+                action,
                 reqBody,
                 callback,
                 new CommonParser());

@@ -168,7 +168,7 @@
         <!--交易方式-->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/item_height"
+            android:layout_height="wrap_content"
             >
             <TextView
                 android:id="@+id/tvDealWay"
@@ -176,24 +176,15 @@
                 android:layout_centerVertical="true"
                 android:text="交易方式:"
                 />
-            <EditText
-                android:id="@+id/etDealWay"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
+            <me.gujun.android.taggroup.TagGroup
+                android:id="@+id/tagView"
                 android:layout_toRightOf="@+id/tvDealWay"
-                android:layout_centerVertical="true"
-                android:textColorHint="@color/white"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                android:background="@null"
-                />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/line2_height"
-                android:background="@mipmap/line2"
-                android:layout_alignParentBottom="true"
-                />
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                app:atg_isAppendMode="true"
+                app:atg_checkedBackgroundColor="@color/blue"
+                style="@style/TagGroupStyle" />
+
         </RelativeLayout>
         <!--物品描述-->
         <TextView
@@ -221,7 +212,12 @@
             android:text="商品图片（最多6张）:"
             android:layout_marginTop="10dp"
             />
-
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvPhotoPicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            />
         <!--完成-->
         <Button
             android:id="@+id/btnOk"

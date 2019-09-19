@@ -33,7 +33,7 @@ public class ArchivesParser implements HInterface.JsonParser {
             bean.setAddress(dataObj.getString("ADDR_DETAIL"));
             bean.setBirthday(dataObj.getString("BIRTHDAY"));
             bean.setSex(dataObj.getString("SEX"));
-            bean.setIdNo(dataObj.getString("IS_CADRE"));
+            bean.setIdNo(dataObj.getString("IDCARD"));
             bean.setUserType(dataObj.getString("USER_TYPE"));
             bean.setIsCompany(dataObj.getString("IS_COMPANY"));
             bean.setCompanyName(dataObj.getString("COMPANY_NAME"));

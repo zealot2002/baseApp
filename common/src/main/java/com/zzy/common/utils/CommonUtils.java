@@ -12,7 +12,7 @@ public final class CommonUtils {
         return userId;
     }
     public static String getToken(){
-        String token = SPUtils.getString(AppUtils.getApp(), SPConstants.TOKEN, HttpConstants.TOKEN);
+        String token = SPUtils.getString(AppUtils.getApp(), SPConstants.TOKEN, "");
         return token;
     }
     public static String getPw(String pw){

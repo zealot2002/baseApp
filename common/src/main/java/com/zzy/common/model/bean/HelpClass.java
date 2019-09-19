@@ -12,7 +12,7 @@ public class HelpClass {
     private int id;
     private String title;
     private String time;
-    private String adress;
+    private String address;
     private String teacher;
     private String content;
     private List<Parter> parterList;
@@ -57,12 +57,12 @@ public class HelpClass {
         this.time = time;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getTeacher() {

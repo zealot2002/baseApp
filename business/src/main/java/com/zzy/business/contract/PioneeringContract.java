@@ -13,7 +13,7 @@ public interface PioneeringContract {
 
     interface Presenter extends BasePresenter {
         void getList(int pageNum);
-        void getDetail(int id);
+        void getDetail(int type,int id);
         void report(int id, String content);
         void create(Pioneering bean);
     }

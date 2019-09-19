@@ -3,6 +3,7 @@ package com.zzy.home.model;
 
 import com.zzy.common.constants.HttpConstants;
 import com.zzy.common.network.HttpUtils;
+import com.zzy.common.utils.CommonUtils;
 import com.zzy.commonlib.http.HInterface;
 import com.zzy.home.model.jsonParser.HomeDataParser;
 
@@ -14,7 +15,7 @@ public class HttpProxy {
     // 获取banner列表
     public static void getHomeData(final HInterface.DataCallback callback) throws Exception {
         JSONObject reqBody = new JSONObject();
-        reqBody.put("TOKEN", HttpConstants.TOKEN);
+        reqBody.put("TOKEN", CommonUtils.getToken());
         HttpUtils.getInstance().req(
                  HttpConstants.HOME_DATA,
                 reqBody,

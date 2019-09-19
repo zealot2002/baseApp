@@ -30,7 +30,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20px"
                     android:layout_marginTop="40px"
-                    android:text="张翠山"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
                 <TextView
@@ -40,7 +39,6 @@
                     android:layout_toRightOf="@+id/tvUserName"
                     android:layout_marginLeft="8px"
                     android:layout_marginTop="40px"
-                    android:text="2018积分"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
                 <TextView

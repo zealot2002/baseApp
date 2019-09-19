@@ -1,10 +1,12 @@
 package com.zzy.business.view.itemViewDelegate;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
 import com.zzy.business.R;
 import com.zzy.common.model.bean.Comment;
+import com.zzy.common.utils.CommonUtils;
 import com.zzy.common.widget.recycleAdapter.ItemViewDelegate;
 import com.zzy.common.widget.recycleAdapter.ViewHolder;
 
@@ -14,10 +16,11 @@ public class ContentCommentDelegate implements ItemViewDelegate<Comment> {
     }
     private TextView tvUser,tvContent,tvReplyContent,tvReply,tvOwner;
     private Listener listener;
+    private String ownerId;
 
-
-    public ContentCommentDelegate(Listener listener) {
+    public ContentCommentDelegate(String ownerId,Listener listener) {
         this.listener = listener;
+        this.ownerId = ownerId;
     }
 
     @Override
@@ -43,8 +46,8 @@ public class ContentCommentDelegate implements ItemViewDelegate<Comment> {
             tvUser.setText(bean.getUserName());
             tvContent.setText(bean.getContent());
 
-            //for test read from SP
-            if(bean.getUserId() == 1){
+            if(CommonUtils.getUserId().equals(ownerId)){
+                //帖子的作者
                 tvReplyContent.setVisibility(View.GONE);
                 tvOwner.setVisibility(View.GONE);
                 tvReply.setVisibility(View.VISIBLE);
@@ -55,10 +58,13 @@ public class ContentCommentDelegate implements ItemViewDelegate<Comment> {
                     }
                 });
             }else{
+                //显示作者和作者回复的内容
                 tvReply.setVisibility(View.GONE);
-                tvOwner.setVisibility(View.VISIBLE);
                 tvReplyContent.setVisibility(View.VISIBLE);
                 tvReplyContent.setText(bean.getReplyContent());
+                if(!TextUtils.isEmpty(bean.getReplyContent())){
+                    tvOwner.setVisibility(View.VISIBLE);
+                }
             }
         }catch (Exception e){
             e.printStackTrace();

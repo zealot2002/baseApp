@@ -38,11 +38,8 @@ public class HomeDataParser implements HInterface.JsonParser {
             for(int i=0;i<dataObj.getJSONArray("SALE").length();i++){
                 JSONObject saleObj = dataObj.getJSONArray("SALE").getJSONObject(i);
                 SaleInfo saleInfo = new SaleInfo();
-                if(saleObj.has("CONNECT_PERSON")) saleInfo.setContract(saleObj.getString("CONNECT_PERSON"));
-                if(saleObj.has("DEAL_FINISH_DATE")) saleInfo.setDealFinishTime(saleObj.getString("DEAL_FINISH_DATE"));
-                if(saleObj.has("RELEASE_PEOPLE")) saleInfo.setFrom(saleObj.getString("RELEASE_PEOPLE"));
                 if(saleObj.has("RELEASE_TIME")) saleInfo.setPublishTime(saleObj.getString("RELEASE_TIME"));
-                if(saleObj.has("SALE_TITLE")) saleInfo.setTitle(saleObj.getString("SALE_TITLE"));
+                if(saleObj.has("RELEASE_TITLE")) saleInfo.setTitle(saleObj.getString("RELEASE_TITLE"));
                 ctx.getSaleInfoList().add(saleInfo);
             }
             for(int i=0;i<dataObj.getJSONArray("NEWS").length();i++){
@@ -58,7 +55,8 @@ public class HomeDataParser implements HInterface.JsonParser {
                 for(int i=0;i<dataObj.getJSONArray("SCROLLIMAGE").length();i++){
                     JSONObject bannerObj = dataObj.getJSONArray("SCROLLIMAGE").getJSONObject(i);
                     Banner banner = new Banner();
-                    if(bannerObj.has("HOME_PAGE_PIC_ADDR")) banner.setImgUrl(bannerObj.getString("HOME_PAGE_PIC_ADDR"));
+                    if(bannerObj.has("HOME_PAGE_PIC_ADDR"))
+                        banner.setImgUrl(HttpConstants.SERVER_ADDRESS+"/"+bannerObj.getString("HOME_PAGE_PIC_ADDR"));
                     ctx.getBannerList().add(banner);
                 }
             }

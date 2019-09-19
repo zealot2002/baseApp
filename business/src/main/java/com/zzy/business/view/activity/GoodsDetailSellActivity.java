@@ -110,7 +110,7 @@ public class GoodsDetailSellActivity extends BaseTitleAndBottomBarActivity imple
 
             /*adapter*/
             adapter = new MyMultiRecycleAdapter(this,bean.getCommentList(),false);
-            adapter.addItemViewDelegate(new ContentCommentDelegate(new ContentCommentDelegate.Listener() {
+            adapter.addItemViewDelegate(new ContentCommentDelegate(id+"",new ContentCommentDelegate.Listener() {
                 @Override
                 public void onReply(int position) {
                     curCommitId = Integer.valueOf(bean.getCommentList().get(position).getId());

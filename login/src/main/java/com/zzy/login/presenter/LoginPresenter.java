@@ -36,8 +36,7 @@ public class LoginPresenter implements LoginContract.Presenter{
 
     private void handleErrs(String s){
         view.closeLoading();
-        view.showDisconnect();
-      //  ToastUtils.showShort(s);
+        view.showError(s);
     }
 
     @Override
@@ -229,7 +228,7 @@ public class LoginPresenter implements LoginContract.Presenter{
                 public void callback(int result, Object o, Object o1) {
                     view.closeLoading();
                     if (result == HConstant.SUCCESS) {
-                        view.onSuccess();
+//                        view.onSuccess();
                     }else if(result == HConstant.FAIL
                             ||result == HConstant.ERROR
                     ){

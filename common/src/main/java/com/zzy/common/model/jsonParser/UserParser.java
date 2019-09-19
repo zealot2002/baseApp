@@ -30,7 +30,8 @@ public class UserParser implements HInterface.JsonParser {
             if(dataObj.has("USERINFO_ID")) bean.setId(dataObj.getString("USERINFO_ID"));
             if(dataObj.has("USERNAME")) bean.setName(dataObj.getString("USERNAME"));
             if(dataObj.has("USER_JOB")) bean.setTitle(dataObj.getString("USER_JOB"));
-            if(dataObj.has("HEAD_PIC_ADDR")) bean.setHeadUrl(dataObj.getString("HEAD_PIC_ADDR"));
+            if(dataObj.has("HEAD_PIC_ADDR"))
+                bean.setHeadUrl(HttpConstants.SERVER_ADDRESS+"/"+dataObj.getString("HEAD_PIC_ADDR"));
             if(dataObj.has("USER_GARDE")) bean.setScore(dataObj.getString("USER_GARDE"));
 
             return new Object[]{HConstant.SUCCESS,bean};
