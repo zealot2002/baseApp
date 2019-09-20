@@ -241,18 +241,6 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
                     }).build();
                 }
                 pvTime.show();
-            }else if(v.getId() == R.id.ivPic){
-//                imageConfig = new ImageConfig.Builder(
-//                        new GlideLoader())
-//                        .steepToolBarColor(getResources().getColor(R.color.titleBlue))
-//                        .titleBgColor(getResources().getColor(R.color.titleBlue))
-//                        .titleSubmitTextColor(getResources().getColor(R.color.white))
-//                        .titleTextColor(getResources().getColor(R.color.white))
-//                        // 开启单选   （默认为多选）
-//                        .singleSelect()
-//                        .requestCode(REQUEST_CODE)
-//                        .build();
-//                ImageSelector.open(RegisterActivity.this, imageConfig);
             }else if(v.getId() == R.id.btnOk){
                 if(tagView.getTags().length>6){
                     ToastUtils.showShort("最多可以添加6个技能");

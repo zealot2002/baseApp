@@ -56,8 +56,8 @@ public class HttpProxy {
         JSONObject reqBody = new JSONObject();
         reqBody.put("USERNAME", bean.getName());
         reqBody.put("MOBILE_NO", bean.getPhone());
-//        reqBody.put("CHECK_CODE_NUM", bean.getSms());
-        reqBody.put("CHECK_CODE_NUM", "1234");
+        reqBody.put("CHECK_CODE_NUM", bean.getSms());
+//        reqBody.put("CHECK_CODE_NUM", "1234");
         reqBody.put("MOBILE_NO_Y", bean.getInviter());
         reqBody.put("IDCARD", bean.getIdNo());
         reqBody.put("PASSWORD", CommonUtils.getPw(bean.getPw()));
@@ -685,9 +685,11 @@ public class HttpProxy {
                 callback,
                 new CommonParser());
     }
-    public static void getMyCommentList(final HInterface.DataCallback callback) throws Exception {
+    public static void getMyCommentList(int pageNum,final HInterface.DataCallback callback) throws Exception {
         JSONObject reqBody = new JSONObject();
         reqBody.put("TOKEN", CommonUtils.getToken());
+        reqBody.put("rows", CommonConstants.PAGE_SIZE);
+        reqBody.put("page", pageNum);
         HttpUtils.getInstance().req(
                 HttpConstants.MY_COMMENT_LIST,
                 reqBody,
@@ -720,9 +722,11 @@ public class HttpProxy {
                 callback,
                 new CommonParser());
     }
-    public static void getMyReplyList(final HInterface.DataCallback callback) throws Exception {
+    public static void getMyReplyList(int pageNum,final HInterface.DataCallback callback) throws Exception {
         JSONObject reqBody = new JSONObject();
         reqBody.put("TOKEN", CommonUtils.getToken());
+        reqBody.put("rows", CommonConstants.PAGE_SIZE);
+        reqBody.put("page", pageNum);
         HttpUtils.getInstance().req(
                 HttpConstants.MY_REPLY_LIST,
                 reqBody,

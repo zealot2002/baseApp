@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 我的招聘
+ * 我的创业
  */
 public class MyPioneeringListActivity extends BaseTitleAndBottomBarActivity
         implements MyPioneeringContract.View, View.OnClickListener {
@@ -39,7 +39,7 @@ public class MyPioneeringListActivity extends BaseTitleAndBottomBarActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("我的招聘");
+        setTitle("我的创业");
         presenter = new MyPioneeringPresenter(this);
         presenter.getList(pageNum);
     }

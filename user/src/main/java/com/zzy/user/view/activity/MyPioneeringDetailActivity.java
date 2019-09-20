@@ -82,7 +82,6 @@ public class MyPioneeringDetailActivity extends BaseTitleAndBottomBarActivity
         btnStop = findViewById(R.id.btnStop);
         btnStop.setOnClickListener(this);
 
-        bean.setHeadUrl("http://img4.imgtn.bdimg.com/it/u=3136075639,3338708347&fm=26&gp=0.jpg");
         ImageLoader.loadImage(ivPic,bean.getHeadUrl());
         if(bean.getSkills().size() > 0){
             rlSkill1.setVisibility(View.VISIBLE);
@@ -114,6 +113,7 @@ public class MyPioneeringDetailActivity extends BaseTitleAndBottomBarActivity
         super.updateUI(o);
         try{
             bean = (Pioneering) o;
+            bean.setId(id);
             setupViews();
         }catch (Exception e){
             e.printStackTrace();
@@ -124,6 +124,10 @@ public class MyPioneeringDetailActivity extends BaseTitleAndBottomBarActivity
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btnUpdate){
+            bean.setContact(etContact.getText().toString().trim());
+            bean.setPhone(etPhone.getText().toString().trim());
+            bean.setContent(etContent.getText().toString().trim());
+
             presenter.update(bean);
         }else if(v.getId() == R.id.btnStop){
             presenter.stop(id);

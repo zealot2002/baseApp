@@ -46,10 +46,24 @@ public class ContentCommentDelegate implements ItemViewDelegate<Comment> {
             tvUser.setText(bean.getUserName());
             tvContent.setText(bean.getContent());
 
-            if(CommonUtils.getUserId().equals(ownerId)){
-                //帖子的作者
+
+            //如果帖子有作者留言，那么显示作者留言
+            if(!bean.getReplyContent().isEmpty()){
+                tvOwner.setVisibility(View.VISIBLE);
+                tvReplyContent.setVisibility(View.VISIBLE);
+                tvReplyContent.setText(bean.getReplyContent());
+            }else {
                 tvReplyContent.setVisibility(View.GONE);
                 tvOwner.setVisibility(View.GONE);
+            }
+
+            //1，如果用户不是帖子作者，用户可以留言
+            //2，如果用户是帖子作者，用户可以留言
+            //   用户可以回复非自己发的留言
+            if(CommonUtils.getUserId().equals(ownerId)//是帖子的作者
+                    &&!CommonUtils.getUserId().equals(bean.getUserId())//并且不是留言的人
+            ){
+                //显示留言按钮
                 tvReply.setVisibility(View.VISIBLE);
                 tvReply.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -58,13 +72,8 @@ public class ContentCommentDelegate implements ItemViewDelegate<Comment> {
                     }
                 });
             }else{
-                //显示作者和作者回复的内容
+                //隐藏留言按钮
                 tvReply.setVisibility(View.GONE);
-                tvReplyContent.setVisibility(View.VISIBLE);
-                tvReplyContent.setText(bean.getReplyContent());
-                if(!TextUtils.isEmpty(bean.getReplyContent())){
-                    tvOwner.setVisibility(View.VISIBLE);
-                }
             }
         }catch (Exception e){
             e.printStackTrace();

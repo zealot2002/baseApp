@@ -10,7 +10,9 @@
         <activity
             android:name=".view.activity.MyArchivesActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/activity_theme" />
+            android:theme="@style/activity_theme"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            />
 
         <activity
             android:name=".view.activity.MyCommentActivity"

@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.glide.ImageLoader;
 import com.zzy.common.model.bean.User;
+import com.zzy.common.widget.PopupDialog;
 import com.zzy.user.R;
 import com.zzy.user.contract.MineContract;
 import com.zzy.user.presenter.MinePresenter;
@@ -24,6 +25,7 @@ public class MyMainActivity extends BaseTitleAndBottomBarActivity
             btnMyLog,btnSettings,btnShareSoftware;
     private MineContract.Presenter presenter;
     private User user;
+    private PopupDialog dialog;
 /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,11 +97,11 @@ public class MyMainActivity extends BaseTitleAndBottomBarActivity
         }else if(v.getId() == R.id.btnMyPioneering){
             startActivity(MyPioneeringListActivity.class);
         }else if(v.getId() == R.id.btnMyComment){
-
+            startActivity(MyCommentActivity.class);
         }else if(v.getId() == R.id.btnMyGoodsToBuy){
-
+            showWaitingPopup();
         }else if(v.getId() == R.id.btnMyGoodsToSell){
-
+            showWaitingPopup();
         }else if(v.getId() == R.id.btnMyLog){
             startActivity(MyLogListActivity.class);
         }else if(v.getId() == R.id.btnSettings){
@@ -108,7 +110,12 @@ public class MyMainActivity extends BaseTitleAndBottomBarActivity
 
         }
     }
-
+    private void showWaitingPopup() {
+        if(dialog == null){
+            dialog = new PopupDialog.Builder(this,"正在开发中...","完成").create();
+        }
+        dialog.show();
+    }
     @Override
     public void reload(boolean bShow) {
         presenter.getUserInfo();

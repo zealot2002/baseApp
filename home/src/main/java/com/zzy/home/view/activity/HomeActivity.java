@@ -14,8 +14,6 @@ import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import com.zzy.business.view.activity.GoodsListActivity;
-import com.zzy.business.view.activity.FriendsCircleActivity;
 import com.zzy.business.view.activity.ContentListActivity;
 import com.zzy.business.view.activity.PioneeringListActivity;
 import com.zzy.business.view.activity.PioneerServiceActivity;
@@ -28,10 +26,10 @@ import com.zzy.business.view.other.SpeedyLinearLayoutManager;
 import com.zzy.common.base.BaseAppActivity;
 import com.zzy.common.constants.CommonConstants;
 import com.zzy.common.constants.ParamConstants;
-import com.zzy.common.glide.ImageLoader;
 import com.zzy.common.utils.StatusBarUtils;
 import com.zzy.common.widget.BannerHolderView;
 import com.zzy.common.widget.LoadingHelper;
+import com.zzy.common.widget.PopupDialog;
 import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.commonlib.utils.ToastUtils;
 import com.zzy.home.R;
@@ -68,6 +66,8 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
     private SmartRefreshLayout smartRefreshLayout;
     private boolean bAniStart;
     private int aniIndex = 0;
+
+    private PopupDialog dialog;
 /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -242,11 +242,13 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
             }else if(v.getId() == R.id.btnEntrepreneurship){
                 startActivity(PioneeringListActivity.class);
             }else if(v.getId() == R.id.btnBuyGoods){
-                bundle.putInt(ParamConstants.TYPE,0);
-                startActivity(GoodsListActivity.class,bundle);
+                showWaitingPopup();
+//                bundle.putInt(ParamConstants.TYPE,0);
+//                startActivity(GoodsListActivity.class,bundle);
             }else if(v.getId() == R.id.btnSellGoods){
-                bundle.putInt(ParamConstants.TYPE,1);
-                startActivity(GoodsListActivity.class,bundle);
+                showWaitingPopup();
+//                bundle.putInt(ParamConstants.TYPE,1);
+//                startActivity(GoodsListActivity.class,bundle);
             }else if(v.getId() == R.id.btnHelp){
                 bundle.putInt(ParamConstants.TYPE, CommonConstants.CONTENT_HELP);
                 startActivity(ContentListActivity.class,bundle);
@@ -257,11 +259,19 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
                 bundle.putInt(ParamConstants.TYPE, CommonConstants.CONTENT_EXPERIENCE);
                 startActivity(ContentListActivity.class,bundle);
             }else if(v.getId() == R.id.btnEntrepreneurshipFriends){
-                startActivity(FriendsCircleActivity.class);
+                showWaitingPopup();
+//                startActivity(FriendsCircleActivity.class);
             }
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    private void showWaitingPopup() {
+        if(dialog == null){
+            dialog = new PopupDialog.Builder(this,"正在开发中...","完成").create();
+        }
+        dialog.show();
     }
 
     @Override

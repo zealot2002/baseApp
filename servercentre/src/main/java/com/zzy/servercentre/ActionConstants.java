@@ -22,6 +22,7 @@ public class ActionConstants {
 
     /* business */
     public static final String ENTRY_PHONE_BOOK_ACTIVITY_ACTION = "entryPhoneBook";
+    public static final String ENTRY_CONTENT_DETAIL_ACTIVITY_ACTION = "entryContentDetail";
     public static final String GET_FUNDS_INFO_ACTION = "getFundsInfo";
     /*app update*/
     public static final String CHECK_UPDATE_ACTION = "checkUpdate";

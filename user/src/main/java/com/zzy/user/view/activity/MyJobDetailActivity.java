@@ -79,6 +79,7 @@ public class MyJobDetailActivity extends BaseTitleAndBottomBarActivity implement
         super.updateUI(o);
         try{
             bean = (Job) o;
+            bean.setId(id);
             setupViews();
         }catch (Exception e){
             e.printStackTrace();
@@ -89,6 +90,18 @@ public class MyJobDetailActivity extends BaseTitleAndBottomBarActivity implement
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btnUpdate){
+            bean.setCompanyName(etCompanyName.getText().toString().trim());
+            bean.setJobName(etJobName.getText().toString().trim());
+            bean.setAddress(etAddress.getText().toString().trim());
+            bean.setHeadcount(etHeadcount.getText().toString().trim());
+            bean.setEducation(etEducation.getText().toString().trim());
+            bean.setSalaryMax(etSalaryMax.getText().toString().trim());
+            bean.setSalaryMin(etSalaryMin.getText().toString().trim());
+            bean.setPhone(etPhone.getText().toString().trim());
+            bean.setContact(etContact.getText().toString().trim());
+            bean.setFrom(etAddress.getText().toString().trim());
+            bean.setJobContent(etJobContent.getText().toString().trim());
+            bean.setJobRequirements(etJobRequirements.getText().toString().trim());
             presenter.update(bean);
         }else if(v.getId() == R.id.btnStop){
             presenter.stop(id);

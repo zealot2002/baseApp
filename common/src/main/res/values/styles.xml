@@ -106,12 +106,12 @@
         <item name="atg_textColor">@color/white</item>
         <item name="atg_backgroundColor">@color/light_blue</item>
         <item name="atg_dashBorderColor">@color/light_blue</item>
-        <item name="atg_inputHintColor">#80000000</item>
-        <item name="atg_inputTextColor">#DE000000</item>
-        <item name="atg_checkedBorderColor">#49C120</item>
+        <item name="atg_inputHintColor">@color/green</item>
+        <item name="atg_inputTextColor">@color/green</item>
+        <item name="atg_checkedBorderColor">@color/red</item>
         <item name="atg_checkedTextColor">#FFFFFF</item>
         <item name="atg_checkedMarkerColor">#FFFFFF</item>
-        <item name="atg_checkedBackgroundColor">#49C120</item>
+        <item name="atg_checkedBackgroundColor">@color/red</item>
         <item name="atg_pressedBackgroundColor">#EDEDED</item>
         <item name="atg_borderStrokeWidth">0.5dp</item>
         <item name="atg_textSize">13sp</item>

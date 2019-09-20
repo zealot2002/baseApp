@@ -1,56 +1,220 @@
 package com.zzy.user.view.activity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.zzy.common.base.BaseToolbarActivity;
+import com.zzy.common.base.BaseTitleAndBottomBarActivity;
+import com.zzy.common.constants.CommonConstants;
+import com.zzy.common.constants.ParamConstants;
+import com.zzy.common.model.HttpProxy;
+import com.zzy.common.model.bean.Comment;
+import com.zzy.common.network.CommonDataCallback;
+import com.zzy.common.view.itemViewDelegate.CommentDelegate;
+import com.zzy.common.widget.recycleAdapter.MyMultiRecycleAdapter;
+import com.zzy.common.widget.recycleAdapter.OnItemChildClickListener;
+import com.zzy.common.widget.recycleAdapter.OnLoadMoreListener;
+import com.zzy.common.widget.recycleAdapter.ViewHolder;
+import com.zzy.commonlib.http.HConstant;
+import com.zzy.commonlib.utils.AppUtils;
+import com.zzy.commonlib.utils.NetUtils;
+import com.zzy.commonlib.utils.ToastUtils;
+import com.zzy.sc.core.serverCenter.SCM;
+import com.zzy.servercentre.ActionConstants;
 import com.zzy.user.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 我的评论
  */
-public class MyCommentActivity extends BaseToolbarActivity implements View.OnClickListener {
-    private EditText etPhone,etPassword;
-    private Button btnOk;
-    private TextView tvToBePioneer,tvForgetPassword;
+public class MyCommentActivity extends BaseTitleAndBottomBarActivity implements View.OnClickListener {
+    private RelativeLayout rlMenu1,rlMenu2;
+    private TextView tv1,tv2;
+    //data
+    private int pageNum = 1;
+    private RecyclerView rvDataList;
+    private OnLoadMoreListener onLoadMoreListener;
+    private MyMultiRecycleAdapter adapter;
+    private boolean isLoadOver = false;
+    private List<Comment> dataList = new ArrayList<>();
+    private int currentMenu = 0;
 
-/***********************************************************************************************/
+    /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.user_my_main_activity);
-        setupViews();
+        setTitle("我的评论");
+        getList(0,pageNum);
     }
 
     @Override
     protected int getLayoutId() {
-        return 0;
+        return R.layout.user_my_comment_list_activity;
     }
 
     private void setupViews() {
-//        etPhone = findViewById(R.id.etPhone);
-//        etPassword = findViewById(R.id.etPassword);
-//        btnOk = findViewById(R.id.btnOk);
-//        tvToBePioneer = findViewById(R.id.tvToBePioneer);
-//        tvForgetPassword = findViewById(R.id.tvForgetPassword);
+        rlMenu1 = findViewById(R.id.rlMenu1);
+        rlMenu2 = findViewById(R.id.rlMenu2);
+        tv1 = findViewById(R.id.tv1);
+        tv2 = findViewById(R.id.tv2);
 
-        btnOk.setOnClickListener(this);
-        tvToBePioneer.setOnClickListener(this);
-        tvForgetPassword.setOnClickListener(this);
+        rlMenu1.setOnClickListener(this);
+        rlMenu2.setOnClickListener(this);
+
+        if(rvDataList == null){
+            rvDataList = findViewById(R.id.rvDataList);
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+            rvDataList.setLayoutManager(layoutManager);
+            rvDataList.setItemAnimator(new DefaultItemAnimator());
+
+            /*adapter*/
+            adapter = new MyMultiRecycleAdapter(this,dataList,true);
+            //设置不满一屏幕，自动加载第二页
+            adapter.openAutoLoadMore();
+            //加载更多的事件监听
+            onLoadMoreListener = new OnLoadMoreListener() {
+                @Override
+                public void onLoadMore(boolean isReload) {
+                    if(isLoadOver){
+                        return;
+                    }
+                    if(isReload){
+                        getList(currentMenu,pageNum);
+                    }else{
+                        getList(currentMenu,++pageNum);
+                    }
+                }
+            };
+            adapter.setOnLoadMoreListener(onLoadMoreListener);
+            adapter.addItemViewDelegate(new CommentDelegate(this));
+            adapter.setOnItemChildClickListener(R.id.rootView, new OnItemChildClickListener() {
+                @Override
+                public void onItemChildClick(ViewHolder viewHolder, Object data, int position) {
+                    try{
+                        Bundle bundle = new Bundle();
+                        Comment bean = dataList.get(position);
+                        bundle.putInt(ParamConstants.ID,Integer.valueOf(bean.getContentId()));
+
+                        if(bean.getType().equals("求助")){
+                            bundle.putInt(ParamConstants.TYPE,CommonConstants.CONTENT_HELP);
+                        }else if(bean.getType().equals("意见")){
+                            bundle.putInt(ParamConstants.TYPE,CommonConstants.CONTENT_IDEA);
+                        }else if(bean.getType().equals("经验")){
+                            bundle.putInt(ParamConstants.TYPE,CommonConstants.CONTENT_EXPERIENCE);
+                        }
+                        SCM.getInstance().req(MyCommentActivity.this, ActionConstants.ENTRY_CONTENT_DETAIL_ACTIVITY_ACTION,bundle);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            });
+            rvDataList.setAdapter(adapter);
+        }
     }
 
+    private void getList(int currentMenu, int pageNum) {
+        if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {
+            ToastUtils.showShort(AppUtils.getApp().getResources().getString(R.string.no_network_tips));
+            return;
+        }
+        showLoading();
+        try{
+            if(currentMenu == 0){
+                HttpProxy.getMyCommentList(pageNum,new CommonDataCallback() {
+                    @Override
+                    public void callback(int result, Object o, Object o1) {
+                        closeLoading();
+                        if (result == HConstant.SUCCESS) {
+                            updateUI(o);
+                        }else if(result == HConstant.FAIL
+                                ||result == HConstant.ERROR
+                        ){
+                            ToastUtils.showShort((String) o);
+                        }
+                    }
+                });
+            }else {
+                HttpProxy.getMyReplyList(pageNum,new CommonDataCallback() {
+                    @Override
+                    public void callback(int result, Object o, Object o1) {
+                        closeLoading();
+                        if (result == HConstant.SUCCESS) {
+                            updateUI(o);
+                        }else if(result == HConstant.FAIL
+                                ||result == HConstant.ERROR
+                        ){
+                            ToastUtils.showShort((String) o);
+                        }
+                    }
+                });
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            ToastUtils.showShort(e.toString());
+        }
+    }
+
+    private void reset(){
+        rlMenu1.setBackgroundResource(R.color.translucent);
+        rlMenu2.setBackgroundResource(R.color.translucent);
+        tv1.setTextColor(getResources().getColor(R.color.white));
+        tv2.setTextColor(getResources().getColor(R.color.white));
+    }
 
     @Override
     public void onClick(View v) {
-//        if(v.getId() == R.id.btnOk){
-//            // TODO: 2019/8/19   to login
-//        }else if(v.getId() == R.id.tvToBePioneer){
-//
-//        }else if(v.getId() == R.id.tvForgetPassword){
-//
-//        }
+        reset();
+        if(v.getId() == R.id.rlMenu1){
+            rlMenu1.setBackgroundResource(R.color.white);
+            tv1.setTextColor(getResources().getColor(R.color.blue));
+            pageNum = 1;
+            dataList.clear();
+            getList(0,pageNum);
+        }else if(v.getId() == R.id.rlMenu2){
+            rlMenu2.setBackgroundResource(R.color.white);
+            tv2.setTextColor(getResources().getColor(R.color.blue));
+            pageNum = 1;
+            dataList.clear();
+            getList(1,pageNum);
+        }
+    }
+
+    @Override
+    public void updateUI(Object o) {
+        super.updateUI(o);
+        try{
+            if(pageNum!=1){
+                appendList((List<Comment>) o);
+                return;
+            }
+            dataList.addAll((List<Comment>) o);
+            setupViews();
+            adapter.notifyDataSetChanged();
+        }catch (Exception e){
+            e.printStackTrace();
+            ToastUtils.showShort(e.toString());
+        }
+    }
+    private void appendList(List<Comment> list) {
+        if(list == null
+                ||list.isEmpty()
+        ){
+            adapter.loadEnd();
+        }
+        if(list.isEmpty()){
+            isLoadOver = true;
+            return;
+        }
+        adapter.setLoadMoreData(list);
+    }
+
+    @Override
+    public void reload(boolean bShow) {
 
     }
 }

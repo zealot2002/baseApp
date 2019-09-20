@@ -7,7 +7,6 @@ package com.zzy.common.model.bean;
 
 public class Comment {
     private String id;
-    private String parentId;//content id
     private int userId;
     private String userName;
     private String userHeadUrl;
@@ -105,11 +104,4 @@ public class Comment {
         this.goodsId = goodsId;
     }
 
-    public String getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(String parentId) {
-        this.parentId = parentId;
-    }
 }
