@@ -90,6 +90,7 @@ public abstract class BaseTitleAndBottomBarActivity extends BaseAppActivity impl
     @Override
     public void updateUI(Object o){
         rlDisconnect.setVisibility(View.GONE);
+
     }
 
 }

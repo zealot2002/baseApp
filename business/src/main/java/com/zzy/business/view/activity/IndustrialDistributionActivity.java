@@ -1,17 +1,24 @@
 package com.zzy.business.view.activity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
+import com.tencent.smtt.sdk.WebView;
 import com.zzy.business.R;
-import com.zzy.common.model.bean.Menu;
+import com.zzy.business.view.adapter.GridMenuListAdapter;
+import com.zzy.common.model.HttpProxy;
+import com.zzy.common.model.bean.Industry;
 import com.zzy.business.view.adapter.MenuListAdapter;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
+import com.zzy.common.model.bean.Menu;
+import com.zzy.common.network.CommonDataCallback;
+import com.zzy.commonlib.http.HConstant;
+import com.zzy.commonlib.utils.AppUtils;
+import com.zzy.commonlib.utils.NetUtils;
+import com.zzy.commonlib.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,20 +27,51 @@ import java.util.List;
  * 产业分布
  */
 public class IndustrialDistributionActivity extends BaseTitleAndBottomBarActivity implements View.OnClickListener {
-    private EditText etPhone,etPassword;
-    private Button btnOk;
-    private TextView tvToBePioneer,tvForgetPassword;
-
-
-    private RecyclerView rvMenuList,rvDataList;
-    private List<Menu> menuList;
+    private RecyclerView rvMenuList,rvTagList;
+    private GridMenuListAdapter gridTagListAdapter;
+    private List<Industry> industryList;
+    private int curMenuIndex = 0;
+    private List<Menu> menuList = new ArrayList<>();
+    private List<Menu> tagList = new ArrayList<>();
+    private WebView webView;
 /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("产业分布");
+        getData();
+    }
 
-        setupViews();
+    private void getData() {
+        if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {
+            ToastUtils.showShort(AppUtils.getApp().getResources().getString(R.string.no_network_tips));
+            return;
+        }
+        showLoading();
+        try{
+            HttpProxy.getIndustryList(new CommonDataCallback() {
+                @Override
+                public void callback(int result, Object o, Object o1) {
+                    closeLoading();
+                    if (result == HConstant.SUCCESS) {
+                        try{
+                            industryList = (List<Industry>) o;
+                            setupViews();
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }else if(result == HConstant.FAIL
+                            ||result == HConstant.ERROR
+                    ){
+                        ToastUtils.showShort((String) o);
+                    }
+                }
+            });
+
+        }catch(Exception e){
+            e.printStackTrace();
+            ToastUtils.showShort(e.toString());
+        }
     }
 
     @Override
@@ -41,21 +79,99 @@ public class IndustrialDistributionActivity extends BaseTitleAndBottomBarActivit
         return R.layout.busi_industrial_distribution_activity;
     }
 
-    private void setupViews() {
-        updateMenuViews();
-//        etPhone = findViewById(R.id.etPhone);
-//        etPassword = findViewById(R.id.etPassword);
-//        btnOk = findViewById(R.id.btnOk);
-//        tvToBePioneer = findViewById(R.id.tvToBePioneer);
-//        tvForgetPassword = findViewById(R.id.tvForgetPassword);
-//
-//        btnOk.setOnClickListener(this);
-//        tvToBePioneer.setOnClickListener(this);
-//        tvForgetPassword.setOnClickListener(this);
+
+    @Override
+    public void updateUI(Object o) {
+        super.updateUI(o);
+        try{
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
-    private void updateMenuViews() {
+
+    private void updateTagView() throws Exception{
+        if(rvTagList == null){
+            rvTagList = findViewById(R.id.rvTagList);
+            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this,3);
+            rvTagList.setLayoutManager(layoutManager);
+            rvTagList.setItemAnimator(new DefaultItemAnimator());
+
+            /*adapter*/
+            gridTagListAdapter = new GridMenuListAdapter(this);
+            rvTagList.setAdapter(gridTagListAdapter);
+            gridTagListAdapter.setOnItemClickedListener(new GridMenuListAdapter.Listener() {
+                @Override
+                public void onItemClicked(int position) {
+                    for(int i=0;i<tagList.size();i++){
+                        tagList.get(i).setSelected(i == position?true:false);
+                    }
+                    try {
+                        updateTagView();
+                        getTagData(industryList.get(curMenuIndex).getItemList().get(position).getId());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+        gridTagListAdapter.swapData(tagList);
+    }
+
+    private void getTagData(int id) {
+        webView.loadData("","text/html","utf-8");
+        if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {
+            ToastUtils.showShort(AppUtils.getApp().getResources().getString(R.string.no_network_tips));
+            return;
+        }
+        showLoading();
+        try{
+            HttpProxy.getIndustryDetail(id,new CommonDataCallback() {
+                @Override
+                public void callback(int result, Object o, Object o1) {
+                    closeLoading();
+                    if (result == HConstant.SUCCESS) {
+                        try{
+                            String s = (String) o;
+                            //显示富文本，http标签由content提供
+                            webView.loadData(s,"text/html","utf-8");
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }else if(result == HConstant.FAIL
+                            ||result == HConstant.ERROR
+                    ){
+                        ToastUtils.showShort((String) o);
+                    }
+                }
+            });
+
+        }catch(Exception e){
+            e.printStackTrace();
+            ToastUtils.showShort(e.toString());
+        }
+    }
+
+    private void setupViews() {
+        try{
+            webView = findViewById(R.id.webView);
+            setupMenuViews();
+            tagList.clear();
+            for(int i=0;i<industryList.get(0).getItemList().size();i++){
+                Industry.Item item = industryList.get(0).getItemList().get(i);
+                tagList.add(new Menu(item.getName(),i == 0?true:false));
+            }
+            updateTagView();
+            if(!industryList.get(curMenuIndex).getItemList().isEmpty()){
+                getTagData(industryList.get(curMenuIndex).getItemList().get(0).getId());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+    private void setupMenuViews() {
         if(rvMenuList == null){
-            repairMenu();
             rvMenuList = findViewById(R.id.rvMenuList);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
             rvMenuList.setLayoutManager(layoutManager);
@@ -67,33 +183,35 @@ public class IndustrialDistributionActivity extends BaseTitleAndBottomBarActivit
             adapter.setOnItemClickedListener(new MenuListAdapter.Listener() {
                 @Override
                 public void onItemClicked(int position) {
-                    //todo  get data
-                    for(int i=0;i<menuList.size();i++){
-                        menuList.get(i).setSelected(i==position?true:false);
+                    try{
+                        webView.loadData("","text/html","utf-8");
+                        for(int i=0;i<menuList.size();i++){
+                            menuList.get(i).setSelected(i==position?true:false);
+                        }
+                        curMenuIndex = position;
+                        adapter.notifyDataSetChanged();
+
+                        tagList.clear();
+                        for(int i=0;i<industryList.get(curMenuIndex).getItemList().size();i++){
+                            Industry.Item item = industryList.get(curMenuIndex).getItemList().get(i);
+                            tagList.add(new Menu(item.getName(),i == 0?true:false));
+                        }
+                        updateTagView();
+                        getTagData(industryList.get(curMenuIndex).getItemList().get(0).getId());
+                    }catch (Exception e){
+                        e.printStackTrace();
                     }
-                    adapter.notifyDataSetChanged();
                 }
             });
+            for(int i=0;i<industryList.size();i++){
+                menuList.add(new Menu(industryList.get(i).getName(),i==0?true:false));
+            }
             adapter.swapData(menuList);
         }
     }
 
-    private void repairMenu() {
-        menuList = new ArrayList<>();
-//        menuList.add(new Menu("东坑村",true));
-//        menuList.add(new Menu("北溪村",false));
-//        menuList.add(new Menu("深阳村",false));
-    }
-
     @Override
     public void onClick(View v) {
-//        if(v.getId() == R.id.btnOk){
-//            // TODO: 2019/8/19   to login
-//        }else if(v.getId() == R.id.tvToBePioneer){
-//
-//        }else if(v.getId() == R.id.tvForgetPassword){
-//
-//        }
 
     }
 

@@ -17,6 +17,8 @@ import com.zzy.common.model.jsonParser.GetRichInfoListParser;
 import com.zzy.common.model.jsonParser.GetRichInfoParser;
 import com.zzy.common.model.jsonParser.GoodsListParser;
 import com.zzy.common.model.jsonParser.GoodsParser;
+import com.zzy.common.model.jsonParser.IndustryListParser;
+import com.zzy.common.model.jsonParser.IndustryParser;
 import com.zzy.common.model.jsonParser.JobListParser;
 import com.zzy.common.model.jsonParser.JobParser;
 import com.zzy.common.model.jsonParser.LogListParser;
@@ -33,6 +35,7 @@ import com.zzy.common.constants.HttpConstants;
 import com.zzy.common.model.jsonParser.CommonParser;
 import com.zzy.common.model.jsonParser.Register1Parser;
 import com.zzy.common.model.jsonParser.UserParser;
+import com.zzy.common.network.CommonDataCallback;
 import com.zzy.common.network.HttpUtils;
 import com.zzy.common.utils.CommonUtils;
 import com.zzy.commonlib.http.HInterface;
@@ -801,4 +804,23 @@ public class HttpProxy {
                 new CommonParser());
     }
 
+    public static void getIndustryList(final HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", CommonUtils.getToken());
+        HttpUtils.getInstance().req(
+                HttpConstants.INDUSTRY_LIST,
+                reqBody,
+                callback,
+                new IndustryListParser());
+    }
+    public static void getIndustryDetail(int id,final HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", CommonUtils.getToken());
+        reqBody.put("ID",id);
+        HttpUtils.getInstance().req(
+                HttpConstants.INDUSTRY_DETAIL,
+                reqBody,
+                callback,
+                new IndustryParser());
+    }
 }
