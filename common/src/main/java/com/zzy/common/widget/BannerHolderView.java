@@ -26,6 +26,6 @@ public class BannerHolderView extends Holder<String> {
 
     @Override
     public void updateUI(String url) {
-        ImageLoader.loadImage(ivPic.getContext(),ivPic,url,errResId);
+        ImageLoader.loadImage(ivPic.getContext(),ivPic,url);
     }
 }

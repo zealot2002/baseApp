@@ -13,6 +13,7 @@ import com.zzy.common.model.jsonParser.CommentListParser;
 import com.zzy.common.model.jsonParser.ContentListParser;
 import com.zzy.common.model.jsonParser.ContentParser;
 import com.zzy.common.model.jsonParser.ExpertParser;
+import com.zzy.common.model.jsonParser.FriendListParser;
 import com.zzy.common.model.jsonParser.GetRichInfoListParser;
 import com.zzy.common.model.jsonParser.GetRichInfoParser;
 import com.zzy.common.model.jsonParser.GoodsListParser;
@@ -822,5 +823,15 @@ public class HttpProxy {
                 reqBody,
                 callback,
                 new IndustryParser());
+    }
+
+    public static void getFriendList(final HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", CommonUtils.getToken());
+        HttpUtils.getInstance().req(
+                HttpConstants.FRIEND_LIST,
+                reqBody,
+                callback,
+                new FriendListParser());
     }
 }

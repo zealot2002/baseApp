@@ -15,6 +15,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zzy.business.view.activity.ContentListActivity;
+import com.zzy.business.view.activity.FriendsCircleActivity;
 import com.zzy.business.view.activity.PioneeringListActivity;
 import com.zzy.business.view.activity.PioneerServiceActivity;
 import com.zzy.business.view.activity.PioneerListActivity;
@@ -259,8 +260,7 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
                 bundle.putInt(ParamConstants.TYPE, CommonConstants.CONTENT_EXPERIENCE);
                 startActivity(ContentListActivity.class,bundle);
             }else if(v.getId() == R.id.btnEntrepreneurshipFriends){
-                showWaitingPopup();
-//                startActivity(FriendsCircleActivity.class);
+                startActivity(FriendsCircleActivity.class);
             }
         }catch (Exception e){
             e.printStackTrace();

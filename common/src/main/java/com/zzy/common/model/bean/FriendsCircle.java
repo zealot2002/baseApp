@@ -7,9 +7,13 @@ import java.util.List;
 
 public class FriendsCircle {
     public String avatar;
-    public String nickname;
     public String createTime;
     public String content;
+    public String likeNum;
+    public String lookNum;
+    public String address;
+    public String id;
+    public String owner;
     public List<Uri> pictureList = new ArrayList<>();
     public List<Uri> pictureThumbList = new ArrayList<>();
     public String videoUrl;
@@ -22,12 +26,12 @@ public class FriendsCircle {
         this.avatar = avatar;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getAddress() {
+        return address;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getCreateTime() {
@@ -68,5 +72,37 @@ public class FriendsCircle {
 
     public void setVideoUrl(String videoUrl) {
         this.videoUrl = videoUrl;
+    }
+
+    public String getLikeNum() {
+        return likeNum;
+    }
+
+    public void setLikeNum(String likeNum) {
+        this.likeNum = likeNum;
+    }
+
+    public String getLookNum() {
+        return lookNum;
+    }
+
+    public void setLookNum(String lookNum) {
+        this.lookNum = lookNum;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 }

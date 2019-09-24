@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -17,10 +18,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter {
+    public interface OnEventListener {
+        void onReport(int position);
+    }
     private final List<FriendsCircle> mDataList = new ArrayList<>();
     private MessagePicturesLayout.Callback mCallback;
 
+    private OnEventListener listener;
     public MessageAdapter(Context context) {
+    }
+
+    public void setListener(OnEventListener listener) {
+        this.listener = listener;
     }
 
     public MessageAdapter setPictureClickCallback(MessagePicturesLayout.Callback callback) {
@@ -39,34 +48,52 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView iAvatar;
-        TextView tNickname, tTime, tContent;
+        TextView tNickname, tTime, tContent,tvCommentNum,tvLikeNum,tvReport;
         MessagePicturesLayout lPictures;
+        LinearLayout lComment,lLike;
 
         FriendsCircle mData;
 
         ViewHolder(View itemView) {
             super(itemView);
-            iAvatar = (ImageView) itemView.findViewById(R.id.i_avatar);
-            tNickname = (TextView) itemView.findViewById(R.id.t_nickname);
-            tTime = (TextView) itemView.findViewById(R.id.t_time);
-            tContent = (TextView) itemView.findViewById(R.id.t_content);
+            iAvatar =  itemView.findViewById(R.id.i_avatar);
+            tNickname =  itemView.findViewById(R.id.t_nickname);
+            tTime = itemView.findViewById(R.id.t_time);
+            tvCommentNum = itemView.findViewById(R.id.tvCommentNum);
+            tvLikeNum = itemView.findViewById(R.id.tvLikeNum);
+            tvReport = itemView.findViewById(R.id.tvReport);
+            tContent = itemView.findViewById(R.id.t_content);
+            lComment = itemView.findViewById(R.id.lComment);
+            lLike = itemView.findViewById(R.id.lLike);
+
             lPictures = (MessagePicturesLayout) itemView.findViewById(R.id.l_pictures);
             lPictures.setCallback(mCallback);
         }
 
-        void refresh(int pos) {
+        void refresh(final int pos) {
             mData = mDataList.get(pos);
             Glide.with(itemView.getContext()).load(mData.getAvatar()).into(iAvatar);
-            tNickname.setText(mData.getNickname());
+            tNickname.setText(mData.getAddress());
             tTime.setText(mData.getCreateTime());
+            tvCommentNum.setText(mData.getLookNum());
+            tvLikeNum.setText(mData.getLikeNum());
             tContent.setText(mData.getContent());
             lPictures.set(mData.getPictureThumbList(), mData.getPictureList());
+            tvReport.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(listener!=null){
+                        listener.onReport(pos);
+                    }
+                }
+            });
         }
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.busi_friends_list_item, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.busi_friends_list_item,
+                parent, false));
     }
 
     @Override

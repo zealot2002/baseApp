@@ -45,6 +45,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
         <activity
+            android:name=".view.activity.FriendNewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/activity_theme" />
+        <activity
             android:name=".view.activity.ContentListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activity_theme"
@@ -76,7 +80,9 @@
         <activity
             android:name=".view.activity.GetRichInfoDetailActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/activity_theme" />
+            android:theme="@style/activity_theme"
+            android:hardwareAccelerated="false"
+            />
         <activity
             android:name=".view.activity.GoodsDetailBuyActivity"
             android:screenOrientation="portrait"
