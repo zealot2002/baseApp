@@ -6,10 +6,13 @@ import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.github.ielse.imagewatcher.ImageWatcher;
 import com.zzy.business.R;
+import com.zzy.business.contract.ContentContract;
+import com.zzy.business.presenter.ContentPresenter;
 import com.zzy.common.model.HttpProxy;
 import com.zzy.common.model.bean.FriendsCircle;
 import com.zzy.business.view.adapter.MessageAdapter;
@@ -33,7 +36,7 @@ import java.util.List;
  * 创业朋友圈
  */
 public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity implements
-        View.OnClickListener, MessagePicturesLayout.Callback, ImageWatcher.OnPictureLongPressListener {
+        View.OnClickListener, MessagePicturesLayout.Callback, ImageWatcher.OnPictureLongPressListener , ContentContract.View {
     private Button btnNew;
 
     private ImageWatcher vImageWatcher;
@@ -41,11 +44,15 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
     private RecyclerView rvDataList;
     private List<FriendsCircle> dataList;
     private PopupEditDialog dialog;
+    private ContentContract.Presenter presenter;
+    private EditText etMsg;
     /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("创业朋友圈");
+
+        presenter = new ContentPresenter(this);
         getData();
 
     }
@@ -87,9 +94,16 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
         return R.layout.busi_friends_circle_activity;
     }
 
+//    private void showRlMsg(int msgType){
+//        this.msgType = msgType;
+//        rlMsg.setVisibility(View.VISIBLE);
+//        etMsg.requestFocus();
+//    }
+
     private void setupViews() {
         btnNew = findViewById(R.id.btnNew);
         btnNew.setOnClickListener(this);
+        etMsg = findViewById(R.id.etMsg);
 
         rvDataList = findViewById(R.id.rvDataList);
         rvDataList.setLayoutManager(new LinearLayoutManager(this));
@@ -108,14 +122,23 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
                                         ToastUtils.showShort("内容不能为空");
                                         return;
                                     }
-                                    report(position,content);
+                                    presenter.report(Integer.valueOf(dataList.get(position).getId()),content);
                                     dialog.dismiss();
                                 }
                             }
                     ).create();
                 }
                 dialog.show();
+            }
 
+            @Override
+            public void onComment(int position) {
+//                presenter.createComment(Integer.valueOf(dataList.get(position).getId()),);
+            }
+
+            @Override
+            public void onLike(int position) {
+                presenter.like(Integer.valueOf(dataList.get(position).getId()));
             }
         });
         // **************   xml 方式加载  ********  推荐使用后面demo的iwHelper
@@ -148,32 +171,6 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
 //        Utils.fitsSystemWindows(isTranslucentStatus, findViewById(R.id.v_fit));
     }
 
-    private void report(int position,String content) {
-        if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {
-            ToastUtils.showShort(AppUtils.getApp().getResources().getString(R.string.no_network_tips));
-            return;
-        }
-        showLoading();
-        try{
-            HttpProxy.reportContent(Integer.valueOf(dataList.get(position).getId()),content,new CommonDataCallback() {
-                @Override
-                public void callback(int result, Object o, Object o1) {
-                    closeLoading();
-                    if (result == HConstant.SUCCESS) {
-                        ToastUtils.showShort("成功");
-                    }else if(result == HConstant.FAIL
-                            ||result == HConstant.ERROR
-                    ){
-                        ToastUtils.showShort((String) o);
-                    }
-                }
-            });
-        }catch(Exception e){
-            e.printStackTrace();
-            ToastUtils.showShort(e.toString());
-        }
-    }
-
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btnNew){
@@ -183,7 +180,7 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
 
     @Override
     public void reload(boolean bShow) {
-
+        getData();
     }
 
     @Override
@@ -202,5 +199,16 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
         if (!vImageWatcher.handleBackPressed()) {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public void showError(String s) {
+        ToastUtils.showShort(s);
+    }
+
+    @Override
+    public void onSuccess() {
+        ToastUtils.showShort("成功");
+        reload(true);
     }
 }

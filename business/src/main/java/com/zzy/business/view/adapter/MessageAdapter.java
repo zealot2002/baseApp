@@ -20,6 +20,8 @@ import java.util.List;
 public class MessageAdapter extends RecyclerView.Adapter {
     public interface OnEventListener {
         void onReport(int position);
+        void onComment(int position);
+        void onLike(int position);
     }
     private final List<FriendsCircle> mDataList = new ArrayList<>();
     private MessagePicturesLayout.Callback mCallback;
@@ -84,6 +86,22 @@ public class MessageAdapter extends RecyclerView.Adapter {
                 public void onClick(View v) {
                     if(listener!=null){
                         listener.onReport(pos);
+                    }
+                }
+            });
+            lComment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(listener!=null){
+                        listener.onComment(pos);
+                    }
+                }
+            });
+            lLike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(listener!=null){
+                        listener.onLike(pos);
                     }
                 }
             });
