@@ -1,6 +1,8 @@
 package com.zzy.business.view.activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -10,6 +12,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.zzy.business.R;
+import com.zzy.business.contract.GoodsContract;
+import com.zzy.business.presenter.GoodsPresenter;
+import com.zzy.business.view.adapter.GridMenuListAdapter;
 import com.zzy.common.adapter.PhotoAdapter;
 import com.zzy.common.adapter.RecyclerItemClickListener;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
@@ -18,6 +23,7 @@ import com.zzy.common.constants.CommonConstants;
 import com.zzy.common.model.HttpProxy;
 import com.zzy.common.model.bean.Goods;
 import com.zzy.common.model.bean.Image;
+import com.zzy.common.model.bean.Menu;
 import com.zzy.common.network.CommonDataCallback;
 import com.zzy.common.utils.FileUploader;
 import com.zzy.common.widget.MyEditText;
@@ -37,18 +43,22 @@ import me.iwf.photopicker.PhotoPreview;
 /**
  * 我要买东西
  */
-public class GoodsNewBuyActivity extends BaseTitleAndBottomBarActivity implements View.OnClickListener {
-    private EditText etName,etContact,etPhone,etAddress,etPrice;
+public class GoodsNewBuyActivity extends BaseTitleAndBottomBarActivity
+        implements View.OnClickListener, GoodsContract.View {
+    private GoodsPresenter presenter;
+    private EditText etName,etContact,etPhone,etStartPrice,etEndPrice;
     private MyEditText etDesc;
     private Button btnOk;
     private PhotoAdapter photoAdapter;
     private ArrayList<String> selectedPhotos = new ArrayList<>();
     private Goods bean;
 
-/***********************************************************************************************/
+    /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        bean = new Goods();
+        presenter = new GoodsPresenter(this);
         setupViews();
     }
 
@@ -63,8 +73,8 @@ public class GoodsNewBuyActivity extends BaseTitleAndBottomBarActivity implement
         etName = findViewById(R.id.etName);
         etContact = findViewById(R.id.etContact);
         etPhone = findViewById(R.id.etPhone);
-        etAddress = findViewById(R.id.etAddress);
-        etPrice = findViewById(R.id.etStartPrice);
+        etStartPrice = findViewById(R.id.etStartPrice);
+        etEndPrice = findViewById(R.id.etEndPrice);
         etDesc = findViewById(R.id.etDesc);
 
         btnOk = findViewById(R.id.btnOk);
@@ -72,6 +82,7 @@ public class GoodsNewBuyActivity extends BaseTitleAndBottomBarActivity implement
 
         setupPhotoPicker();
     }
+
 
     private void setupPhotoPicker() {
         RecyclerView recyclerView = findViewById(R.id.rvPhotoPicker);
@@ -89,8 +100,9 @@ public class GoodsNewBuyActivity extends BaseTitleAndBottomBarActivity implement
                             PhotoPicker.builder()
                                     .setPhotoCount(6)
                                     .setShowCamera(true)
-                                    .setPreviewEnabled(false)
+//                                    .setPreviewEnabled(false)
                                     .setSelected(selectedPhotos)
+                                    .setPreviewEnabled(true)
                                     .start(GoodsNewBuyActivity.this);
                         } else {
                             PhotoPreview.builder()
@@ -122,13 +134,12 @@ public class GoodsNewBuyActivity extends BaseTitleAndBottomBarActivity implement
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btnOk){
-            bean = new Goods();
-            bean.setAddress(etAddress.getText().toString().trim());
             bean.setContact(etContact.getText().toString().trim());
             bean.setDesc(etDesc.getText().toString().trim());
             bean.setName(etName.getText().toString().trim());
             bean.setPhone(etPhone.getText().toString().trim());
-            bean.setPrice(etPrice.getText().toString().trim());
+            bean.setStartPrice(etStartPrice.getText().toString().trim());
+            bean.setEndPrice(etEndPrice.getText().toString().trim());
 
             for(String s:selectedPhotos){
                 Image image = new Image();
@@ -136,64 +147,23 @@ public class GoodsNewBuyActivity extends BaseTitleAndBottomBarActivity implement
                 image.setName(s.substring(s.lastIndexOf('/')));
                 bean.getImgList().add(image);
             }
-            preSubmit();
+            presenter.create(CommonConstants.GOODS_BUY,bean);
         }
-    }
-
-    private void preSubmit() {
-        if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {
-            ToastUtils.showShort(AppUtils.getApp().getResources().getString(R.string.no_network_tips));
-            return;
-        }
-        showLoading();
-        try{
-            if(bean.getImgList().isEmpty()){
-                submit();
-                return;
-            }
-            new FileUploader().post(bean.getImgList(), new HInterface.DataCallback() {
-                @Override
-                public void requestCallback(int result, Object data, Object tagData) {
-                    MyLog.e("result:" +data.toString());
-                    if (result == HConstant.SUCCESS) {
-                        bean.setImgList((List<Image>) data);
-                        submit();
-                    }else if(result == HConstant.FAIL){
-                        ToastUtils.showShort((String) data);
-                    }
-                }
-            });
-        }catch(Exception e){
-            e.printStackTrace();
-            ToastUtils.showShort(e.toString());
-        }
-    }
-
-    private void submit() {
-        try {
-            HttpProxy.newGoods(CommonConstants.GOODS_BUY,bean,new CommonDataCallback() {
-                @Override
-                public void callback(int result, Object o, Object o1) {
-                    closeLoading();
-                    if (result == HConstant.SUCCESS) {
-                        ToastUtils.showShort("成功");
-                        finish();
-                    }else if(result == HConstant.FAIL
-                            ||result == HConstant.ERROR
-                    ){
-                        ToastUtils.showShort((String) o);
-                    }
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-            ToastUtils.showShort(e.toString());
-        }
-
     }
 
     @Override
     public void reload(boolean bShow) {
 
+    }
+
+    @Override
+    public void showError(String s) {
+
+    }
+
+    @Override
+    public void onSuccess() {
+        ToastUtils.showShort("成功");
+        finish();
     }
 }

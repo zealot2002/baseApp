@@ -182,7 +182,12 @@
             android:text="商品图片（最多6张）:"
             android:layout_marginTop="10dp"
             />
-
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvPhotoPicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            />
         <!--完成-->
         <Button
             android:id="@+id/btnOk"

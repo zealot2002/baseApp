@@ -86,11 +86,15 @@
         <activity
             android:name=".view.activity.GoodsDetailBuyActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/activity_theme" />
+            android:theme="@style/activity_theme"
+            android:windowSoftInputMode="adjustPan"
+            />
         <activity
             android:name=".view.activity.GoodsDetailSellActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/activity_theme" />
+            android:theme="@style/activity_theme"
+            android:windowSoftInputMode="adjustPan"
+            />
         <activity
             android:name=".view.activity.GoodsNewBuyActivity"
             android:screenOrientation="portrait"

@@ -16,6 +16,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zzy.business.view.activity.ContentListActivity;
 import com.zzy.business.view.activity.FriendsCircleActivity;
+import com.zzy.business.view.activity.GoodsListActivity;
 import com.zzy.business.view.activity.PioneeringListActivity;
 import com.zzy.business.view.activity.PioneerServiceActivity;
 import com.zzy.business.view.activity.PioneerListActivity;
@@ -243,13 +244,11 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
             }else if(v.getId() == R.id.btnEntrepreneurship){
                 startActivity(PioneeringListActivity.class);
             }else if(v.getId() == R.id.btnBuyGoods){
-                showWaitingPopup();
-//                bundle.putInt(ParamConstants.TYPE,0);
-//                startActivity(GoodsListActivity.class,bundle);
+                bundle.putInt(ParamConstants.TYPE,CommonConstants.GOODS_BUY);
+                startActivity(GoodsListActivity.class,bundle);
             }else if(v.getId() == R.id.btnSellGoods){
-                showWaitingPopup();
-//                bundle.putInt(ParamConstants.TYPE,1);
-//                startActivity(GoodsListActivity.class,bundle);
+                bundle.putInt(ParamConstants.TYPE,CommonConstants.GOODS_SELL);
+                startActivity(GoodsListActivity.class,bundle);
             }else if(v.getId() == R.id.btnHelp){
                 bundle.putInt(ParamConstants.TYPE, CommonConstants.CONTENT_HELP);
                 startActivity(ContentListActivity.class,bundle);

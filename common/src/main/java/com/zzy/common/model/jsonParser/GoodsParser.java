@@ -27,16 +27,24 @@ public class GoodsParser implements HInterface.JsonParser {
         if (errorCode == HttpConstants.NO_ERROR) {
             JSONObject dataObj = obj.getJSONObject("data");
             Goods bean = new Goods();
-            bean.setName(dataObj.getString("SALE_TITLE"));
-            bean.setContact(dataObj.getString("RELEASE_PEOPLE"));
-            bean.setPhone(dataObj.getString("SALE_TEL"));
-            bean.setPrice(dataObj.getString("SALE_PRICE"));
-            bean.setDesc(dataObj.getString("SALE_CONTENT"));
+            if(dataObj.has("SALE_TITLE")) bean.setName(dataObj.getString("SALE_TITLE"));
+            if(dataObj.has("RELEASE_PEOPLE")) bean.setContact(dataObj.getString("RELEASE_PEOPLE"));
+            if(dataObj.has("SALE_TEL")) bean.setPhone(dataObj.getString("SALE_TEL"));
+            if(dataObj.has("SALE_PRICE")) bean.setPrice(dataObj.getString("SALE_PRICE"));
+            if(dataObj.has("SALE_CONTENT")) bean.setDesc(dataObj.getString("SALE_CONTENT"));
 
+
+            if(dataObj.has("SALE_ADDRESS")) bean.setAddress(dataObj.getString("SALE_ADDRESS"));
+            if(dataObj.has("SALE_BUSINESS")) bean.setDealWay(dataObj.getString("SALE_BUSINESS"));
+            try{
+                if(dataObj.has("SALE_GRADE")) bean.setScore(Integer.valueOf(dataObj.getString("SALE_GRADE")));
+            }catch (Exception e){
+//                e.printStackTrace();
+            }
             JSONArray imgArray = dataObj.getJSONArray("IMAGES");
             for(int i=0;i<imgArray.length();i++) {
                 JSONObject infoObj = imgArray.getJSONObject(i);
-                bean.getImgList().add(new Image(infoObj.getString("PIC_ADDR")));
+                bean.getImgList().add(new Image(HttpConstants.SERVER_ADDRESS+"/"+infoObj.getString("PIC_ADDR")));
             }
 
             JSONArray commentArray = dataObj.getJSONArray("COMMENT");

@@ -7,9 +7,10 @@ import android.view.View;
 import android.widget.Button;
 
 import com.zzy.business.R;
-import com.zzy.business.contract.GoodsBuyContract;
+import com.zzy.business.contract.GoodsContract;
+import com.zzy.common.constants.CommonConstants;
 import com.zzy.common.model.bean.Goods;
-import com.zzy.business.presenter.GoodsBuyPresenter;
+import com.zzy.business.presenter.GoodsPresenter;
 import com.zzy.business.view.itemViewDelegate.GoodsDelegate;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.constants.ParamConstants;
@@ -26,12 +27,12 @@ import java.util.List;
  * 我要买|卖东西列表
  */
 public class GoodsListActivity extends BaseTitleAndBottomBarActivity
-        implements View.OnClickListener , GoodsBuyContract.View {
+        implements View.OnClickListener , GoodsContract.View {
     private Button btnNew;
     private int goodType = 0;
     private RecyclerView rvDataList;
     private List<Goods> dataList = new ArrayList<>();
-    private GoodsBuyContract.Presenter presenter;
+    private GoodsContract.Presenter presenter;
     private int pageNum = 1;
     private OnLoadMoreListener onLoadMoreListener;
     private MyMultiRecycleAdapter adapter;
@@ -42,9 +43,9 @@ public class GoodsListActivity extends BaseTitleAndBottomBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try{
-            goodType = getIntent().getIntExtra(ParamConstants.TYPE,0);
-            presenter = new GoodsBuyPresenter(this);
-            presenter.getList(pageNum);
+            goodType = getIntent().getIntExtra(ParamConstants.TYPE,CommonConstants.GOODS_BUY);
+            presenter = new GoodsPresenter(this);
+            presenter.getList(goodType,pageNum);
         }catch (Exception e){
             e.printStackTrace();
             ToastUtils.showShort(e.toString());
@@ -58,7 +59,7 @@ public class GoodsListActivity extends BaseTitleAndBottomBarActivity
 
     private void setupViews() {
         btnNew = findViewById(R.id.btnNew);
-        if(goodType == 0){
+        if(goodType == CommonConstants.GOODS_BUY){
             setTitle("我要买东西");
             btnNew.setText("发布求购信息");
         }else{
@@ -84,9 +85,9 @@ public class GoodsListActivity extends BaseTitleAndBottomBarActivity
                         return;
                     }
                     if(isReload){
-                        presenter.getList(pageNum);
+                        presenter.getList(goodType,pageNum);
                     }else{
-                        presenter.getList(++pageNum);
+                        presenter.getList(goodType,++pageNum);
                     }
                 }
             };
@@ -97,7 +98,8 @@ public class GoodsListActivity extends BaseTitleAndBottomBarActivity
                 public void onItemChildClick(ViewHolder viewHolder, Object data, int position) {
                     Bundle bundle = new Bundle();
                     bundle.putInt(ParamConstants.ID,dataList.get(position).getId());
-                    startActivity(goodType==0?GoodsDetailBuyActivity.class:GoodsDetailSellActivity.class,bundle);
+                    startActivity(goodType==CommonConstants.GOODS_BUY?
+                            GoodsDetailBuyActivity.class:GoodsDetailSellActivity.class,bundle);
                 }
             });
             rvDataList.setAdapter(adapter);
@@ -108,13 +110,14 @@ public class GoodsListActivity extends BaseTitleAndBottomBarActivity
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btnNew){
-            startActivity(goodType==0?GoodsNewBuyActivity.class:GoodsNewSellActivity.class);
+            startActivity(goodType==CommonConstants.GOODS_BUY?
+                    GoodsNewBuyActivity.class:GoodsNewSellActivity.class);
         }
     }
 
     @Override
     public void reload(boolean bShow) {
-        presenter.getList(pageNum);
+        presenter.getList(goodType,pageNum);
     }
 
     @Override

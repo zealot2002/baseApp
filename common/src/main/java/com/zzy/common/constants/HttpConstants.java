@@ -117,6 +117,9 @@ public class HttpConstants {
     public static final String GOODS_SELL_DETAIL = "/sale/selByIdSale.do";
     public static final String GOODS_SELL_NEW = "/sale/insertSale.do";
 
+    public static final String GOODS_COMMENT_NEW = "/sale/insertLeave.do";
+    public static final String GOODS_REPLY_NEW = "/sale/insertReply.do";
+    public static final String GOODS_REPORT = "/sale/insertReport.do";
 
     /**********************        我的档案            ***************************/
     public static final String ARCHIVES_INFO = "/userinfo/selByToken.do";

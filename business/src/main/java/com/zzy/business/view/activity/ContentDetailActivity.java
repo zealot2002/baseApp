@@ -6,12 +6,12 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.tencent.smtt.sdk.WebView;
 import com.zzy.business.R;
 import com.zzy.business.contract.ContentContract;
 import com.zzy.common.model.bean.Content;
@@ -20,6 +20,7 @@ import com.zzy.business.view.itemViewDelegate.ContentCommentDelegate;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.constants.CommonConstants;
 import com.zzy.common.constants.ParamConstants;
+import com.zzy.common.utils.CommonUtils;
 import com.zzy.common.widget.PopupEditDialog;
 import com.zzy.common.widget.recycleAdapter.MyMultiRecycleAdapter;
 import com.zzy.common.widget.recycleAdapter.OnLoadMoreListener;
@@ -97,7 +98,7 @@ public class ContentDetailActivity extends BaseTitleAndBottomBarActivity
         etMsg = findViewById(R.id.etMsg);
         tvSubmit = findViewById(R.id.tvSubmit);
 //        webView.loadData(testHtml,"text/html","utf-8");
-        webView.loadData(bean.getContent(),"text/html","utf-8");
+        CommonUtils.webLoadData(webView,bean.getContent());
 
         tvDate.setText("时间: "+bean.getDate());
 

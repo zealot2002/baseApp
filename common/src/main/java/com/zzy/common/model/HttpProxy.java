@@ -586,50 +586,103 @@ public class HttpProxy {
     }
 
     /**********************        买卖            ***************************/
-    public static void getGoodsBuyList(int pageNum, final HInterface.DataCallback callback) throws Exception {
+    public static void getGoodsList(int type,int pageNum, final HInterface.DataCallback callback) throws Exception {
         JSONObject reqBody = new JSONObject();
         reqBody.put("TOKEN", CommonUtils.getToken());
         reqBody.put("rows", CommonConstants.PAGE_SIZE);
         reqBody.put("page", pageNum);
+        String action = HttpConstants.GOODS_BUY_LIST;
+        if(type == CommonConstants.GOODS_SELL){
+            action = HttpConstants.GOODS_SELL_LIST;
+        }
         HttpUtils.getInstance().req(
-                HttpConstants.GOODS_BUY_LIST,
+                action,
                 reqBody,
                 callback,
                 new GoodsListParser());
     }
-    public static void getGoodsBuyDetail(int id, final HInterface.DataCallback callback) throws Exception {
+    public static void getGoodsDetail(int type,int id, final HInterface.DataCallback callback) throws Exception {
         JSONObject reqBody = new JSONObject();
         reqBody.put("TOKEN", CommonUtils.getToken());
         reqBody.put("SALE_ID", id);
+        String action = HttpConstants.GOODS_BUY_DETAIL;
+        if(type == CommonConstants.GOODS_SELL){
+            action = HttpConstants.GOODS_SELL_DETAIL;
+        }
         HttpUtils.getInstance().req(
-                HttpConstants.GOODS_BUY_DETAIL,
+                action,
                 reqBody,
                 callback,
                 new GoodsParser());
     }
-    public static void getGoodsSellList(int pageNum, final HInterface.DataCallback callback) throws Exception {
+    public static void newGoods(int type, Goods bean, final HInterface.DataCallback callback) throws Exception {
         JSONObject reqBody = new JSONObject();
         reqBody.put("TOKEN", CommonUtils.getToken());
-        reqBody.put("rows", CommonConstants.PAGE_SIZE);
-        reqBody.put("page", pageNum);
+        reqBody.put("SALE_TITLE",bean.getName());
+        reqBody.put("RELEASE_PEOPLE", bean.getContact());
+        reqBody.put("SALE_TEL", bean.getPhone());
+        reqBody.put("SALE_PRICE", bean.getPrice());
+        reqBody.put("SALE_CONTENT", bean.getDesc());
+        reqBody.put("SALE_BUSINESS", bean.getDealWay());
+        reqBody.put("SALE_ADDRESS", bean.getAddress());
+
+        JSONArray imgArr = new JSONArray();
+        for(Image image:bean.getImgList()){
+            JSONObject obj = new JSONObject();
+            obj.put("PIC_NAME",image.getName());
+            obj.put("PIC_ADDR",image.getPath());
+            imgArr.put(obj);
+        }
+        reqBody.put("IMAGES",imgArr);
+
+        String action = HttpConstants.GOODS_BUY_NEW;
+        if(type == CommonConstants.GOODS_SELL){
+            action = HttpConstants.GOODS_SELL_NEW;
+        }
         HttpUtils.getInstance().req(
-                HttpConstants.GOODS_SELL_LIST,
+                action,
                 reqBody,
                 callback,
-                new GoodsListParser());
+                new CommonParser());
     }
-    public static void getGoodsSellDetail(int id, final HInterface.DataCallback callback) throws Exception {
+
+    public static void createGoodsComment(int goodsId, String content, HInterface.DataCallback callback) throws Exception{
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", CommonUtils.getToken());
+        reqBody.put("SALE_ID",goodsId);
+        reqBody.put("COMMENT_TEXT", content);
+
+        HttpUtils.getInstance().req(
+                HttpConstants.GOODS_COMMENT_NEW,
+                reqBody,
+                callback,
+                new CommonParser());
+    }
+
+    public static void createGoodsReply(int goodsId, int commentId, String content, HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", CommonUtils.getToken());
+        reqBody.put("SALE_ID",goodsId);
+        reqBody.put("COMMENT_ID",commentId);
+        reqBody.put("REVIEW_TEXT", content);
+
+        HttpUtils.getInstance().req(
+                HttpConstants.GOODS_REPLY_NEW,
+                reqBody,
+                callback,
+                new CommonParser());
+    }
+    public static void reportGoods(int id, String content, final HInterface.DataCallback callback) throws Exception {
         JSONObject reqBody = new JSONObject();
         reqBody.put("TOKEN", CommonUtils.getToken());
         reqBody.put("SALE_ID", id);
+        reqBody.put("COMPLAINT_REASON", content);
         HttpUtils.getInstance().req(
-                HttpConstants.GOODS_SELL_DETAIL,
+                HttpConstants.GOODS_REPORT,
                 reqBody,
                 callback,
-                new GoodsParser());
+                new CommonParser());
     }
-
-
     /**********************        我的档案            ***************************/
     public static void getMyArchives(final HInterface.DataCallback callback) throws Exception {
         JSONObject reqBody = new JSONObject();
@@ -774,36 +827,12 @@ public class HttpProxy {
                 new CommonParser());
     }
 
-    public static void newGoods(int type, Goods bean, final HInterface.DataCallback callback) throws Exception {
-        JSONObject reqBody = new JSONObject();
-        reqBody.put("TOKEN", CommonUtils.getToken());
-        reqBody.put("SALE_TITLE",bean.getName());
-        reqBody.put("RELEASE_PEOPLE", bean.getContact());
-        reqBody.put("SALE_TEL", bean.getPhone());
-        reqBody.put("SALE_PRICE", bean.getPrice());
-        reqBody.put("SALE_CONTENT", bean.getDesc());
-        reqBody.put("SALE_BUSINESS", bean.getDealWay());
-        reqBody.put("SALE_ADDRESS", bean.getAddress());
 
-        JSONArray imgArr = new JSONArray();
-        for(Image image:bean.getImgList()){
-            JSONObject obj = new JSONObject();
-            obj.put("PIC_NAME",image.getName());
-            obj.put("PIC_ADDR",image.getPath());
-            imgArr.put(obj);
-        }
-        reqBody.put("IMAGES",imgArr);
+    /////goods
 
-        String action = HttpConstants.GOODS_BUY_NEW;
-        if(type == CommonConstants.GOODS_SELL){
-            action = HttpConstants.GOODS_SELL_NEW;
-        }
-        HttpUtils.getInstance().req(
-                action,
-                reqBody,
-                callback,
-                new CommonParser());
-    }
+
+
+    ///产业
 
     public static void getIndustryList(final HInterface.DataCallback callback) throws Exception {
         JSONObject reqBody = new JSONObject();

@@ -1,17 +1,18 @@
 package com.zzy.business.view.activity;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.tencent.smtt.sdk.WebView;
 import com.zzy.business.R;
 import com.zzy.business.contract.GetRichInfoContract;
 import com.zzy.common.model.bean.GetRichInfo;
 import com.zzy.business.presenter.GetRichInfoPresenter;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.constants.ParamConstants;
+import com.zzy.common.utils.CommonUtils;
 import com.zzy.commonlib.utils.ToastUtils;
 
 /**
@@ -66,8 +67,7 @@ public class GetRichInfoDetailActivity extends BaseTitleAndBottomBarActivity
         ivPic = findViewById(R.id.ivPic);
         rlLike = findViewById(R.id.rlLike);
 
-//        webView.loadData(testHtml,"text/html","utf-8");
-        webView.loadData(bean.getContent(),"text/html","utf-8");
+        CommonUtils.webLoadData(webView,bean.getContent());
 
         tvDate.setText("时间: "+bean.getDate());
 

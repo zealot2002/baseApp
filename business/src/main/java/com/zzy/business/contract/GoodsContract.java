@@ -5,16 +5,19 @@ import com.zzy.commonlib.base.BaseLoadingView;
 import com.zzy.commonlib.base.BasePresenter;
 
 
-public interface GoodsBuyContract {
+public interface GoodsContract {
     interface View extends BaseLoadingView {
         void showError(String s);
         void onSuccess();
     }
 
     interface Presenter extends BasePresenter {
-        void getList(int pageNum);
-        void getDetail(int id);
+        void getList(int type,int pageNum);
+        void getDetail(int type,int id);
+        void create(int type,Goods bean);
+
+        void createComment(int id, String content);
+        void reply(int id, int commitId, String content);
         void report(int id, String content);
-        void create(Goods bean);
     }
 }

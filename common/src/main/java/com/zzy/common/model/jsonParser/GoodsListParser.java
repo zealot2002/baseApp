@@ -42,7 +42,7 @@ public class GoodsListParser implements HInterface.JsonParser {
                 if(infoObj.has("SALE_GRADE")){
                     bean.setScore(getScore(infoObj.getString("SALE_GRADE")));
                 }
-                bean.getImgList().add(new Image(infoObj.getString("PIC_ADDR")));
+                bean.getImgList().add(new Image(HttpConstants.SERVER_ADDRESS+"/"+infoObj.getString("PIC_ADDR")));
                 dataList.add(bean);
             }
             return new Object[]{HConstant.SUCCESS,dataList};
