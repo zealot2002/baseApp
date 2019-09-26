@@ -1,14 +1,21 @@
 package com.zzy.common.utils;
 
+import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.zzy.common.R;
 import com.zzy.common.constants.HttpConstants;
 import com.zzy.common.constants.SPConstants;
 import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.commonlib.utils.SPUtils;
 import com.zzy.commonlib.utils.encryptUtils.MD5Utils;
+import com.zzy.sc.core.serverCenter.SCM;
+import com.zzy.servercentre.ActionConstants;
+
+import java.net.URLDecoder;
 
 public final class CommonUtils {
     public static String getUserId(){
@@ -39,5 +46,27 @@ public final class CommonUtils {
                 webView.measure(w, h);
             }
         });
+    }
+
+    /**
+     *
+     * @param title 分享标题
+     * @param content 分享内容
+     * @param imgUrl 分享图片链接
+     * @param targetUrl 分享内容链接
+     */
+    public static void showShare(Context context,
+                                 String title, String content, String imgUrl, String targetUrl) {
+        try {
+            Bundle bundle = new Bundle();
+            bundle.putString("title", URLDecoder.decode(title, "utf-8"));
+            bundle.putString("content", URLDecoder.decode(content, "utf-8"));
+            bundle.putString("url", URLDecoder.decode(imgUrl, "utf-8"));
+            bundle.putString("actionUrl", URLDecoder.decode(targetUrl, "utf-8"));
+            bundle.putInt("defaultIcon", R.mipmap.icon);
+            SCM.getInstance().req(context, ActionConstants.SHOW_SHARE_DIALOG_ACTION, bundle);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

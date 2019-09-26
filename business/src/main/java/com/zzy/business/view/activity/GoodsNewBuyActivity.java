@@ -170,6 +170,7 @@ public class GoodsNewBuyActivity extends BaseTitleAndBottomBarActivity
             bean.setStartPrice(etStartPrice.getText().toString().trim());
             bean.setEndPrice(etEndPrice.getText().toString().trim());
 
+            bean.getImgList().clear();
             for(String s:selectedPhotos){
                 Image image = new Image();
                 image.setPath(s);

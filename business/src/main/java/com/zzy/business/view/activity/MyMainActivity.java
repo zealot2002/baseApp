@@ -13,6 +13,7 @@ import com.zzy.common.constants.CommonConstants;
 import com.zzy.common.constants.ParamConstants;
 import com.zzy.common.glide.ImageLoader;
 import com.zzy.common.model.bean.User;
+import com.zzy.common.utils.CommonUtils;
 import com.zzy.common.widget.PopupDialog;
 
 /**
@@ -112,12 +113,18 @@ public class MyMainActivity extends BaseTitleAndBottomBarActivity
         }else if(v.getId() == R.id.btnSettings){
             startActivity(SettingsActivity.class);
         }else if(v.getId() == R.id.btnShareSoftware){
-
+            showWaitingPopup("开发中...");
+//            CommonUtils.showShare(this,
+//                    "标题",
+//                    "内容",
+//                    "图片url",
+//                    "linkUrl"
+//                    );
         }
     }
-    private void showWaitingPopup() {
+    private void showWaitingPopup(String s) {
         if(dialog == null){
-            dialog = new PopupDialog.Builder(this,"正在开发中...","完成").create();
+            dialog = new PopupDialog.Builder(this,s,"完成").create();
         }
         dialog.show();
     }

@@ -6,6 +6,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -130,6 +131,9 @@ public class GoodsNewSellActivity extends BaseTitleAndBottomBarActivity
         gridMenuListAdapter.swapData(tagList);
     }
     private void refreshTagList(String initTag) {
+        if(TextUtils.isEmpty(initTag)){
+            return;
+        }
         for(int i=0;i<tagList.size();i++){
             Menu m = tagList.get(i);
             m.setSelected(initTag.equals(m.getName())?true:false);
@@ -202,6 +206,7 @@ public class GoodsNewSellActivity extends BaseTitleAndBottomBarActivity
             bean.setPrice(etPrice.getText().toString().trim());
             bean.setDealWay(tagList.get(tagIndex).getName());
 
+            bean.getImgList().clear();
             for(String s:selectedPhotos){
                 Image image = new Image();
                 image.setPath(s);

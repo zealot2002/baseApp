@@ -99,6 +99,7 @@ dependencies {
     implementation project(':other')
     implementation project(':web')
     implementation project(':update')
+    implementation project(':share')
     implementation project(':servercentre')
     implementation project(':business')
 }
