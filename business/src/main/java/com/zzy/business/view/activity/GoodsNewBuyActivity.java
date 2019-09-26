@@ -20,6 +20,8 @@ import com.zzy.common.adapter.RecyclerItemClickListener;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.base.BaseToolbarActivity;
 import com.zzy.common.constants.CommonConstants;
+import com.zzy.common.constants.HttpConstants;
+import com.zzy.common.constants.ParamConstants;
 import com.zzy.common.model.HttpProxy;
 import com.zzy.common.model.bean.Goods;
 import com.zzy.common.model.bean.Image;
@@ -48,16 +50,26 @@ public class GoodsNewBuyActivity extends BaseTitleAndBottomBarActivity
     private GoodsPresenter presenter;
     private EditText etName,etContact,etPhone,etStartPrice,etEndPrice;
     private MyEditText etDesc;
-    private Button btnOk;
+    private Button btnOk,btnDel;
     private PhotoAdapter photoAdapter;
     private ArrayList<String> selectedPhotos = new ArrayList<>();
     private Goods bean;
+    private int type;
 
     /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        bean = new Goods();
+        try{
+            type = getIntent().getIntExtra(ParamConstants.TYPE,0);
+            bean = (Goods) getIntent().getSerializableExtra(ParamConstants.OBJECT);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        if(type != CommonConstants.MY_GOODS_BUY){
+            //new goods
+            bean = new Goods();
+        }
         presenter = new GoodsPresenter(this);
         setupViews();
     }
@@ -80,7 +92,24 @@ public class GoodsNewBuyActivity extends BaseTitleAndBottomBarActivity
         btnOk = findViewById(R.id.btnOk);
         btnOk.setOnClickListener(this);
 
+        btnDel = findViewById(R.id.btnDel);
+        btnDel.setOnClickListener(this);
+
         setupPhotoPicker();
+        if(type == CommonConstants.MY_GOODS_BUY){
+            fillValue();
+        }
+    }
+
+    private void fillValue() {
+        etName.setText(bean.getName());
+        etContact.setText(bean.getContact());
+        etPhone.setText(bean.getPhone());
+        etStartPrice.setText(bean.getStartPrice());
+        etEndPrice.setText(bean.getEndPrice());
+        etDesc.setText(bean.getDesc());
+
+        btnDel.setVisibility(View.VISIBLE);
     }
 
 
@@ -147,7 +176,13 @@ public class GoodsNewBuyActivity extends BaseTitleAndBottomBarActivity
                 image.setName(s.substring(s.lastIndexOf('/')));
                 bean.getImgList().add(image);
             }
-            presenter.create(CommonConstants.GOODS_BUY,bean);
+            if(type == CommonConstants.MY_GOODS_BUY){
+                presenter.update(CommonConstants.GOODS_BUY,bean);
+            }else {
+                presenter.create(CommonConstants.GOODS_BUY,bean);
+            }
+        }if(v.getId() == R.id.btnDel){
+            presenter.delete(bean.getId());
         }
     }
 

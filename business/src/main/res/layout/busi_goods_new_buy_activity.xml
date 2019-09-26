@@ -201,5 +201,19 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="@dimen/bottom_margin"
             />
+        <!--完成-->
+        <Button
+            android:id="@+id/btnDel"
+            android:layout_width="@dimen/btn_width"
+            android:layout_height="@dimen/btn_height"
+            android:background="@mipmap/btn_login"
+            android:text="停止发布"
+            android:textColor="@color/white"
+            android:textSize="@dimen/btn_text_size"
+            android:layout_gravity="right"
+            android:layout_marginTop="-30dp"
+            android:layout_marginBottom="@dimen/bottom_margin"
+            android:visibility="gone"
+            />
     </LinearLayout>
 </ScrollView>

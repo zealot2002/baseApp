@@ -592,8 +592,14 @@ public class HttpProxy {
         reqBody.put("rows", CommonConstants.PAGE_SIZE);
         reqBody.put("page", pageNum);
         String action = HttpConstants.GOODS_BUY_LIST;
-        if(type == CommonConstants.GOODS_SELL){
+        if(type == CommonConstants.GOODS_BUY){
+            action = HttpConstants.GOODS_BUY_LIST;
+        }else if(type == CommonConstants.GOODS_SELL){
             action = HttpConstants.GOODS_SELL_LIST;
+        }else if(type == CommonConstants.MY_GOODS_BUY){
+            action = HttpConstants.MY_GOODS_BUY_LIST;
+        }else if(type == CommonConstants.MY_GOODS_SELL){
+            action = HttpConstants.MY_GOODS_SELL_LIST;
         }
         HttpUtils.getInstance().req(
                 action,
@@ -615,17 +621,22 @@ public class HttpProxy {
                 callback,
                 new GoodsParser());
     }
+
     public static void newGoods(int type, Goods bean, final HInterface.DataCallback callback) throws Exception {
         JSONObject reqBody = new JSONObject();
         reqBody.put("TOKEN", CommonUtils.getToken());
         reqBody.put("SALE_TITLE",bean.getName());
         reqBody.put("RELEASE_PEOPLE", bean.getContact());
         reqBody.put("SALE_TEL", bean.getPhone());
-        reqBody.put("SALE_PRICE", bean.getPrice());
         reqBody.put("SALE_CONTENT", bean.getDesc());
-        reqBody.put("SALE_BUSINESS", bean.getDealWay());
-        reqBody.put("SALE_ADDRESS", bean.getAddress());
-
+        if(type == CommonConstants.GOODS_SELL){
+            reqBody.put("SALE_PRICE", bean.getStartPrice());
+            reqBody.put("SALE_PRICE_UP", bean.getEndPrice());
+            reqBody.put("SALE_BUSINESS", bean.getDealWay());
+            reqBody.put("SALE_ADDRESS", bean.getAddress());
+        }else{
+            reqBody.put("SALE_PRICE", bean.getPrice());
+        }
         JSONArray imgArr = new JSONArray();
         for(Image image:bean.getImgList()){
             JSONObject obj = new JSONObject();
@@ -641,6 +652,47 @@ public class HttpProxy {
         }
         HttpUtils.getInstance().req(
                 action,
+                reqBody,
+                callback,
+                new CommonParser());
+    }
+    public static void updateGoods(int type, Goods bean, final HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", CommonUtils.getToken());
+        reqBody.put("SALE_TITLE",bean.getName());
+        reqBody.put("RELEASE_PEOPLE", bean.getContact());
+        reqBody.put("SALE_TEL", bean.getPhone());
+        reqBody.put("SALE_CONTENT", bean.getDesc());
+        if(type == CommonConstants.GOODS_SELL){
+            reqBody.put("SALE_PRICE", bean.getStartPrice());
+            reqBody.put("SALE_PRICE_UP", bean.getEndPrice());
+            reqBody.put("SALE_BUSINESS", bean.getDealWay());
+            reqBody.put("SALE_ADDRESS", bean.getAddress());
+        }else{
+            reqBody.put("SALE_PRICE", bean.getPrice());
+        }
+        JSONArray imgArr = new JSONArray();
+        for(Image image:bean.getImgList()){
+            JSONObject obj = new JSONObject();
+            obj.put("PIC_NAME",image.getName());
+            obj.put("PIC_ADDR",image.getPath());
+            imgArr.put(obj);
+        }
+        reqBody.put("IMAGES",imgArr);
+
+        HttpUtils.getInstance().req(
+                HttpConstants.GOODS_UPDATE,
+                reqBody,
+                callback,
+                new CommonParser());
+    }
+    public static void deleteGoods(int goodsId, HInterface.DataCallback callback) throws Exception{
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", CommonUtils.getToken());
+        reqBody.put("SALE_ID",goodsId);
+
+        HttpUtils.getInstance().req(
+                HttpConstants.GOODS_DEL,
                 reqBody,
                 callback,
                 new CommonParser());

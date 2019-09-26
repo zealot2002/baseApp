@@ -4,16 +4,14 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
 
 import com.zzy.business.R;
-import com.zzy.business.contract.GoodsContract;
-import com.zzy.common.constants.CommonConstants;
-import com.zzy.common.model.bean.Goods;
-import com.zzy.business.presenter.GoodsPresenter;
-import com.zzy.business.view.itemViewDelegate.GoodsDelegate;
+import com.zzy.business.contract.MyJobContract;
+import com.zzy.business.presenter.MyJobPresenter;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.constants.ParamConstants;
+import com.zzy.common.model.bean.Job;
+import com.zzy.common.view.itemViewDelegate.JobDelegate;
 import com.zzy.common.widget.recycleAdapter.MyMultiRecycleAdapter;
 import com.zzy.common.widget.recycleAdapter.OnItemChildClickListener;
 import com.zzy.common.widget.recycleAdapter.OnLoadMoreListener;
@@ -24,15 +22,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 我要买|卖东西列表
+ * 我的招聘
  */
-public class GoodsListActivity extends BaseTitleAndBottomBarActivity
-        implements View.OnClickListener , GoodsContract.View {
-    private Button btnNew;
-    private int goodType = 0;
+public class MyJobListActivity extends BaseTitleAndBottomBarActivity
+        implements MyJobContract.View, View.OnClickListener {
     private RecyclerView rvDataList;
-    private List<Goods> dataList = new ArrayList<>();
-    private GoodsContract.Presenter presenter;
+    private List<Job> dataList = new ArrayList<>();
+    private MyJobContract.Presenter presenter;
     private int pageNum = 1;
     private OnLoadMoreListener onLoadMoreListener;
     private MyMultiRecycleAdapter adapter;
@@ -42,37 +38,17 @@ public class GoodsListActivity extends BaseTitleAndBottomBarActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        try{
-            goodType = getIntent().getIntExtra(ParamConstants.TYPE,CommonConstants.GOODS_BUY);
-            presenter = new GoodsPresenter(this);
-            presenter.getList(goodType,pageNum);
-        }catch (Exception e){
-            e.printStackTrace();
-            ToastUtils.showShort(e.toString());
-        }
+        setTitle("我的招聘");
+        presenter = new MyJobPresenter(this);
+        presenter.getList(pageNum);
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.list_with_btn_activity;
+        return R.layout.list_activity;
     }
 
     private void setupViews() {
-        btnNew = findViewById(R.id.btnNew);
-        if(goodType == CommonConstants.GOODS_BUY){
-            setTitle("我要买东西");
-            btnNew.setText("发布求购信息");
-        }else if(goodType == CommonConstants.GOODS_SELL){
-            setTitle("我要卖东西");
-            btnNew.setText("发布售卖信息");
-        }else if(goodType == CommonConstants.MY_GOODS_BUY){
-            setTitle("我要买的东西");
-            btnNew.setVisibility(View.GONE);
-        }else if(goodType == CommonConstants.MY_GOODS_SELL){
-            setTitle("我要卖的东西");
-            btnNew.setVisibility(View.GONE);
-        }
-        btnNew.setOnClickListener(this);
         if(rvDataList == null){
             rvDataList = findViewById(R.id.rvDataList);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -91,48 +67,24 @@ public class GoodsListActivity extends BaseTitleAndBottomBarActivity
                         return;
                     }
                     if(isReload){
-                        presenter.getList(goodType,pageNum);
+                        presenter.getList(pageNum);
                     }else{
-                        presenter.getList(goodType,++pageNum);
+                        presenter.getList(++pageNum);
                     }
                 }
             };
             adapter.setOnLoadMoreListener(onLoadMoreListener);
-            adapter.addItemViewDelegate(new GoodsDelegate(goodType));
+            adapter.addItemViewDelegate(new JobDelegate(this));
             adapter.setOnItemChildClickListener(R.id.rootView, new OnItemChildClickListener() {
                 @Override
                 public void onItemChildClick(ViewHolder viewHolder, Object data, int position) {
                     Bundle bundle = new Bundle();
-                    bundle.putInt(ParamConstants.TYPE,goodType);
                     bundle.putInt(ParamConstants.ID,dataList.get(position).getId());
-                    bundle.putSerializable(ParamConstants.OBJECT,dataList.get(position));
-                    if(goodType==CommonConstants.GOODS_BUY){
-                        startActivity(GoodsDetailBuyActivity.class,bundle);
-                    }else if(goodType==CommonConstants.GOODS_SELL){
-                        startActivity(GoodsDetailSellActivity.class,bundle);
-                    }else if(goodType==CommonConstants.MY_GOODS_BUY){
-                        startActivity(GoodsNewBuyActivity.class,bundle);
-                    }else if(goodType==CommonConstants.MY_GOODS_SELL){
-                        startActivity(GoodsNewSellActivity.class,bundle);
-                    }
+                    startActivity(MyJobDetailActivity.class,bundle);
                 }
             });
             rvDataList.setAdapter(adapter);
         }
-    }
-
-
-    @Override
-    public void onClick(View v) {
-        if(v.getId() == R.id.btnNew){
-            startActivity(goodType==CommonConstants.GOODS_BUY?
-                    GoodsNewBuyActivity.class:GoodsNewSellActivity.class);
-        }
-    }
-
-    @Override
-    public void reload(boolean bShow) {
-        presenter.getList(goodType,pageNum);
     }
 
     @Override
@@ -140,10 +92,10 @@ public class GoodsListActivity extends BaseTitleAndBottomBarActivity
         super.updateUI(o);
         try{
             if(pageNum!=1){
-                appendList((List<Goods>) o);
+                appendList((List<Job>) o);
                 return;
             }
-            dataList.addAll((List<Goods>) o);
+            dataList.addAll((List<Job>) o);
             setupViews();
             adapter.notifyDataSetChanged();
         }catch (Exception e){
@@ -151,7 +103,7 @@ public class GoodsListActivity extends BaseTitleAndBottomBarActivity
             ToastUtils.showShort(e.toString());
         }
     }
-    private void appendList(List<Goods> list) {
+    private void appendList(List<Job> list) {
         if(list == null
                 ||list.isEmpty()
         ){
@@ -163,6 +115,16 @@ public class GoodsListActivity extends BaseTitleAndBottomBarActivity
         }
         adapter.setLoadMoreData(list);
     }
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    @Override
+    public void reload(boolean bShow) {
+        presenter.getList(pageNum);
+    }
+
     @Override
     public void showError(String s) {
         ToastUtils.showShort(s);

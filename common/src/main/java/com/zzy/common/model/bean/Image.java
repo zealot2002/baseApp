@@ -1,11 +1,13 @@
 package com.zzy.common.model.bean;
 
+import java.io.Serializable;
+
 /**
  * @author zzy
  * @date 2018/11/30
  */
 
-public class Image {
+public class Image implements Serializable {
     private String name;
     private String path;
 

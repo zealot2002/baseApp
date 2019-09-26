@@ -150,6 +150,93 @@ public class GoodsPresenter implements GoodsContract.Presenter{
             handleErrs(e.toString());
         }
     }
+
+    @Override
+    public void update(final int type,final Goods bean) {
+        if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {
+            view.showError(AppUtils.getApp().getResources().getString(R.string.no_network_tips));
+            return;
+        }
+        view.showLoading();
+        try{
+            if(bean.getImgList().isEmpty()){
+                HttpProxy.updateGoods(type,bean,new CommonDataCallback() {
+                    @Override
+                    public void callback(int result, Object o, Object o1) {
+                        view.closeLoading();
+                        if (result == HConstant.SUCCESS) {
+                            view.onSuccess();
+                        }else if(result == HConstant.FAIL
+                                ||result == HConstant.ERROR
+                        ){
+                            handleErrs((String) o);
+                        }
+                    }
+                });
+                return;
+            }
+            new FileUploader().post(bean.getImgList(), new HInterface.DataCallback() {
+                @Override
+                public void requestCallback(int result, Object data, Object tagData) {
+                    MyLog.e("result:" +data.toString());
+                    if (result == HConstant.SUCCESS) {
+                        bean.setImgList((List<Image>) data);
+                        try {
+                            HttpProxy.updateGoods(type,bean,new CommonDataCallback() {
+                                @Override
+                                public void callback(int result, Object o, Object o1) {
+                                    view.closeLoading();
+                                    if (result == HConstant.SUCCESS) {
+                                        view.onSuccess();
+                                    }else if(result == HConstant.FAIL
+                                            ||result == HConstant.ERROR
+                                    ){
+                                        handleErrs((String) o);
+                                    }
+                                }
+                            });
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            handleErrs(e.toString());
+                        }
+                    }else if(result == HConstant.FAIL){
+                        handleErrs((String) data);
+                    }
+                }
+            });
+        }catch(Exception e){
+            e.printStackTrace();
+            handleErrs(e.toString());
+        }
+    }
+
+    @Override
+    public void delete(int id) {
+        if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {
+            view.showError(AppUtils.getApp().getResources().getString(R.string.no_network_tips));
+            return;
+        }
+        view.showLoading();
+        try{
+            HttpProxy.deleteGoods(id,new CommonDataCallback() {
+                @Override
+                public void callback(int result, Object o, Object o1) {
+                    view.closeLoading();
+                    if (result == HConstant.SUCCESS) {
+                        view.onSuccess();
+                    }else if(result == HConstant.FAIL
+                            ||result == HConstant.ERROR
+                    ){
+                        handleErrs((String) o);
+                    }
+                }
+            });
+        }catch(Exception e){
+            e.printStackTrace();
+            handleErrs(e.toString());
+        }
+    }
+
     @Override
     public void report(int id, String content) {
         if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {

@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.hedgehog.ratingbar.RatingBar;
 import com.zzy.business.R;
+import com.zzy.common.constants.CommonConstants;
 import com.zzy.common.model.bean.Goods;
 import com.zzy.common.glide.ImageLoader;
 import com.zzy.common.widget.recycleAdapter.ItemViewDelegate;
@@ -16,10 +17,10 @@ public class GoodsDelegate implements ItemViewDelegate<Goods> {
     private TextView tvName,tvPrice,tvPhone,tvContact;
     private ImageView ivPic;
     private RatingBar rbScore;
-    private Context context;
+    private int type;
 
-    public GoodsDelegate(Context context) {
-        this.context = context;
+    public GoodsDelegate(int type) {
+        this.type = type;
     }
 
     @Override
@@ -48,7 +49,9 @@ public class GoodsDelegate implements ItemViewDelegate<Goods> {
             tvContact.setText(bean.getContact());
 
             rbScore.setmClickable(false);
-            if(bean.getScore()>0){
+            if(type == CommonConstants.GOODS_SELL
+                ||type == CommonConstants.MY_GOODS_SELL
+            ){
                 //卖
                 rbScore.setVisibility(View.VISIBLE);
                 rbScore.setStar(bean.getScore());

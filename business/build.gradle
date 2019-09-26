@@ -22,9 +22,6 @@ android {
             consumerProguardFiles 'proguard-rules.pro'
         }
     }
-
-
-    resourcePrefix "busi_"
 }
 
 

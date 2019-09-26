@@ -4,6 +4,8 @@ public class CommonConstants {
 
     public static final int GOODS_BUY = 1;
     public static final int GOODS_SELL = 2;
+    public static final int MY_GOODS_BUY = 3;
+    public static final int MY_GOODS_SELL = 4;
 
     public static final int CONTENT_HELP = 1;
     public static final int CONTENT_IDEA = 2;

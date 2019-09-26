@@ -125,6 +125,7 @@ public class GoodsDetailBuyActivity extends BaseTitleAndBottomBarActivity
         etMsg.requestFocus();
     }
     private void updateBanner() {
+        banner = findViewById(R.id.banner);
         ArrayList<String> imgs = new ArrayList<>();
         for(int i=0;i<bean.getImgList().size();i++){
             imgs.add(bean.getImgList().get(i).getPath());

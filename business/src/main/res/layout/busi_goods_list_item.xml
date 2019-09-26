@@ -24,7 +24,15 @@
             style="@style/tv_style_white_14"
             android:layout_marginTop="5dp"
             />
+        <TextView
+            android:id="@+id/tvPriceScope"
+            android:layout_toRightOf="@+id/ivPic"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@+id/tvName"
+            style="@style/tv_style_white_14"
+            />
         <LinearLayout
+            android:id="@+id/lRating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/ivPic"

@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/body_margin"
         android:layout_marginRight="@dimen/body_margin"
-        android:layout_marginTop="50px"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="@dimen/bottom_margin"
         />
 </RelativeLayout>

@@ -111,11 +111,15 @@ public class HttpConstants {
     public static final String GOODS_BUY_LIST = "/sale/selAllBuy.do";
     public static final String GOODS_BUY_DETAIL = "/sale/selById.do";
     public static final String GOODS_BUY_NEW = "/sale/insert.do";
-
+    public static final String MY_GOODS_BUY_LIST = "/sale/selAllBuyMy.do";
 
     public static final String GOODS_SELL_LIST = "/sale/selAllSale.do";
     public static final String GOODS_SELL_DETAIL = "/sale/selByIdSale.do";
     public static final String GOODS_SELL_NEW = "/sale/insertSale.do";
+    public static final String MY_GOODS_SELL_LIST = "/sale/selAllSaleMy.do";
+
+    public static final String GOODS_UPDATE = "/sale/update.do";
+    public static final String GOODS_DEL = "/sale/stop.do";
 
     public static final String GOODS_COMMENT_NEW = "/sale/insertLeave.do";
     public static final String GOODS_REPLY_NEW = "/sale/insertReply.do";
