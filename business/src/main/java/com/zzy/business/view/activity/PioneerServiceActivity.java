@@ -102,6 +102,7 @@ public class PioneerServiceActivity extends BaseTitleAndBottomBarActivity
                         startActivity(PioneerHelpDetailActivity.class,bundle);
                     }else if(bean.getType().equals(CommonConstants.PIONEER_SERVICE_ZCHB)){
                         //致富信息
+                        bundle.putString(ParamConstants.TITLE,"政策汇编");
                         startActivity(GetRichInfoDetailActivity.class,bundle);
                     }else if(bean.getType().equals(CommonConstants.PIONEER_SERVICE_EXPERT)){
 
@@ -210,5 +211,12 @@ public class PioneerServiceActivity extends BaseTitleAndBottomBarActivity
             menuList.get(i).setSelected(i==position?true:false);
         }
         gridMenuListAdapter.swapData(menuList);
+    }
+
+    private void reset() {
+        pageNum = 1;
+        isLoadOver = false;
+        dataList.clear();
+        adapter.reset();
     }
 }

@@ -67,7 +67,7 @@ public class MyLogPresenter implements MyLogContract.Presenter{
                 public void callback(int result, Object o, Object o1) {
                     view.closeLoading();
                     if (result == HConstant.SUCCESS) {
-                        view.updateUI(o);
+                        view.onSuccess();
                     }else if(result == HConstant.FAIL
                             ||result == HConstant.ERROR
                     ){

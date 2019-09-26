@@ -76,7 +76,7 @@ public class ForgetPasswordActivity extends BaseAppActivity implements View.OnCl
                     ToastUtils.showShort("无效的手机号码");
                     return;
                 }
-                // TODO: 2019/8/19   to get sms
+                presenter.getSms(etPhone.getText().toString().trim());
                 cdTimer.start();
                 tvSendSms.setOnClickListener(null);
             }

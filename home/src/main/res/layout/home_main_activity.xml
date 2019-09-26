@@ -177,14 +177,14 @@
                     android:layout_marginRight="99px"
                     android:layout_marginTop="90px"
                     />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="90px"
-                    android:background="@color/translucent_gray"
-                    android:layout_marginLeft="99px"
-                    android:layout_marginRight="99px"
-                    android:layout_marginTop="120px"
-                    />
+                <!--<View-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="90px"-->
+                    <!--android:background="@color/translucent_gray"-->
+                    <!--android:layout_marginLeft="99px"-->
+                    <!--android:layout_marginRight="99px"-->
+                    <!--android:layout_marginTop="120px"-->
+                    <!--/>-->
                 <ImageView
                     android:layout_width="99px"
                     android:layout_height="260px"

@@ -10,10 +10,17 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.github.ielse.imagewatcher.ImageWatcher;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zzy.business.R;
 import com.zzy.business.contract.ContentContract;
 import com.zzy.business.presenter.ContentPresenter;
+import com.zzy.business.view.itemViewDelegate.FriendDelegate;
+import com.zzy.business.view.itemViewDelegate.GoodsDelegate;
+import com.zzy.common.constants.CommonConstants;
 import com.zzy.common.model.HttpProxy;
+import com.zzy.common.model.bean.Content;
 import com.zzy.common.model.bean.FriendsCircle;
 import com.zzy.business.view.adapter.MessageAdapter;
 import com.zzy.business.view.other.GlideSimpleLoader;
@@ -23,29 +30,37 @@ import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.network.CommonDataCallback;
 import com.zzy.common.utils.StatusBarUtils;
 import com.zzy.common.widget.PopupEditDialog;
+import com.zzy.common.widget.recycleAdapter.MyMultiRecycleAdapter;
+import com.zzy.common.widget.recycleAdapter.OnLoadMoreListener;
 import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.commonlib.utils.NetUtils;
 import com.zzy.commonlib.utils.PxUtils;
 import com.zzy.commonlib.utils.ToastUtils;
 
+import java.util.ArrayList;
 import java.util.List;
+
 
 
 /**
  * 创业朋友圈
  */
 public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity implements
-        View.OnClickListener, MessagePicturesLayout.Callback, ImageWatcher.OnPictureLongPressListener , ContentContract.View {
+        View.OnClickListener, MessagePicturesLayout.Callback, ImageWatcher.OnPictureLongPressListener , ContentContract.View, OnRefreshListener {
     private Button btnNew;
 
     private ImageWatcher vImageWatcher;
-    private MessageAdapter adapter;
+    private MyMultiRecycleAdapter adapter;
     private RecyclerView rvDataList;
-    private List<FriendsCircle> dataList;
+    private List<FriendsCircle> dataList = new ArrayList<>();
     private PopupEditDialog dialog;
     private ContentContract.Presenter presenter;
     private EditText etMsg;
+    private SmartRefreshLayout smartRefreshLayout;
+    private OnLoadMoreListener onLoadMoreListener;
+    private int pageNum = 1;
+    private boolean isLoadOver = false;
     /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,25 +68,26 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
         setTitle("创业朋友圈");
 
         presenter = new ContentPresenter(this);
-        getData();
+
+        getData(pageNum);
 
     }
 
-    private void getData() {
+    private void getData(int pageNum) {
         if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {
             ToastUtils.showShort(AppUtils.getApp().getResources().getString(R.string.no_network_tips));
             return;
         }
         showLoading();
         try{
-            HttpProxy.getFriendList(new CommonDataCallback() {
+            HttpProxy.getFriendList(pageNum,new CommonDataCallback() {
                 @Override
                 public void callback(int result, Object o, Object o1) {
                     closeLoading();
                     if (result == HConstant.SUCCESS) {
                         try{
-                            dataList = (List<FriendsCircle>) o;
-                            setupViews();
+                            updateUI(o);
+
                         }catch (Exception e){
                             e.printStackTrace();
                         }
@@ -90,6 +106,37 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
     }
 
     @Override
+    public void updateUI(Object o) {
+        super.updateUI(o);
+        try{
+            if(smartRefreshLayout!=null){
+                smartRefreshLayout.finishRefresh();
+            }
+            if(pageNum!=1){
+                appendList((List<FriendsCircle>) o);
+                return;
+            }
+            dataList.addAll((List<FriendsCircle>) o);
+            setupViews();
+            adapter.notifyDataSetChanged();
+        }catch (Exception e){
+            e.printStackTrace();
+            ToastUtils.showShort(e.toString());
+        }
+    }
+    private void appendList(List<FriendsCircle> list) {
+        if(list == null
+                ||list.isEmpty()
+        ){
+            adapter.loadEnd();
+        }
+        if(list.isEmpty()){
+            isLoadOver = true;
+            return;
+        }
+        adapter.setLoadMoreData(list);
+    }
+    @Override
     protected int getLayoutId() {
         return R.layout.busi_friends_circle_activity;
     }
@@ -101,6 +148,10 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
 //    }
 
     private void setupViews() {
+        smartRefreshLayout = findViewById(R.id.smartRefreshLayout);
+        smartRefreshLayout.setEnableRefresh(true);
+        smartRefreshLayout.setOnRefreshListener(this);
+
         btnNew = findViewById(R.id.btnNew);
         btnNew.setOnClickListener(this);
         etMsg = findViewById(R.id.etMsg);
@@ -108,9 +159,27 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
         rvDataList = findViewById(R.id.rvDataList);
         rvDataList.setLayoutManager(new LinearLayoutManager(this));
         rvDataList.addItemDecoration(new SpaceItemDecoration(this).setSpace(14).setSpaceColor(0xD30440B8));
-        rvDataList.setAdapter(adapter = new MessageAdapter(this).setPictureClickCallback(this));
-        adapter.set(dataList);
-        adapter.setListener(new MessageAdapter.OnEventListener() {
+
+        /*adapter*/
+        adapter = new MyMultiRecycleAdapter(this,dataList,true);
+        //设置不满一屏幕，自动加载第二页
+        adapter.openAutoLoadMore();
+        //加载更多的事件监听
+        onLoadMoreListener = new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(boolean isReload) {
+                if(isLoadOver){
+                    return;
+                }
+                if(isReload){
+                    presenter.getList(CommonConstants.CONTENT_FRIEND,pageNum);
+                }else{
+                    presenter.getList(CommonConstants.CONTENT_FRIEND,++pageNum);
+                }
+            }
+        };
+        adapter.setOnLoadMoreListener(onLoadMoreListener);
+        adapter.addItemViewDelegate(new FriendDelegate(new FriendDelegate.OnEventListener() {
             @Override
             public void onReport(final int position) {
                 if(dialog == null){
@@ -140,7 +209,10 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
             public void onLike(int position) {
                 presenter.like(Integer.valueOf(dataList.get(position).getId()));
             }
-        });
+        },this));
+        adapter.setData(dataList);
+        rvDataList.setAdapter(adapter);
+//
         // **************   xml 方式加载  ********  推荐使用后面demo的iwHelper
 
         // 一般来讲， ImageWatcher 需要占据全屏的位置
@@ -180,7 +252,9 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
 
     @Override
     public void reload(boolean bShow) {
-        getData();
+        dataList.clear();
+        pageNum = 1;
+        getData(pageNum);
     }
 
     @Override
@@ -209,6 +283,11 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
     @Override
     public void onSuccess() {
         ToastUtils.showShort("成功");
+        reload(true);
+    }
+
+    @Override
+    public void onRefresh(RefreshLayout refreshLayout) {
         reload(true);
     }
 }

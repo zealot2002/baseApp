@@ -6,6 +6,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zzy.business.R;
 import com.zzy.business.contract.GoodsContract;
 import com.zzy.common.constants.CommonConstants;
@@ -27,7 +30,7 @@ import java.util.List;
  * 我要买|卖东西列表
  */
 public class GoodsListActivity extends BaseTitleAndBottomBarActivity
-        implements View.OnClickListener , GoodsContract.View {
+        implements View.OnClickListener , GoodsContract.View, OnRefreshListener {
     private Button btnNew;
     private int goodType = 0;
     private RecyclerView rvDataList;
@@ -37,7 +40,7 @@ public class GoodsListActivity extends BaseTitleAndBottomBarActivity
     private OnLoadMoreListener onLoadMoreListener;
     private MyMultiRecycleAdapter adapter;
     private boolean isLoadOver = false;
-
+    private SmartRefreshLayout smartRefreshLayout;
     /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +61,10 @@ public class GoodsListActivity extends BaseTitleAndBottomBarActivity
     }
 
     private void setupViews() {
+        smartRefreshLayout = findViewById(R.id.smartRefreshLayout);
+        smartRefreshLayout.setEnableRefresh(true);
+        smartRefreshLayout.setOnRefreshListener(this);
+
         btnNew = findViewById(R.id.btnNew);
         if(goodType == CommonConstants.GOODS_BUY){
             setTitle("我要买东西");
@@ -132,6 +139,8 @@ public class GoodsListActivity extends BaseTitleAndBottomBarActivity
 
     @Override
     public void reload(boolean bShow) {
+        dataList.clear();
+        pageNum = 1;
         presenter.getList(goodType,pageNum);
     }
 
@@ -139,6 +148,9 @@ public class GoodsListActivity extends BaseTitleAndBottomBarActivity
     public void updateUI(Object o) {
         super.updateUI(o);
         try{
+            if(smartRefreshLayout!=null){
+                smartRefreshLayout.finishRefresh();
+            }
             if(pageNum!=1){
                 appendList((List<Goods>) o);
                 return;
@@ -174,5 +186,10 @@ public class GoodsListActivity extends BaseTitleAndBottomBarActivity
     @Override
     public void onSuccess() {
 
+    }
+
+    @Override
+    public void onRefresh(RefreshLayout refreshLayout) {
+        reload(true);
     }
 }

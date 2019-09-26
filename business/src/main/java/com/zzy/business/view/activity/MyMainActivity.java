@@ -1,4 +1,5 @@
 package com.zzy.business.view.activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,9 +13,16 @@ import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.constants.CommonConstants;
 import com.zzy.common.constants.ParamConstants;
 import com.zzy.common.glide.ImageLoader;
+import com.zzy.common.model.bean.Image;
 import com.zzy.common.model.bean.User;
-import com.zzy.common.utils.CommonUtils;
 import com.zzy.common.widget.PopupDialog;
+import com.zzy.commonlib.utils.ToastUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import me.iwf.photopicker.PhotoPicker;
+import me.iwf.photopicker.PhotoPreview;
 
 /**
  * 我的首页
@@ -29,6 +37,7 @@ public class MyMainActivity extends BaseTitleAndBottomBarActivity
     private MineContract.Presenter presenter;
     private User user;
     private PopupDialog dialog;
+    private ArrayList<String> selectedPhotos = new ArrayList<>();
 /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +69,7 @@ public class MyMainActivity extends BaseTitleAndBottomBarActivity
         btnSettings = findViewById(R.id.btnSettings);
         btnShareSoftware = findViewById(R.id.btnShareSoftware);
 
-
+        ivUserHead.setOnClickListener(this);
         btnMyArchives.setOnClickListener(this);
         btnMyJob.setOnClickListener(this);
         btnMyPioneering.setOnClickListener(this);
@@ -120,6 +129,12 @@ public class MyMainActivity extends BaseTitleAndBottomBarActivity
 //                    "图片url",
 //                    "linkUrl"
 //                    );
+        }else if(v.getId() == R.id.ivUserHead){
+            PhotoPicker.builder()
+                    .setPhotoCount(1)
+                    .setShowCamera(false)
+                    .setPreviewEnabled(false)
+                    .start(MyMainActivity.this);
         }
     }
     private void showWaitingPopup(String s) {
@@ -131,5 +146,44 @@ public class MyMainActivity extends BaseTitleAndBottomBarActivity
     @Override
     public void reload(boolean bShow) {
         presenter.getUserInfo();
+    }
+
+    @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK &&
+                (requestCode == PhotoPicker.REQUEST_CODE || requestCode == PhotoPreview.REQUEST_CODE)) {
+
+            List<String> photos = null;
+            if (data != null) {
+                photos = data.getStringArrayListExtra(PhotoPicker.KEY_SELECTED_PHOTOS);
+            }
+            selectedPhotos.clear();
+
+            if (photos != null) {
+                selectedPhotos.addAll(photos);
+            }
+            Image image = new Image();
+            String s = selectedPhotos.get(0);
+            image.setPath(s);
+            image.setName(s.substring(s.lastIndexOf('/')));
+            presenter.uploadUserHead(image);
+        }
+    }
+
+
+    @Override
+    public void onSuccess() {
+        btnMyComment.post(new Runnable() {
+            @Override
+            public void run() {
+                presenter.getUserInfo();
+            }
+        });
+    }
+
+    @Override
+    public void showError(String s) {
+        ToastUtils.showShort(s);
     }
 }

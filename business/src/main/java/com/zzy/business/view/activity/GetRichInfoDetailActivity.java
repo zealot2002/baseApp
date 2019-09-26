@@ -1,5 +1,6 @@
 package com.zzy.business.view.activity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageView;
@@ -27,12 +28,18 @@ public class GetRichInfoDetailActivity extends BaseTitleAndBottomBarActivity
     private int id;
     private GetRichInfoContract.Presenter presenter;
     private GetRichInfo bean;
+    private String outerTitle;
 /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try{
-            setTitle("致富信息");
+            outerTitle = getIntent().getStringExtra(ParamConstants.TITLE);
+            if(TextUtils.isEmpty(outerTitle)){
+                setTitle("致富信息");
+            }else{
+                setTitle(outerTitle);
+            }
             id = getIntent().getIntExtra(ParamConstants.ID,0);
             presenter = new GetRichInfoPresenter(this);
             presenter.getDetail(id);

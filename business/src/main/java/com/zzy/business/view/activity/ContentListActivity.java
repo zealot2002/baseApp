@@ -6,6 +6,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zzy.business.R;
 import com.zzy.business.contract.ContentContract;
 import com.zzy.common.model.bean.Content;
@@ -27,7 +30,7 @@ import java.util.List;
  * 创业求助
  */
 public class ContentListActivity extends BaseTitleAndBottomBarActivity
-        implements View.OnClickListener , ContentContract.View {
+        implements View.OnClickListener , ContentContract.View, OnRefreshListener {
     private Button btnNew;
     private List<Content> dataList = new ArrayList<>();
     private ContentContract.Presenter presenter;
@@ -37,6 +40,8 @@ public class ContentListActivity extends BaseTitleAndBottomBarActivity
     private MyMultiRecycleAdapter adapter;
     private boolean isLoadOver = false;
     private int type;
+    private SmartRefreshLayout smartRefreshLayout;
+
     /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +69,10 @@ public class ContentListActivity extends BaseTitleAndBottomBarActivity
 
     private void setupViews() {
         if(rvDataList == null){
+            smartRefreshLayout = findViewById(R.id.smartRefreshLayout);
+            smartRefreshLayout.setEnableRefresh(true);
+            smartRefreshLayout.setOnRefreshListener(this);
+
             btnNew = findViewById(R.id.btnNew);
             btnNew.setOnClickListener(this);
             if(CommonConstants.CONTENT_HELP == type){
@@ -121,6 +130,9 @@ public class ContentListActivity extends BaseTitleAndBottomBarActivity
     public void updateUI(Object o) {
         super.updateUI(o);
         try{
+            if(smartRefreshLayout!=null){
+                smartRefreshLayout.finishRefresh();
+            }
             if(pageNum!=1){
                 appendList((List<Content>) o);
                 return;
@@ -172,5 +184,10 @@ public class ContentListActivity extends BaseTitleAndBottomBarActivity
     @Override
     public void onSuccess() {
 
+    }
+
+    @Override
+    public void onRefresh(RefreshLayout refreshLayout) {
+        reload(true);
     }
 }

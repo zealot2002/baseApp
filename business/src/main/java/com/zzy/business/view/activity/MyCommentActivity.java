@@ -159,29 +159,29 @@ public class MyCommentActivity extends BaseTitleAndBottomBarActivity implements 
         }
     }
 
-    private void reset(){
+    @Override
+    public void onClick(View v) {
+        resetMenu();
+        if(v.getId() == R.id.rlMenu1){
+            rlMenu1.setBackgroundResource(R.color.white);
+            tv1.setTextColor(getResources().getColor(R.color.blue));
+            reset();
+            currentMenu = 0;
+            getList(currentMenu,pageNum);
+        }else if(v.getId() == R.id.rlMenu2){
+            rlMenu2.setBackgroundResource(R.color.white);
+            tv2.setTextColor(getResources().getColor(R.color.blue));
+            reset();
+            currentMenu = 1;
+            getList(currentMenu,pageNum);
+        }
+    }
+
+    private void resetMenu(){
         rlMenu1.setBackgroundResource(R.color.translucent);
         rlMenu2.setBackgroundResource(R.color.translucent);
         tv1.setTextColor(getResources().getColor(R.color.white));
         tv2.setTextColor(getResources().getColor(R.color.white));
-    }
-
-    @Override
-    public void onClick(View v) {
-        reset();
-        if(v.getId() == R.id.rlMenu1){
-            rlMenu1.setBackgroundResource(R.color.white);
-            tv1.setTextColor(getResources().getColor(R.color.blue));
-            pageNum = 1;
-            dataList.clear();
-            getList(0,pageNum);
-        }else if(v.getId() == R.id.rlMenu2){
-            rlMenu2.setBackgroundResource(R.color.white);
-            tv2.setTextColor(getResources().getColor(R.color.blue));
-            pageNum = 1;
-            dataList.clear();
-            getList(1,pageNum);
-        }
     }
 
     @Override
@@ -216,5 +216,12 @@ public class MyCommentActivity extends BaseTitleAndBottomBarActivity implements 
     @Override
     public void reload(boolean bShow) {
 
+    }
+
+    private void reset() {
+        pageNum = 1;
+        isLoadOver = false;
+        dataList.clear();
+        adapter.reset();
     }
 }

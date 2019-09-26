@@ -51,7 +51,7 @@ import me.iwf.photopicker.PhotoPreview;
  */
 public class RegisterActivity extends BaseAppActivity implements View.OnClickListener , LoginContract.View {
     private View lFirst,lNext;
-    private EditText etName,etPhone,etSms,etInviter,etIdNo, etPw,etAddress;
+    private EditText etName,etPhone,etSms,etInviter,etIdNo, etPw1,etPw2,etAddress;
     private Button btnNext,btnOk;
     private TextView tvSendSms,tvBirthday;
     private MaterialSpinner spinnerCounty,spinnerTown,spinnerVillage,spinnerUserType;
@@ -114,7 +114,8 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
         etSms = findViewById(R.id.etSms);
         etInviter = findViewById(R.id.etInviter);
         etIdNo = findViewById(R.id.etIdNo);
-        etPw = findViewById(R.id.etPw);
+        etPw1 = findViewById(R.id.etPw1);
+        etPw2 = findViewById(R.id.etPw2);
         etAddress = findViewById(R.id.etAddress);
 
         tvSendSms = findViewById(R.id.tvSendSms);
@@ -213,7 +214,7 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
                 bean.setBirthday(tvBirthday.getText().toString().trim());
                 bean.setSex(btnMan.isChecked()?"男":"女");
                 bean.setIdNo(etIdNo.getText().toString().trim());
-                bean.setPw(etPw.getText().toString().trim());
+                bean.setPw(etPw1.getText().toString().trim());
 
                 presenter.register1(bean);
 
@@ -266,6 +267,10 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
     private boolean checkData() {
         if(!ValidateUtils.isMobileNO(etPhone.getText().toString().trim())){
             ToastUtils.showShort("无效的手机号码");
+            return false;
+        }
+        if(!etPw1.getText().toString().trim().equals(etPw2.getText().toString().trim())){
+            ToastUtils.showShort("两次密码不一致");
             return false;
         }
         return true;

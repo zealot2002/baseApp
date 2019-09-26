@@ -6,6 +6,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zzy.business.R;
 import com.zzy.business.contract.PioneeringContract;
 import com.zzy.common.model.bean.Pioneering;
@@ -26,7 +29,7 @@ import java.util.List;
  * 我要创业列表
  */
 public class PioneeringListActivity extends BaseTitleAndBottomBarActivity
-        implements View.OnClickListener , PioneeringContract.View {
+        implements View.OnClickListener , PioneeringContract.View, OnRefreshListener {
     private Button btnNew;
     private RecyclerView rvDataList;
     private List<Pioneering> dataList = new ArrayList<>();
@@ -35,7 +38,7 @@ public class PioneeringListActivity extends BaseTitleAndBottomBarActivity
     private OnLoadMoreListener onLoadMoreListener;
     private MyMultiRecycleAdapter adapter;
     private boolean isLoadOver = false;
-
+    private SmartRefreshLayout smartRefreshLayout;
     /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,9 @@ public class PioneeringListActivity extends BaseTitleAndBottomBarActivity
     }
 
     private void setupViews() {
+        smartRefreshLayout = findViewById(R.id.smartRefreshLayout);
+        smartRefreshLayout.setEnableRefresh(true);
+        smartRefreshLayout.setOnRefreshListener(this);
         btnNew = findViewById(R.id.btnNew);
         btnNew.setText("发布创业信息");
         btnNew.setOnClickListener(this);
@@ -104,6 +110,8 @@ public class PioneeringListActivity extends BaseTitleAndBottomBarActivity
 
     @Override
     public void reload(boolean bShow) {
+        dataList.clear();
+        pageNum = 1;
         presenter.getList(pageNum);
     }
 
@@ -111,6 +119,9 @@ public class PioneeringListActivity extends BaseTitleAndBottomBarActivity
     public void updateUI(Object o) {
         super.updateUI(o);
         try{
+            if(smartRefreshLayout!=null){
+                smartRefreshLayout.finishRefresh();
+            }
             if(pageNum!=1){
                 appendList((List<Pioneering>) o);
                 return;
@@ -146,5 +157,10 @@ public class PioneeringListActivity extends BaseTitleAndBottomBarActivity
     @Override
     public void onSuccess() {
 
+    }
+
+    @Override
+    public void onRefresh(RefreshLayout refreshLayout) {
+        reload(true);
     }
 }

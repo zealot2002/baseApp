@@ -29,7 +29,8 @@
             style="@style/tv_style_gray_12"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="5dp"
-            android:layout_marginLeft="100dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="100dp"
             />
         <View
             android:layout_width="match_parent"

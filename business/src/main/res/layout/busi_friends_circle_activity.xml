@@ -20,14 +20,20 @@
             android:layout_gravity="right"
             android:layout_marginRight="@dimen/body_margin"
             />
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvDataList"
+
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/smartRefreshLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="@dimen/home_bottom_line_height"
-            android:background="@color/white"
-            />
+            android:layout_height="match_parent">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvDataList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="@dimen/home_bottom_line_height"
+                android:background="@color/white"
+                />
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
     </LinearLayout>
     <com.github.ielse.imagewatcher.ImageWatcher
         android:id="@+id/v_image_watcher"

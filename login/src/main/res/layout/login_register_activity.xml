@@ -496,11 +496,47 @@
                     android:layout_centerVertical="true"
                     />
                 <EditText
-                    android:id="@+id/etPw"
+                    android:id="@+id/etPw1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
                     android:layout_toRightOf="@+id/tvPd"
+                    android:layout_centerVertical="true"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textSize="14sp"
+                    android:background="@null"
+                    android:inputType="textPassword"
+                    />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line2_height"
+                    android:background="@mipmap/line2"
+                    android:layout_alignParentBottom="true"
+                    />
+            </RelativeLayout>
+            <!--确认密码-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                >
+                <TextView
+                    android:id="@+id/tvPd2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="确认密码 :   "
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:layout_centerVertical="true"
+                    />
+                <EditText
+                    android:id="@+id/etPw2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_toRightOf="@+id/tvPd2"
                     android:layout_centerVertical="true"
                     android:text=""
                     android:textColor="@color/white"

@@ -132,7 +132,7 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
         newsListAdapter.setOnItemClickedListener(new NewsListAdapter.Listener() {
             @Override
             public void onItemClicked(int position) {
-                ToastUtils.showShort(position);
+//                ToastUtils.showShort(position);
             }
         });
         rvNewsList.postDelayed(mRunnable,500);
@@ -327,6 +327,7 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
 
     @Override
     public void onRefresh(RefreshLayout refreshLayout) {
+        refreshLayout.finishRefresh();
         presenter.start();
     }
 }

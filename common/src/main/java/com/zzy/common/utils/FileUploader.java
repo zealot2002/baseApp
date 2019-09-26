@@ -27,6 +27,7 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.Headers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -145,6 +146,53 @@ public class FileUploader {
         Request request = new Request.Builder()
                 .header("TOKEN", CommonUtils.getToken())//添加请求头的身份认证Token
                 .url(HttpConstants.FILE_SERVER_URL)
+                .post(multipartBody)
+                .build();
+        Call call = httpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e("TAG-失败：", e.toString() + "");
+                if(callback!=null){
+                    callback.requestCallback(HConstant.FAIL,e.toString(),"");
+                }
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String string = response.body().string();
+                Log.e("TAG-成功：", string + "");
+                if(callback!=null){
+                    callback.requestCallback(HConstant.SUCCESS,string,"");
+                }
+            }
+        });
+    }
+    public static void postHeadPic(String path,final HInterface.DataCallback callback) throws JSONException {
+        File file = new File(path);//我的文件路径，需要改你自己的
+        long size = file.length();//文件长度
+        OkHttpClient httpClient = new OkHttpClient();
+        MediaType mediaType = MediaType.parse("application/octet-stream");//设置类型，类型为八位字节流
+        RequestBody requestBody = RequestBody.create(mediaType, file);//把文件与类型放入请求体
+
+//        JSONObject json = new JSONObject();
+//        json.put("TOKEN", CommonUtils.getToken());
+//        json.put("imgType", 1);
+
+        MultipartBody multipartBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("TOKEN",CommonUtils.getToken())//添加表单数据
+                .addFormDataPart("imgType","1")//添加表单数据
+                .addFormDataPart("file", file.getName(), requestBody)//文件名,请求体里的文件
+                .build();
+
+        Request request = new Request.Builder()
+//                .header()//添加请求头的身份认证Token
+                .headers(new Headers.Builder()
+                        .add("TOKEN", CommonUtils.getToken())
+                        .add("imgType","1")
+                        .build())
+                .url(HttpConstants.HEAD_FILE_SERVER_URL)
                 .post(multipartBody)
                 .build();
         Call call = httpClient.newCall(request);

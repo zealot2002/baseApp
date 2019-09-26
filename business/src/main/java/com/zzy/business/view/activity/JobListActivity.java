@@ -6,6 +6,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zzy.business.R;
 import com.zzy.business.contract.JobContract;
 import com.zzy.common.model.bean.Job;
@@ -25,7 +28,7 @@ import java.util.List;
 /**
  * 我要招聘列表
  */
-public class JobListActivity extends BaseTitleAndBottomBarActivity implements JobContract.View, View.OnClickListener {
+public class JobListActivity extends BaseTitleAndBottomBarActivity implements JobContract.View, View.OnClickListener, OnRefreshListener {
     private Button btnNew;
     private RecyclerView rvDataList;
     private List<Job> dataList = new ArrayList<>();
@@ -34,7 +37,7 @@ public class JobListActivity extends BaseTitleAndBottomBarActivity implements Jo
     private OnLoadMoreListener onLoadMoreListener;
     private MyMultiRecycleAdapter adapter;
     private boolean isLoadOver = false;
-
+    private SmartRefreshLayout smartRefreshLayout;
 /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,9 @@ public class JobListActivity extends BaseTitleAndBottomBarActivity implements Jo
 
     private void setupViews() {
         if(rvDataList == null){
+            smartRefreshLayout = findViewById(R.id.smartRefreshLayout);
+            smartRefreshLayout.setEnableRefresh(true);
+            smartRefreshLayout.setOnRefreshListener(this);
             btnNew = findViewById(R.id.btnNew);
             btnNew.setText("发布招聘信息");
             btnNew.setOnClickListener(this);
@@ -96,6 +102,9 @@ public class JobListActivity extends BaseTitleAndBottomBarActivity implements Jo
     public void updateUI(Object o) {
         super.updateUI(o);
         try{
+            if(smartRefreshLayout!=null){
+                smartRefreshLayout.finishRefresh();
+            }
             if(pageNum!=1){
                 appendList((List<Job>) o);
                 return;
@@ -136,6 +145,8 @@ public class JobListActivity extends BaseTitleAndBottomBarActivity implements Jo
 
     @Override
     public void reload(boolean bShow) {
+        pageNum = 1;
+        dataList.clear();
         presenter.getList(pageNum);
     }
 
@@ -150,5 +161,10 @@ public class JobListActivity extends BaseTitleAndBottomBarActivity implements Jo
     @Override
     public void onSuccess() {
 
+    }
+
+    @Override
+    public void onRefresh(RefreshLayout refreshLayout) {
+        reload(true);
     }
 }

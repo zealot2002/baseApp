@@ -4,6 +4,9 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zzy.business.R;
 import com.zzy.business.contract.GetRichInfoContract;
 import com.zzy.common.model.bean.GetRichInfo;
@@ -23,7 +26,7 @@ import java.util.List;
 /**
  * 致富信息
  */
-public class GetRichInfoListActivity extends BaseTitleAndBottomBarActivity implements GetRichInfoContract.View {
+public class GetRichInfoListActivity extends BaseTitleAndBottomBarActivity implements GetRichInfoContract.View, OnRefreshListener {
     private RecyclerView rvDataList;
     private List<GetRichInfo> dataList = new ArrayList<>();
     private GetRichInfoContract.Presenter presenter;
@@ -31,6 +34,8 @@ public class GetRichInfoListActivity extends BaseTitleAndBottomBarActivity imple
     private OnLoadMoreListener onLoadMoreListener;
     private MyMultiRecycleAdapter adapter;
     private boolean isLoadOver = false;
+    private SmartRefreshLayout smartRefreshLayout;
+
     /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +47,9 @@ public class GetRichInfoListActivity extends BaseTitleAndBottomBarActivity imple
     }
 
     private void setupViews() {
+        smartRefreshLayout = findViewById(R.id.smartRefreshLayout);
+        smartRefreshLayout.setEnableRefresh(true);
+        smartRefreshLayout.setOnRefreshListener(this);
         if(rvDataList == null){
             rvDataList = findViewById(R.id.rvDataList);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -102,6 +110,8 @@ public class GetRichInfoListActivity extends BaseTitleAndBottomBarActivity imple
 
     @Override
     public void reload(boolean bShow) {
+        dataList.clear();
+        pageNum = 1;
         presenter.getList(pageNum);
     }
 
@@ -109,6 +119,9 @@ public class GetRichInfoListActivity extends BaseTitleAndBottomBarActivity imple
     public void updateUI(Object o) {
         super.updateUI(o);
         try{
+            if(smartRefreshLayout!=null){
+                smartRefreshLayout.finishRefresh();
+            }
             if(pageNum!=1){
                 appendList((List<GetRichInfo>) o);
                 return;
@@ -144,5 +157,10 @@ public class GetRichInfoListActivity extends BaseTitleAndBottomBarActivity imple
     @Override
     public void onSuccess() {
 
+    }
+
+    @Override
+    public void onRefresh(RefreshLayout refreshLayout) {
+        reload(true);
     }
 }

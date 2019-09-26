@@ -906,9 +906,11 @@ public class HttpProxy {
                 new IndustryParser());
     }
 
-    public static void getFriendList(final HInterface.DataCallback callback) throws Exception {
+    public static void getFriendList(int pageNum,final HInterface.DataCallback callback) throws Exception {
         JSONObject reqBody = new JSONObject();
         reqBody.put("TOKEN", CommonUtils.getToken());
+        reqBody.put("rows", CommonConstants.PAGE_SIZE);
+        reqBody.put("page", pageNum);
         HttpUtils.getInstance().req(
                 HttpConstants.FRIEND_LIST,
                 reqBody,

@@ -145,6 +145,6 @@ public class MyPioneeringDetailActivity extends BaseTitleAndBottomBarActivity
 
     @Override
     public void onSuccess() {
-        ToastUtils.showShort("举报成功");
+        ToastUtils.showShort("成功");
     }
 }
