@@ -24,12 +24,12 @@ public class MyDelegate implements ApplicationDelegate {
     @Override
     public void onCreate(final Application application) {
         MyLog.e("onCreate");
+        /* server centre */
+        SCM.getInstance().init(application);
         /* sp content provider */
         SPHelper.init(application);
         /*common lib*/
         CommonLibHelper.init(application);
-        /* server centre */
-        SCM.getInstance().init(application);
         /* auto layout */
         AutoLayoutConifg.getInstance().useDeviceSize().init(application);
         /* log */

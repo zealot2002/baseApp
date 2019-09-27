@@ -28,7 +28,7 @@ public class WelcomeActivity extends BaseAppActivity {
             public void run() {
                 judgeNextEntry();
             }
-        }, 2000);
+        }, 3000);
     }
     private void judgeNextEntry(){
         try{
@@ -39,6 +39,14 @@ public class WelcomeActivity extends BaseAppActivity {
                 SCM.getInstance().req(this, ActionConstants.ENTRY_HOME_ACTIVITY_ACTION);
             }
             finish();
+        }catch (RuntimeException e){
+            e.printStackTrace();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    judgeNextEntry();
+                }
+            }, 1000);
         }catch (Exception e){
             e.printStackTrace();
         }

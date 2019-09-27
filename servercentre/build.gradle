@@ -29,7 +29,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //服务中心 start
     api "com.github.zealot2002:serverCentre:${thridLibs.server_center}"
-    compile files('libs/scmProcessors.jar')
+    api files('libs/scmProcessors.jar')
     api files('libs/scmAnnotations.jar')
     compile "com.squareup:javapoet:${thridLibs.javapoet}"
     //服务中心 end
