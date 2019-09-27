@@ -48,7 +48,7 @@ public class GoodsListActivity extends BaseTitleAndBottomBarActivity
         try{
             goodType = getIntent().getIntExtra(ParamConstants.TYPE,CommonConstants.GOODS_BUY);
             presenter = new GoodsPresenter(this);
-            presenter.getList(goodType,pageNum);
+//            presenter.getList(goodType,pageNum);
         }catch (Exception e){
             e.printStackTrace();
             ToastUtils.showShort(e.toString());
@@ -138,9 +138,14 @@ public class GoodsListActivity extends BaseTitleAndBottomBarActivity
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        reload(true);
+    }
+
+    @Override
     public void reload(boolean bShow) {
-        dataList.clear();
-        pageNum = 1;
+        reset();
         presenter.getList(goodType,pageNum);
     }
 
@@ -191,5 +196,13 @@ public class GoodsListActivity extends BaseTitleAndBottomBarActivity
     @Override
     public void onRefresh(RefreshLayout refreshLayout) {
         reload(true);
+    }
+    private void reset() {
+        pageNum = 1;
+        isLoadOver = false;
+        dataList.clear();
+        if(adapter!=null){
+            adapter.reset();
+        }
     }
 }

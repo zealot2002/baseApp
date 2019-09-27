@@ -25,7 +25,7 @@ public class JobParser implements HInterface.JsonParser {
             JSONObject dataObj = obj.getJSONObject("data");
             Job bean = new Job();
             if(dataObj.has("RECRUITMENT_ID")) bean.setId(dataObj.getInt("RECRUITMENT_ID"));
-            bean.setCompanyName(dataObj.getString("RELEASE_PERSON"));
+            if(dataObj.has("COMPANY_NAME")) bean.setCompanyName(dataObj.getString("COMPANY_NAME"));
             bean.setJobName(dataObj.getString("JOB_NAME"));
             bean.setAddress(dataObj.getString("WORK_LOCATION"));
             bean.setHeadcount(dataObj.getString("RECRUITMENT_PERSON_NUM"));

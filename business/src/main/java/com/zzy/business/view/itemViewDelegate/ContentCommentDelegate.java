@@ -2,9 +2,11 @@ package com.zzy.business.view.itemViewDelegate;
 
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zzy.business.R;
+import com.zzy.common.glide.ImageLoader;
 import com.zzy.common.model.bean.Comment;
 import com.zzy.common.utils.CommonUtils;
 import com.zzy.common.widget.recycleAdapter.ItemViewDelegate;
@@ -17,6 +19,7 @@ public class ContentCommentDelegate implements ItemViewDelegate<Comment> {
     private TextView tvUser,tvContent,tvReplyContent,tvReply,tvOwner;
     private Listener listener;
     private String ownerId;
+    private ImageView ivPic;
 
     public ContentCommentDelegate(String ownerId,Listener listener) {
         this.listener = listener;
@@ -42,13 +45,13 @@ public class ContentCommentDelegate implements ItemViewDelegate<Comment> {
             tvReplyContent = holder.itemView.findViewById(R.id.tvReplyContent);
             tvReply = holder.itemView.findViewById(R.id.tvReply);
             tvOwner = holder.itemView.findViewById(R.id.tvOwner);
-
+            ivPic = holder.itemView.findViewById(R.id.ivPic);
             tvUser.setText(bean.getUserName());
             tvContent.setText(bean.getContent());
 
 
             //如果帖子有作者留言，那么显示作者留言
-            if(!bean.getReplyContent().isEmpty()){
+            if(!TextUtils.isEmpty(bean.getReplyContent())){
                 tvOwner.setVisibility(View.VISIBLE);
                 tvReplyContent.setVisibility(View.VISIBLE);
                 tvReplyContent.setText(bean.getReplyContent());
@@ -75,6 +78,8 @@ public class ContentCommentDelegate implements ItemViewDelegate<Comment> {
                 //隐藏留言按钮
                 tvReply.setVisibility(View.GONE);
             }
+
+            ImageLoader.loadImage(ivPic,bean.getUserHeadUrl());
         }catch (Exception e){
             e.printStackTrace();
         }

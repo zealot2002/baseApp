@@ -68,8 +68,7 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
         setTitle("创业朋友圈");
 
         presenter = new ContentPresenter(this);
-
-        getData(pageNum);
+//        getData(pageNum);
 
     }
 
@@ -252,8 +251,7 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
 
     @Override
     public void reload(boolean bShow) {
-        dataList.clear();
-        pageNum = 1;
+        reset();
         getData(pageNum);
     }
 
@@ -288,6 +286,21 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
 
     @Override
     public void onRefresh(RefreshLayout refreshLayout) {
+        reload(true);
+    }
+
+    private void reset() {
+        pageNum = 1;
+        isLoadOver = false;
+        dataList.clear();
+        if(adapter!=null){
+            adapter.reset();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         reload(true);
     }
 }

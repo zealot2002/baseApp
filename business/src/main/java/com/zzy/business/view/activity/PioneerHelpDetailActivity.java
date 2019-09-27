@@ -5,10 +5,10 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.tencent.smtt.sdk.WebView;
 import com.zzy.business.R;
 import com.zzy.business.view.itemViewDelegate.ExpertDelegate;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
@@ -16,6 +16,7 @@ import com.zzy.common.constants.ParamConstants;
 import com.zzy.common.model.HttpProxy;
 import com.zzy.common.model.bean.HelpClass;
 import com.zzy.common.network.CommonDataCallback;
+import com.zzy.common.utils.CommonUtils;
 import com.zzy.common.widget.recycleAdapter.MyMultiRecycleAdapter;
 import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.utils.AppUtils;
@@ -34,7 +35,6 @@ public class PioneerHelpDetailActivity extends BaseTitleAndBottomBarActivity
     private HelpClass bean;
     private RecyclerView rvDataList;
     private MyMultiRecycleAdapter adapter;
-
 
     /***********************************************************************************************/
     @Override
@@ -107,7 +107,7 @@ public class PioneerHelpDetailActivity extends BaseTitleAndBottomBarActivity
         tvTeacher.setText("专家简介："+bean.getTeacher());
         tvJoinNum.setText("目前已有"+bean.getParterNum()+"人报名参加");
 
-        webView.loadData(bean.getContent(),"text/html","utf-8");
+        CommonUtils.webLoadData(webView,bean.getContent());
 
         btnJoin.setOnClickListener(this);
 
@@ -127,6 +127,8 @@ public class PioneerHelpDetailActivity extends BaseTitleAndBottomBarActivity
             adapter.addItemViewDelegate(new ExpertDelegate(this));
             rvDataList.setAdapter(adapter);
         }
+        adapter.setData(bean.getParterList());
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -143,7 +145,7 @@ public class PioneerHelpDetailActivity extends BaseTitleAndBottomBarActivity
                     public void callback(int result, Object o, Object o1) {
                         closeLoading();
                         if (result == HConstant.SUCCESS) {
-                            getData();
+                            reload(true);
                         }else if(result == HConstant.FAIL
                                 ||result == HConstant.ERROR
                         ){
@@ -160,7 +162,6 @@ public class PioneerHelpDetailActivity extends BaseTitleAndBottomBarActivity
 
     @Override
     public void reload(boolean bShow) {
-
-//        presenter.getDetail(id);
+        getData();
     }
 }

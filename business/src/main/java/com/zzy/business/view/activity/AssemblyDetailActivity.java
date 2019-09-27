@@ -2,12 +2,12 @@ package com.zzy.business.view.activity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.tencent.smtt.sdk.WebView;
 import com.zzy.business.R;
 import com.zzy.business.contract.PioneerContract;
 import com.zzy.business.presenter.PioneerPresenter;
@@ -15,6 +15,7 @@ import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.constants.ParamConstants;
 import com.zzy.common.model.bean.Menu;
 import com.zzy.common.model.bean.Pioneer;
+import com.zzy.common.utils.CommonUtils;
 import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.commonlib.utils.ToastUtils;
 
@@ -73,7 +74,7 @@ public class AssemblyDetailActivity extends BaseTitleAndBottomBarActivity
         ivPic = findViewById(R.id.ivPic);
         rlLike = findViewById(R.id.rlLike);
 
-        webView.loadData(bean.getContent(),"text/html","utf-8");
+        CommonUtils.webLoadData(webView,bean.getContent());
 
         tvLikeNum.setText("赞 ("+bean.getLikeNum()+")");
         tvLookNum.setText("浏览数 :"+bean.getLookNum());

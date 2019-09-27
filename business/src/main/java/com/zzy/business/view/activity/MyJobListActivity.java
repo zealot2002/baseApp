@@ -5,6 +5,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zzy.business.R;
 import com.zzy.business.contract.MyJobContract;
 import com.zzy.business.presenter.MyJobPresenter;
@@ -25,7 +28,7 @@ import java.util.List;
  * 我的招聘
  */
 public class MyJobListActivity extends BaseTitleAndBottomBarActivity
-        implements MyJobContract.View, View.OnClickListener {
+        implements MyJobContract.View, View.OnClickListener, OnRefreshListener {
     private RecyclerView rvDataList;
     private List<Job> dataList = new ArrayList<>();
     private MyJobContract.Presenter presenter;
@@ -33,15 +36,16 @@ public class MyJobListActivity extends BaseTitleAndBottomBarActivity
     private OnLoadMoreListener onLoadMoreListener;
     private MyMultiRecycleAdapter adapter;
     private boolean isLoadOver = false;
-
+    private SmartRefreshLayout smartRefreshLayout;
     /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("我的招聘");
         presenter = new MyJobPresenter(this);
-        presenter.getList(pageNum);
+//        presenter.getList(pageNum);
     }
+
 
     @Override
     protected int getLayoutId() {
@@ -50,6 +54,10 @@ public class MyJobListActivity extends BaseTitleAndBottomBarActivity
 
     private void setupViews() {
         if(rvDataList == null){
+            smartRefreshLayout = findViewById(R.id.smartRefreshLayout);
+            smartRefreshLayout.setEnableRefresh(true);
+            smartRefreshLayout.setOnRefreshListener(this);
+
             rvDataList = findViewById(R.id.rvDataList);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
             rvDataList.setLayoutManager(layoutManager);
@@ -91,6 +99,9 @@ public class MyJobListActivity extends BaseTitleAndBottomBarActivity
     public void updateUI(Object o) {
         super.updateUI(o);
         try{
+            if(smartRefreshLayout!=null){
+                smartRefreshLayout.finishRefresh();
+            }
             if(pageNum!=1){
                 appendList((List<Job>) o);
                 return;
@@ -122,6 +133,7 @@ public class MyJobListActivity extends BaseTitleAndBottomBarActivity
 
     @Override
     public void reload(boolean bShow) {
+        reset();
         presenter.getList(pageNum);
     }
 
@@ -133,8 +145,28 @@ public class MyJobListActivity extends BaseTitleAndBottomBarActivity
         }
     }
 
+    private void reset() {
+        pageNum = 1;
+        isLoadOver = false;
+        dataList.clear();
+        if(adapter!=null){
+            adapter.reset();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        reload(true);
+    }
+
     @Override
     public void onSuccess() {
 
+    }
+
+    @Override
+    public void onRefresh(RefreshLayout refreshLayout) {
+        reload(true);
     }
 }

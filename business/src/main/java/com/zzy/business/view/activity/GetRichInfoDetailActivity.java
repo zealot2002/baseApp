@@ -82,7 +82,7 @@ public class GetRichInfoDetailActivity extends BaseTitleAndBottomBarActivity
         tvLookNum.setText("浏览数 :"+bean.getLookNum());
         if(bean.isPlaceTop()){
             ivPic.setVisibility(View.VISIBLE);
-            tvTitle.setText("         "+bean.getTitle());
+            tvTitle.setText("             "+bean.getTitle());
         }else{
             tvTitle.setText(bean.getTitle());
         }

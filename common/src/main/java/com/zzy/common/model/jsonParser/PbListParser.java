@@ -33,7 +33,7 @@ public class PbListParser implements HInterface.JsonParser {
                 JSONObject infoObj = infoArray.getJSONObject(i);
                 PbRecord bean = new PbRecord();
                 bean.setName(infoObj.getString("USERNAME"));
-                bean.setImgUrl(infoObj.getString("HEAD_PIC_ADDR"));
+                bean.setImgUrl(HttpConstants.SERVER_ADDRESS+"/"+infoObj.getString("HEAD_PIC_ADDR"));
                 bean.setRemarks(infoObj.getString("USER_JOB"));
                 bean.setPhone(infoObj.getString("MOBILE_NO"));
                 dataList.add(bean);

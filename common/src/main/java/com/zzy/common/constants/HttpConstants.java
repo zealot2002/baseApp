@@ -22,7 +22,7 @@ public class HttpConstants {
 
     /**************************    特色东坑 *******************************/
     public static final String DK_URL_1 = SERVER_ADDRESS+"/page/characteristic/introduction.html";
-    public static final String DK_URL_2 = SERVER_ADDRESS+"/page/characteristic/Industry.html";
+    public static final String DK_URL_2 = SERVER_ADDRESS+"/page/characteristic/industry.html";
     public static final String DK_URL_3 = SERVER_ADDRESS+"/page/characteristic/programme.html";
 
     /**************************    主页 *******************************/

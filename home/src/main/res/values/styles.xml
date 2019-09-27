@@ -12,8 +12,8 @@
 
     <!-- 首页tab的文字样式 -->
     <style name="home_btn_style_2">
-        <item name="android:layout_width">165px</item>
-        <item name="android:layout_height">165px</item>
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">80dp</item>
         <item name="android:background">@mipmap/home_btn2</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/white</item>

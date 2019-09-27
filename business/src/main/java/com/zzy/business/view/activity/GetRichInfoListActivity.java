@@ -43,7 +43,7 @@ public class GetRichInfoListActivity extends BaseTitleAndBottomBarActivity imple
         setTitle("致富信息");
 
         presenter = new GetRichInfoPresenter(this);
-        presenter.getList(pageNum);
+//        presenter.getList(pageNum);
     }
 
     private void setupViews() {
@@ -105,13 +105,12 @@ public class GetRichInfoListActivity extends BaseTitleAndBottomBarActivity imple
     @Override
     protected void onResume() {
         super.onResume();
-//        reload(true);
+        reload(true);
     }
 
     @Override
     public void reload(boolean bShow) {
-        dataList.clear();
-        pageNum = 1;
+        reset();
         presenter.getList(pageNum);
     }
 
@@ -162,5 +161,14 @@ public class GetRichInfoListActivity extends BaseTitleAndBottomBarActivity imple
     @Override
     public void onRefresh(RefreshLayout refreshLayout) {
         reload(true);
+    }
+
+    private void reset() {
+        pageNum = 1;
+        isLoadOver = false;
+        dataList.clear();
+        if(adapter!=null){
+            adapter.reset();
+        }
     }
 }

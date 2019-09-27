@@ -5,6 +5,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zzy.business.R;
 import com.zzy.business.contract.MyPioneeringContract;
 import com.zzy.business.presenter.MyPioneeringPresenter;
@@ -25,7 +28,7 @@ import java.util.List;
  * 我的创业
  */
 public class MyPioneeringListActivity extends BaseTitleAndBottomBarActivity
-        implements MyPioneeringContract.View, View.OnClickListener {
+        implements MyPioneeringContract.View, View.OnClickListener, OnRefreshListener {
     private RecyclerView rvDataList;
     private List<Pioneering> dataList = new ArrayList<>();
     private MyPioneeringContract.Presenter presenter;
@@ -33,14 +36,14 @@ public class MyPioneeringListActivity extends BaseTitleAndBottomBarActivity
     private OnLoadMoreListener onLoadMoreListener;
     private MyMultiRecycleAdapter adapter;
     private boolean isLoadOver = false;
-
+    private SmartRefreshLayout smartRefreshLayout;
     /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("我的创业");
         presenter = new MyPioneeringPresenter(this);
-        presenter.getList(pageNum);
+//        presenter.getList(pageNum);
     }
 
     @Override
@@ -50,6 +53,9 @@ public class MyPioneeringListActivity extends BaseTitleAndBottomBarActivity
 
     private void setupViews() {
         if(rvDataList == null){
+            smartRefreshLayout = findViewById(R.id.smartRefreshLayout);
+            smartRefreshLayout.setEnableRefresh(true);
+            smartRefreshLayout.setOnRefreshListener(this);
             rvDataList = findViewById(R.id.rvDataList);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
             rvDataList.setLayoutManager(layoutManager);
@@ -91,6 +97,9 @@ public class MyPioneeringListActivity extends BaseTitleAndBottomBarActivity
     public void updateUI(Object o) {
         super.updateUI(o);
         try{
+            if(smartRefreshLayout!=null){
+                smartRefreshLayout.finishRefresh();
+            }
             if(pageNum!=1){
                 appendList((List<Pioneering>) o);
                 return;
@@ -122,6 +131,7 @@ public class MyPioneeringListActivity extends BaseTitleAndBottomBarActivity
 
     @Override
     public void reload(boolean bShow) {
+        reset();
         presenter.getList(pageNum);
     }
 
@@ -135,6 +145,31 @@ public class MyPioneeringListActivity extends BaseTitleAndBottomBarActivity
 
     @Override
     public void onSuccess() {
+
+    }
+
+    @Override
+    public void onRefresh(RefreshLayout refreshLayout) {
+        reload(true);
+    }
+
+    private void reset() {
+        pageNum = 1;
+        isLoadOver = false;
+        dataList.clear();
+        if(adapter!=null){
+            adapter.reset();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        reload(true);
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
 }

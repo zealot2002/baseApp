@@ -222,6 +222,8 @@ public class MyCommentActivity extends BaseTitleAndBottomBarActivity implements 
         pageNum = 1;
         isLoadOver = false;
         dataList.clear();
-        adapter.reset();
+        if(adapter!=null){
+            adapter.reset();
+        }
     }
 }

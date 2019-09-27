@@ -140,6 +140,8 @@ public class ContentDetailActivity extends BaseTitleAndBottomBarActivity
             }));
             rvCommentList.setAdapter(adapter);
         }
+        adapter.setData(bean.getCommentList());
+        adapter.notifyDataSetChanged();
     }
 
     @Override

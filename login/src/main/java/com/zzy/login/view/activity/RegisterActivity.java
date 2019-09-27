@@ -247,10 +247,17 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
                     ToastUtils.showShort("最多可以添加6个技能");
                     return;
                 }
-                bean.setUserType(userTypeList.get(spinnerUserType.getSelectedItemPosition()));
+                if(btnYes.isChecked()
+                &&selectedPhotos.isEmpty()
+                ){
+                    ToastUtils.showShort("企业用户必须上传相关图片");
+                    return;
+                }
                 bean.setIsCompany(btnYes.isChecked()?"是":"否");
+                bean.setUserType(userTypeList.get(spinnerUserType.getSelectedItemPosition()));
                 bean.setCompanyName(etCompanyName.getText().toString().trim());
                 bean.setCompanyScope(etCompanyScope.getText().toString().trim());
+                bean.getSkills().clear();
                 for(String s:tagView.getTags()){
                     bean.getSkills().add(s);
                 }

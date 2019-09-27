@@ -203,6 +203,8 @@ public class HttpProxy {
         reqBody.put("EDUCATION", job.getEducation());
         reqBody.put("JOB_REQUIREMENT", job.getJobRequirements());
         reqBody.put("PERSON_REQUIREMENT", job.getJobContent());
+        reqBody.put("COMPANY_NAME", job.getCompanyName());
+
         HttpUtils.getInstance().req(
                 HttpConstants.JOB_NEW,
                 reqBody,

@@ -44,7 +44,7 @@ public class JobListActivity extends BaseTitleAndBottomBarActivity implements Jo
         super.onCreate(savedInstanceState);
         setTitle("我要招聘");
         presenter = new JobPresenter(this);
-        presenter.getList(pageNum);
+//        presenter.getList(pageNum);
     }
 
     @Override
@@ -139,14 +139,12 @@ public class JobListActivity extends BaseTitleAndBottomBarActivity implements Jo
     @Override
     protected void onResume() {
         super.onResume();
-        pageNum = 1;
-        presenter.getList(pageNum);
+        reload(true);
     }
 
     @Override
     public void reload(boolean bShow) {
-        pageNum = 1;
-        dataList.clear();
+        reset();
         presenter.getList(pageNum);
     }
 
@@ -166,5 +164,14 @@ public class JobListActivity extends BaseTitleAndBottomBarActivity implements Jo
     @Override
     public void onRefresh(RefreshLayout refreshLayout) {
         reload(true);
+    }
+
+    private void reset() {
+        pageNum = 1;
+        isLoadOver = false;
+        dataList.clear();
+        if(adapter!=null){
+            adapter.reset();
+        }
     }
 }

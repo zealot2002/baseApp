@@ -5,8 +5,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.webkit.WebView;
 
-import com.tencent.smtt.sdk.WebView;
 import com.zzy.business.R;
 import com.zzy.business.view.adapter.GridMenuListAdapter;
 import com.zzy.common.model.HttpProxy;
@@ -15,6 +15,7 @@ import com.zzy.business.view.adapter.MenuListAdapter;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.model.bean.Menu;
 import com.zzy.common.network.CommonDataCallback;
+import com.zzy.common.utils.CommonUtils;
 import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.commonlib.utils.NetUtils;
@@ -119,7 +120,7 @@ public class IndustrialDistributionActivity extends BaseTitleAndBottomBarActivit
     }
 
     private void getTagData(int id) {
-        webView.loadData("","text/html","utf-8");
+        CommonUtils.webLoadData(webView,"");
         if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {
             ToastUtils.showShort(AppUtils.getApp().getResources().getString(R.string.no_network_tips));
             return;
@@ -134,7 +135,7 @@ public class IndustrialDistributionActivity extends BaseTitleAndBottomBarActivit
                         try{
                             String s = (String) o;
                             //显示富文本，http标签由content提供
-                            webView.loadData(s,"text/html","utf-8");
+                            CommonUtils.webLoadData(webView,s);
                         }catch (Exception e){
                             e.printStackTrace();
                         }
@@ -184,7 +185,7 @@ public class IndustrialDistributionActivity extends BaseTitleAndBottomBarActivit
                 @Override
                 public void onItemClicked(int position) {
                     try{
-                        webView.loadData("","text/html","utf-8");
+                        CommonUtils.webLoadData(webView,"");
                         for(int i=0;i<menuList.size();i++){
                             menuList.get(i).setSelected(i==position?true:false);
                         }

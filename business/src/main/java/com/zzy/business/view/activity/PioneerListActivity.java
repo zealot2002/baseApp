@@ -161,15 +161,8 @@ public class PioneerListActivity extends BaseTitleAndBottomBarActivity
                 @Override
                 public void onItemClicked(int position) {
                     refreshMenu(position);
-                    pageNum = 1;
-                    dataList.clear();
+                    reset();
                     presenter.getList(menuList.get(menuIndex).getName(),pageNum);
-
-//                    //todo  get data
-//                    for(int i=0;i<menuList.size();i++){
-//                        menuList.get(i).setSelected(i==position?true:false);
-//                    }
-//                    adapter.notifyDataSetChanged();
                 }
             });
         }
@@ -182,5 +175,15 @@ public class PioneerListActivity extends BaseTitleAndBottomBarActivity
             menuList.get(i).setSelected(i==position?true:false);
         }
         gridMenuListAdapter.swapData(menuList);
+    }
+
+
+    private void reset() {
+        pageNum = 1;
+        isLoadOver = false;
+        dataList.clear();
+        if(adapter!=null){
+            adapter.reset();
+        }
     }
 }

@@ -168,8 +168,7 @@ public class ContentListActivity extends BaseTitleAndBottomBarActivity
 
     @Override
     public void reload(boolean bShow) {
-        pageNum = 1;
-        dataList.clear();
+        reset();
         presenter.getList(type,pageNum);
     }
 
@@ -185,7 +184,14 @@ public class ContentListActivity extends BaseTitleAndBottomBarActivity
     public void onSuccess() {
 
     }
-
+    private void reset() {
+        pageNum = 1;
+        isLoadOver = false;
+        dataList.clear();
+        if(adapter!=null) {
+            adapter.reset();
+        }
+    }
     @Override
     public void onRefresh(RefreshLayout refreshLayout) {
         reload(true);

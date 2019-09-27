@@ -4,6 +4,9 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zzy.business.R;
 import com.zzy.business.contract.PbContract;
 import com.zzy.common.model.bean.PbRecord;
@@ -22,7 +25,7 @@ import java.util.List;
 /**
  * 通讯录
  */
-public class PhoneBookListActivity extends BaseTitleAndBottomBarActivity implements PbContract.View {
+public class PhoneBookListActivity extends BaseTitleAndBottomBarActivity implements PbContract.View, OnRefreshListener {
     private RecyclerView rvDataList;
     private List<PbRecord> dataList = new ArrayList<>();
     private PbContract.Presenter presenter;
@@ -30,6 +33,7 @@ public class PhoneBookListActivity extends BaseTitleAndBottomBarActivity impleme
     private OnLoadMoreListener onLoadMoreListener;
     private MyMultiRecycleAdapter adapter;
     private boolean isLoadOver = false;
+    private SmartRefreshLayout smartRefreshLayout;
     /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,10 @@ public class PhoneBookListActivity extends BaseTitleAndBottomBarActivity impleme
 
     private void setupViews() {
         if(rvDataList == null){
+            smartRefreshLayout = findViewById(R.id.smartRefreshLayout);
+            smartRefreshLayout.setEnableRefresh(true);
+            smartRefreshLayout.setOnRefreshListener(this);
+
             rvDataList = findViewById(R.id.rvDataList);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
             rvDataList.setLayoutManager(layoutManager);
@@ -90,6 +98,7 @@ public class PhoneBookListActivity extends BaseTitleAndBottomBarActivity impleme
 
     @Override
     public void reload(boolean bShow) {
+        reset();
         presenter.getList(pageNum);
     }
 
@@ -97,6 +106,9 @@ public class PhoneBookListActivity extends BaseTitleAndBottomBarActivity impleme
     public void updateUI(Object o) {
         super.updateUI(o);
         try{
+            if(smartRefreshLayout!=null){
+                smartRefreshLayout.finishRefresh();
+            }
             if(pageNum!=1){
                 appendList((List<PbRecord>) o);
                 return;
@@ -126,6 +138,20 @@ public class PhoneBookListActivity extends BaseTitleAndBottomBarActivity impleme
         ToastUtils.showShort(s);
         if(adapter!=null){
             adapter.loadFailed();
+        }
+    }
+
+    @Override
+    public void onRefresh(RefreshLayout refreshLayout) {
+        reload(true);
+    }
+
+    private void reset() {
+        pageNum = 1;
+        isLoadOver = false;
+        dataList.clear();
+        if(adapter!=null){
+            adapter.reset();
         }
     }
 }

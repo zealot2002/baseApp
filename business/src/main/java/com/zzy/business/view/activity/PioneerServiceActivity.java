@@ -187,7 +187,6 @@ public class PioneerServiceActivity extends BaseTitleAndBottomBarActivity
                 @Override
                 public void onItemClicked(int position) {
                     refreshMenu(position);
-                    pageNum = 1;
                     if(menuList.get(menuIndex).getName().equals("市场支持")
                         ||menuList.get(menuIndex).getName().equals("银行对接")
                     ){
@@ -197,7 +196,7 @@ public class PioneerServiceActivity extends BaseTitleAndBottomBarActivity
                         startActivity(IndustrialDistributionActivity.class);
                         return;
                     }
-                    dataList.clear();
+                    reset();
                     presenter.getList(menuList.get(menuIndex).getName(),pageNum);
                 }
             });
@@ -217,6 +216,8 @@ public class PioneerServiceActivity extends BaseTitleAndBottomBarActivity
         pageNum = 1;
         isLoadOver = false;
         dataList.clear();
-        adapter.reset();
+        if(adapter!=null){
+            adapter.reset();
+        }
     }
 }

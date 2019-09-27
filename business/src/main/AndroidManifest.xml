@@ -69,10 +69,7 @@
             android:name=".view.activity.PioneerDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
-        <activity
-            android:name=".view.activity.FeedbackActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/activity_theme" />
+
         <activity
             android:name=".view.activity.GetRichInfoListActivity"
             android:screenOrientation="portrait"
@@ -151,10 +148,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
 
-        <activity
-            android:name=".view.activity.ShareExperienceActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/activity_theme" />
         <activity
             android:name=".view.activity.SkillDetailActivity"
             android:screenOrientation="portrait"

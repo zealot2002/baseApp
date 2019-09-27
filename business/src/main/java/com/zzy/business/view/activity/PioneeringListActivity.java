@@ -46,7 +46,7 @@ public class PioneeringListActivity extends BaseTitleAndBottomBarActivity
         setTitle("我要创业");
 
         presenter = new PioneeringPresenter(this);
-        presenter.getList(pageNum);
+//        presenter.getList(pageNum);
     }
 
     @Override
@@ -110,10 +110,10 @@ public class PioneeringListActivity extends BaseTitleAndBottomBarActivity
 
     @Override
     public void reload(boolean bShow) {
-        dataList.clear();
-        pageNum = 1;
+        reset();
         presenter.getList(pageNum);
     }
+
 
     @Override
     public void updateUI(Object o) {
@@ -162,5 +162,20 @@ public class PioneeringListActivity extends BaseTitleAndBottomBarActivity
     @Override
     public void onRefresh(RefreshLayout refreshLayout) {
         reload(true);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        reload(true);
+    }
+
+    private void reset() {
+        pageNum = 1;
+        isLoadOver = false;
+        dataList.clear();
+        if(adapter!=null){
+            adapter.reset();
+        }
     }
 }

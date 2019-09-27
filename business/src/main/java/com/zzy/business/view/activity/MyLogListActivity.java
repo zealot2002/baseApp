@@ -42,7 +42,7 @@ public class MyLogListActivity extends BaseTitleAndBottomBarActivity
         super.onCreate(savedInstanceState);
         setTitle("我的创业日志");
         presenter = new MyLogPresenter(this);
-        presenter.getList(pageNum);
+//        presenter.getList(pageNum);
     }
 
     @Override
@@ -129,8 +129,7 @@ public class MyLogListActivity extends BaseTitleAndBottomBarActivity
 
     @Override
     public void reload(boolean bShow) {
-        pageNum = 1;
-        dataList.clear();
+        reset();
         presenter.getList(pageNum);
     }
 
@@ -150,5 +149,20 @@ public class MyLogListActivity extends BaseTitleAndBottomBarActivity
     @Override
     public void onRefresh(RefreshLayout refreshLayout) {
         reload(true);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        reload(true);
+    }
+
+    private void reset() {
+        pageNum = 1;
+        isLoadOver = false;
+        dataList.clear();
+        if(adapter!=null){
+            adapter.reset();
+        }
     }
 }
