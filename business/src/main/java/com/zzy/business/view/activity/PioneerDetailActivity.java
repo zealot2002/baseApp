@@ -74,6 +74,9 @@ public class PioneerDetailActivity extends BaseTitleAndBottomBarActivity
         CommonUtils.webLoadData(webView,bean.getContent());
 
         tvLikeNum.setText("赞 ("+bean.getLikeNum()+")");
+        tvLikeNum.setTextColor(bean.isLike()?
+                getResources().getColor(R.color.deep_blue)
+                :getResources().getColor(R.color.text_gray));
         tvLookNum.setText("浏览数 :"+bean.getLookNum());
         if(bean.isPlaceTop()){
             tvTitle.setText("         "+bean.getTitle());

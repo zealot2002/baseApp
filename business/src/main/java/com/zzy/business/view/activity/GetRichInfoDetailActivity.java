@@ -79,6 +79,10 @@ public class GetRichInfoDetailActivity extends BaseTitleAndBottomBarActivity
         tvDate.setText("时间: "+bean.getDate());
 
         tvLikeNum.setText("赞 ("+bean.getLikeNum()+")");
+        tvLikeNum.setTextColor(bean.isLike()?
+                getResources().getColor(R.color.deep_blue)
+                :getResources().getColor(R.color.text_gray));
+
         tvLookNum.setText("浏览数 :"+bean.getLookNum());
         if(bean.isPlaceTop()){
             ivPic.setVisibility(View.VISIBLE);

@@ -16,6 +16,7 @@ import com.zzy.business.R;
 import com.zzy.business.contract.GoodsContract;
 import com.zzy.business.view.itemViewDelegate.ContentCommentDelegate;
 import com.zzy.common.constants.CommonConstants;
+import com.zzy.common.model.bean.Comment;
 import com.zzy.common.model.bean.Goods;
 import com.zzy.business.presenter.GoodsPresenter;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
@@ -108,7 +109,7 @@ public class GoodsDetailBuyActivity extends BaseTitleAndBottomBarActivity
             rvCommentList.setItemAnimator(new DefaultItemAnimator());
 
             /*adapter*/
-            adapter = new MyMultiRecycleAdapter(this,bean.getCommentList(),false);
+            adapter = new MyMultiRecycleAdapter(this,new ArrayList<Comment>(),false);
             adapter.addItemViewDelegate(new ContentCommentDelegate(id+"",new ContentCommentDelegate.Listener() {
                 @Override
                 public void onReply(int position) {
@@ -118,6 +119,7 @@ public class GoodsDetailBuyActivity extends BaseTitleAndBottomBarActivity
             }));
             rvCommentList.setAdapter(adapter);
         }
+        adapter.setNewData(bean.getCommentList());
     }
     private void showRlMsg(int msgType){
         this.msgType = msgType;

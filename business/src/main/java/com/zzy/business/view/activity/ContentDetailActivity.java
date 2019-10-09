@@ -107,6 +107,9 @@ public class ContentDetailActivity extends BaseTitleAndBottomBarActivity
 
         String likeNum = TextUtils.isEmpty(bean.getLikeNum())?"0":bean.getLikeNum();
         tvLikeNum.setText("赞 ("+ likeNum +")");
+        tvLikeNum.setTextColor(bean.isLike()?
+                getResources().getColor(R.color.deep_blue)
+                :getResources().getColor(R.color.text_gray));
         tvLookNum.setText("浏览数 :"+bean.getLookNum());
         if(bean.isPlaceTop()){
             ivPic.setVisibility(View.VISIBLE);
@@ -118,6 +121,7 @@ public class ContentDetailActivity extends BaseTitleAndBottomBarActivity
         tvReport.setOnClickListener(this);
         tvComment.setOnClickListener(this);
         tvSubmit.setOnClickListener(this);
+
 //        if(!bean.isLike()){
         rlLike.setOnClickListener(this);
 //        }
