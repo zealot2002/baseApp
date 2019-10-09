@@ -46,6 +46,7 @@ public class HttpConstants {
     public static final String FORGET_PW = "/account/forget.do";
     public static final String RESET_PW = "/userinfo/update.do";
 
+    public static final String GET_TAG_LIST = "/userskill/selShared.do";
     public static final String GET_SMS = "/account/verification.do";
 
     /**********************        招聘            ***************************/

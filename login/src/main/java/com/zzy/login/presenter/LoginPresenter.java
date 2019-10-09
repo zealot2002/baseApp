@@ -21,6 +21,8 @@ import com.zzy.login.contract.LoginContract;
 
 import org.json.JSONException;
 
+import java.util.List;
+
 /**
  * @author dell-7020
  * @Description:
@@ -228,6 +230,34 @@ public class LoginPresenter implements LoginContract.Presenter{
                 public void callback(int result, Object o, Object o1) {
                     view.closeLoading();
                     if (result == HConstant.SUCCESS) {
+//                        view.onSuccess();
+                    }else if(result == HConstant.FAIL
+                            ||result == HConstant.ERROR
+                    ){
+                        handleErrs((String) o);
+                    }
+                }
+            });
+        }catch(Exception e){
+            e.printStackTrace();
+            handleErrs(e.toString());
+        }
+    }
+
+    @Override
+    public void getSkillTagList() {
+        if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {
+            view.showError(AppUtils.getApp().getResources().getString(R.string.no_network_tips));
+            return;
+        }
+        view.showLoading();
+        try{
+            HttpProxy.getSkillTagList(new CommonDataCallback() {
+                @Override
+                public void callback(int result, Object o, Object o1) {
+                    view.closeLoading();
+                    if (result == HConstant.SUCCESS) {
+                        view.onTagList((List<String>) o);
 //                        view.onSuccess();
                     }else if(result == HConstant.FAIL
                             ||result == HConstant.ERROR

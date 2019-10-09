@@ -35,6 +35,7 @@ import com.zzy.common.constants.CommonConstants;
 import com.zzy.common.constants.HttpConstants;
 import com.zzy.common.model.jsonParser.CommonParser;
 import com.zzy.common.model.jsonParser.Register1Parser;
+import com.zzy.common.model.jsonParser.TagListParser;
 import com.zzy.common.model.jsonParser.UserParser;
 import com.zzy.common.network.CommonDataCallback;
 import com.zzy.common.network.HttpUtils;
@@ -918,5 +919,16 @@ public class HttpProxy {
                 reqBody,
                 callback,
                 new FriendListParser());
+    }
+
+    public static void getSkillTagList(final HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", CommonUtils.getToken());
+        HttpUtils.getInstance().req(
+                HttpConstants.GET_TAG_LIST,
+                reqBody,
+                callback,
+                new TagListParser());
+
     }
 }

@@ -16,6 +16,8 @@ import com.zzy.login.R;
 import com.zzy.login.contract.LoginContract;
 import com.zzy.login.presenter.LoginPresenter;
 
+import java.util.List;
+
 /**
  * forget password
  */
@@ -126,6 +128,11 @@ public class ForgetPasswordActivity extends BaseAppActivity implements View.OnCl
 
     @Override
     public void onFirstSuccess(String s) {
+
+    }
+
+    @Override
+    public void onTagList(List<String> tagList) {
 
     }
 

@@ -19,10 +19,14 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
+import com.cunoraz.tagview.Tag;
+import com.cunoraz.tagview.TagView;
 import com.zzy.common.adapter.PhotoAdapter;
 import com.zzy.common.adapter.RecyclerItemClickListener;
 import com.zzy.common.base.BaseAppActivity;
 import com.zzy.common.model.bean.Archives;
+import com.zzy.common.model.bean.Menu;
+import com.zzy.common.model.bean.SelectableItem;
 import com.zzy.common.utils.StatusBarUtils;
 import com.zzy.common.widget.LoadingHelper;
 import com.zzy.common.widget.TagEditDialog;
@@ -42,7 +46,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import fr.ganfra.materialspinner.MaterialSpinner;
-import me.gujun.android.taggroup.TagGroup;
 import me.iwf.photopicker.PhotoPicker;
 import me.iwf.photopicker.PhotoPreview;
 
@@ -66,7 +69,8 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
     private EditText etCompanyName,etCompanyScope;
 
     //person
-    private TagGroup tagView;
+    private TagView tagView;
+    private List<SelectableItem> skillList = new ArrayList<>();
     private LoginContract.Presenter presenter;
     private Archives bean;
     private LoadingHelper loadingHelper;
@@ -200,6 +204,11 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
     public void onClick(View v) {
         try{
             if(v.getId() == R.id.btnNext){
+                presenter.getSkillTagList();
+                showNext();
+                if(true){
+                    return;
+                }
                 if(!checkData()) {
                     return;
                 }
@@ -243,7 +252,7 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
                 }
                 pvTime.show();
             }else if(v.getId() == R.id.btnOk){
-                if(tagView.getTags().length>6){
+                if(tagView.getTags().size()>6){
                     ToastUtils.showShort("最多可以添加6个技能");
                     return;
                 }
@@ -258,9 +267,12 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
                 bean.setCompanyName(etCompanyName.getText().toString().trim());
                 bean.setCompanyScope(etCompanyScope.getText().toString().trim());
                 bean.getSkills().clear();
-                for(String s:tagView.getTags()){
-                    bean.getSkills().add(s);
-                }
+//                for(Tag tag:tagView.getTags()){
+//                    if(tag.){
+//
+//                    }
+//                    bean.getSkills().add(s);
+//                }
                 for(String s:selectedPhotos){
                     bean.setCompanyImgUrl(s);
                 }
@@ -313,8 +325,12 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
     @Override
     public void onFirstSuccess(String s) {
         bean.setUserId(s);
+        presenter.getSkillTagList();
         showNext();
     }
+
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -345,7 +361,7 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
                     public void onItemClick(View view, int position) {
                         if (photoAdapter.getItemViewType(position) == PhotoAdapter.TYPE_ADD) {
                             PhotoPicker.builder()
-                                    .setPhotoCount(1)
+                                    .setPhotoCount(6)
                                     .setShowCamera(true)
                                     .setPreviewEnabled(false)
                                     .setSelected(selectedPhotos)
@@ -396,23 +412,60 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
         btnOk = findViewById(R.id.btnOk);
         btnOk.setOnClickListener(this);
 
+//        tagView = findViewById(R.id.tagView);
+//        tagView.setTags(bean.getSkills());
+//        tagView.setOnTagChangeListener(new TagGroup.OnTagChangeListener() {
+//            @Override
+//            public void onAppend(TagGroup tagGroup, String tag) {
+//                if(tagGroup.getTags().length > 6){
+//                    ToastUtils.showShort("最多可以添加6个技能");
+//                }
+//            }
+//
+//            @Override
+//            public void onDelete(TagGroup tagGroup, String tag) {
+//                if(tagGroup.getTags().length < 6){
+//
+//                }
+//            }
+//        });
         tagView = findViewById(R.id.tagView);
-        tagView.setTags(bean.getSkills());
-        tagView.setOnTagChangeListener(new TagGroup.OnTagChangeListener() {
+        tagView.setOnTagClickListener(new TagView.OnTagClickListener() {
             @Override
-            public void onAppend(TagGroup tagGroup, String tag) {
-                if(tagGroup.getTags().length > 6){
-                    ToastUtils.showShort("最多可以添加6个技能");
-                }
-            }
+            public void onTagClick(Tag tag, int position) {
+                if(position == skillList.size()-1){
+                    //add new
 
-            @Override
-            public void onDelete(TagGroup tagGroup, String tag) {
-                if(tagGroup.getTags().length < 6){
-
+                }else {
+                    skillList.get(position).setSelected(!skillList.get(position).isSelected());
                 }
             }
         });
+    }
+    @Override
+    public void onTagList(List<String> tagList) {
+        for(String s:tagList){
+            skillList.add(new SelectableItem(s));
+        }
+        skillList.add(new SelectableItem("增加新标签"));
+        updateTagView();
+    }
+    private void updateTagView() {
+        tagView.removeAll();
+
+        for(int i=0;i<skillList.size();i++){
+            SelectableItem item = skillList.get(i);
+            Tag tag = new Tag(item.getName());
+            if(item.isSelected()){
+                tag.tagTextColor = getResources().getColor(R.color.white);
+                tag.layoutColor = getResources().getColor(R.color.light_blue);
+            }else{
+                tag.tagTextColor = getResources().getColor(R.color.green);
+                tag.layoutColor = getResources().getColor(R.color.light_blue);
+            }
+            tag.tagTextSize = 12;
+            tagView.addTag(tag);
+        }
     }
 
     @Override

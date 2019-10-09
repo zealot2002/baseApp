@@ -14,6 +14,8 @@ import com.zzy.login.R;
 import com.zzy.login.contract.LoginContract;
 import com.zzy.login.presenter.LoginPresenter;
 
+import java.util.List;
+
 /**
  * 修改密码
  */
@@ -93,6 +95,11 @@ public class ResetPasswordActivity extends BaseAppActivity implements View.OnCli
 
     @Override
     public void onFirstSuccess(String s) {
+
+    }
+
+    @Override
+    public void onTagList(List<String> tagList) {
 
     }
 

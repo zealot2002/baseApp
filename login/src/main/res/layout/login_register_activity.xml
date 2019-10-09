@@ -761,11 +761,18 @@
                 style="@style/tv_style_white_14"
                 android:text="技能标签:"
                 />
-            <me.gujun.android.taggroup.TagGroup
+            <com.cunoraz.tagview.TagView
+                xmlns:tagview="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/tagView"
-                android:layout_marginTop="10dp"
-                app:atg_isAppendMode="true"
-                style="@style/TagGroupStyle" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                tagview:lineMargin="5dp"
+                tagview:tagMargin="5dp"
+                tagview:textPaddingLeft="8dp"
+                tagview:textPaddingTop="5dp"
+                tagview:textPaddingRight="8dp"
+                tagview:textPaddingBottom="5dp" />
         </LinearLayout>
         <Button
             android:id="@+id/btnOk"
