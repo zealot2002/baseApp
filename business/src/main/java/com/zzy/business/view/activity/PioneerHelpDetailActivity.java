@@ -127,7 +127,6 @@ public class PioneerHelpDetailActivity extends BaseTitleAndBottomBarActivity
             adapter.addItemViewDelegate(new ExpertDelegate(this));
             rvDataList.setAdapter(adapter);
         }
-        adapter.setData(bean.getParterList());
         adapter.notifyDataSetChanged();
     }
 

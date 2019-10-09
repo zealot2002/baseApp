@@ -185,6 +185,7 @@
                 android:textSize="12sp"
                 android:background="@null"
                 android:gravity="center_horizontal"
+                android:inputType="numberDecimal"
                 />
             <TextView
                 style="@style/tv_style_white_12"
@@ -204,6 +205,7 @@
                 android:textSize="12sp"
                 android:background="@null"
                 android:gravity="center_horizontal"
+                android:inputType="numberDecimal"
                 />
             <View
                 android:layout_width="match_parent"

@@ -17,6 +17,7 @@ import com.zzy.business.view.itemViewDelegate.ContentDelegate;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.constants.CommonConstants;
 import com.zzy.common.constants.ParamConstants;
+import com.zzy.common.model.bean.FriendsCircle;
 import com.zzy.common.widget.recycleAdapter.MyMultiRecycleAdapter;
 import com.zzy.common.widget.recycleAdapter.OnItemChildClickListener;
 import com.zzy.common.widget.recycleAdapter.OnLoadMoreListener;
@@ -133,30 +134,44 @@ public class ContentListActivity extends BaseTitleAndBottomBarActivity
             if(smartRefreshLayout!=null){
                 smartRefreshLayout.finishRefresh();
             }
-            if(pageNum!=1){
-                appendList((List<Content>) o);
+            List<Content> list = (List<Content>) o;
+            if(list == null){
                 return;
             }
-            dataList.addAll((List<Content>) o);
+
             setupViews();
+            dataList.addAll(list);
+//            adapter.setData(dataList);
             adapter.notifyDataSetChanged();
+
+            if(list.isEmpty()
+                    ||list.size()<CommonConstants.PAGE_SIZE
+            ){
+                smartRefreshLayout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.loadEnd();
+                    }
+                },10);
+                isLoadOver = true;
+            }
         }catch (Exception e){
             e.printStackTrace();
             ToastUtils.showShort(e.toString());
         }
     }
-    private void appendList(List<Content> list) {
-        if(list == null
-                ||list.isEmpty()
-        ){
-            adapter.loadEnd();
-        }
-        if(list.isEmpty()){
-            isLoadOver = true;
-            return;
-        }
-        adapter.setLoadMoreData(list);
-    }
+//    private void appendList(List<Content> list) {
+//        if(list == null
+//                ||list.isEmpty()
+//        ){
+//            adapter.loadEnd();
+//        }
+//        if(list.isEmpty()){
+//            isLoadOver = true;
+//            return;
+//        }
+//        adapter.setLoadMoreData(list);
+//    }
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btnNew){
@@ -189,7 +204,7 @@ public class ContentListActivity extends BaseTitleAndBottomBarActivity
         isLoadOver = false;
         dataList.clear();
         if(adapter!=null) {
-            adapter.reset();
+            adapter.resetA();
         }
     }
     @Override

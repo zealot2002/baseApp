@@ -89,6 +89,14 @@ public class MyJobDetailActivity extends BaseTitleAndBottomBarActivity implement
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btnUpdate){
+            if(bean.getSalaryMin()!=null
+                    &&bean.getSalaryMin()!=null
+            ){
+                if(Float.valueOf(bean.getSalaryMin())>Float.valueOf(bean.getSalaryMax())){
+                    ToastUtils.showShort("起始薪资不得大于最高薪资");
+                    return;
+                }
+            }
             bean.setCompanyName(etCompanyName.getText().toString().trim());
             bean.setJobName(etJobName.getText().toString().trim());
             bean.setAddress(etAddress.getText().toString().trim());

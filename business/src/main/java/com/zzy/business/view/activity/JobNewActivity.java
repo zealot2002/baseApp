@@ -94,20 +94,32 @@ public class JobNewActivity extends BaseTitleAndBottomBarActivity implements Vie
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.btnOk){
-            bean.setJobRequirements(etJobRequirements.getText().toString().trim());
-            bean.setJobContent(etJobContent.getText().toString().trim());
-            bean.setEducation(etEducation.getText().toString().trim());
-            bean.setPhone(etPhone.getText().toString().trim());
-            bean.setContact(etContact.getText().toString().trim());
-            bean.setAddress(etAddress.getText().toString().trim());
-            bean.setHeadcount(etHeadcount.getText().toString().trim());
-            bean.setCompanyName(etCompanyName.getText().toString().trim());
-            bean.setJobName(etJobName.getText().toString().trim());
-            bean.setSalaryMin(etSalaryMin.getText().toString().trim());
-            bean.setSalaryMax(etSalaryMax.getText().toString().trim());
+        try{
+            if(v.getId() == R.id.btnOk){
+                bean.setJobRequirements(etJobRequirements.getText().toString().trim());
+                bean.setJobContent(etJobContent.getText().toString().trim());
+                bean.setEducation(etEducation.getText().toString().trim());
+                bean.setPhone(etPhone.getText().toString().trim());
+                bean.setContact(etContact.getText().toString().trim());
+                bean.setAddress(etAddress.getText().toString().trim());
+                bean.setHeadcount(etHeadcount.getText().toString().trim());
+                bean.setCompanyName(etCompanyName.getText().toString().trim());
+                bean.setJobName(etJobName.getText().toString().trim());
+                bean.setSalaryMin(etSalaryMin.getText().toString().trim());
+                bean.setSalaryMax(etSalaryMax.getText().toString().trim());
 
-            presenter.create(bean);
+                if(bean.getSalaryMin()!=null
+                        &&bean.getSalaryMin()!=null
+                ){
+                    if(Float.valueOf(bean.getSalaryMin())>Float.valueOf(bean.getSalaryMax())){
+                        ToastUtils.showShort("起始薪资不得大于最高薪资");
+                        return;
+                    }
+                }
+                presenter.create(bean);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 

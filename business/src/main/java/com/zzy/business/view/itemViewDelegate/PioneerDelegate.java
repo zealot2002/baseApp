@@ -36,7 +36,7 @@ public class PioneerDelegate implements ItemViewDelegate<Pioneer> {
 
             tvTitle.setText(bean.getTitle());
             tvDate.setText(bean.getDate());
-            tvFrom.setText(bean.getLookNum());
+            tvFrom.setText("浏览："+bean.getLookNum());
         }catch (Exception e){
             e.printStackTrace();
         }

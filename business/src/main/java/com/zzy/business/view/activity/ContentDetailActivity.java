@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.zzy.business.R;
 import com.zzy.business.contract.ContentContract;
+import com.zzy.common.model.bean.Comment;
 import com.zzy.common.model.bean.Content;
 import com.zzy.business.presenter.ContentPresenter;
 import com.zzy.business.view.itemViewDelegate.ContentCommentDelegate;
@@ -25,6 +26,8 @@ import com.zzy.common.widget.PopupEditDialog;
 import com.zzy.common.widget.recycleAdapter.MyMultiRecycleAdapter;
 import com.zzy.common.widget.recycleAdapter.OnLoadMoreListener;
 import com.zzy.commonlib.utils.ToastUtils;
+
+import java.util.ArrayList;
 
 /**
  * 内容详情（困难详情|意见详情|经验详情）
@@ -130,7 +133,7 @@ public class ContentDetailActivity extends BaseTitleAndBottomBarActivity
             rvCommentList.setItemAnimator(new DefaultItemAnimator());
 
             /*adapter*/
-            adapter = new MyMultiRecycleAdapter(this,bean.getCommentList(),false);
+            adapter = new MyMultiRecycleAdapter(this,new ArrayList<Comment>(),false);
             adapter.addItemViewDelegate(new ContentCommentDelegate(id+"",new ContentCommentDelegate.Listener() {
                 @Override
                 public void onReply(int position) {
@@ -140,8 +143,13 @@ public class ContentDetailActivity extends BaseTitleAndBottomBarActivity
             }));
             rvCommentList.setAdapter(adapter);
         }
-        adapter.setData(bean.getCommentList());
-        adapter.notifyDataSetChanged();
+        rvCommentList.post(new Runnable() {
+            @Override
+            public void run() {
+                adapter.setNewData(bean.getCommentList());
+            }
+        });
+
     }
 
     @Override
