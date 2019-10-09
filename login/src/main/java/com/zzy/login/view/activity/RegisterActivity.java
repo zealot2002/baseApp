@@ -407,6 +407,9 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 lCompany.setVisibility(checkedId == R.id.btnYes?View.VISIBLE:View.GONE);
                 lPersonal.setVisibility(checkedId == R.id.btnYes?View.GONE:View.VISIBLE);
+                if(lPersonal.getVisibility() == View.VISIBLE){
+                    updateTagView();
+                }
             }
         });
         btnOk = findViewById(R.id.btnOk);
@@ -448,7 +451,7 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
             skillList.add(new SelectableItem(s));
         }
         skillList.add(new SelectableItem("增加新标签"));
-        updateTagView();
+//        updateTagView();
     }
     private void updateTagView() {
         tagView.removeAll();

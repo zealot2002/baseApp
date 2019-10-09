@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tagview="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rootView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -762,7 +763,6 @@
                 android:text="技能标签:"
                 />
             <com.cunoraz.tagview.TagView
-                xmlns:tagview="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/tagView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -772,7 +772,8 @@
                 tagview:textPaddingLeft="8dp"
                 tagview:textPaddingTop="5dp"
                 tagview:textPaddingRight="8dp"
-                tagview:textPaddingBottom="5dp" />
+                tagview:textPaddingBottom="5dp"
+                />
         </LinearLayout>
         <Button
             android:id="@+id/btnOk"

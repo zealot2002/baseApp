@@ -77,7 +77,7 @@ public class UpdateDialog extends Dialog {
             EditText etChangeList = layout.findViewById(R.id.etChangeList);
             etChangeList.setKeyListener(null);
 
-            tvVersion.setText("V5.0.0");
+            tvVersion.setText("V"+versionName);
             etChangeList.setText(changeList+"");
 
             Button btnOk = layout.findViewById(R.id.btnOk);

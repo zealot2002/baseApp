@@ -647,12 +647,12 @@ public class HttpProxy {
         reqBody.put("SALE_TEL", bean.getPhone());
         reqBody.put("SALE_CONTENT", bean.getDesc());
         if(type == CommonConstants.GOODS_SELL){
-            reqBody.put("SALE_PRICE", bean.getStartPrice());
-            reqBody.put("SALE_PRICE_UP", bean.getEndPrice());
+            reqBody.put("SALE_PRICE", bean.getPrice());
             reqBody.put("SALE_BUSINESS", bean.getDealWay());
             reqBody.put("SALE_ADDRESS", bean.getAddress());
         }else{
-            reqBody.put("SALE_PRICE", bean.getPrice());
+            reqBody.put("SALE_PRICE", bean.getStartPrice());
+            reqBody.put("SALE_PRICE_UP", bean.getEndPrice());
         }
         JSONArray imgArr = new JSONArray();
         for(Image image:bean.getImgList()){

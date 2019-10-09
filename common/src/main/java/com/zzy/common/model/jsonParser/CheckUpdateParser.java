@@ -20,12 +20,12 @@ public class CheckUpdateParser implements HInterface.JsonParser {
         }
         JSONTokener jsonParser = new JSONTokener(s);
         JSONObject obj = (JSONObject) jsonParser.nextValue();
-        String errorCode = obj.getString(HttpConstants.ERROR_CODE);
-        if (errorCode.equals(HttpConstants.NO_ERROR)) {
+        int errorCode = obj.getInt(HttpConstants.ERROR_CODE);
+        if (errorCode == HttpConstants.NO_ERROR) {
             JSONObject object = obj.getJSONObject("data");
             UpdateBean bean = new UpdateBean();
 
-            if (object.has("APP_PATH")) bean.setDownloadUrl(HttpConstants.SERVER_ADDRESS+"/"+object.getString("APP_PATH"));
+            if (object.has("APP_PATH")) bean.setDownloadUrl(object.getString("APP_PATH"));
             if (object.has("APP_VERSION_NAME")) bean.setVersionName(object.getString("APP_VERSION_NAME"));
             if (object.has("APP_UPDATE_LOG")) bean.setChangeList(object.getString("APP_UPDATE_LOG"));
 //            if (object.has("force")) bean.setForce(object.getBoolean("force"));

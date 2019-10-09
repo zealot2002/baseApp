@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="65dp"
         android:layout_alignLeft="@+id/tvVersionT"
-        android:text="V5.0.0"
+        android:text=""
         android:textSize="13sp"
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
