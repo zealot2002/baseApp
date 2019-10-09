@@ -9,6 +9,7 @@ import com.zzy.common.model.bean.Job;
 import com.zzy.common.model.bean.Log;
 import com.zzy.common.model.bean.Pioneering;
 import com.zzy.common.model.jsonParser.ArchivesParser;
+import com.zzy.common.model.jsonParser.CheckUpdateParser;
 import com.zzy.common.model.jsonParser.CommentListParser;
 import com.zzy.common.model.jsonParser.ContentListParser;
 import com.zzy.common.model.jsonParser.ContentParser;
@@ -41,11 +42,24 @@ import com.zzy.common.network.CommonDataCallback;
 import com.zzy.common.network.HttpUtils;
 import com.zzy.common.utils.CommonUtils;
 import com.zzy.commonlib.http.HInterface;
+import com.zzy.commonlib.utils.AppUtils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class HttpProxy {
+
+    public static void checkVersion(final HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+//        reqBody.put("TOKEN", CommonUtils.getToken());
+        reqBody.put("CODE", AppUtils.getVersionCode()+"");
+        HttpUtils.getInstance().req(
+                HttpConstants.APP_UPDATE,
+                reqBody,
+                callback,
+                new CheckUpdateParser());
+    }
+
     /**************************    登录相关 *******************************/
     public static void login(String un, String pw, HInterface.DataCallback callback) throws Exception {
         JSONObject reqBody = new JSONObject();

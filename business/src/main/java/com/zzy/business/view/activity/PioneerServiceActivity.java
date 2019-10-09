@@ -200,6 +200,7 @@ public class PioneerServiceActivity extends BaseTitleAndBottomBarActivity
                     presenter.getList(menuList.get(menuIndex).getName(),pageNum);
                 }
             });
+            refreshMenu(0);
         }
         gridMenuListAdapter.swapData(menuList);
     }

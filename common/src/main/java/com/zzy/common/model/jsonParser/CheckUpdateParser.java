@@ -1,9 +1,9 @@
-package com.zzy.update.model.jsonParser;
+package com.zzy.common.model.jsonParser;
 
 import com.zzy.common.constants.HttpConstants;
+import com.zzy.common.model.bean.UpdateBean;
 import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.http.HInterface;
-import com.zzy.update.model.UpdateBean;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,11 +25,10 @@ public class CheckUpdateParser implements HInterface.JsonParser {
             JSONObject object = obj.getJSONObject("data");
             UpdateBean bean = new UpdateBean();
 
-            if (object.has("version_url")) bean.setDownloadUrl(object.getString("version_url"));
-            if (object.has("content")) bean.setChangeList(object.getString("content"));
-            if (object.has("versioncode")) bean.setVersionName(object.getString("versioncode"));
-            // 0强更
-            if (object.has("is_update")) bean.setForce(object.getString("is_update").equals("0"));
+            if (object.has("APP_PATH")) bean.setDownloadUrl(HttpConstants.SERVER_ADDRESS+"/"+object.getString("APP_PATH"));
+            if (object.has("APP_VERSION_NAME")) bean.setVersionName(object.getString("APP_VERSION_NAME"));
+            if (object.has("APP_UPDATE_LOG")) bean.setChangeList(object.getString("APP_UPDATE_LOG"));
+//            if (object.has("force")) bean.setForce(object.getBoolean("force"));
             return new Object[]{HConstant.SUCCESS, bean};
         } else {
             String msg = obj.getString(HttpConstants.ERROR_MESSAGE);

@@ -41,6 +41,8 @@ import com.zzy.home.model.wrapper.HomeCtx;
 import com.zzy.home.presenter.HomePresenter;
 import com.zzy.home.view.adapter.NewsListAdapter;
 import com.zzy.home.view.adapter.SaleListAdapter;
+import com.zzy.sc.core.serverCenter.SCM;
+import com.zzy.servercentre.ActionConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,6 +83,11 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
         setupViews();
         presenter = new HomePresenter(this);
         presenter.start();
+        try{
+            SCM.getInstance().req(HomeActivity.this, ActionConstants.CHECK_UPDATE_ACTION);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void setupViews() {

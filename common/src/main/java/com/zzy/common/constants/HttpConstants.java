@@ -20,12 +20,20 @@ public class HttpConstants {
     /*************************************************************************************************************/
     public static final String UPLOAD_FILE = "/forum_pic/upload.do";
 
+
+    //
+
+
+
+
     /**************************    特色东坑 *******************************/
     public static final String DK_URL_1 = SERVER_ADDRESS+"/page/characteristic/introduction.html";
     public static final String DK_URL_2 = SERVER_ADDRESS+"/page/characteristic/industry.html";
     public static final String DK_URL_3 = SERVER_ADDRESS+"/page/characteristic/programme.html";
 
     /**************************    主页 *******************************/
+
+    public static final String APP_UPDATE = "/checkUpdate.do";
     public static final String HOME_DATA = "/userinfo/index.do";
 
 

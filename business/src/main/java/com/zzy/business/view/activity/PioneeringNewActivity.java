@@ -1,5 +1,6 @@
 package com.zzy.business.view.activity;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,6 +10,9 @@ import com.zzy.business.contract.PioneeringContract;
 import com.zzy.common.model.bean.Pioneering;
 import com.zzy.business.presenter.PioneeringPresenter;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
+import com.zzy.common.utils.InputFilter.EmojiExcludeFilter;
+import com.zzy.common.utils.InputFilter.LengthFilter;
+import com.zzy.common.utils.InputFilter.SpecialExcludeFilter;
 import com.zzy.commonlib.utils.ToastUtils;
 
 /**
@@ -40,6 +44,16 @@ public class PioneeringNewActivity extends BaseTitleAndBottomBarActivity
         etContact = findViewById(R.id.etContact);
         etPhone = findViewById(R.id.etPhone);
         etContent = findViewById(R.id.etContent);
+
+
+        etContact.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(50)}
+        );
+        etContent.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(500)}
+        );
 
         btnOk = findViewById(R.id.btnOk);
         btnOk.setOnClickListener(this);

@@ -47,6 +47,7 @@
                     android:textColor="@color/white"
                     android:textSize="12sp"
                     android:background="@null"
+                    android:enabled="false"
                     />
                 <View
                     android:layout_width="match_parent"
@@ -125,6 +126,7 @@
                     android:textColor="@color/white"
                     android:textSize="12sp"
                     android:background="@null"
+                    android:enabled="false"
                     />
                 <View
                     android:layout_width="match_parent"
@@ -159,6 +161,7 @@
                     android:maxLength="11"
                     android:textSize="12sp"
                     android:background="@null"
+                    android:enabled="false"
                     />
                 <View
                     android:layout_width="match_parent"
@@ -192,7 +195,6 @@
                     android:textSize="12sp"
                     android:background="@null"
                     android:enabled="false"
-                    android:focusable="false"
                     />
                 <View
                     android:layout_width="match_parent"
@@ -293,6 +295,7 @@
                 android:background="@color/deep_blue"
                 android:layout_marginRight="@dimen/body_margin"
                 android:layout_marginLeft="@dimen/body_margin"
+                android:enabled="false"
                 />
             <!--tips-->
             <TextView

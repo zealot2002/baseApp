@@ -86,7 +86,6 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
                     if (result == HConstant.SUCCESS) {
                         try{
                             updateUI(o);
-
                         }catch (Exception e){
                             e.printStackTrace();
                         }
@@ -111,30 +110,48 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
             if(smartRefreshLayout!=null){
                 smartRefreshLayout.finishRefresh();
             }
-            if(pageNum!=1){
-                appendList((List<FriendsCircle>) o);
+
+//            if(pageNum!=1){
+//                appendList();
+//                return;
+//            }
+            List<FriendsCircle> list = (List<FriendsCircle>) o;
+            if(list == null){
                 return;
             }
-            dataList.addAll((List<FriendsCircle>) o);
+
             setupViews();
+            dataList.addAll(list);
+//            adapter.setData(dataList);
             adapter.notifyDataSetChanged();
+
+            if(list.isEmpty()
+                    ||list.size()<CommonConstants.PAGE_SIZE
+            ){
+                smartRefreshLayout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.loadEnd();
+                    }
+                },10);
+                isLoadOver = true;
+            }
         }catch (Exception e){
             e.printStackTrace();
             ToastUtils.showShort(e.toString());
         }
     }
-    private void appendList(List<FriendsCircle> list) {
-        if(list == null
-                ||list.isEmpty()
-        ){
-            adapter.loadEnd();
-        }
-        if(list.isEmpty()){
-            isLoadOver = true;
-            return;
-        }
-        adapter.setLoadMoreData(list);
-    }
+//    private void appendList(List<FriendsCircle> list) {
+//        if(list == null
+//                ||list.isEmpty()
+//        ){
+//            adapter.loadEnd();
+//        }
+//        if(list.isEmpty()){
+//
+//        }
+//        adapter.setLoadMoreData(list);
+//    }
     @Override
     protected int getLayoutId() {
         return R.layout.busi_friends_circle_activity;
@@ -147,99 +164,99 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
 //    }
 
     private void setupViews() {
-        smartRefreshLayout = findViewById(R.id.smartRefreshLayout);
-        smartRefreshLayout.setEnableRefresh(true);
-        smartRefreshLayout.setOnRefreshListener(this);
+        if(smartRefreshLayout == null){
+            smartRefreshLayout = findViewById(R.id.smartRefreshLayout);
+            smartRefreshLayout.setEnableRefresh(true);
+            smartRefreshLayout.setOnRefreshListener(this);
 
-        btnNew = findViewById(R.id.btnNew);
-        btnNew.setOnClickListener(this);
-        etMsg = findViewById(R.id.etMsg);
+            btnNew = findViewById(R.id.btnNew);
+            btnNew.setOnClickListener(this);
+            etMsg = findViewById(R.id.etMsg);
 
-        rvDataList = findViewById(R.id.rvDataList);
-        rvDataList.setLayoutManager(new LinearLayoutManager(this));
-        rvDataList.addItemDecoration(new SpaceItemDecoration(this).setSpace(14).setSpaceColor(0xD30440B8));
+            rvDataList = findViewById(R.id.rvDataList);
+            rvDataList.setLayoutManager(new LinearLayoutManager(this));
+            rvDataList.addItemDecoration(new SpaceItemDecoration(this).setSpace(14).setSpaceColor(0xD30440B8));
 
-        /*adapter*/
-        adapter = new MyMultiRecycleAdapter(this,dataList,true);
-        //设置不满一屏幕，自动加载第二页
-        adapter.openAutoLoadMore();
-        //加载更多的事件监听
-        onLoadMoreListener = new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore(boolean isReload) {
-                if(isLoadOver){
-                    return;
+            /*adapter*/
+            adapter = new MyMultiRecycleAdapter(this,dataList,true);
+            //设置不满一屏幕，自动加载第二页
+            adapter.openAutoLoadMore();
+            //加载更多的事件监听
+            onLoadMoreListener = new OnLoadMoreListener() {
+                @Override
+                public void onLoadMore(boolean isReload) {
+                    if(isLoadOver){
+                        return;
+                    }
+                    if(isReload){
+                        getData(pageNum);
+                    }else{
+                        getData(++pageNum);
+                    }
                 }
-                if(isReload){
-                    presenter.getList(CommonConstants.CONTENT_FRIEND,pageNum);
-                }else{
-                    presenter.getList(CommonConstants.CONTENT_FRIEND,++pageNum);
-                }
-            }
-        };
-        adapter.setOnLoadMoreListener(onLoadMoreListener);
-        adapter.addItemViewDelegate(new FriendDelegate(new FriendDelegate.OnEventListener() {
-            @Override
-            public void onReport(final int position) {
-                if(dialog == null){
-                    dialog = new PopupEditDialog.Builder(FriendsCircleActivity.this, "举报原因：","完成",
-                            new PopupEditDialog.OnClickOkListener() {
-                                @Override
-                                public void clickOk(String content) {
-                                    if(content.isEmpty()){
-                                        ToastUtils.showShort("内容不能为空");
-                                        return;
+            };
+            adapter.setOnLoadMoreListener(onLoadMoreListener);
+            adapter.addItemViewDelegate(new FriendDelegate(new FriendDelegate.OnEventListener() {
+                @Override
+                public void onReport(final int position) {
+                    if(dialog == null){
+                        dialog = new PopupEditDialog.Builder(FriendsCircleActivity.this, "举报原因：","完成",
+                                new PopupEditDialog.OnClickOkListener() {
+                                    @Override
+                                    public void clickOk(String content) {
+                                        if(content.isEmpty()){
+                                            ToastUtils.showShort("内容不能为空");
+                                            return;
+                                        }
+                                        presenter.report(Integer.valueOf(dataList.get(position).getId()),content);
+                                        dialog.dismiss();
                                     }
-                                    presenter.report(Integer.valueOf(dataList.get(position).getId()),content);
-                                    dialog.dismiss();
                                 }
-                            }
-                    ).create();
+                        ).create();
+                    }
+                    dialog.show();
                 }
-                dialog.show();
-            }
 
-            @Override
-            public void onComment(int position) {
+                @Override
+                public void onComment(int position) {
 //                presenter.createComment(Integer.valueOf(dataList.get(position).getId()),);
-            }
-
-            @Override
-            public void onLike(int position) {
-                presenter.like(Integer.valueOf(dataList.get(position).getId()));
-            }
-        },this));
-        adapter.setData(dataList);
-        rvDataList.setAdapter(adapter);
-//
-        // **************   xml 方式加载  ********  推荐使用后面demo的iwHelper
-
-        // 一般来讲， ImageWatcher 需要占据全屏的位置
-        vImageWatcher = (ImageWatcher) findViewById(R.id.v_image_watcher);
-        // 如果不是透明状态栏，你需要给ImageWatcher标记 一个偏移值，以修正点击ImageView查看的启动动画的Y轴起点的不正确
-        int statusBarHeight = StatusBarUtils.getStatusBarHeight(this) + PxUtils.dp2px(this,70);
-        vImageWatcher.setTranslucentStatus(statusBarHeight);
-        // 配置error图标 如果不介意使用lib自带的图标，并不一定要调用这个API
-        vImageWatcher.setErrorImageRes(R.mipmap.error_picture);
-        // 长按图片的回调，你可以显示一个框继续提供一些复制，发送等功能
-        vImageWatcher.setOnPictureLongPressListener(this);
-        vImageWatcher.setLoader(new GlideSimpleLoader());
-        vImageWatcher.addOnStateChangedListener(new ImageWatcher.OnStateChangedListener() {
-            @Override
-            public void onStateChangeUpdate(ImageWatcher imageWatcher, ImageView clicked, int position, Uri uri, float animatedValue, int actionTag) {
-//                Log.e("IW", "onStateChangeUpdate [" + position + "][" + uri + "][" + animatedValue + "][" + actionTag + "]");
-            }
-
-            @Override
-            public void onStateChanged(ImageWatcher imageWatcher, int position, Uri uri, int actionTag) {
-                if (actionTag == ImageWatcher.STATE_ENTER_DISPLAYING) {
-//                    Toast.makeText(getApplicationContext(), "点击了图片 [" + position + "]" + uri + "", Toast.LENGTH_SHORT).show();
-                } else if (actionTag == ImageWatcher.STATE_EXIT_HIDING) {
-//                    Toast.makeText(getApplicationContext(), "退出了查看大图", Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
-//        Utils.fitsSystemWindows(isTranslucentStatus, findViewById(R.id.v_fit));
+
+                @Override
+                public void onLike(int position) {
+                    presenter.like(Integer.valueOf(dataList.get(position).getId()));
+                }
+            },this));
+            rvDataList.setAdapter(adapter);
+//
+            // **************   xml 方式加载  ********  推荐使用后面demo的iwHelper
+
+            // 一般来讲， ImageWatcher 需要占据全屏的位置
+            vImageWatcher = (ImageWatcher) findViewById(R.id.v_image_watcher);
+            // 如果不是透明状态栏，你需要给ImageWatcher标记 一个偏移值，以修正点击ImageView查看的启动动画的Y轴起点的不正确
+            int statusBarHeight = StatusBarUtils.getStatusBarHeight(this) + PxUtils.dp2px(this,70);
+            vImageWatcher.setTranslucentStatus(statusBarHeight);
+            // 配置error图标 如果不介意使用lib自带的图标，并不一定要调用这个API
+            vImageWatcher.setErrorImageRes(R.mipmap.error_picture);
+            // 长按图片的回调，你可以显示一个框继续提供一些复制，发送等功能
+            vImageWatcher.setOnPictureLongPressListener(this);
+            vImageWatcher.setLoader(new GlideSimpleLoader());
+            vImageWatcher.addOnStateChangedListener(new ImageWatcher.OnStateChangedListener() {
+                @Override
+                public void onStateChangeUpdate(ImageWatcher imageWatcher, ImageView clicked, int position, Uri uri, float animatedValue, int actionTag) {
+//                Log.e("IW", "onStateChangeUpdate [" + position + "][" + uri + "][" + animatedValue + "][" + actionTag + "]");
+                }
+
+                @Override
+                public void onStateChanged(ImageWatcher imageWatcher, int position, Uri uri, int actionTag) {
+                    if (actionTag == ImageWatcher.STATE_ENTER_DISPLAYING) {
+//                    Toast.makeText(getApplicationContext(), "点击了图片 [" + position + "]" + uri + "", Toast.LENGTH_SHORT).show();
+                    } else if (actionTag == ImageWatcher.STATE_EXIT_HIDING) {
+//                    Toast.makeText(getApplicationContext(), "退出了查看大图", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
     }
 
     @Override
@@ -251,8 +268,13 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
 
     @Override
     public void reload(boolean bShow) {
-        reset();
-        getData(pageNum);
+        try{
+            reset();
+            getData(pageNum);
+        }catch (Exception e){
+            ToastUtils.showShort(e.toString());
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -294,7 +316,7 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
         isLoadOver = false;
         dataList.clear();
         if(adapter!=null){
-            adapter.reset();
+            adapter.resetA();
         }
     }
 

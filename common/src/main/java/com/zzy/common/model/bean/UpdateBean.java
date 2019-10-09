@@ -1,4 +1,4 @@
-package com.zzy.update.model;
+package com.zzy.common.model.bean;
 
 /**
  * @author zzy

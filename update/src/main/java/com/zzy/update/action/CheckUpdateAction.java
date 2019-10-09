@@ -8,6 +8,8 @@ import android.os.Bundle;
 
 import com.zzy.annotations.ScActionAnnotation;
 import com.zzy.common.constants.ParamConstants;
+import com.zzy.common.model.HttpProxy;
+import com.zzy.common.model.bean.UpdateBean;
 import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.http.HInterface;
 import com.zzy.commonlib.utils.ToastUtils;
@@ -15,8 +17,6 @@ import com.zzy.sc.core.serverCenter.ScAction;
 import com.zzy.sc.core.serverCenter.ScCallback;
 import com.zzy.servercentre.ActionConstants;
 import com.zzy.update.DownloadService;
-import com.zzy.update.model.HttpProxy;
-import com.zzy.update.model.UpdateBean;
 import com.zzy.update.widget.UpdateDialog;
 
 /**
@@ -53,36 +53,6 @@ public class CheckUpdateAction implements ScAction {
         }
     }
 
-/*    private void downloadFile(Context context,UpdateBean updateBean) {
-//        final LayoutInflater inflater = LayoutInflater.from(context);
-//        View v = inflater.inflate(R.layout.update_progress, null);
-//        TextView tv_size = (TextView) v.findViewById(R.id.progress_size);
-//        TextView percent_size = (TextView) v.findViewById(R.id.progress_percent);
-//        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-//        builder.setView(v);
-//        final ProgressBar mProgressBar = (ProgressBar) v.findViewById(R.id.progress_1);
-//        mProgressBar.setPressed(true);
-//        mProgressBar.setProgress(0);
-
-        OkHttpUtils.get()
-                .url(updateBean.getDownloadUrl())
-//                .url("http://172.30.14.146/test.apk")
-                .build()
-                .execute(new FileCallBack(Environment.getExternalStorageDirectory().getAbsolutePath(), "hyr.apk") {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        Log.e(TAG, "onError :" + e.getMessage());
-                        ToastUtils.showLong("下载失败: "+e.getMessage());
-                    }
-
-                    @Override
-                    public void onResponse(File response, int id) {
-                        installApk(response);
-                        Log.e(TAG, "onResponse :" + response.getAbsolutePath());
-                    }
-                });
-    }*/
-
     private void showUpdateDialog(final Activity activity, final UpdateBean updateBean) {
         UpdateDialog.Builder builder = new UpdateDialog.Builder(activity)
                 .changeList(updateBean.getChangeList())
@@ -100,16 +70,4 @@ public class CheckUpdateAction implements ScAction {
                 });
         builder.create().show();
     }
-
-/*    private void installApk(File file) {
-        if (!file.exists()) {
-            return;
-        }
-        Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        i.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
-        AppUtils.getApp().startActivity(i);
-        AppUtils.exitApp(AppUtils.getApp());
-    }*/
-
 }

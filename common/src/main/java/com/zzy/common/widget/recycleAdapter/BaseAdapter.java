@@ -470,7 +470,13 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<RecyclerView.V
         isAutoLoadMoreEnd = false;
         mDatas.clear();
     }
-
+    public void resetA() {
+        if (mLoadingView != null) {
+            addFooterView(mLoadingView);
+        }
+        isLoading = false;
+        isAutoLoadMoreEnd = false;
+    }
     /**
      * 数据加载完成
      */

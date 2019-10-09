@@ -1,5 +1,6 @@
 package com.zzy.business.view.activity;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,6 +10,9 @@ import com.zzy.business.contract.JobContract;
 import com.zzy.common.model.bean.Job;
 import com.zzy.business.presenter.JobPresenter;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
+import com.zzy.common.utils.InputFilter.EmojiExcludeFilter;
+import com.zzy.common.utils.InputFilter.LengthFilter;
+import com.zzy.common.utils.InputFilter.SpecialExcludeFilter;
 import com.zzy.common.widget.MyEditText;
 import com.zzy.commonlib.utils.ToastUtils;
 
@@ -53,6 +57,35 @@ public class JobNewActivity extends BaseTitleAndBottomBarActivity implements Vie
         etContact = findViewById(R.id.etContact);
         etJobContent = findViewById(R.id.etJobContent);
         etJobRequirements = findViewById(R.id.etJobRequirements);
+
+        etCompanyName.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(50)}
+        );
+        etJobName.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(50)}
+        );
+        etAddress.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(50)}
+        );
+        etEducation.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(50)}
+        );
+        etContact.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(50)}
+        );
+        etJobContent.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(200)}
+        );
+        etJobRequirements.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(200)}
+        );
 
         btnOk = findViewById(R.id.btnOk);
         btnOk.setOnClickListener(this);

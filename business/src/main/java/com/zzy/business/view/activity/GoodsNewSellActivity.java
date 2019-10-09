@@ -6,6 +6,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,9 @@ import com.zzy.common.constants.ParamConstants;
 import com.zzy.common.model.bean.Goods;
 import com.zzy.common.model.bean.Image;
 import com.zzy.common.model.bean.Menu;
+import com.zzy.common.utils.InputFilter.EmojiExcludeFilter;
+import com.zzy.common.utils.InputFilter.LengthFilter;
+import com.zzy.common.utils.InputFilter.SpecialExcludeFilter;
 import com.zzy.common.widget.MyEditText;
 import com.zzy.commonlib.utils.ToastUtils;
 
@@ -86,6 +90,20 @@ public class GoodsNewSellActivity extends BaseTitleAndBottomBarActivity
         etAddress = findViewById(R.id.etAddress);
         etPrice = findViewById(R.id.etPrice);
         etDesc = findViewById(R.id.etDesc);
+
+        etName.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(20)}
+        );
+
+        etContact.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(20)}
+        );
+        etDesc.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(200)}
+        );
 
         btnOk = findViewById(R.id.btnOk);
         btnOk.setOnClickListener(this);

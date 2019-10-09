@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.InputFilter;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +18,9 @@ import com.zzy.business.presenter.ContentPresenter;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.constants.CommonConstants;
 import com.zzy.common.constants.ParamConstants;
+import com.zzy.common.utils.InputFilter.EmojiExcludeFilter;
+import com.zzy.common.utils.InputFilter.LengthFilter;
+import com.zzy.common.utils.InputFilter.SpecialExcludeFilter;
 import com.zzy.commonlib.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -66,6 +70,15 @@ public class ContentNewActivity extends BaseTitleAndBottomBarActivity
     private void setupViews() {
         etTitle = findViewById(R.id.etTitle);
         etContent = findViewById(R.id.etContent);
+
+        etTitle.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(20)}
+        );
+        etContent.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(200)}
+        );
 
         btnOk = findViewById(R.id.btnOk);
         btnOk.setOnClickListener(this);

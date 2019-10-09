@@ -116,7 +116,8 @@
                 android:background="@mipmap/line3" />
             <!--menu 2-->
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="45px"
@@ -144,10 +145,10 @@
             </LinearLayout>
             <!--menu 3-->
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="45px"
-                android:layout_marginRight="45px">
+                >
                 <Button
                     android:id="@+id/btnHelp"
                     style="@style/home_btn_style_2"
