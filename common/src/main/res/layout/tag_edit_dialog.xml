@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="315dp"
-    android:layout_height="wrap_content"
+    android:layout_height="165dp"
     android:orientation="vertical"
     android:background="@color/white"
     >
     <TextView
         style="@style/tv_style_black1_14"
         android:textStyle="bold"
-        android:text="设置标签"
+        android:text="新增标签"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="22dp"
         />

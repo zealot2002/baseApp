@@ -19,17 +19,16 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
-import com.cunoraz.tagview.Tag;
-import com.cunoraz.tagview.TagView;
+import com.dl7.tag.TagLayout;
+import com.dl7.tag.TagView;
 import com.zzy.common.adapter.PhotoAdapter;
 import com.zzy.common.adapter.RecyclerItemClickListener;
 import com.zzy.common.base.BaseAppActivity;
 import com.zzy.common.model.bean.Archives;
-import com.zzy.common.model.bean.Menu;
-import com.zzy.common.model.bean.SelectableItem;
 import com.zzy.common.utils.StatusBarUtils;
 import com.zzy.common.widget.LoadingHelper;
 import com.zzy.common.widget.TagEditDialog;
+import com.zzy.commonlib.log.MyLog;
 import com.zzy.commonlib.utils.FileUtils;
 import com.zzy.commonlib.utils.ToastUtils;
 import com.zzy.commonlib.utils.ValidateUtils;
@@ -69,8 +68,8 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
     private EditText etCompanyName,etCompanyScope;
 
     //person
-    private TagView tagView;
-    private List<SelectableItem> skillList = new ArrayList<>();
+    private TagLayout tagLayout;
+    private TagView tagAdd;
     private LoginContract.Presenter presenter;
     private Archives bean;
     private LoadingHelper loadingHelper;
@@ -199,7 +198,6 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
         });
     }
 
-
     @Override
     public void onClick(View v) {
         try{
@@ -252,14 +250,16 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
                 }
                 pvTime.show();
             }else if(v.getId() == R.id.btnOk){
-                if(tagView.getTags().size()>6){
-                    ToastUtils.showShort("最多可以添加6个技能");
-                    return;
-                }
                 if(btnYes.isChecked()
                 &&selectedPhotos.isEmpty()
                 ){
                     ToastUtils.showShort("企业用户必须上传相关图片");
+                    return;
+                }
+
+                if(btnYes.isChecked()
+                        &&!userTypeList.get(spinnerUserType.getSelectedItemPosition()).equals("企业")){
+                    ToastUtils.showShort("是否企业注册选'是'，则用户类别必须选'企业'");
                     return;
                 }
                 bean.setIsCompany(btnYes.isChecked()?"是":"否");
@@ -267,20 +267,45 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
                 bean.setCompanyName(etCompanyName.getText().toString().trim());
                 bean.setCompanyScope(etCompanyScope.getText().toString().trim());
                 bean.getSkills().clear();
-//                for(Tag tag:tagView.getTags()){
-//                    if(tag.){
-//
-//                    }
-//                    bean.getSkills().add(s);
-//                }
+                for(String s:tagLayout.getCheckedTags()){
+                    bean.getSkills().add(s);
+                }
                 for(String s:selectedPhotos){
                     bean.setCompanyImgUrl(s);
                 }
                 presenter.register2(bean);
+            }else if(v.getId() == R.id.tagAdd){
+                dialog = new TagEditDialog.Builder(RegisterActivity.this,
+                        new TagEditDialog.OnClickOkListener() {
+                            @Override
+                            public void clickOk(String content) {
+                                if(getAllTags().contains(content)){
+                                    ToastUtils.showShort("此标签已存在");
+                                    return;
+                                }
+                                if(content.isEmpty()){
+                                    ToastUtils.showShort("标签不能为空");
+                                    return;
+                                }
+                                tagLayout.addTag(content);
+                                ((TagView)tagLayout.getChildAt(tagLayout.getChildCount()-1)).setChecked(true);
+                                dialog.dismiss();
+                            }
+                        }
+                ).create();
+                dialog.show();
             }
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    private List<String> getAllTags() {
+        List<String> tags = new ArrayList<>();
+        for(int i = 0; i < tagLayout.getChildCount(); ++i) {
+            tags.add(((TagView)tagLayout.getChildAt(i)).getText());
+        }
+        return tags;
     }
 
     private boolean checkData() {
@@ -407,67 +432,36 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 lCompany.setVisibility(checkedId == R.id.btnYes?View.VISIBLE:View.GONE);
                 lPersonal.setVisibility(checkedId == R.id.btnYes?View.GONE:View.VISIBLE);
-                if(lPersonal.getVisibility() == View.VISIBLE){
-                    updateTagView();
-                }
             }
         });
         btnOk = findViewById(R.id.btnOk);
         btnOk.setOnClickListener(this);
 
-//        tagView = findViewById(R.id.tagView);
-//        tagView.setTags(bean.getSkills());
-//        tagView.setOnTagChangeListener(new TagGroup.OnTagChangeListener() {
-//            @Override
-//            public void onAppend(TagGroup tagGroup, String tag) {
-//                if(tagGroup.getTags().length > 6){
-//                    ToastUtils.showShort("最多可以添加6个技能");
-//                }
-//            }
-//
-//            @Override
-//            public void onDelete(TagGroup tagGroup, String tag) {
-//                if(tagGroup.getTags().length < 6){
-//
-//                }
-//            }
-//        });
-        tagView = findViewById(R.id.tagView);
-        tagView.setOnTagClickListener(new TagView.OnTagClickListener() {
+        tagLayout = findViewById(R.id.tagLayout);
+        tagLayout.setTagCheckListener(new TagView.OnTagCheckListener() {
             @Override
-            public void onTagClick(Tag tag, int position) {
-                if(position == skillList.size()-1){
-                    //add new
-
-                }else {
-                    skillList.get(position).setSelected(!skillList.get(position).isSelected());
+            public void onTagCheck(final int position, String s, boolean b) {
+                MyLog.e("onTagCheck position : "+position);
+                if(b && tagLayout.getCheckedTags().size()>5){
+                    ToastUtils.showShort("最多可选6个标签");
+                    tagLayout.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            ((TagView)tagLayout.getChildAt(position)).setChecked(false);
+                        }
+                    },10);
                 }
             }
         });
+        tagAdd = findViewById(R.id.tagAdd);
+        tagAdd.setOnClickListener(this);
     }
     @Override
     public void onTagList(List<String> tagList) {
+        tagLayout.removeAllViews();
         for(String s:tagList){
-            skillList.add(new SelectableItem(s));
-        }
-        skillList.add(new SelectableItem("增加新标签"));
-//        updateTagView();
-    }
-    private void updateTagView() {
-        tagView.removeAll();
-
-        for(int i=0;i<skillList.size();i++){
-            SelectableItem item = skillList.get(i);
-            Tag tag = new Tag(item.getName());
-            if(item.isSelected()){
-                tag.tagTextColor = getResources().getColor(R.color.white);
-                tag.layoutColor = getResources().getColor(R.color.light_blue);
-            }else{
-                tag.tagTextColor = getResources().getColor(R.color.green);
-                tag.layoutColor = getResources().getColor(R.color.light_blue);
-            }
-            tag.tagTextSize = 12;
-            tagView.addTag(tag);
+            tagLayout.addTag(s);
+//            ((TagView)tagLayout.getChildAt(i)).setChecked(true);
         }
     }
 

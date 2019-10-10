@@ -67,7 +67,7 @@ public class TagEditDialog extends Dialog {
             WindowManager.LayoutParams lp = window.getAttributes();
             lp.gravity = Gravity.CENTER;
             lp.width = PxUtils.dp2px(context,315);
-            lp.height = PxUtils.dp2px(context,150);
+            lp.height = PxUtils.dp2px(context,165);
 
             dialog.setCancelable(true);
             dialog.setCanceledOnTouchOutside(true);
