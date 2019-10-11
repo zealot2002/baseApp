@@ -214,16 +214,6 @@
             android:theme="@style/activity_theme" />
 
         <activity
-            android:name=".view.activity.MyGoodsToBuyActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/activity_theme" />
-
-        <activity
-            android:name=".view.activity.MyGoodsToSellActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/activity_theme" />
-
-        <activity
             android:name=".view.activity.SettingsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />

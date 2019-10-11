@@ -159,7 +159,7 @@ public class GoodsDetailBuyActivity extends BaseTitleAndBottomBarActivity
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btnShare){
-            ToastUtils.showShort("分享");
+//            ToastUtils.showShort("分享");
         }else if(v.getId() == R.id.btnCall){
             AppUtils.callPhone(this,bean.getPhone());
         }else if(v.getId() == R.id.tvReport){

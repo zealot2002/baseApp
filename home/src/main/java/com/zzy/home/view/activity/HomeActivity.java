@@ -75,6 +75,7 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
     private int aniIndex = 0;
 
     private PopupDialog dialog;
+    private static boolean haveChecked = false;
 /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +103,10 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
                     @Override
                     public void onAction(List<String> data) {
                         try {
-                            SCM.getInstance().req(HomeActivity.this, ActionConstants.CHECK_UPDATE_ACTION);
+                            if(!haveChecked){
+                                haveChecked = true;
+                                SCM.getInstance().req(HomeActivity.this, ActionConstants.CHECK_UPDATE_ACTION);
+                            }
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

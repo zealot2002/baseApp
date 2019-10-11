@@ -13,6 +13,6 @@ public class InnerUtils {
         }else if(score == 1){
             return "差";
         }
-        return "";
+        return "非常好";
     }
 }

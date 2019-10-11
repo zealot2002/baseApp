@@ -112,6 +112,7 @@ public class GoodsDetailSellActivity extends BaseTitleAndBottomBarActivity
         etAddress.setText(bean.getAddress());
         etDealWay.setText(bean.getDealWay());
         rbScore.setStar(bean.getScore());
+//        rbScore.setStar(1);
         tvScore.setText(InnerUtils.getRatingString(bean.getScore()));
 
         updateBanner();
@@ -176,7 +177,7 @@ public class GoodsDetailSellActivity extends BaseTitleAndBottomBarActivity
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btnShare){
-            ToastUtils.showShort("分享");
+//            ToastUtils.showShort("分享");
         }else if(v.getId() == R.id.btnCall){
             AppUtils.callPhone(this,bean.getPhone());
         }else if(v.getId() == R.id.tvReport){
