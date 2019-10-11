@@ -27,9 +27,11 @@ import com.zzy.business.view.other.GlideSimpleLoader;
 import com.zzy.business.view.other.MessagePicturesLayout;
 import com.zzy.business.view.other.SpaceItemDecoration;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
+import com.zzy.common.model.bean.GetRichInfo;
 import com.zzy.common.network.CommonDataCallback;
 import com.zzy.common.utils.StatusBarUtils;
 import com.zzy.common.widget.PopupEditDialog;
+import com.zzy.common.widget.recycleAdapter.MyLinearLayoutManager;
 import com.zzy.common.widget.recycleAdapter.MyMultiRecycleAdapter;
 import com.zzy.common.widget.recycleAdapter.OnLoadMoreListener;
 import com.zzy.commonlib.http.HConstant;
@@ -60,7 +62,7 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
     private SmartRefreshLayout smartRefreshLayout;
     private OnLoadMoreListener onLoadMoreListener;
     private int pageNum = 1;
-    private boolean isLoadOver = false;
+    private boolean isLoadOver = false,isReload = true;
     /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,23 +112,26 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
             if(smartRefreshLayout!=null){
                 smartRefreshLayout.finishRefresh();
             }
-
-//            if(pageNum!=1){
-//                appendList();
-//                return;
-//            }
             List<FriendsCircle> list = (List<FriendsCircle>) o;
             if(list == null){
                 return;
             }
-
             setupViews();
-            dataList.addAll(list);
-//            adapter.setData(dataList);
-            adapter.notifyDataSetChanged();
+            if(isReload){
+                isReload = false;
+                reset();
+                if(rvDataList!=null){
+                    rvDataList.scrollToPosition(0);
+                }
+
+                dataList.addAll(list);
+                adapter.notifyDataSetChanged();
+            }else {
+                adapter.setLoadMoreData(list);
+            }
 
             if(list.isEmpty()
-                    ||list.size()<CommonConstants.PAGE_SIZE
+                    ||list.size()< CommonConstants.PAGE_SIZE
             ){
                 smartRefreshLayout.postDelayed(new Runnable() {
                     @Override
@@ -174,7 +179,7 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
             etMsg = findViewById(R.id.etMsg);
 
             rvDataList = findViewById(R.id.rvDataList);
-            rvDataList.setLayoutManager(new LinearLayoutManager(this));
+            rvDataList.setLayoutManager(new MyLinearLayoutManager(this));
             rvDataList.addItemDecoration(new SpaceItemDecoration(this).setSpace(14).setSpaceColor(0xD30440B8));
 
             /*adapter*/
@@ -269,7 +274,8 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
     @Override
     public void reload(boolean bShow) {
         try{
-            reset();
+            isReload = true;
+            pageNum = 1;
             getData(pageNum);
         }catch (Exception e){
             ToastUtils.showShort(e.toString());
@@ -316,7 +322,7 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
         isLoadOver = false;
         dataList.clear();
         if(adapter!=null){
-            adapter.resetA();
+            adapter.reset();
         }
     }
 

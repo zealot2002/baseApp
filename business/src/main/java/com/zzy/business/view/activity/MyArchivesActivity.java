@@ -12,12 +12,16 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.dl7.tag.TagLayout;
+import com.dl7.tag.TagView;
 import com.zzy.business.contract.MyArchivesContract;
 import com.zzy.business.presenter.MyArchivesPresenter;
 import com.zzy.common.adapter.PhotoAdapter;
 import com.zzy.common.adapter.RecyclerItemClickListener;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.model.bean.Archives;
+import com.zzy.common.widget.TagEditDialog;
+import com.zzy.commonlib.log.MyLog;
 import com.zzy.commonlib.utils.ToastUtils;
 import com.zzy.business.R;
 
@@ -47,7 +51,11 @@ public class MyArchivesActivity extends BaseTitleAndBottomBarActivity
     private EditText etCompanyName,etCompanyScope;
     private MaterialSpinner spinnerUserType;
     //person
-    private TagGroup tagView;
+    private TagLayout tagLayout;
+    private TagView tagAdd;
+    private TagEditDialog dialog;
+
+
     private List<String> userTypeList;
 
     private PhotoAdapter photoAdapter;
@@ -132,25 +140,38 @@ public class MyArchivesActivity extends BaseTitleAndBottomBarActivity
         });
         btnOk = findViewById(R.id.btnOk);
         btnOk.setOnClickListener(this);
-
-        tagView = findViewById(R.id.tagView);
-        tagView.setTags(bean.getSkills());
-        tagView.setOnTagChangeListener(new TagGroup.OnTagChangeListener() {
+        tagLayout = findViewById(R.id.tagLayout);
+        tagLayout.setTagCheckListener(new TagView.OnTagCheckListener() {
             @Override
-            public void onAppend(TagGroup tagGroup, String tag) {
-                if(tagGroup.getTags().length > 6){
-                    ToastUtils.showShort("最多可以添加6个技能");
-                }
-            }
-
-            @Override
-            public void onDelete(TagGroup tagGroup, String tag) {
-                if(tagGroup.getTags().length < 6){
-
+            public void onTagCheck(final int position, String s, boolean b) {
+                MyLog.e("onTagCheck position : "+position);
+                if(b && tagLayout.getCheckedTags().size()>5){
+                    ToastUtils.showShort("最多可选6个标签");
+                    tagLayout.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            ((TagView)tagLayout.getChildAt(position)).setChecked(false);
+                        }
+                    },10);
                 }
             }
         });
+        tagAdd = findViewById(R.id.tagAdd);
+        tagAdd.setOnClickListener(this);
     }
+
+    @Override
+    public void onTagList(List<String> tagList) {
+        tagLayout.removeAllViews();
+        for(int i = 0;i<tagList.size();i++){
+            String s = tagList.get(i);
+            tagLayout.addTag(s);
+            if(bean.getSkills().contains(s)){
+                ((TagView)tagLayout.getChildAt(i)).setChecked(true);
+            }
+        }
+    }
+
     @Override
     public void updateUI(Object o) {
         super.updateUI(o);
@@ -191,7 +212,7 @@ public class MyArchivesActivity extends BaseTitleAndBottomBarActivity
                     public void onItemClick(View view, int position) {
                         if (photoAdapter.getItemViewType(position) == PhotoAdapter.TYPE_ADD) {
                             PhotoPicker.builder()
-                                    .setPhotoCount(1)
+                                    .setPhotoCount(6)
                                     .setShowCamera(true)
                                     .setPreviewEnabled(false)
                                     .setSelected(selectedPhotos)
@@ -206,20 +227,54 @@ public class MyArchivesActivity extends BaseTitleAndBottomBarActivity
                 }));
 
     }
+
+    private List<String> getAllTags() {
+        List<String> tags = new ArrayList<>();
+        for(int i = 0; i < tagLayout.getChildCount(); ++i) {
+            tags.add(((TagView)tagLayout.getChildAt(i)).getText());
+        }
+        return tags;
+    }
+
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btnModify){
+            presenter.getSkillTagList();
             showNext();
+        }else if(v.getId() == R.id.tagAdd){
+            dialog = new TagEditDialog.Builder(MyArchivesActivity.this,
+                    new TagEditDialog.OnClickOkListener() {
+                        @Override
+                        public void clickOk(String content) {
+                            if(getAllTags().contains(content)){
+                                ToastUtils.showShort("此标签已存在");
+                                return;
+                            }
+                            if(content.isEmpty()){
+                                ToastUtils.showShort("标签不能为空");
+                                return;
+                            }
+                            tagLayout.addTag(content);
+                            ((TagView)tagLayout.getChildAt(tagLayout.getChildCount()-1)).setChecked(true);
+                            dialog.dismiss();
+                        }
+                    }
+            ).create();
+            dialog.show();
         }else if(v.getId() == R.id.btnOk){
+            if(!(btnYes.isChecked()
+                    &&userTypeList.get(spinnerUserType.getSelectedItemPosition()).equals("企业"))){
+                ToastUtils.showShort("是否企业注册选'是'，则用户类别必须选'企业';" +
+                        "是否企业注册选'否'，则用户类别不能选'企业'");
+                return;
+            }
+
             bean.setUserType(userTypeList.get(spinnerUserType.getSelectedItemPosition()));
             bean.setIsCompany(btnYes.isChecked()?"是":"否");
             bean.setCompanyName(etCompanyName.getText().toString().trim());
             bean.setCompanyScope(etCompanyScope.getText().toString().trim());
             bean.getSkills().clear();
-            for(String s:tagView.getTags()){
-                if(bean.getSkills().contains(s)){
-                    continue;
-                }
+            for(String s:tagLayout.getCheckedTags()){
                 bean.getSkills().add(s);
             }
             for(String s:selectedPhotos){

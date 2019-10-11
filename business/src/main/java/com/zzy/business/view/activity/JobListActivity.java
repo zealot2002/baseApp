@@ -11,11 +11,15 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zzy.business.R;
 import com.zzy.business.contract.JobContract;
+import com.zzy.common.constants.CommonConstants;
+import com.zzy.common.model.bean.Content;
+import com.zzy.common.model.bean.GetRichInfo;
 import com.zzy.common.model.bean.Job;
 import com.zzy.business.presenter.JobPresenter;
 import com.zzy.common.view.itemViewDelegate.JobDelegate;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.constants.ParamConstants;
+import com.zzy.common.widget.recycleAdapter.MyLinearLayoutManager;
 import com.zzy.common.widget.recycleAdapter.MyMultiRecycleAdapter;
 import com.zzy.common.widget.recycleAdapter.OnItemChildClickListener;
 import com.zzy.common.widget.recycleAdapter.OnLoadMoreListener;
@@ -36,7 +40,7 @@ public class JobListActivity extends BaseTitleAndBottomBarActivity implements Jo
     private int pageNum = 1;
     private OnLoadMoreListener onLoadMoreListener;
     private MyMultiRecycleAdapter adapter;
-    private boolean isLoadOver = false;
+    private boolean isLoadOver = false,isReload = true;
     private SmartRefreshLayout smartRefreshLayout;
 /***********************************************************************************************/
     @Override
@@ -62,7 +66,7 @@ public class JobListActivity extends BaseTitleAndBottomBarActivity implements Jo
             btnNew.setOnClickListener(this);
 
             rvDataList = findViewById(R.id.rvDataList);
-            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+            RecyclerView.LayoutManager layoutManager = new MyLinearLayoutManager(this);
             rvDataList.setLayoutManager(layoutManager);
             rvDataList.setItemAnimator(new DefaultItemAnimator());
 
@@ -105,29 +109,38 @@ public class JobListActivity extends BaseTitleAndBottomBarActivity implements Jo
             if(smartRefreshLayout!=null){
                 smartRefreshLayout.finishRefresh();
             }
-            if(pageNum!=1){
-                appendList((List<Job>) o);
+            List<Job> list = (List<Job>) o;
+            if(list == null){
                 return;
             }
-            dataList.addAll((List<Job>) o);
             setupViews();
-            adapter.notifyDataSetChanged();
+            if(isReload){
+                isReload = false;
+                reset();
+                if(rvDataList!=null){
+                    rvDataList.scrollToPosition(0);
+                }
+                dataList.addAll(list);
+                adapter.notifyDataSetChanged();
+            }else {
+                adapter.setLoadMoreData(list);
+            }
+
+            if(list.isEmpty()
+                    ||list.size()< CommonConstants.PAGE_SIZE
+            ){
+                smartRefreshLayout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.loadEnd();
+                    }
+                },10);
+                isLoadOver = true;
+            }
         }catch (Exception e){
             e.printStackTrace();
             ToastUtils.showShort(e.toString());
         }
-    }
-    private void appendList(List<Job> list) {
-        if(list == null
-                ||list.isEmpty()
-        ){
-            adapter.loadEnd();
-        }
-        if(list.isEmpty()){
-            isLoadOver = true;
-            return;
-        }
-        adapter.setLoadMoreData(list);
     }
     @Override
     public void onClick(View v) {
@@ -144,7 +157,8 @@ public class JobListActivity extends BaseTitleAndBottomBarActivity implements Jo
 
     @Override
     public void reload(boolean bShow) {
-        reset();
+        isReload = true;
+        pageNum = 1;
         presenter.getList(pageNum);
     }
 

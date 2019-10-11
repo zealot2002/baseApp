@@ -336,6 +336,9 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<RecyclerView.V
      * @param datas
      */
     public void setLoadMoreData(List<T> datas) {
+        if(datas==null||datas.isEmpty()){
+            return;
+        }
         isLoading = false;
         int size = mDatas.size();
         mDatas.addAll(datas);
@@ -469,13 +472,6 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<RecyclerView.V
         isLoading = false;
         isAutoLoadMoreEnd = false;
         mDatas.clear();
-    }
-    public void resetA() {
-        if (mLoadingView != null) {
-            addFooterView(mLoadingView);
-        }
-        isLoading = false;
-        isAutoLoadMoreEnd = false;
     }
     /**
      * 数据加载完成

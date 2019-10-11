@@ -12,9 +12,12 @@ import com.zzy.business.R;
 import com.zzy.business.contract.MyPioneeringContract;
 import com.zzy.business.presenter.MyPioneeringPresenter;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
+import com.zzy.common.constants.CommonConstants;
 import com.zzy.common.constants.ParamConstants;
+import com.zzy.common.model.bean.Job;
 import com.zzy.common.model.bean.Pioneering;
 import com.zzy.common.view.itemViewDelegate.PioneeringDelegate;
+import com.zzy.common.widget.recycleAdapter.MyLinearLayoutManager;
 import com.zzy.common.widget.recycleAdapter.MyMultiRecycleAdapter;
 import com.zzy.common.widget.recycleAdapter.OnItemChildClickListener;
 import com.zzy.common.widget.recycleAdapter.OnLoadMoreListener;
@@ -35,7 +38,7 @@ public class MyPioneeringListActivity extends BaseTitleAndBottomBarActivity
     private int pageNum = 1;
     private OnLoadMoreListener onLoadMoreListener;
     private MyMultiRecycleAdapter adapter;
-    private boolean isLoadOver = false;
+    private boolean isLoadOver = false,isReload = true;
     private SmartRefreshLayout smartRefreshLayout;
     /***********************************************************************************************/
     @Override
@@ -57,7 +60,7 @@ public class MyPioneeringListActivity extends BaseTitleAndBottomBarActivity
             smartRefreshLayout.setEnableRefresh(true);
             smartRefreshLayout.setOnRefreshListener(this);
             rvDataList = findViewById(R.id.rvDataList);
-            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+            RecyclerView.LayoutManager layoutManager = new MyLinearLayoutManager(this);
             rvDataList.setLayoutManager(layoutManager);
             rvDataList.setItemAnimator(new DefaultItemAnimator());
 
@@ -100,29 +103,38 @@ public class MyPioneeringListActivity extends BaseTitleAndBottomBarActivity
             if(smartRefreshLayout!=null){
                 smartRefreshLayout.finishRefresh();
             }
-            if(pageNum!=1){
-                appendList((List<Pioneering>) o);
+            List<Pioneering> list = (List<Pioneering>) o;
+            if(list == null){
                 return;
             }
-            dataList.addAll((List<Pioneering>) o);
             setupViews();
-            adapter.notifyDataSetChanged();
+            if(isReload){
+                isReload = false;
+                reset();
+                if(rvDataList!=null){
+                    rvDataList.scrollToPosition(0);
+                }
+                dataList.addAll(list);
+                adapter.notifyDataSetChanged();
+            }else {
+                adapter.setLoadMoreData(list);
+            }
+
+            if(list.isEmpty()
+                    ||list.size()< CommonConstants.PAGE_SIZE
+            ){
+                smartRefreshLayout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.loadEnd();
+                    }
+                },10);
+                isLoadOver = true;
+            }
         }catch (Exception e){
             e.printStackTrace();
             ToastUtils.showShort(e.toString());
         }
-    }
-    private void appendList(List<Pioneering> list) {
-        if(list == null
-                ||list.isEmpty()
-        ){
-            adapter.loadEnd();
-        }
-        if(list.isEmpty()){
-            isLoadOver = true;
-            return;
-        }
-        adapter.setLoadMoreData(list);
     }
     @Override
     public void onClick(View v) {
@@ -131,7 +143,8 @@ public class MyPioneeringListActivity extends BaseTitleAndBottomBarActivity
 
     @Override
     public void reload(boolean bShow) {
-        reset();
+        isReload = true;
+        pageNum = 1;
         presenter.getList(pageNum);
     }
 

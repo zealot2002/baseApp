@@ -511,15 +511,45 @@
             android:visibility="gone"
             android:layout_marginTop="10dp"
             >
-            <TextView
-                style="@style/tv_style_white_14"
-                android:text="技能标签:"
-                />
-            <me.gujun.android.taggroup.TagGroup
-                android:id="@+id/tagView"
-                android:layout_marginTop="10dp"
-                app:atg_isAppendMode="true"
-                style="@style/TagGroupStyle" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    style="@style/tv_style_white_14"
+                    android:text="技能标签:"
+                    android:layout_centerVertical="true"
+                    />
+                <com.dl7.tag.TagView
+                    android:id="@+id/tagAdd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    app:tag_text="新增标签"
+                    app:tag_text_size="12sp"
+                    app:tag_border_color="@android:color/holo_green_light"
+                    app:tag_bg_color="@android:color/white"
+                    app:tag_bg_color_check="@android:color/holo_green_light"
+                    app:tag_border_color_check="@android:color/holo_green_light"
+                    app:tag_text_color_check="@android:color/white"
+                    app:tag_icon="@mipmap/ic_add"
+                    app:tag_press_feedback="true"
+                    app:tag_text_color="@android:color/holo_green_light"/>
+            </RelativeLayout>
+
+            <com.dl7.tag.TagLayout
+                android:id="@+id/tagLayout"
+                style="@style/TagLayout.MultiChoice"
+                android:layout_marginTop="5dp"
+                app:tag_layout_bg_color="@android:color/transparent"
+                app:tag_layout_border_color="@android:color/transparent"
+                app:tag_layout_mode="multi_choice"
+                app:tag_view_text_color="@color/light_blue"
+                app:tag_view_text_color_check="@color/white"
+                app:tag_view_bg_color="@color/white"
+                app:tag_view_bg_color_check="@color/light_blue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
         <Button
             android:id="@+id/btnOk"

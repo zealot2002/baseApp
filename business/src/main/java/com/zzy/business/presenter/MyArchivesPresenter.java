@@ -15,6 +15,8 @@ import com.zzy.commonlib.http.HInterface;
 import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.commonlib.utils.NetUtils;
 
+import java.util.List;
+
 public class MyArchivesPresenter implements MyArchivesContract.Presenter{
     private final MyArchivesContract.View view;
 /****************************************************************************************************/
@@ -104,6 +106,34 @@ public class MyArchivesPresenter implements MyArchivesContract.Presenter{
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
+                    }else if(result == HConstant.FAIL
+                            ||result == HConstant.ERROR
+                    ){
+                        handleErrs((String) o);
+                    }
+                }
+            });
+        }catch(Exception e){
+            e.printStackTrace();
+            handleErrs(e.toString());
+        }
+    }
+
+    @Override
+    public void getSkillTagList() {
+        if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {
+            view.showErr(AppUtils.getApp().getResources().getString(R.string.no_network_tips));
+            return;
+        }
+        view.showLoading();
+        try{
+            HttpProxy.getSkillTagList(new CommonDataCallback() {
+                @Override
+                public void callback(int result, Object o, Object o1) {
+                    view.closeLoading();
+                    if (result == HConstant.SUCCESS) {
+                        view.onTagList((List<String>) o);
+//                        view.onSuccess();
                     }else if(result == HConstant.FAIL
                             ||result == HConstant.ERROR
                     ){

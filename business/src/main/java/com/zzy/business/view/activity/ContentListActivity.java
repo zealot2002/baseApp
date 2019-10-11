@@ -18,6 +18,8 @@ import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.constants.CommonConstants;
 import com.zzy.common.constants.ParamConstants;
 import com.zzy.common.model.bean.FriendsCircle;
+import com.zzy.common.model.bean.GetRichInfo;
+import com.zzy.common.widget.recycleAdapter.MyLinearLayoutManager;
 import com.zzy.common.widget.recycleAdapter.MyMultiRecycleAdapter;
 import com.zzy.common.widget.recycleAdapter.OnItemChildClickListener;
 import com.zzy.common.widget.recycleAdapter.OnLoadMoreListener;
@@ -39,7 +41,7 @@ public class ContentListActivity extends BaseTitleAndBottomBarActivity
     private RecyclerView rvDataList;
     private OnLoadMoreListener onLoadMoreListener;
     private MyMultiRecycleAdapter adapter;
-    private boolean isLoadOver = false;
+    private boolean isLoadOver = false,isReload = true;
     private int type;
     private SmartRefreshLayout smartRefreshLayout;
 
@@ -84,7 +86,7 @@ public class ContentListActivity extends BaseTitleAndBottomBarActivity
                 btnNew.setText("分享个人经验");
             }
             rvDataList = findViewById(R.id.rvDataList);
-            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+            RecyclerView.LayoutManager layoutManager = new MyLinearLayoutManager(this);
             rvDataList.setLayoutManager(layoutManager);
             rvDataList.setItemAnimator(new DefaultItemAnimator());
 
@@ -138,14 +140,22 @@ public class ContentListActivity extends BaseTitleAndBottomBarActivity
             if(list == null){
                 return;
             }
-
             setupViews();
-            dataList.addAll(list);
-//            adapter.setData(dataList);
-            adapter.notifyDataSetChanged();
+            if(isReload){
+                isReload = false;
+                reset();
+                if(rvDataList!=null){
+                    rvDataList.scrollToPosition(0);
+                }
+
+                dataList.addAll(list);
+                adapter.notifyDataSetChanged();
+            }else {
+                adapter.setLoadMoreData(list);
+            }
 
             if(list.isEmpty()
-                    ||list.size()<CommonConstants.PAGE_SIZE
+                    ||list.size()< CommonConstants.PAGE_SIZE
             ){
                 smartRefreshLayout.postDelayed(new Runnable() {
                     @Override
@@ -183,7 +193,8 @@ public class ContentListActivity extends BaseTitleAndBottomBarActivity
 
     @Override
     public void reload(boolean bShow) {
-        reset();
+        isReload = true;
+        pageNum = 1;
         presenter.getList(type,pageNum);
     }
 
@@ -204,7 +215,7 @@ public class ContentListActivity extends BaseTitleAndBottomBarActivity
         isLoadOver = false;
         dataList.clear();
         if(adapter!=null) {
-            adapter.resetA();
+            adapter.reset();
         }
     }
     @Override
