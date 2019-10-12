@@ -43,8 +43,8 @@ public class GoodsDetailSellActivity extends BaseTitleAndBottomBarActivity
         implements View.OnClickListener, GoodsContract.View {
     private EditText etName,etContact,etPhone,etAddress,etPrice,etDealWay;
     private MyEditText etDesc;
-    private RatingBar rbScore;
-    private TextView tvScore,tvReport,tvComment,tvSubmit;
+    private RatingBar rbScore,rbScore2;
+    private TextView tvScore,tvScore2,tvReport,tvComment,tvSubmit;
     private ConvenientBanner banner;
 
     private GoodsContract.Presenter presenter;
@@ -87,7 +87,9 @@ public class GoodsDetailSellActivity extends BaseTitleAndBottomBarActivity
         etAddress = findViewById(R.id.etAddress);
         etDealWay = findViewById(R.id.etDealWay);
         rbScore = findViewById(R.id.rbScore);
+        rbScore2 = findViewById(R.id.rbScore2);
         tvScore = findViewById(R.id.tvScore);
+        tvScore2 = findViewById(R.id.tvScore2);
         rlMsg = findViewById(R.id.rlMsg);
         etMsg = findViewById(R.id.etMsg);
 
@@ -112,9 +114,17 @@ public class GoodsDetailSellActivity extends BaseTitleAndBottomBarActivity
         etAddress.setText(bean.getAddress());
         etDealWay.setText(bean.getDealWay());
         rbScore.setStar(bean.getScore());
-//        rbScore.setStar(1);
+        rbScore.setmClickable(false);
         tvScore.setText(InnerUtils.getRatingString(bean.getScore()));
 
+        rbScore2.setStar(5.0f);
+        tvScore2.setText(InnerUtils.getRatingString(5.0f));
+        rbScore2.setOnRatingChangeListener(new RatingBar.OnRatingChangeListener() {
+            @Override
+            public void onRatingChange(float RatingCount) {
+                tvScore2.setText(InnerUtils.getRatingString(RatingCount));
+            }
+        });
         updateBanner();
         setupCommentList();
     }

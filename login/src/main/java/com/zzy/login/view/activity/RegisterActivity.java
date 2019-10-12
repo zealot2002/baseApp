@@ -25,6 +25,7 @@ import com.zzy.common.adapter.PhotoAdapter;
 import com.zzy.common.adapter.RecyclerItemClickListener;
 import com.zzy.common.base.BaseAppActivity;
 import com.zzy.common.model.bean.Archives;
+import com.zzy.common.model.bean.Image;
 import com.zzy.common.utils.StatusBarUtils;
 import com.zzy.common.widget.LoadingHelper;
 import com.zzy.common.widget.TagEditDialog;
@@ -266,7 +267,10 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
                     bean.getSkills().add(s);
                 }
                 for(String s:selectedPhotos){
-                    bean.setCompanyImgUrl(s);
+                    Image image = new Image();
+                    image.setPath(s);
+                    image.setName(s.substring(s.lastIndexOf('/')));
+                    bean.getImgList().add(image);
                 }
                 presenter.register2(bean);
             }else if(v.getId() == R.id.tagAdd){

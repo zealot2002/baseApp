@@ -35,9 +35,17 @@ public class GoodsListParser implements HInterface.JsonParser {
                 Goods bean = new Goods();
                 bean.setId(infoObj.getInt("SALE_ID"));
                 bean.setName(infoObj.getString("SALE_TITLE"));
-                bean.setPrice(infoObj.getString("SALE_PRICE"));
                 bean.setContact(infoObj.getString("RELEASE_PEOPLE"));
                 bean.setPhone(infoObj.getString("SALE_TEL"));
+
+                String type = "买";
+                if(infoObj.has("SALE_TYPE")) type = infoObj.getString("SALE_TYPE");
+                if(type.equals("买")){
+                    if(infoObj.has("SALE_PRICE")) bean.setStartPrice(infoObj.getString("SALE_PRICE"));
+                    if(infoObj.has("SALE_PRICE_UP")) bean.setEndPrice(infoObj.getString("SALE_PRICE_UP"));
+                }else {
+                    if(infoObj.has("SALE_PRICE")) bean.setPrice(infoObj.getString("SALE_PRICE"));
+                }
 
                 if(infoObj.has("SALE_GRADE")){
                     bean.setScore(getScore(infoObj.getString("SALE_GRADE")));

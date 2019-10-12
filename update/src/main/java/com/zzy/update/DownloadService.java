@@ -15,6 +15,7 @@ import android.support.v4.content.LocalBroadcastManager;
 
 
 import com.zzy.common.constants.ParamConstants;
+import com.zzy.commonlib.log.MyLog;
 
 import java.io.File;
 
@@ -89,19 +90,24 @@ public class DownloadService extends IntentService {
         super.onDestroy();
     }
 
-
     private void install(Context context) {
-        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), APK_NAME);
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        if (Build.VERSION.SDK_INT >= 24) {
-            Uri apkUri = FileProvider.getUriForFile(context, context.getPackageName()+".update.provider", file);
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
-        } else {
-            intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+        MyLog.e(" install context:"+context.toString());
+        try{
+            File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), APK_NAME);
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            if (Build.VERSION.SDK_INT >= 24) {
+                Uri apkUri = FileProvider.getUriForFile(context, context.getPackageName()+".update.provider", file);
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
+            } else {
+                intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+            }
+            context.startActivity(intent);
+        }catch (Exception e){
+            e.printStackTrace();
         }
-        context.startActivity(intent);
+        MyLog.e(" install 2:");
     }
 
 }

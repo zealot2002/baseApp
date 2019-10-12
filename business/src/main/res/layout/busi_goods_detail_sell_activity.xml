@@ -88,6 +88,7 @@
                         hedgehog:starFill="@mipmap/rating_checked"
                         android:layout_marginRight="10dp"
                         android:layout_gravity="center_vertical"
+
                         />
                     <TextView
                         android:id="@+id/tvScore"
@@ -392,7 +393,41 @@
             android:id="@+id/lOp"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:background="@color/white"
             >
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/tvScoreT"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                >
+                <com.hedgehog.ratingbar.RatingBar
+                    android:id="@+id/rbScore2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    hedgehog:starImageHeight="20dp"
+                    hedgehog:starImageWidth="20dp"
+                    hedgehog:starImagePadding="8px"
+                    hedgehog:starEmpty="@mipmap/rating_normal"
+                    hedgehog:starHalf="@mipmap/rating_normal"
+                    hedgehog:starFill="@mipmap/rating_checked"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="center_vertical"
+
+                    />
+                <TextView
+                    android:id="@+id/tvScore2"
+                    style="@style/tv_style_gray_12"
+                    android:layout_gravity="center_vertical"
+                    />
+            </LinearLayout>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/blue"
+                />
             <Button
                 android:id="@+id/btnShare"
                 android:layout_width="0dp"

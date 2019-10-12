@@ -38,8 +38,6 @@ public class ArchivesParser implements HInterface.JsonParser {
             bean.setIsCompany(dataObj.getString("IS_COMPANY"));
             bean.setCompanyName(dataObj.getString("COMPANY_NAME"));
             bean.setCompanyScope(dataObj.getString("COMPANY_EMP_NUM"));
-            bean.setCompanyImgUrl(dataObj.getString("BUSINESS_LICENSE_PIC_ADDR"));
-            bean.setCompanyImgName(dataObj.getString("BUSINESS_LICENSE_PIC_NAME"));
 
             if(dataObj.has("USER_SKILL")){
                 JSONArray imgArray = dataObj.getJSONArray("USER_SKILL");

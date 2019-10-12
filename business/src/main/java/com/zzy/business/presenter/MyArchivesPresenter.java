@@ -12,6 +12,7 @@ import com.zzy.common.network.CommonDataCallback;
 import com.zzy.common.utils.FileUploader;
 import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.http.HInterface;
+import com.zzy.commonlib.log.MyLog;
 import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.commonlib.utils.NetUtils;
 
@@ -79,17 +80,29 @@ public class MyArchivesPresenter implements MyArchivesContract.Presenter{
                 });
                 return;
             }
-            FileUploader.post(bean.getCompanyImgUrl(), new HInterface.DataCallback() {
+            if(bean.getImgList().isEmpty()){
+                HttpProxy.updateArchives(bean,new CommonDataCallback() {
+                    @Override
+                    public void callback(int result, Object o, Object o1) {
+                        view.closeLoading();
+                        if (result == HConstant.SUCCESS) {
+                            view.onSuccess();
+                        }else if(result == HConstant.FAIL
+                                ||result == HConstant.ERROR
+                        ){
+                            handleErrs((String) o);
+                        }
+                    }
+                });
+                return;
+            }
+            new FileUploader().post(bean.getImgList(), new HInterface.DataCallback() {
                 @Override
-                public void requestCallback(int result, Object o, Object tagData) {
-                    view.closeLoading();
+                public void requestCallback(int result, Object data, Object tagData) {
+                    MyLog.e("result:" +data.toString());
                     if (result == HConstant.SUCCESS) {
+                        bean.setImgList((List<Image>) data);
                         try {
-                            Image image = ImageParser.parse((String) o);
-                            if(image!=null){
-                                bean.setCompanyImgName(image.getName());
-                                bean.setCompanyImgUrl(image.getPath());
-                            }
                             HttpProxy.updateArchives(bean,new CommonDataCallback() {
                                 @Override
                                 public void callback(int result, Object o, Object o1) {
@@ -105,11 +118,10 @@ public class MyArchivesPresenter implements MyArchivesContract.Presenter{
                             });
                         } catch (Exception e) {
                             e.printStackTrace();
+                            handleErrs(e.toString());
                         }
-                    }else if(result == HConstant.FAIL
-                            ||result == HConstant.ERROR
-                    ){
-                        handleErrs((String) o);
+                    }else if(result == HConstant.FAIL){
+                        handleErrs((String) data);
                     }
                 }
             });

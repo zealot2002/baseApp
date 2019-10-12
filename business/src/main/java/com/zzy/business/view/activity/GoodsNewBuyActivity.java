@@ -57,6 +57,7 @@ public class GoodsNewBuyActivity extends BaseTitleAndBottomBarActivity
     private Button btnOk,btnDel;
     private PhotoAdapter photoAdapter;
     private ArrayList<String> selectedPhotos = new ArrayList<>();
+    private int id;
     private Goods bean;
     private int type;
 
@@ -65,17 +66,19 @@ public class GoodsNewBuyActivity extends BaseTitleAndBottomBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try{
+            presenter = new GoodsPresenter(this);
             type = getIntent().getIntExtra(ParamConstants.TYPE,0);
-            bean = (Goods) getIntent().getSerializableExtra(ParamConstants.OBJECT);
+            id = getIntent().getIntExtra(ParamConstants.ID,0);
         }catch (Exception e){
             e.printStackTrace();
         }
         if(type != CommonConstants.MY_GOODS_BUY){
             //new goods
             bean = new Goods();
+            setupViews();
+        }else {
+            presenter.getDetail(CommonConstants.GOODS_SELL,id);
         }
-        presenter = new GoodsPresenter(this);
-        setupViews();
     }
 
     @Override
@@ -205,6 +208,18 @@ public class GoodsNewBuyActivity extends BaseTitleAndBottomBarActivity
         }
     }
 
+    @Override
+    public void updateUI(Object o) {
+        super.updateUI(o);
+        try{
+            bean = (Goods) o;
+            bean.setId(id);
+            setupViews();
+        }catch (Exception e){
+            e.printStackTrace();
+            ToastUtils.showShort(e.toString());
+        }
+    }
     @Override
     public void reload(boolean bShow) {
 

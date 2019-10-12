@@ -1,6 +1,7 @@
 package com.zzy.common.model.bean;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author zzy
@@ -27,8 +28,7 @@ public class Archives {
     private String companyName;
     private String companyScope;
 
-    private String companyImgUrl;
-    private String companyImgName;
+    private List<Image> imgList = new ArrayList<>();
     private ArrayList<String> skills = new ArrayList<>();
 
 
@@ -136,20 +136,12 @@ public class Archives {
         this.companyScope = companyScope;
     }
 
-    public String getCompanyImgUrl() {
-        return companyImgUrl;
+    public List<Image> getImgList() {
+        return imgList;
     }
 
-    public void setCompanyImgUrl(String companyImgUrl) {
-        this.companyImgUrl = companyImgUrl;
-    }
-
-    public String getCompanyImgName() {
-        return companyImgName;
-    }
-
-    public void setCompanyImgName(String companyImgName) {
-        this.companyImgName = companyImgName;
+    public void setImgList(List<Image> imgList) {
+        this.imgList = imgList;
     }
 
     public ArrayList<String> getSkills() {

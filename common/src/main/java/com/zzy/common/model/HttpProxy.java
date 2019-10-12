@@ -100,8 +100,15 @@ public class HttpProxy {
         reqBody.put("IS_COMPANY", bean.getIsCompany());
         reqBody.put("COMPANY_NAME", bean.getCompanyName());
         reqBody.put("COMPANY_EMP_NUM", bean.getCompanyScope());
-        reqBody.put("BUSINESS_LICENSE_PIC_ADDR", bean.getCompanyImgUrl());
-        reqBody.put("BUSINESS_LICENSE_PIC_NAME", bean.getCompanyImgName());
+
+        JSONArray imgArr = new JSONArray();
+        for(Image image:bean.getImgList()){
+            JSONObject obj = new JSONObject();
+            obj.put("PIC_NAME",image.getName());
+            obj.put("PIC_ADDR",image.getPath());
+            imgArr.put(obj);
+        }
+        reqBody.put("IMAGES",imgArr);
 
         JSONArray arr = new JSONArray();
         for(String s:bean.getSkills()){
@@ -676,17 +683,18 @@ public class HttpProxy {
     public static void updateGoods(int type, Goods bean, final HInterface.DataCallback callback) throws Exception {
         JSONObject reqBody = new JSONObject();
         reqBody.put("TOKEN", CommonUtils.getToken());
+        reqBody.put("SALE_ID",bean.getId());
         reqBody.put("SALE_TITLE",bean.getName());
         reqBody.put("RELEASE_PEOPLE", bean.getContact());
         reqBody.put("SALE_TEL", bean.getPhone());
         reqBody.put("SALE_CONTENT", bean.getDesc());
-        if(type == CommonConstants.GOODS_SELL){
+        if(type == CommonConstants.GOODS_BUY){
             reqBody.put("SALE_PRICE", bean.getStartPrice());
             reqBody.put("SALE_PRICE_UP", bean.getEndPrice());
-            reqBody.put("SALE_BUSINESS", bean.getDealWay());
-            reqBody.put("SALE_ADDRESS", bean.getAddress());
         }else{
             reqBody.put("SALE_PRICE", bean.getPrice());
+            reqBody.put("SALE_BUSINESS", bean.getDealWay());
+            reqBody.put("SALE_ADDRESS", bean.getAddress());
         }
         JSONArray imgArr = new JSONArray();
         for(Image image:bean.getImgList()){
@@ -769,8 +777,15 @@ public class HttpProxy {
         reqBody.put("IS_COMPANY", bean.getIsCompany());
         reqBody.put("COMPANY_NAME", bean.getCompanyName());
         reqBody.put("COMPANY_EMP_NUM", bean.getCompanyScope());
-        reqBody.put("BUSINESS_LICENSE_PIC_ADDR", bean.getCompanyImgUrl());
-        reqBody.put("BUSINESS_LICENSE_PIC_NAME", bean.getCompanyImgName());
+
+        JSONArray imgArr = new JSONArray();
+        for(Image image:bean.getImgList()){
+            JSONObject obj = new JSONObject();
+            obj.put("PIC_NAME",image.getName());
+            obj.put("PIC_ADDR",image.getPath());
+            imgArr.put(obj);
+        }
+        reqBody.put("IMAGES",imgArr);
 
         JSONArray arr = new JSONArray();
         for(String s:bean.getSkills()){

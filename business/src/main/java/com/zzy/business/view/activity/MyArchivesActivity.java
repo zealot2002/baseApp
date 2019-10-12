@@ -20,6 +20,7 @@ import com.zzy.common.adapter.PhotoAdapter;
 import com.zzy.common.adapter.RecyclerItemClickListener;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.model.bean.Archives;
+import com.zzy.common.model.bean.Image;
 import com.zzy.common.widget.TagEditDialog;
 import com.zzy.commonlib.log.MyLog;
 import com.zzy.commonlib.utils.ToastUtils;
@@ -141,6 +142,36 @@ public class MyArchivesActivity extends BaseTitleAndBottomBarActivity
         btnOk = findViewById(R.id.btnOk);
         btnOk.setOnClickListener(this);
         tagLayout = findViewById(R.id.tagLayout);
+//        tagLayout.setTagCheckListener(new TagView.OnTagCheckListener() {
+//            @Override
+//            public void onTagCheck(final int position, String s, boolean b) {
+//                MyLog.e("onTagCheck position : "+position);
+//                if(b && tagLayout.getCheckedTags().size()>5){
+//                    ToastUtils.showShort("最多可选6个标签");
+//                    tagLayout.postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            ((TagView)tagLayout.getChildAt(position)).setChecked(false);
+//                        }
+//                    },10);
+//                }
+//            }
+//        });
+        tagAdd = findViewById(R.id.tagAdd);
+        tagAdd.setOnClickListener(this);
+    }
+
+    @Override
+    public void onTagList(List<String> tagList) {
+        tagLayout.removeAllViews();
+        for(int i = 0;i<tagList.size();i++){
+            String s = tagList.get(i);
+            tagLayout.addTag(s);
+            if(bean.getSkills().contains(s)){
+                ((TagView)tagLayout.getChildAt(i)).setChecked(true);
+            }
+        }
+
         tagLayout.setTagCheckListener(new TagView.OnTagCheckListener() {
             @Override
             public void onTagCheck(final int position, String s, boolean b) {
@@ -156,20 +187,6 @@ public class MyArchivesActivity extends BaseTitleAndBottomBarActivity
                 }
             }
         });
-        tagAdd = findViewById(R.id.tagAdd);
-        tagAdd.setOnClickListener(this);
-    }
-
-    @Override
-    public void onTagList(List<String> tagList) {
-        tagLayout.removeAllViews();
-        for(int i = 0;i<tagList.size();i++){
-            String s = tagList.get(i);
-            tagLayout.addTag(s);
-            if(bean.getSkills().contains(s)){
-                ((TagView)tagLayout.getChildAt(i)).setChecked(true);
-            }
-        }
     }
 
     @Override
@@ -262,13 +279,16 @@ public class MyArchivesActivity extends BaseTitleAndBottomBarActivity
             ).create();
             dialog.show();
         }else if(v.getId() == R.id.btnOk){
-            if(!(btnYes.isChecked()
-                    &&userTypeList.get(spinnerUserType.getSelectedItemPosition()).equals("企业"))){
-                ToastUtils.showShort("是否企业注册选'是'，则用户类别必须选'企业';" +
-                        "是否企业注册选'否'，则用户类别不能选'企业'");
+            if(btnYes.isChecked()
+                    &&!userTypeList.get(spinnerUserType.getSelectedItemPosition()).equals("企业")){
+                ToastUtils.showShort("是否企业注册选'是'，则用户类别必须选'企业'");
                 return;
             }
-
+            if(!btnYes.isChecked()
+                    &&userTypeList.get(spinnerUserType.getSelectedItemPosition()).equals("企业")){
+                ToastUtils.showShort("是否企业注册选'否'，则用户类别不能选'企业'");
+                return;
+            }
             bean.setUserType(userTypeList.get(spinnerUserType.getSelectedItemPosition()));
             bean.setIsCompany(btnYes.isChecked()?"是":"否");
             bean.setCompanyName(etCompanyName.getText().toString().trim());
@@ -278,7 +298,10 @@ public class MyArchivesActivity extends BaseTitleAndBottomBarActivity
                 bean.getSkills().add(s);
             }
             for(String s:selectedPhotos){
-                bean.setCompanyImgUrl(s);
+                Image image = new Image();
+                image.setPath(s);
+                image.setName(s.substring(s.lastIndexOf('/')));
+                bean.getImgList().add(image);
             }
             presenter.updateArchives(bean);
         }

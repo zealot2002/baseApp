@@ -115,7 +115,7 @@ public class GoodsListActivity extends BaseTitleAndBottomBarActivity
                     Bundle bundle = new Bundle();
                     bundle.putInt(ParamConstants.TYPE,goodType);
                     bundle.putInt(ParamConstants.ID,dataList.get(position).getId());
-                    bundle.putSerializable(ParamConstants.OBJECT,dataList.get(position));
+//                    bundle.putSerializable(ParamConstants.OBJECT,dataList.get(position));
                     if(goodType==CommonConstants.GOODS_BUY){
                         startActivity(GoodsDetailBuyActivity.class,bundle);
                     }else if(goodType==CommonConstants.GOODS_SELL){

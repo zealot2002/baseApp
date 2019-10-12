@@ -26,7 +26,6 @@ import com.zzy.common.model.bean.Image;
 import com.zzy.common.model.bean.Menu;
 import com.zzy.common.utils.InputFilter.EmojiExcludeFilter;
 import com.zzy.common.utils.InputFilter.LengthFilter;
-import com.zzy.common.utils.InputFilter.SpecialExcludeFilter;
 import com.zzy.common.widget.MyEditText;
 import com.zzy.commonlib.utils.ToastUtils;
 
@@ -47,6 +46,7 @@ public class GoodsNewSellActivity extends BaseTitleAndBottomBarActivity
     private Button btnOk,btnDel;
     private PhotoAdapter photoAdapter;
     private ArrayList<String> selectedPhotos = new ArrayList<>();
+    private int id;
     private Goods bean;
     private int type;
     private RecyclerView rvTagList;
@@ -63,17 +63,19 @@ public class GoodsNewSellActivity extends BaseTitleAndBottomBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try{
+            presenter = new GoodsPresenter(this);
             type = getIntent().getIntExtra(ParamConstants.TYPE,0);
-            bean = (Goods) getIntent().getSerializableExtra(ParamConstants.OBJECT);
+            id = getIntent().getIntExtra(ParamConstants.ID,0);
         }catch (Exception e){
             e.printStackTrace();
         }
         if(type != CommonConstants.MY_GOODS_SELL){
             //new goods
             bean = new Goods();
+            setupViews();
+        }else {
+            presenter.getDetail(CommonConstants.GOODS_SELL,id);
         }
-        presenter = new GoodsPresenter(this);
-        setupViews();
     }
 
     @Override
@@ -238,6 +240,19 @@ public class GoodsNewSellActivity extends BaseTitleAndBottomBarActivity
             }
         }if(v.getId() == R.id.btnDel){
             presenter.delete(bean.getId());
+        }
+    }
+
+    @Override
+    public void updateUI(Object o) {
+        super.updateUI(o);
+        try{
+            bean = (Goods) o;
+            bean.setId(id);
+            setupViews();
+        }catch (Exception e){
+            e.printStackTrace();
+            ToastUtils.showShort(e.toString());
         }
     }
 

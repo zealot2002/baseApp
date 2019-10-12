@@ -30,14 +30,22 @@ public class GoodsParser implements HInterface.JsonParser {
             if(dataObj.has("SALE_TITLE")) bean.setName(dataObj.getString("SALE_TITLE"));
             if(dataObj.has("RELEASE_PEOPLE")) bean.setContact(dataObj.getString("RELEASE_PEOPLE"));
             if(dataObj.has("SALE_TEL")) bean.setPhone(dataObj.getString("SALE_TEL"));
-            if(dataObj.has("SALE_PRICE")) bean.setPrice(dataObj.getString("SALE_PRICE"));
+
             if(dataObj.has("SALE_CONTENT")) bean.setDesc(dataObj.getString("SALE_CONTENT"));
 
+            String type = "买";
+            if(dataObj.has("SALE_TYPE")) type = dataObj.getString("SALE_TYPE");
+            if(type.equals("买")){
+                if(dataObj.has("SALE_PRICE")) bean.setStartPrice(dataObj.getString("SALE_PRICE"));
+                if(dataObj.has("SALE_PRICE_UP")) bean.setEndPrice(dataObj.getString("SALE_PRICE_UP"));
+            }else {
+                if(dataObj.has("SALE_PRICE")) bean.setPrice(dataObj.getString("SALE_PRICE"));
+            }
 
             if(dataObj.has("SALE_ADDRESS")) bean.setAddress(dataObj.getString("SALE_ADDRESS"));
             if(dataObj.has("SALE_BUSINESS")) bean.setDealWay(dataObj.getString("SALE_BUSINESS"));
             try{
-                if(dataObj.has("SALE_GRADE")) bean.setScore(Integer.valueOf(dataObj.getString("SALE_GRADE")));
+                if(dataObj.has("SALE_GRADE")) bean.setScore(Float.valueOf(dataObj.getString("SALE_GRADE")));
             }catch (Exception e){
 //                e.printStackTrace();
             }

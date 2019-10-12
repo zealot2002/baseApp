@@ -15,7 +15,7 @@ public class Goods implements Serializable {
     private String price;
     private String phone;
     private String contact;
-    private int score;
+    private float score;
     private String address;
     private String desc;
     private String dealWay;
@@ -60,11 +60,11 @@ public class Goods implements Serializable {
         this.contact = contact;
     }
 
-    public int getScore() {
+    public float getScore() {
         return score;
     }
 
-    public void setScore(int score) {
+    public void setScore(float score) {
         this.score = score;
     }
 

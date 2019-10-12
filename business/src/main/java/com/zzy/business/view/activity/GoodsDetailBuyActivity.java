@@ -95,7 +95,8 @@ public class GoodsDetailBuyActivity extends BaseTitleAndBottomBarActivity
         etName.setText(bean.getName());
         etContact.setText(bean.getContact());
         etPhone.setText(bean.getPhone());
-        etPrice.setText(bean.getPrice());
+        etPrice.setText("¥"+bean.getStartPrice()+"-"+bean.getEndPrice());
+
         etDesc.setText(bean.getDesc());
         updateBanner();
         setupCommentList();

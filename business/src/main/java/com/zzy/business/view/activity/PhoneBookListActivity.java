@@ -13,10 +13,12 @@ import com.zzy.common.model.bean.PbRecord;
 import com.zzy.business.presenter.PbPresenter;
 import com.zzy.business.view.itemViewDelegate.PbDelegate;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
+import com.zzy.common.utils.CommonUtils;
 import com.zzy.common.widget.recycleAdapter.MyMultiRecycleAdapter;
 import com.zzy.common.widget.recycleAdapter.OnItemChildClickListener;
 import com.zzy.common.widget.recycleAdapter.OnLoadMoreListener;
 import com.zzy.common.widget.recycleAdapter.ViewHolder;
+import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.commonlib.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -78,7 +80,8 @@ public class PhoneBookListActivity extends BaseTitleAndBottomBarActivity impleme
             adapter.setOnItemChildClickListener(R.id.rootView, new OnItemChildClickListener() {
                 @Override
                 public void onItemChildClick(ViewHolder viewHolder, Object data, int position) {
-
+                    PbRecord bean = dataList.get(position);
+                    AppUtils.callPhone(PhoneBookListActivity.this,bean.getPhone());
                 }
             });
             rvDataList.setAdapter(adapter);
