@@ -30,6 +30,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/activity_theme" />
 
+
+        <activity
+            android:name=".view.activity.ImageViewerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/activity_theme" />
+
         <activity
             android:name=".view.activity.AssemblyDetailActivity"
             android:screenOrientation="portrait"

@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.hedgehog.ratingbar.RatingBar;
 import com.zzy.business.R;
+import com.zzy.business.contract.MyLogContract;
 import com.zzy.business.view.adapter.MessageAdapter;
 import com.zzy.business.view.other.MessagePicturesLayout;
 import com.zzy.common.constants.CommonConstants;
@@ -16,6 +17,7 @@ import com.zzy.common.model.bean.FriendsCircle;
 import com.zzy.common.model.bean.Goods;
 import com.zzy.common.widget.recycleAdapter.ItemViewDelegate;
 import com.zzy.common.widget.recycleAdapter.ViewHolder;
+import com.zzy.commonlib.log.MyLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +68,6 @@ public class FriendDelegate implements ItemViewDelegate<FriendsCircle> {
 
             lPictures = holder.itemView.findViewById(R.id.l_pictures);
             lPictures.setCallback(mCallback);
-
 
             Glide.with(holder.itemView.getContext()).load(bean.getAvatar()).into(iAvatar);
             tNickname.setText(bean.getAddress());

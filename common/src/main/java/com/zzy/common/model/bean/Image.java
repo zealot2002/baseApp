@@ -10,6 +10,7 @@ import java.io.Serializable;
 public class Image implements Serializable {
     private String name;
     private String path;
+    private String uri;
 
     public Image() {
     }
@@ -32,5 +33,13 @@ public class Image implements Serializable {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 }

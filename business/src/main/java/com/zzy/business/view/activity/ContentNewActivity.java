@@ -106,10 +106,18 @@ public class ContentNewActivity extends BaseTitleAndBottomBarActivity
                                     .setSelected(selectedPhotos)
                                     .start(ContentNewActivity.this);
                         } else {
-                            PhotoPreview.builder()
-                                    .setPhotos(selectedPhotos)
-                                    .setCurrentItem(position)
-                                    .start(ContentNewActivity.this);
+//                            PhotoPreview.builder()
+//                                    .setPhotos(selectedPhotos)
+//                                    .setCurrentItem(position)
+//                                    .start(ContentNewActivity.this);
+
+                            Bundle bundle = new Bundle();
+                            bundle.putStringArrayList(ParamConstants.DATA,selectedPhotos);
+                            bundle.putInt(ParamConstants.INDEX,position);
+                            Intent intent = new Intent();
+                            intent.setClass(ContentNewActivity.this,ImageViewerActivity.class);
+                            intent.putExtras(bundle);
+                            startActivityForResult(intent,ImageViewerActivity.REQUEST_CODE);
                         }
                     }
                 }));
@@ -123,6 +131,17 @@ public class ContentNewActivity extends BaseTitleAndBottomBarActivity
             List<String> photos = null;
             if (data != null) {
                 photos = data.getStringArrayListExtra(PhotoPicker.KEY_SELECTED_PHOTOS);
+            }
+            selectedPhotos.clear();
+            if (photos != null) {
+                selectedPhotos.addAll(photos);
+            }
+            photoAdapter.notifyDataSetChanged();
+        }else if (resultCode == RESULT_OK &&
+                (requestCode == ImageViewerActivity.REQUEST_CODE)) {
+            List<String> photos = null;
+            if (data != null) {
+                photos = data.getStringArrayListExtra(ParamConstants.DATA);
             }
             selectedPhotos.clear();
             if (photos != null) {

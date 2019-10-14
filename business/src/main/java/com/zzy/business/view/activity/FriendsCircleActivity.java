@@ -43,8 +43,6 @@ import com.zzy.commonlib.utils.ToastUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 /**
  * 创业朋友圈
  */
@@ -62,7 +60,7 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
     private SmartRefreshLayout smartRefreshLayout;
     private OnLoadMoreListener onLoadMoreListener;
     private int pageNum = 1;
-    private boolean isLoadOver = false,isReload = true;
+    private boolean isLoadOver = false,isReload = true,isLikeOp = false;
     /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,15 +119,17 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
                 isReload = false;
                 reset();
                 if(rvDataList!=null){
-                    rvDataList.scrollToPosition(0);
+                    if(isLikeOp){
+                        isLikeOp = false;
+                    }else{
+                        rvDataList.scrollToPosition(0);
+                    }
                 }
-
                 dataList.addAll(list);
                 adapter.notifyDataSetChanged();
             }else {
                 adapter.setLoadMoreData(list);
             }
-
             if(list.isEmpty()
                     ||list.size()< CommonConstants.PAGE_SIZE
             ){
@@ -309,6 +309,7 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
     @Override
     public void onSuccess() {
         ToastUtils.showShort("成功");
+        isLikeOp = true;
         reload(true);
     }
 
