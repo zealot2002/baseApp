@@ -67,4 +67,6 @@ dependencies {
     compile 'me.iwf.photopicker:PhotoPicker:0.9.12@aar'
 
     compile 'com.github.Rukey7:TagLayout:1.0.6'
+
+    api 'com.soundcloud.android:android-crop:1.0.1@aar'
 }

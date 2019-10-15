@@ -20,7 +20,6 @@ import com.zzy.common.constants.CommonConstants;
 import com.zzy.common.constants.ParamConstants;
 import com.zzy.common.utils.InputFilter.EmojiExcludeFilter;
 import com.zzy.common.utils.InputFilter.LengthFilter;
-import com.zzy.common.utils.InputFilter.SpecialExcludeFilter;
 import com.zzy.commonlib.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -77,7 +76,7 @@ public class ContentNewActivity extends BaseTitleAndBottomBarActivity
         );
         etContent.setFilters(new InputFilter[]{
                 new EmojiExcludeFilter(),
-                new LengthFilter(200)}
+                new LengthFilter(500)}
         );
 
         btnOk = findViewById(R.id.btnOk);

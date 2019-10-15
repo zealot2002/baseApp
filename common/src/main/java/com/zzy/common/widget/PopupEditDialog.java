@@ -2,6 +2,7 @@ package com.zzy.common.widget;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.text.InputFilter;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.zzy.common.R;
+import com.zzy.common.utils.InputFilter.EmojiExcludeFilter;
+import com.zzy.common.utils.InputFilter.LengthFilter;
 import com.zzy.commonlib.utils.PxUtils;
 
 public class PopupEditDialog extends Dialog {
@@ -53,6 +56,12 @@ public class PopupEditDialog extends Dialog {
             tvTitle = layout.findViewById(R.id.tvTitle);
             btnOk = layout.findViewById(R.id.btnOk);
             etContent = layout.findViewById(R.id.etContent);
+
+
+            etContent.setFilters(new InputFilter[]{
+                    new EmojiExcludeFilter(),
+                    new LengthFilter(500)}
+            );
 
             tvTitle.setText(title);
             btnOk.setText(btnText);

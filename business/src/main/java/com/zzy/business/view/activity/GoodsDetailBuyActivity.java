@@ -3,6 +3,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputFilter;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +22,8 @@ import com.zzy.common.model.bean.Goods;
 import com.zzy.business.presenter.GoodsPresenter;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.constants.ParamConstants;
+import com.zzy.common.utils.InputFilter.EmojiExcludeFilter;
+import com.zzy.common.utils.InputFilter.LengthFilter;
 import com.zzy.common.widget.BannerHolderView;
 import com.zzy.common.widget.MyEditText;
 import com.zzy.common.widget.PopupEditDialog;
@@ -78,6 +81,11 @@ public class GoodsDetailBuyActivity extends BaseTitleAndBottomBarActivity
         etDesc = findViewById(R.id.etDesc);
         rlMsg = findViewById(R.id.rlMsg);
         etMsg = findViewById(R.id.etMsg);
+
+        etMsg.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(500)}
+        );
 
         btnShare = findViewById(R.id.btnShare);
         btnCall = findViewById(R.id.btnCall);

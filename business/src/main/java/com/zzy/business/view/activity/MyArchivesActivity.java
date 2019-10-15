@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.InputFilter;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -21,6 +22,8 @@ import com.zzy.common.adapter.RecyclerItemClickListener;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.model.bean.Archives;
 import com.zzy.common.model.bean.Image;
+import com.zzy.common.utils.InputFilter.EmojiExcludeFilter;
+import com.zzy.common.utils.InputFilter.LengthFilter;
 import com.zzy.common.widget.TagEditDialog;
 import com.zzy.commonlib.log.MyLog;
 import com.zzy.commonlib.utils.ToastUtils;
@@ -159,6 +162,16 @@ public class MyArchivesActivity extends BaseTitleAndBottomBarActivity
 //        });
         tagAdd = findViewById(R.id.tagAdd);
         tagAdd.setOnClickListener(this);
+
+        etCompanyName.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(200)}
+        );
+        etCompanyScope.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(200)}
+        );
+
     }
 
     @Override

@@ -1,6 +1,8 @@
 package com.zzy.business.view.activity;
 
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,6 +13,8 @@ import com.zzy.business.presenter.MyJobPresenter;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.constants.ParamConstants;
 import com.zzy.common.model.bean.Job;
+import com.zzy.common.utils.InputFilter.EmojiExcludeFilter;
+import com.zzy.common.utils.InputFilter.LengthFilter;
 import com.zzy.commonlib.utils.ToastUtils;
 
 /**
@@ -56,6 +60,42 @@ public class MyJobDetailActivity extends BaseTitleAndBottomBarActivity implement
         etJobContent = findViewById(R.id.etJobContent);
         etJobRequirements = findViewById(R.id.etJobRequirements);
 
+
+        etHeadcount.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(200)}
+        );
+
+        etCompanyName.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(200)}
+        );
+        etJobName.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(200)}
+        );
+        etAddress.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(200)}
+        );
+        etEducation.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(200)}
+        );
+        etContact.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(200)}
+        );
+        etJobContent.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(500)}
+        );
+        etJobRequirements.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(500)}
+        );
+
+
         etCompanyName.setText(bean.getCompanyName());
         etJobName.setText(bean.getJobName());
         etAddress.setText(bean.getAddress());
@@ -89,14 +129,6 @@ public class MyJobDetailActivity extends BaseTitleAndBottomBarActivity implement
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btnUpdate){
-            if(bean.getSalaryMin()!=null
-                    &&bean.getSalaryMin()!=null
-            ){
-                if(Float.valueOf(bean.getSalaryMin())>Float.valueOf(bean.getSalaryMax())){
-                    ToastUtils.showShort("起始薪资不得大于最高薪资");
-                    return;
-                }
-            }
             bean.setCompanyName(etCompanyName.getText().toString().trim());
             bean.setJobName(etJobName.getText().toString().trim());
             bean.setAddress(etAddress.getText().toString().trim());
@@ -109,6 +141,49 @@ public class MyJobDetailActivity extends BaseTitleAndBottomBarActivity implement
             bean.setFrom(etAddress.getText().toString().trim());
             bean.setJobContent(etJobContent.getText().toString().trim());
             bean.setJobRequirements(etJobRequirements.getText().toString().trim());
+
+            if(TextUtils.isEmpty(bean.getCompanyName())){
+                ToastUtils.showShort("请填写单位名称");
+                return;
+            }
+            if(TextUtils.isEmpty(bean.getJobName())){
+                ToastUtils.showShort("请填写岗位名称");
+                return;
+            }
+            if(TextUtils.isEmpty(bean.getAddress())){
+                ToastUtils.showShort("请填写工作地址");
+                return;
+            }
+            if(TextUtils.isEmpty(bean.getEducation())){
+                ToastUtils.showShort("请填写学历要求");
+                return;
+            }
+            if(TextUtils.isEmpty(bean.getSalaryMax())
+                    ||TextUtils.isEmpty(bean.getSalaryMin())
+            ){
+                ToastUtils.showShort("请填写职位薪资");
+                return;
+            }
+            if(TextUtils.isEmpty(bean.getPhone())){
+                ToastUtils.showShort("请填写联系电话");
+                return;
+            }
+            if(TextUtils.isEmpty(bean.getContact())){
+                ToastUtils.showShort("请填写联系人");
+                return;
+            }
+            if(TextUtils.isEmpty(bean.getJobRequirements())){
+                ToastUtils.showShort("请填写工作要求");
+                return;
+            }
+            if(TextUtils.isEmpty(bean.getJobContent())){
+                ToastUtils.showShort("请填写岗位要求");
+                return;
+            }
+            if(Float.valueOf(bean.getSalaryMin())>Float.valueOf(bean.getSalaryMax())){
+                ToastUtils.showShort("起始薪资不得大于最高薪资");
+                return;
+            }
             presenter.update(bean);
         }else if(v.getId() == R.id.btnStop){
             presenter.stop(id);

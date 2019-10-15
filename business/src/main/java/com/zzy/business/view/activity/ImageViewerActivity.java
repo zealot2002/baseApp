@@ -1,8 +1,11 @@
 package com.zzy.business.view.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.util.TimeUtils;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,14 +16,19 @@ import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
 import com.bigkoo.convenientbanner.listener.OnPageChangeListener;
+import com.soundcloud.android.crop.Crop;
 import com.zzy.business.R;
 import com.zzy.common.base.BaseAppActivity;
 import com.zzy.common.constants.ParamConstants;
 import com.zzy.common.glide.ImageLoader;
+import com.zzy.common.utils.CommonUtils;
 import com.zzy.common.utils.StatusBarUtils;
+import com.zzy.commonlib.utils.AppUtils;
+import com.zzy.commonlib.utils.ToastUtils;
 
+import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
+
 
 
 /*
@@ -98,7 +106,7 @@ public class ImageViewerActivity extends BaseAppActivity implements View.OnClick
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.tvCrop){
-
+            gotoCrop();
         }else if(v.getId() == R.id.tvDel){
             dataList.remove(curPosition);
             curPosition = 0;
@@ -108,6 +116,20 @@ public class ImageViewerActivity extends BaseAppActivity implements View.OnClick
         }
     }
 
+    private void gotoCrop() {
+        Uri source = Uri.fromFile(new File(dataList.get(curPosition)));
+        Uri destination = Uri.fromFile(new File(getCacheDir(),System.currentTimeMillis() +"_cropped.jpg"));
+            Crop.of(source, destination).withAspect(200,150).start(this);
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == Crop.REQUEST_CROP && resultCode == RESULT_OK) {
+            Uri uri = Crop.getOutput(data);
+            String cropFile = uri.getPath();
+            dataList.set(curPosition,cropFile);
+            updateViews();
+        }
+    }
     public class BannerHolderView extends Holder<String> {
         private ImageView ivPic;
         private int errResId;

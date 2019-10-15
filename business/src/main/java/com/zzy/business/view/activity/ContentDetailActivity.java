@@ -3,6 +3,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -22,6 +23,8 @@ import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.constants.CommonConstants;
 import com.zzy.common.constants.ParamConstants;
 import com.zzy.common.utils.CommonUtils;
+import com.zzy.common.utils.InputFilter.EmojiExcludeFilter;
+import com.zzy.common.utils.InputFilter.LengthFilter;
 import com.zzy.common.widget.PopupEditDialog;
 import com.zzy.common.widget.recycleAdapter.MyMultiRecycleAdapter;
 import com.zzy.common.widget.recycleAdapter.OnLoadMoreListener;
@@ -99,6 +102,12 @@ public class ContentDetailActivity extends BaseTitleAndBottomBarActivity
         rlLike = findViewById(R.id.rlLike);
         rlMsg = findViewById(R.id.rlMsg);
         etMsg = findViewById(R.id.etMsg);
+
+        etMsg.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(500)}
+        );
+
         tvSubmit = findViewById(R.id.tvSubmit);
 //        webView.loadData(testHtml,"text/html","utf-8");
         CommonUtils.webLoadData(webView,bean.getContent());

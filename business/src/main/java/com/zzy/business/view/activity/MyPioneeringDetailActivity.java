@@ -1,6 +1,7 @@
 package com.zzy.business.view.activity;
 
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +16,8 @@ import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.constants.ParamConstants;
 import com.zzy.common.glide.ImageLoader;
 import com.zzy.common.model.bean.Pioneering;
+import com.zzy.common.utils.InputFilter.EmojiExcludeFilter;
+import com.zzy.common.utils.InputFilter.LengthFilter;
 import com.zzy.commonlib.utils.ToastUtils;
 
 /**
@@ -56,6 +59,15 @@ public class MyPioneeringDetailActivity extends BaseTitleAndBottomBarActivity
         etContent = findViewById(R.id.etContent);
         etPhone = findViewById(R.id.etPhone);
         etContact = findViewById(R.id.etContact);
+
+        etContact.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(500)}
+        );
+        etContent.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(500)}
+        );
 
         rlSkill1 = findViewById(R.id.rlSkill1);
         rlSkill2 = findViewById(R.id.rlSkill2);

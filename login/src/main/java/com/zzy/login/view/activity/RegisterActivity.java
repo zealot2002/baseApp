@@ -5,6 +5,7 @@ import android.os.CountDownTimer;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.InputFilter;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -26,6 +27,8 @@ import com.zzy.common.adapter.RecyclerItemClickListener;
 import com.zzy.common.base.BaseAppActivity;
 import com.zzy.common.model.bean.Archives;
 import com.zzy.common.model.bean.Image;
+import com.zzy.common.utils.InputFilter.EmojiExcludeFilter;
+import com.zzy.common.utils.InputFilter.LengthFilter;
 import com.zzy.common.utils.StatusBarUtils;
 import com.zzy.common.widget.LoadingHelper;
 import com.zzy.common.widget.TagEditDialog;
@@ -134,6 +137,21 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
         rlBirthday.setOnClickListener(this);
         btnNext.setOnClickListener(this);
         tvSendSms.setOnClickListener(this);
+
+
+        etName.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(200)}
+        );
+        etIdNo.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(200)}
+        );
+
+        etAddress.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(500)}
+        );
 
         setupSpinner();
     }
@@ -422,6 +440,17 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
         lCompany = findViewById(R.id.lCompany);
         etCompanyName = findViewById(R.id.etCompanyName);
         etCompanyScope = findViewById(R.id.etCompanyScope);
+
+        etCompanyName.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(500)}
+        );
+
+        etCompanyScope.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(500)}
+        );
+
         setupPhotoPicker();
 
         btnYes = findViewById(R.id.btnYes);

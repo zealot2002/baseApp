@@ -1,6 +1,7 @@
 package com.zzy.business.view.activity;
 import android.os.Bundle;
 import android.text.InputFilter;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -58,33 +59,38 @@ public class JobNewActivity extends BaseTitleAndBottomBarActivity implements Vie
         etJobContent = findViewById(R.id.etJobContent);
         etJobRequirements = findViewById(R.id.etJobRequirements);
 
+        etHeadcount.setFilters(new InputFilter[]{
+                new EmojiExcludeFilter(),
+                new LengthFilter(200)}
+        );
+
         etCompanyName.setFilters(new InputFilter[]{
                 new EmojiExcludeFilter(),
-                new LengthFilter(50)}
+                new LengthFilter(200)}
         );
         etJobName.setFilters(new InputFilter[]{
                 new EmojiExcludeFilter(),
-                new LengthFilter(50)}
+                new LengthFilter(200)}
         );
         etAddress.setFilters(new InputFilter[]{
                 new EmojiExcludeFilter(),
-                new LengthFilter(50)}
+                new LengthFilter(200)}
         );
         etEducation.setFilters(new InputFilter[]{
                 new EmojiExcludeFilter(),
-                new LengthFilter(50)}
+                new LengthFilter(200)}
         );
         etContact.setFilters(new InputFilter[]{
                 new EmojiExcludeFilter(),
-                new LengthFilter(50)}
+                new LengthFilter(200)}
         );
         etJobContent.setFilters(new InputFilter[]{
                 new EmojiExcludeFilter(),
-                new LengthFilter(200)}
+                new LengthFilter(500)}
         );
         etJobRequirements.setFilters(new InputFilter[]{
                 new EmojiExcludeFilter(),
-                new LengthFilter(200)}
+                new LengthFilter(500)}
         );
 
         btnOk = findViewById(R.id.btnOk);
@@ -108,13 +114,47 @@ public class JobNewActivity extends BaseTitleAndBottomBarActivity implements Vie
                 bean.setSalaryMin(etSalaryMin.getText().toString().trim());
                 bean.setSalaryMax(etSalaryMax.getText().toString().trim());
 
-                if(bean.getSalaryMin()!=null
-                        &&bean.getSalaryMin()!=null
+                if(TextUtils.isEmpty(bean.getCompanyName())){
+                    ToastUtils.showShort("请填写单位名称");
+                    return;
+                }
+                if(TextUtils.isEmpty(bean.getJobName())){
+                    ToastUtils.showShort("请填写岗位名称");
+                    return;
+                }
+                if(TextUtils.isEmpty(bean.getAddress())){
+                    ToastUtils.showShort("请填写工作地址");
+                    return;
+                }
+                if(TextUtils.isEmpty(bean.getEducation())){
+                    ToastUtils.showShort("请填写学历要求");
+                    return;
+                }
+                if(TextUtils.isEmpty(bean.getSalaryMax())
+                        ||TextUtils.isEmpty(bean.getSalaryMin())
                 ){
-                    if(Float.valueOf(bean.getSalaryMin())>Float.valueOf(bean.getSalaryMax())){
-                        ToastUtils.showShort("起始薪资不得大于最高薪资");
-                        return;
-                    }
+                    ToastUtils.showShort("请填写职位薪资");
+                    return;
+                }
+                if(TextUtils.isEmpty(bean.getPhone())){
+                    ToastUtils.showShort("请填写联系电话");
+                    return;
+                }
+                if(TextUtils.isEmpty(bean.getContact())){
+                    ToastUtils.showShort("请填写联系人");
+                    return;
+                }
+                if(TextUtils.isEmpty(bean.getJobRequirements())){
+                    ToastUtils.showShort("请填写工作要求");
+                    return;
+                }
+                if(TextUtils.isEmpty(bean.getJobContent())){
+                    ToastUtils.showShort("请填写岗位要求");
+                    return;
+                }
+                if(Float.valueOf(bean.getSalaryMin())>Float.valueOf(bean.getSalaryMax())){
+                    ToastUtils.showShort("起始薪资不得大于最高薪资");
+                    return;
                 }
                 presenter.create(bean);
             }
