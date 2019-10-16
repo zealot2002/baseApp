@@ -37,7 +37,7 @@ public class FriendListParser implements HInterface.JsonParser {
                 FriendsCircle bean = new FriendsCircle();
                 bean.setCreateTime(infoObj.getString("RELEASE_DATE"));
                 bean.setLookNum(infoObj.getString("TOTAL_BROWSE"));
-                bean.setContent(infoObj.getString("FORUM_NAME"));
+                bean.setContent(infoObj.getString("RELEASE_TEXT"));
                 bean.setAddress(infoObj.getString("RELEASE_LOCATION"));
                 bean.setAvatar(HttpConstants.SERVER_ADDRESS+"/"+infoObj.getString("HEAD_PIC_ADDR"));
                 bean.setOwner(infoObj.getString("RELEASE_PERSON"));

@@ -3,6 +3,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -98,13 +99,36 @@ public class MyCommentActivity extends BaseTitleAndBottomBarActivity implements 
                     try{
                         Bundle bundle = new Bundle();
                         Comment bean = dataList.get(position);
+                        if(TextUtils.isEmpty(bean.getContentId())){
+                            ToastUtils.showLong("原文ID为空");
+                            return;
+                        }
                         bundle.putInt(ParamConstants.ID,Integer.valueOf(bean.getContentId()));
+
+                        if(bean.getType().equals("朋友圈")){
+                            startActivity(FriendsDetailActivity.class,bundle);
+                            return;
+                        }
+                        if(bean.getType().equals("资讯评论")){
+                            startActivity(GetRichInfoDetailActivity.class,bundle);
+                            return;
+                        }
+                        if(bean.getType().equals("求购评论")
+                        ){
+                            startActivity(GoodsDetailBuyActivity.class,bundle);
+                            return;
+                        }
+                        if(bean.getType().equals("售卖评论")
+                        ){
+                            startActivity(GoodsDetailSellActivity.class,bundle);
+                            return;
+                        }
 
                         if(bean.getType().equals("求助")){
                             bundle.putInt(ParamConstants.TYPE,CommonConstants.CONTENT_HELP);
                         }else if(bean.getType().equals("意见")){
                             bundle.putInt(ParamConstants.TYPE,CommonConstants.CONTENT_IDEA);
-                        }else if(bean.getType().equals("经验")){
+                        }else if(bean.getType().equals("分享经验")){
                             bundle.putInt(ParamConstants.TYPE,CommonConstants.CONTENT_EXPERIENCE);
                         }
                         SCM.getInstance().req(MyCommentActivity.this, ActionConstants.ENTRY_CONTENT_DETAIL_ACTIVITY_ACTION,bundle);

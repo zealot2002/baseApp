@@ -36,13 +36,20 @@
         android:layout_marginTop="10dip"
         android:textColor="#000"
         android:textSize="15sp"/>
-
+    <TextView
+        android:id="@+id/t_all"
+        android:text="全文"
+        style="@style/tv_style_blue_14"
+        android:layout_below="@+id/t_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="-10dp"
+        />
     <com.zzy.business.view.other.MessagePicturesLayout
         android:id="@+id/l_pictures"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/t_content"
-        android:layout_marginTop="10dip"/>
+        android:layout_marginTop="20dip"/>
 
     <LinearLayout
         android:id="@+id/lComment"
