@@ -19,6 +19,7 @@ import com.zzy.business.presenter.ContentPresenter;
 import com.zzy.business.view.itemViewDelegate.FriendDelegate;
 import com.zzy.business.view.itemViewDelegate.GoodsDelegate;
 import com.zzy.common.constants.CommonConstants;
+import com.zzy.common.constants.ParamConstants;
 import com.zzy.common.model.HttpProxy;
 import com.zzy.common.model.bean.Content;
 import com.zzy.common.model.bean.FriendsCircle;
@@ -224,7 +225,15 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
 
                 @Override
                 public void onComment(int position) {
-//                presenter.createComment(Integer.valueOf(dataList.get(position).getId()),);
+                    //go to detail
+                    try{
+                        Bundle bundle = new Bundle();
+                        bundle.putInt(ParamConstants.ID,Integer.valueOf(dataList.get(position).getId()));
+                        startActivity(FriendsDetailActivity.class,bundle);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                        ToastUtils.showLong(e.toString());
+                    }
                 }
 
                 @Override
@@ -295,9 +304,11 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
 
     @Override
     public void onBackPressed() {
-        // 没有使用helper初始化
-        if (!vImageWatcher.handleBackPressed()) {
-            super.onBackPressed();
+        if(vImageWatcher!=null){
+            // 没有使用helper初始化
+            if (!vImageWatcher.handleBackPressed()) {
+                super.onBackPressed();
+            }
         }
     }
 

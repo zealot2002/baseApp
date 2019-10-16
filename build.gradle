@@ -3,8 +3,8 @@
 buildscript {
     ext {
         gradle_tool = "3.0.1"
-        versionCode = 4
-        versionName = "1.0.9"
+        versionCode = 6
+        versionName = "1.1.2"
         buildToolsVersion = "26.0.2"
         compileSdkVersion = 26
         minSdkVersion = 19

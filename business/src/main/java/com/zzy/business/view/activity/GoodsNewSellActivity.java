@@ -189,10 +189,13 @@ public class GoodsNewSellActivity extends BaseTitleAndBottomBarActivity
                                     .setPreviewEnabled(true)
                                     .start(GoodsNewSellActivity.this);
                         } else {
-                            PhotoPreview.builder()
-                                    .setPhotos(selectedPhotos)
-                                    .setCurrentItem(position)
-                                    .start(GoodsNewSellActivity.this);
+                            Bundle bundle = new Bundle();
+                            bundle.putStringArrayList(ParamConstants.DATA,selectedPhotos);
+                            bundle.putInt(ParamConstants.INDEX,position);
+                            Intent intent = new Intent();
+                            intent.setClass(GoodsNewSellActivity.this,ImageViewerActivity.class);
+                            intent.putExtras(bundle);
+                            startActivityForResult(intent,ImageViewerActivity.REQUEST_CODE);
                         }
                     }
                 }));
@@ -206,6 +209,17 @@ public class GoodsNewSellActivity extends BaseTitleAndBottomBarActivity
             List<String> photos = null;
             if (data != null) {
                 photos = data.getStringArrayListExtra(PhotoPicker.KEY_SELECTED_PHOTOS);
+            }
+            selectedPhotos.clear();
+            if (photos != null) {
+                selectedPhotos.addAll(photos);
+            }
+            photoAdapter.notifyDataSetChanged();
+        }else if (resultCode == RESULT_OK &&
+                (requestCode == ImageViewerActivity.REQUEST_CODE)) {
+            List<String> photos = null;
+            if (data != null) {
+                photos = data.getStringArrayListExtra(ParamConstants.DATA);
             }
             selectedPhotos.clear();
             if (photos != null) {

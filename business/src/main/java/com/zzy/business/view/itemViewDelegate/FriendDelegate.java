@@ -70,7 +70,7 @@ public class FriendDelegate implements ItemViewDelegate<FriendsCircle> {
             lPictures.setCallback(mCallback);
 
             Glide.with(holder.itemView.getContext()).load(bean.getAvatar()).into(iAvatar);
-            tNickname.setText(bean.getAddress());
+            tNickname.setText(bean.getOwner());
             tTime.setText(bean.getCreateTime());
             tvCommentNum.setText(bean.getLookNum());
             tvLikeNum.setText(bean.getLikeNum());

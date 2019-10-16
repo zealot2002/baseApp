@@ -11,6 +11,10 @@ import java.util.List;
 public class Content {
     private int id;
     private int userId;
+    private String userName;
+    private String userHeadUrl;
+    private String location;
+
     private String title;
     private boolean isPlaceTop;
     private String from;
@@ -134,5 +138,29 @@ public class Content {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserHeadUrl() {
+        return userHeadUrl;
+    }
+
+    public void setUserHeadUrl(String userHeadUrl) {
+        this.userHeadUrl = userHeadUrl;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

@@ -36,12 +36,16 @@ public class ContentParser implements HInterface.JsonParser {
             bean.setLikeNum(dataObj.getString("LIKE_TOTAL"));
             bean.setUserId(dataObj.getInt("RELEASE_PERSON_ID"));
 
+            if(dataObj.has("RELEASE_PERSON"))  bean.setUserName(dataObj.getString("RELEASE_PERSON"));
+            if(dataObj.has("HEAD_PIC_ADDR"))  bean.setUserHeadUrl(HttpConstants.SERVER_ADDRESS+"/"+dataObj.getString("HEAD_PIC_ADDR"));
+            if(dataObj.has("RELEASE_LOCATION"))  bean.setLocation(dataObj.getString("RELEASE_LOCATION"));
+
             JSONArray array = dataObj.getJSONArray("IMAGES");
             for(int i=0;i<array.length();i++) {
-//                JSONObject imgObj = array.getJSONObject(i);
+                JSONObject imgObj = array.getJSONObject(i);
                 Image image = new Image();
                 image.setName("");
-                image.setPath(array.getString(i));
+                image.setPath(HttpConstants.SERVER_ADDRESS+"/"+imgObj.getString("PIC_ADDR"));
                 bean.getImgList().add(image);
             }
             JSONArray comArr = dataObj.getJSONArray("COMMENT");

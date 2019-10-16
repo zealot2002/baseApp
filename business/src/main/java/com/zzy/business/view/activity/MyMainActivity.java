@@ -1,11 +1,13 @@
 package com.zzy.business.view.activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.soundcloud.android.crop.Crop;
 import com.zzy.business.R;
 import com.zzy.business.contract.MineContract;
 import com.zzy.business.presenter.MinePresenter;
@@ -18,6 +20,7 @@ import com.zzy.common.model.bean.User;
 import com.zzy.common.widget.PopupDialog;
 import com.zzy.commonlib.utils.ToastUtils;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -163,14 +166,31 @@ public class MyMainActivity extends BaseTitleAndBottomBarActivity
             if (photos != null) {
                 selectedPhotos.addAll(photos);
             }
-            Image image = new Image();
-            String s = selectedPhotos.get(0);
-            image.setPath(s);
-            image.setName(s.substring(s.lastIndexOf('/')));
-            presenter.uploadUserHead(image);
+            gotoCrop(selectedPhotos.get(0));
+//            Bundle bundle = new Bundle();
+//            bundle.putStringArrayList(ParamConstants.DATA,selectedPhotos);
+//            bundle.putInt(ParamConstants.INDEX,0);
+//            Intent intent = new Intent();
+//            intent.setClass(MyMainActivity.this,ImageViewerActivity.class);
+//            intent.putExtras(bundle);
+//            startActivityForResult(intent,ImageViewerActivity.REQUEST_CODE);
+        }else if (requestCode == Crop.REQUEST_CROP && resultCode == RESULT_OK) {
+            Uri uri = Crop.getOutput(data);
+            String cropFile = uri.getPath();
+            uploadHeader(cropFile);
         }
     }
-
+    private void gotoCrop(String filePath) {
+        Uri source = Uri.fromFile(new File(filePath));
+        Uri destination = Uri.fromFile(new File(getCacheDir(),System.currentTimeMillis() +"_cropped.jpg"));
+        Crop.of(source, destination).withAspect(150,150).start(this);
+    }
+    private void uploadHeader(String filePath){
+        Image image = new Image();
+        image.setPath(filePath);
+        image.setName(filePath.substring(filePath.lastIndexOf('/')));
+        presenter.uploadUserHead(image);
+    }
 
     @Override
     public void onSuccess() {

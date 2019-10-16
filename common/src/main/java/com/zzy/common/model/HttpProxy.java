@@ -561,7 +561,6 @@ public class HttpProxy {
         reqBody.put("TOKEN", CommonUtils.getToken());
         reqBody.put("FORUM_NAME",bean.getTitle());
         reqBody.put("RELEASE_TEXT", bean.getContent());
-
         JSONArray imgArr = new JSONArray();
         for(Image image:bean.getImgList()){
             JSONObject obj = new JSONObject();

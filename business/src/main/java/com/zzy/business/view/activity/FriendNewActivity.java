@@ -65,10 +65,9 @@ public class FriendNewActivity extends BaseTitleAndBottomBarActivity
 
     private void setupViews() {
         etContent = findViewById(R.id.etContent);
-
         etContent.setFilters(new InputFilter[]{
                 new EmojiExcludeFilter(),
-                new LengthFilter(200)}
+                new LengthFilter(500)}
         );
         btnOk = findViewById(R.id.btnOk);
         btnOk.setOnClickListener(this);
@@ -103,7 +102,6 @@ public class FriendNewActivity extends BaseTitleAndBottomBarActivity
                         }
                     }
                 }));
-
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
