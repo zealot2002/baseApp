@@ -61,6 +61,7 @@ public class GoodsParser implements HInterface.JsonParser {
             for(int i=0;i<commentArray.length();i++) {
                 JSONObject infoObj = commentArray.getJSONObject(i);
                 Comment comment = new Comment();
+                comment.setUserId(infoObj.getInt("COMMENT_PERSON_ID"));
                 comment.setContent(infoObj.getString("COMMENT_TEXT"));
                 comment.setUserName(infoObj.getString("COMMENT_PERSON"));
                 comment.setUserHeadUrl(HttpConstants.SERVER_ADDRESS+"/"+infoObj.getString("HEAD_PIC_ADDR"));

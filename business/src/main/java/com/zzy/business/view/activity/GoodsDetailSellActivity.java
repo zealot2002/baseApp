@@ -149,8 +149,13 @@ public class GoodsDetailSellActivity extends BaseTitleAndBottomBarActivity
             adapter.addItemViewDelegate(new ContentCommentDelegate(bean.getUserId(),new ContentCommentDelegate.Listener() {
                 @Override
                 public void onReply(int position) {
-                    curCommitId = Integer.valueOf(bean.getCommentList().get(position).getId());
-                    showRlMsg(2);
+                    try{
+                        curCommitId = Integer.valueOf(bean.getCommentList().get(position).getId());
+                        showRlMsg(2);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                        ToastUtils.showLong("评论id为空");
+                    }
                 }
             }));
             rvCommentList.setAdapter(adapter);
