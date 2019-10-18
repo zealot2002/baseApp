@@ -11,6 +11,7 @@ import java.util.List;
 
 public class Goods implements Serializable {
     private int id;
+    private String userId;
     private String name;
     private String price;
     private String phone;
@@ -130,5 +131,13 @@ public class Goods implements Serializable {
 
     public void setCommentList(List<Comment> commentList) {
         this.commentList = commentList;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

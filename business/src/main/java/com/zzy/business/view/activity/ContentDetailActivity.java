@@ -147,7 +147,7 @@ public class ContentDetailActivity extends BaseTitleAndBottomBarActivity
 
             /*adapter*/
             adapter = new MyMultiRecycleAdapter(this,new ArrayList<Comment>(),false);
-            adapter.addItemViewDelegate(new ContentCommentDelegate(id+"",new ContentCommentDelegate.Listener() {
+            adapter.addItemViewDelegate(new ContentCommentDelegate(bean.getUserId()+"",new ContentCommentDelegate.Listener() {
                 @Override
                 public void onReply(int position) {
                     curCommitId = Integer.valueOf(bean.getCommentList().get(position).getId());

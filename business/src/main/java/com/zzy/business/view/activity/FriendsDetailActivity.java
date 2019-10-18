@@ -152,7 +152,7 @@ public class FriendsDetailActivity extends BaseTitleAndBottomBarActivity impleme
 
             /*adapter*/
             adapter = new MyMultiRecycleAdapter(this,new ArrayList<Comment>(),false);
-            adapter.addItemViewDelegate(new ContentCommentDelegate(id+"",new ContentCommentDelegate.Listener() {
+            adapter.addItemViewDelegate(new ContentCommentDelegate(bean.getUserId()+"",new ContentCommentDelegate.Listener() {
                 @Override
                 public void onReply(int position) {
                     curCommitId = Integer.valueOf(bean.getCommentList().get(position).getId());
@@ -177,6 +177,9 @@ public class FriendsDetailActivity extends BaseTitleAndBottomBarActivity impleme
             uris.add(uri);
         }
         lPictures.set(uris,uris);
+
+        setupCommentList();
+
         adapter.setNewData(bean.getCommentList());
     }
     private void setupViews() {
@@ -225,7 +228,6 @@ public class FriendsDetailActivity extends BaseTitleAndBottomBarActivity impleme
                     }
                 }
             });
-            setupCommentList();
         }
     }
 

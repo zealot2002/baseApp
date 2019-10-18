@@ -33,6 +33,8 @@ public class GoodsParser implements HInterface.JsonParser {
 
             if(dataObj.has("SALE_CONTENT")) bean.setDesc(dataObj.getString("SALE_CONTENT"));
 
+            if(dataObj.has("RELEASE_PEOPLE_ID")) bean.setUserId(dataObj.getString("RELEASE_PEOPLE_ID"));
+
             String type = "买";
             if(dataObj.has("SALE_TYPE")) type = dataObj.getString("SALE_TYPE");
             if(type.equals("买")){
@@ -61,7 +63,7 @@ public class GoodsParser implements HInterface.JsonParser {
                 Comment comment = new Comment();
                 comment.setContent(infoObj.getString("COMMENT_TEXT"));
                 comment.setUserName(infoObj.getString("COMMENT_PERSON"));
-                comment.setUserHeadUrl(infoObj.getString("HEAD_PIC_ADDR"));
+                comment.setUserHeadUrl(HttpConstants.SERVER_ADDRESS+"/"+infoObj.getString("HEAD_PIC_ADDR"));
                 comment.setReplyContent(infoObj.getString("REVIEW_TEXT"));
 
                 bean.getCommentList().add(comment);

@@ -34,7 +34,9 @@ import com.zzy.common.utils.StatusBarUtils;
 import com.zzy.common.widget.PopupEditDialog;
 import com.zzy.common.widget.recycleAdapter.MyLinearLayoutManager;
 import com.zzy.common.widget.recycleAdapter.MyMultiRecycleAdapter;
+import com.zzy.common.widget.recycleAdapter.OnItemChildClickListener;
 import com.zzy.common.widget.recycleAdapter.OnLoadMoreListener;
+import com.zzy.common.widget.recycleAdapter.ViewHolder;
 import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.commonlib.utils.NetUtils;
@@ -225,6 +227,27 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
 
                 @Override
                 public void onComment(int position) {
+//                    //go to detail
+//                    try{
+//                        Bundle bundle = new Bundle();
+//                        bundle.putInt(ParamConstants.ID,Integer.valueOf(dataList.get(position).getId()));
+//                        startActivity(FriendsDetailActivity.class,bundle);
+//                    }catch (Exception e){
+//                        e.printStackTrace();
+//                        ToastUtils.showLong(e.toString());
+//                    }
+                }
+
+                @Override
+                public void onLike(int position) {
+                    presenter.like(Integer.valueOf(dataList.get(position).getId()));
+                }
+            },this));
+            rvDataList.setAdapter(adapter);
+
+            adapter.setOnItemChildClickListener(R.id.rootView, new OnItemChildClickListener() {
+                @Override
+                public void onItemChildClick(ViewHolder viewHolder, Object data, int position) {
                     //go to detail
                     try{
                         Bundle bundle = new Bundle();
@@ -235,13 +258,7 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
                         ToastUtils.showLong(e.toString());
                     }
                 }
-
-                @Override
-                public void onLike(int position) {
-                    presenter.like(Integer.valueOf(dataList.get(position).getId()));
-                }
-            },this));
-            rvDataList.setAdapter(adapter);
+            });
 //
             // **************   xml 方式加载  ********  推荐使用后面demo的iwHelper
 

@@ -16,10 +16,10 @@ public class ContentCommentDelegate implements ItemViewDelegate<Comment> {
     public interface Listener{
         void onReply(int position);
     }
-    private TextView tvUser,tvContent,tvReplyContent,tvReply,tvOwner;
+//    private TextView tvUser,tvContent,tvReplyContent,tvReply,tvOwner;
     private Listener listener;
     private String ownerId;
-    private ImageView ivPic;
+//    private ImageView ivPic;
 
     public ContentCommentDelegate(String ownerId,Listener listener) {
         this.listener = listener;
@@ -40,12 +40,12 @@ public class ContentCommentDelegate implements ItemViewDelegate<Comment> {
     @Override
     public void convert(ViewHolder holder, Comment bean, final int position) {
         try{
-            tvUser = holder.itemView.findViewById(R.id.tvUser);
-            tvContent = holder.itemView.findViewById(R.id.tvContent);
-            tvReplyContent = holder.itemView.findViewById(R.id.tvReplyContent);
-            tvReply = holder.itemView.findViewById(R.id.tvReply);
-            tvOwner = holder.itemView.findViewById(R.id.tvOwner);
-            ivPic = holder.itemView.findViewById(R.id.ivPic);
+            TextView tvUser = holder.itemView.findViewById(R.id.tvUser);
+            TextView tvContent = holder.itemView.findViewById(R.id.tvContent);
+            TextView tvReplyContent = holder.itemView.findViewById(R.id.tvReplyContent);
+            TextView tvReply = holder.itemView.findViewById(R.id.tvReply);
+            TextView tvOwner = holder.itemView.findViewById(R.id.tvOwner);
+            ImageView ivPic = holder.itemView.findViewById(R.id.ivPic);
             tvUser.setText(bean.getUserName());
             tvContent.setText(bean.getContent());
 
@@ -64,7 +64,7 @@ public class ContentCommentDelegate implements ItemViewDelegate<Comment> {
             //2，如果用户是帖子作者，用户可以留言
             //   用户可以回复非自己发的留言
             if(CommonUtils.getUserId().equals(ownerId)//是帖子的作者
-                    &&!CommonUtils.getUserId().equals(bean.getUserId())//并且不是留言的人
+                    &&!CommonUtils.getUserId().equals(bean.getUserId()+"")//并且不是留言的人
             ){
                 //显示留言按钮
                 tvReply.setVisibility(View.VISIBLE);

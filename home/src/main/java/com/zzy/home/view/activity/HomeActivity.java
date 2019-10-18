@@ -261,7 +261,7 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
                     }
                     @Override
                     public int getLayoutId() {
-                        return R.layout.banner_item;
+                        return R.layout.banner_item_fitxy;
                     }
                 }, list);
     }
