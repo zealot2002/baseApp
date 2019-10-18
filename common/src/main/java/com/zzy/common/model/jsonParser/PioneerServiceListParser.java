@@ -65,7 +65,7 @@ public class PioneerServiceListParser implements HInterface.JsonParser {
                     bean.setType(CommonConstants.PIONEER_SERVICE_PIONEER_HELP);
                     if(pO.has("FORUM_NAME")) bean.setTv1(pO.getString("FORUM_NAME"));
                     if(pO.has("RELEASE_PERSON")) bean.setTv3(pO.getString("RELEASE_PERSON"));
-                    if(pO.has("RELEASE_TIME")) bean.setTv3(pO.getString("RELEASE_TIME"));
+                    if(pO.has("RELEASE_DATE")) bean.setTv4(pO.getString("RELEASE_DATE"));
                 }
 
                 dataList.add(bean);

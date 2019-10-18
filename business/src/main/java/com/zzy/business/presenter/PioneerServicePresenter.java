@@ -105,6 +105,20 @@ public class PioneerServicePresenter implements PioneerServiceContract.Presenter
                         }
                     }
                 });
+            }else if(type.equals("资源分布")){
+                HttpProxy.getResList(pageNum,new CommonDataCallback() {
+                    @Override
+                    public void callback(int result, Object o, Object o1) {
+                        view.closeLoading();
+                        if (result == HConstant.SUCCESS) {
+                            view.updateUI(o);
+                        }else if(result == HConstant.FAIL
+                                ||result == HConstant.ERROR
+                        ){
+                            handleErrs((String) o);
+                        }
+                    }
+                });
             }else if(type.equals("创业专家")){
                 HttpProxy.getExpertList(pageNum,new CommonDataCallback() {
                     @Override

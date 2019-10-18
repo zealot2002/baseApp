@@ -104,6 +104,10 @@ public class PioneerServiceActivity extends BaseTitleAndBottomBarActivity
                         //致富信息
                         bundle.putString(ParamConstants.TITLE,"政策汇编");
                         startActivity(GetRichInfoDetailActivity.class,bundle);
+                    }else if(bean.getType().equals("资源分布")){
+                        //致富信息
+                        bundle.putString(ParamConstants.TITLE,"资源分布");
+                        startActivity(GetRichInfoDetailActivity.class,bundle);
                     }else if(bean.getType().equals(CommonConstants.PIONEER_SERVICE_EXPERT)){
 
                         startActivity(ExpertDetailActivity.class,bundle);
@@ -191,9 +195,6 @@ public class PioneerServiceActivity extends BaseTitleAndBottomBarActivity
                         ||menuList.get(menuIndex).getName().equals("银行对接")
                     ){
                         new PopupDialog.Builder(PioneerServiceActivity.this,"正在开发中...","完成").create();
-                        return;
-                    }else if(menuList.get(menuIndex).getName().equals("资源分布")){
-                        startActivity(IndustrialDistributionActivity.class);
                         return;
                     }
                     reset();

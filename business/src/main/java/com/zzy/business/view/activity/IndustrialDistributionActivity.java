@@ -9,6 +9,8 @@ import android.webkit.WebView;
 
 import com.zzy.business.R;
 import com.zzy.business.view.adapter.GridMenuListAdapter;
+import com.zzy.common.constants.CommonConstants;
+import com.zzy.common.constants.ParamConstants;
 import com.zzy.common.model.HttpProxy;
 import com.zzy.common.model.bean.Industry;
 import com.zzy.business.view.adapter.MenuListAdapter;

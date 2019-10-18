@@ -376,6 +376,18 @@ public class HttpProxy {
                 callback,
                 new PioneerServiceListParser());
     }
+    public static void getResList(int pageNum,final HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", CommonUtils.getToken());
+        reqBody.put("rows", CommonConstants.PAGE_SIZE);
+        reqBody.put("page", pageNum);
+        reqBody.put("NEWS_TYPE", "资源分布");
+        HttpUtils.getInstance().req(
+                HttpConstants.PIONEER_RES_LIST,
+                reqBody,
+                callback,
+                new PioneerServiceListParser());
+    }
     public static void getContentJobList(int pageNum,final HInterface.DataCallback callback) throws Exception {
         JSONObject reqBody = new JSONObject();
         reqBody.put("TOKEN", CommonUtils.getToken());

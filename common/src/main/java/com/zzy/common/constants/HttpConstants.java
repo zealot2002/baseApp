@@ -41,7 +41,9 @@ public class HttpConstants {
     public static final String INDUSTRY_LIST = "/dict_type/selAll.do";
     public static final String INDUSTRY_DETAIL = "/dict_type/selById.do";
 
-
+//    /**************************    资源分布 *******************************/
+//    public static final String INDUSTRY_LIST = "/dict_type/selAll.do";
+//    public static final String INDUSTRY_DETAIL = "/dict_type/selById.do";
 
     /**************************    电话本 *******************************/
     public static final String PB_LIST = "/userinfo/selAllbook.do";
@@ -87,6 +89,7 @@ public class HttpConstants {
     public static final String PIONEER_SERVICE_TYPE_LIST = "/news_information/selAllBusinessTYPE.do";
     public static final String PIONEER_HELP_LIST = "/help_info/selAll.do";
     public static final String PIONEER_ZCHB_LIST = "/news_information/selAll.do";
+    public static final String PIONEER_RES_LIST = "/news_information/selAll.do";
     public static final String PIONEER_EXPERT_LIST = "/userinfo/selAll.do";
 
     public static final String PIONEER_HELP_DETAIL = "/help_info/selHelp_InfoById.do";
