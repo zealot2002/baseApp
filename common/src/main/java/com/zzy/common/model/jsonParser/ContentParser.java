@@ -17,7 +17,6 @@ import org.json.JSONTokener;
 public class ContentParser implements HInterface.JsonParser {
     @Override
     public Object[] parse(String s) throws JSONException {
-        MyLog.e("服务返回:"+s);
         if(s==null){
             throw new JSONException("server return null");
         }
@@ -58,6 +57,7 @@ public class ContentParser implements HInterface.JsonParser {
                 comment.setDate(comObj.getString("COMMENT_RELEASE_TIME"));
                 comment.setContent(comObj.getString("COMMENT_TEXT"));
                 comment.setUserHeadUrl(HttpConstants.SERVER_ADDRESS+"/"+comObj.getString("HEAD_PIC_ADDR"));
+                comment.setReplyContent(comObj.getString("REVIEW_TEXT"));
                 bean.getCommentList().add(comment);
             }
             return new Object[]{HConstant.SUCCESS,bean};

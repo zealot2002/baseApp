@@ -270,10 +270,14 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
                     ToastUtils.showShort("企业用户必须上传相关图片");
                     return;
                 }
-                if(!(btnYes.isChecked()
-                        &&userTypeList.get(spinnerUserType.getSelectedItemPosition()).equals("企业"))){
-                    ToastUtils.showShort("是否企业注册选'是'，则用户类别必须选'企业';" +
-                            "是否企业注册选'否'，则用户类别不能选'企业'");
+                if(btnYes.isChecked()
+                        &&!userTypeList.get(spinnerUserType.getSelectedItemPosition()).equals("企业")){
+                    ToastUtils.showShort("是否企业注册选'是'，则用户类别必须选'企业'");
+                    return;
+                }
+                if(!btnYes.isChecked()
+                        &&userTypeList.get(spinnerUserType.getSelectedItemPosition()).equals("企业")){
+                    ToastUtils.showShort("是否企业注册选'否'，则用户类别不能选'企业'");
                     return;
                 }
                 bean.setIsCompany(btnYes.isChecked()?"是":"否");

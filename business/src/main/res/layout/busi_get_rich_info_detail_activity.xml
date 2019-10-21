@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:background="@color/gray"
     >
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
@@ -18,8 +18,10 @@
             <TextView
                 android:id="@+id/tvTitle"
                 style="@style/tv_style_black1_16"
-                android:layout_marginLeft="@dimen/body_margin"
-                android:layout_marginRight="@dimen/body_margin"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
                 android:layout_marginTop="20dp"
                 android:textStyle="bold"
                 />
@@ -91,5 +93,5 @@
             android:layout_marginLeft="@dimen/body_margin"
             android:visibility="gone"
             />
-    </FrameLayout>
+    </RelativeLayout>
 </ScrollView>

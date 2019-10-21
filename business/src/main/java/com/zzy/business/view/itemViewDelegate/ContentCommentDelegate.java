@@ -65,8 +65,9 @@ public class ContentCommentDelegate implements ItemViewDelegate<Comment> {
             //   用户可以回复非自己发的留言
             if(CommonUtils.getUserId().equals(ownerId)//是帖子的作者
                     &&!CommonUtils.getUserId().equals(bean.getUserId()+"")//并且不是留言的人
+                    &&TextUtils.isEmpty(bean.getReplyContent())//并且没有回复过
             ){
-                //显示留言按钮
+                //显示回复按钮
                 tvReply.setVisibility(View.VISIBLE);
                 tvReply.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -75,7 +76,7 @@ public class ContentCommentDelegate implements ItemViewDelegate<Comment> {
                     }
                 });
             }else{
-                //隐藏留言按钮
+                //隐藏回复按钮
                 tvReply.setVisibility(View.GONE);
             }
 

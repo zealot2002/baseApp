@@ -771,6 +771,17 @@ public class HttpProxy {
                 callback,
                 new CommonParser());
     }
+    public static void scoreGoods(int id,int score,final HInterface.DataCallback callback) throws Exception {
+        JSONObject reqBody = new JSONObject();
+        reqBody.put("TOKEN", CommonUtils.getToken());
+        reqBody.put("SALE_ID", id);
+        reqBody.put("SCORE_NUM", score);
+        HttpUtils.getInstance().req(
+                HttpConstants.GOODS_SCORE,
+                reqBody,
+                callback,
+                new CommonParser());
+    }
     /**********************        我的档案            ***************************/
     public static void getMyArchives(final HInterface.DataCallback callback) throws Exception {
         JSONObject reqBody = new JSONObject();

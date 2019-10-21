@@ -99,12 +99,9 @@ public class MyCommentActivity extends BaseTitleAndBottomBarActivity implements 
                     try{
                         Bundle bundle = new Bundle();
                         Comment bean = dataList.get(position);
-                        if(TextUtils.isEmpty(bean.getContentId())){
-                            ToastUtils.showLong("原文ID为空");
-                            return;
+                        if(!TextUtils.isEmpty(bean.getContentId())){
+                            bundle.putInt(ParamConstants.ID,Integer.valueOf(bean.getContentId()));
                         }
-                        bundle.putInt(ParamConstants.ID,Integer.valueOf(bean.getContentId()));
-
                         if(bean.getType().equals("朋友圈")){
                             startActivity(FriendsDetailActivity.class,bundle);
                             return;
@@ -115,11 +112,13 @@ public class MyCommentActivity extends BaseTitleAndBottomBarActivity implements 
                         }
                         if(bean.getType().equals("求购评论")
                         ){
+                            bundle.putInt(ParamConstants.ID,Integer.valueOf(bean.getGoodsId()));
                             startActivity(GoodsDetailBuyActivity.class,bundle);
                             return;
                         }
                         if(bean.getType().equals("售卖评论")
                         ){
+                            bundle.putInt(ParamConstants.ID,Integer.valueOf(bean.getGoodsId()));
                             startActivity(GoodsDetailSellActivity.class,bundle);
                             return;
                         }

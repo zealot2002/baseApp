@@ -82,57 +82,63 @@ public class GoodsDetailSellActivity extends BaseTitleAndBottomBarActivity
     }
 
     private void setupViews() {
-        etName = findViewById(R.id.etName);
-        etContact = findViewById(R.id.etContact);
-        etPhone = findViewById(R.id.etPhone);
-        etPrice = findViewById(R.id.etPrice);
-        etDesc = findViewById(R.id.etDesc);
-        etAddress = findViewById(R.id.etAddress);
-        etDealWay = findViewById(R.id.etDealWay);
-        rbScore = findViewById(R.id.rbScore);
-        rbScore2 = findViewById(R.id.rbScore2);
-        tvScore = findViewById(R.id.tvScore);
-        tvScore2 = findViewById(R.id.tvScore2);
-        rlMsg = findViewById(R.id.rlMsg);
-        etMsg = findViewById(R.id.etMsg);
+        if(etName == null){
+            etName = findViewById(R.id.etName);
+            etContact = findViewById(R.id.etContact);
+            etPhone = findViewById(R.id.etPhone);
+            etPrice = findViewById(R.id.etPrice);
+            etDesc = findViewById(R.id.etDesc);
+            etAddress = findViewById(R.id.etAddress);
+            etDealWay = findViewById(R.id.etDealWay);
+            rbScore = findViewById(R.id.rbScore);
+            rbScore2 = findViewById(R.id.rbScore2);
+            tvScore = findViewById(R.id.tvScore);
+            tvScore2 = findViewById(R.id.tvScore2);
+            rlMsg = findViewById(R.id.rlMsg);
+            etMsg = findViewById(R.id.etMsg);
 
-        etMsg.setFilters(new InputFilter[]{
-                new EmojiExcludeFilter(),
-                new LengthFilter(500)}
-        );
+            etMsg.setFilters(new InputFilter[]{
+                    new EmojiExcludeFilter(),
+                    new LengthFilter(500)}
+            );
 
-        btnShare = findViewById(R.id.btnShare);
-        btnCall = findViewById(R.id.btnCall);
+            btnShare = findViewById(R.id.btnShare);
+            btnCall = findViewById(R.id.btnCall);
 
-        tvReport = findViewById(R.id.tvReport);
-        tvSubmit = findViewById(R.id.tvSubmit);
-        tvComment = findViewById(R.id.tvComment);
+            tvReport = findViewById(R.id.tvReport);
+            tvSubmit = findViewById(R.id.tvSubmit);
+            tvComment = findViewById(R.id.tvComment);
 
-        tvReport.setOnClickListener(this);
-        tvComment.setOnClickListener(this);
-        tvSubmit.setOnClickListener(this);
-        btnShare.setOnClickListener(this);
-        btnCall.setOnClickListener(this);
+            tvReport.setOnClickListener(this);
+            tvComment.setOnClickListener(this);
+            tvSubmit.setOnClickListener(this);
+            btnShare.setOnClickListener(this);
+            btnCall.setOnClickListener(this);
 
-        etName.setText(bean.getName());
-        etContact.setText(bean.getContact());
-        etPhone.setText(bean.getPhone());
-        etPrice.setText(bean.getPrice());
-        etDesc.setText(bean.getDesc());
-        etAddress.setText(bean.getAddress());
-        etDealWay.setText(bean.getDealWay());
-        rbScore.setStar(bean.getScore());
-        rbScore.setmClickable(false);
-        tvScore.setText(InnerUtils.getRatingString(bean.getScore()));
+            etName.setText(bean.getName());
+            etContact.setText(bean.getContact());
+            etPhone.setText(bean.getPhone());
+            etPrice.setText(bean.getPrice());
+            etDesc.setText(bean.getDesc());
+            etAddress.setText(bean.getAddress());
+            etDealWay.setText(bean.getDealWay());
+            rbScore.setStar(bean.getScore());
+            rbScore.setmClickable(false);
+            tvScore.setText(InnerUtils.getRatingString(bean.getScore()));
 
-        rbScore2.setStar(5.0f);
-        tvScore2.setText(InnerUtils.getRatingString(5.0f));
-        rbScore2.setOnRatingChangeListener(new RatingBar.OnRatingChangeListener() {
-            @Override
-            public void onRatingChange(float RatingCount) {
-                tvScore2.setText(InnerUtils.getRatingString(RatingCount));
-            }
-        });
+            rbScore2.setStar(5.0f);
+            tvScore2.setText(InnerUtils.getRatingString(5.0f));
+
+            rbScore2.setOnRatingChangeListener(new RatingBar.OnRatingChangeListener() {
+                @Override
+                public void onRatingChange(float RatingCount) {
+                    presenter.score(bean.getId(),(int)RatingCount);
+                    rbScore2.setStar(RatingCount);
+                    tvScore2.setText(InnerUtils.getRatingString(RatingCount));
+                }
+            });
+        }
+
         updateBanner();
         setupCommentList();
     }
@@ -190,6 +196,7 @@ public class GoodsDetailSellActivity extends BaseTitleAndBottomBarActivity
         super.updateUI(o);
         try{
             bean = (Goods) o;
+            bean.setId(id);
             setupViews();
         }catch (Exception e){
             e.printStackTrace();

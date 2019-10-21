@@ -17,7 +17,7 @@ public class CommonConstants {
     public static final String PIONEER_SERVICE_EXPERT = "创业专家";
     public static final String PIONEER_SERVICE_PERSON = "技能人才";
     public static final String PIONEER_SERVICE_PIONEER_HELP = "创业求助";
-    public static final String PIONEER_SERVICE_RES_INTRUDITION = "资源分布";
+    public static final String PIONEER_SERVICE_RES = "资源分布";
 
     public static final int PAGE_SIZE = 10;
     public static final int REFRESH_TIME = 800;

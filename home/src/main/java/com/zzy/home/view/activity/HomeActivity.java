@@ -219,12 +219,18 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
     protected void onResume() {
         super.onResume();
         startAni();
+        if(banner!=null){
+            banner.startTurning(5000);
+        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         stopAni();
+        if(banner!=null){
+            banner.stopTurning();
+        }
     }
 
     private long exitTime = 0;
@@ -264,6 +270,7 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
                         return R.layout.banner_item_fitxy;
                     }
                 }, list);
+        banner.startTurning(5000);
     }
 
     @Override

@@ -17,6 +17,7 @@ public interface GoodsContract {
         void create(int type,Goods bean);
         void update(int type,Goods bean);
         void delete(int id);
+        void score(int id,int score);
 
         void createComment(int id, String content);
         void reply(int id, int commitId, String content);

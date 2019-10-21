@@ -125,8 +125,6 @@ public class FileUploader {
             ThreadPool.getInstance().getPool().execute(taskThread);
         }
     }
-
-
     public static void post(String path,final HInterface.DataCallback callback) throws JSONException {
         File file = new File(path);//我的文件路径，需要改你自己的
         long size = file.length();//文件长度

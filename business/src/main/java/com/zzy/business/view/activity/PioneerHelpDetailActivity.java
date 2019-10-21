@@ -23,6 +23,8 @@ import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.commonlib.utils.NetUtils;
 import com.zzy.commonlib.utils.ToastUtils;
 
+import java.util.ArrayList;
+
 /**
  * 创业帮扶详情
  */
@@ -123,10 +125,11 @@ public class PioneerHelpDetailActivity extends BaseTitleAndBottomBarActivity
             rvDataList.setItemAnimator(new DefaultItemAnimator());
 
             /*adapter*/
-            adapter = new MyMultiRecycleAdapter(this,bean.getParterList(),false);
+            adapter = new MyMultiRecycleAdapter(this,new ArrayList(),false);
             adapter.addItemViewDelegate(new ExpertDelegate(this));
             rvDataList.setAdapter(adapter);
         }
+        adapter.setNewData(bean.getParterList());
         adapter.notifyDataSetChanged();
     }
 

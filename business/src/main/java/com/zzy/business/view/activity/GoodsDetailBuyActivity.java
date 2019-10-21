@@ -163,6 +163,7 @@ public class GoodsDetailBuyActivity extends BaseTitleAndBottomBarActivity
         super.updateUI(o);
         try{
             bean = (Goods) o;
+            bean.setId(id);
             setupViews();
         }catch (Exception e){
             e.printStackTrace();

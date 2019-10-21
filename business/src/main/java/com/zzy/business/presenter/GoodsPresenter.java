@@ -238,6 +238,34 @@ public class GoodsPresenter implements GoodsContract.Presenter{
     }
 
     @Override
+    public void score(int id,int score) {
+        if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {
+            view.showError(AppUtils.getApp().getResources().getString(R.string.no_network_tips));
+            return;
+        }
+        view.showLoading();
+        try{
+            HttpProxy.scoreGoods(id,score,new CommonDataCallback() {
+                @Override
+                public void callback(int result, Object o, Object o1) {
+                    view.closeLoading();
+                    if (result == HConstant.SUCCESS) {
+                        view.onSuccess();
+                    }else if(result == HConstant.FAIL
+                            ||result == HConstant.ERROR
+                    ){
+                        handleErrs((String) o);
+                    }
+                }
+            });
+        }catch(Exception e){
+            e.printStackTrace();
+            handleErrs(e.toString());
+        }
+
+    }
+
+    @Override
     public void report(int id, String content) {
         if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {
             view.showError(AppUtils.getApp().getResources().getString(R.string.no_network_tips));

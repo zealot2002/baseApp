@@ -43,7 +43,13 @@ public class PioneerServiceListParser implements HInterface.JsonParser {
                 }
                 if(pO.has("NEWS_INFORMATION_ID")){
                     bean.setId(pO.getInt("NEWS_INFORMATION_ID")+"");
-                    bean.setType(CommonConstants.PIONEER_SERVICE_ZCHB);
+                    if(pO.has("NEWS_TYPE")
+                    &&pO.getString("NEWS_TYPE").equals(CommonConstants.PIONEER_SERVICE_RES)
+                    ){
+                        bean.setType(CommonConstants.PIONEER_SERVICE_RES);
+                    }else{
+                        bean.setType(CommonConstants.PIONEER_SERVICE_ZCHB);
+                    }
                     if(pO.has("NEWS_TITLE")) bean.setTv1(pO.getString("NEWS_TITLE"));
                     if(pO.has("RELEASE_DEPT")) bean.setTv3(pO.getString("RELEASE_DEPT"));
                     if(pO.has("RELEASE_DATE")) bean.setTv4(pO.getString("RELEASE_DATE"));

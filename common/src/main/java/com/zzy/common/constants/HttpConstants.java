@@ -136,6 +136,7 @@ public class HttpConstants {
     public static final String GOODS_COMMENT_NEW = "/sale/insertLeave.do";
     public static final String GOODS_REPLY_NEW = "/sale/insertReply.do";
     public static final String GOODS_REPORT = "/sale/insertReport.do";
+    public static final String GOODS_SCORE = "/sale/insertscore.do";
 
     /**********************        我的档案            ***************************/
     public static final String ARCHIVES_INFO = "/userinfo/selByToken.do";
