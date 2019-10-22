@@ -9,12 +9,14 @@ public interface ContentContract {
     interface View extends BaseLoadingView {
         void showError(String s);
         void onSuccess();
+        void onLikeSuccess(int position,String likeNum);
     }
 
     interface Presenter extends BasePresenter {
         void getList(int type,int pageNum);
         void create(int type, Content bean);
         void getDetail(int id);
+        void like(int position,int id);
         void like(int id);
         void report(int id,String content);
         void createComment(int contentId,String content);

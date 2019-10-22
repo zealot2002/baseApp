@@ -283,6 +283,11 @@ public class FriendsDetailActivity extends BaseTitleAndBottomBarActivity impleme
     }
 
     @Override
+    public void onLikeSuccess(int position, String likeNum) {
+
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         reload(true);

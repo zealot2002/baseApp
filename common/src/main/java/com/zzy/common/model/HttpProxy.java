@@ -23,6 +23,7 @@ import com.zzy.common.model.jsonParser.IndustryListParser;
 import com.zzy.common.model.jsonParser.IndustryParser;
 import com.zzy.common.model.jsonParser.JobListParser;
 import com.zzy.common.model.jsonParser.JobParser;
+import com.zzy.common.model.jsonParser.LikeParser;
 import com.zzy.common.model.jsonParser.LogListParser;
 import com.zzy.common.model.jsonParser.MenuListParser;
 import com.zzy.common.model.jsonParser.PbListParser;
@@ -617,7 +618,7 @@ public class HttpProxy {
                 HttpConstants.CONTENT_LIKE,
                 reqBody,
                 callback,
-                new CommonParser());
+                new LikeParser());
     }
 
     /**********************        买卖            ***************************/

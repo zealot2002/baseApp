@@ -17,6 +17,7 @@ import com.zzy.business.view.itemViewDelegate.PioneerDelegate;
 import com.zzy.business.view.itemViewDelegate.PioneerServiceDelegate;
 import com.zzy.common.constants.CommonConstants;
 import com.zzy.common.constants.ParamConstants;
+import com.zzy.common.model.bean.Content;
 import com.zzy.common.model.bean.Menu;
 import com.zzy.common.model.bean.PbRecord;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
@@ -48,7 +49,7 @@ public class PioneerServiceActivity extends BaseTitleAndBottomBarActivity
     private int pageNum = 1;
     private OnLoadMoreListener onLoadMoreListener;
     private MyMultiRecycleAdapter adapter;
-    private boolean isLoadOver = false;
+    private boolean isLoadOver = false,isReload = true;
     private List<PioneerService> dataList = new ArrayList<>();
     /***********************************************************************************************/
     @Override
@@ -130,29 +131,39 @@ public class PioneerServiceActivity extends BaseTitleAndBottomBarActivity
     public void updateUI(Object o) {
         super.updateUI(o);
         try{
-            if(pageNum!=1){
-                appendList((List<PioneerService>) o);
+            List<PioneerService> list = (List<PioneerService>) o;
+            if(list == null){
                 return;
             }
-            dataList.addAll((List<PioneerService>) o);
             setupViews();
-            adapter.notifyDataSetChanged();
+            if(isReload){
+                isReload = false;
+                reset();
+                if(rvDataList!=null){
+                    rvDataList.scrollToPosition(0);
+                }
+
+                dataList.addAll(list);
+                adapter.notifyDataSetChanged();
+            }else {
+                adapter.setLoadMoreData(list);
+            }
+
+            if(list.isEmpty()
+                    ||list.size()< CommonConstants.PAGE_SIZE
+            ){
+                rvDataList.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.loadEnd();
+                    }
+                },10);
+                isLoadOver = true;
+            }
         }catch (Exception e){
             e.printStackTrace();
             ToastUtils.showShort(e.toString());
         }
-    }
-    private void appendList(List<PioneerService> list) {
-        if(list == null
-                ||list.isEmpty()
-        ){
-            adapter.loadEnd();
-        }
-        if(list.isEmpty()){
-            isLoadOver = true;
-            return;
-        }
-        adapter.setLoadMoreData(list);
     }
 
     @Override
@@ -197,7 +208,8 @@ public class PioneerServiceActivity extends BaseTitleAndBottomBarActivity
                         new PopupDialog.Builder(PioneerServiceActivity.this,"正在开发中...","完成").create();
                         return;
                     }
-                    reset();
+                    isReload = true;
+                    pageNum = 1;
                     presenter.getList(menuList.get(menuIndex).getName(),pageNum);
                 }
             });
@@ -218,7 +230,7 @@ public class PioneerServiceActivity extends BaseTitleAndBottomBarActivity
         pageNum = 1;
         isLoadOver = false;
         dataList.clear();
-        if(adapter!=null){
+        if(adapter!=null) {
             adapter.reset();
         }
     }

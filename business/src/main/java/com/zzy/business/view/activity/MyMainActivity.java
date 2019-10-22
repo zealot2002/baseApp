@@ -49,6 +49,7 @@ public class MyMainActivity extends BaseTitleAndBottomBarActivity
 
         presenter = new MinePresenter(this);
         presenter.getUserInfo();
+        setupViews();
     }
 
     @Override
@@ -84,7 +85,9 @@ public class MyMainActivity extends BaseTitleAndBottomBarActivity
         btnMyLog.setOnClickListener(this);
         btnSettings.setOnClickListener(this);
         btnShareSoftware.setOnClickListener(this);
+    }
 
+    void updateViews(){
         tvUserName.setText(user.getName());
         tvUserRemarks.setText(user.getTitle());
         tvUserScore.setText(user.getScore()+"积分");
@@ -96,8 +99,7 @@ public class MyMainActivity extends BaseTitleAndBottomBarActivity
         super.updateUI(o);
         try{
             user = (User) o;
-
-            setupViews();
+            updateViews();
         }catch (Exception e){
             e.printStackTrace();
         }

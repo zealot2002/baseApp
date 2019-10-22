@@ -157,6 +157,33 @@ public class ContentPresenter implements ContentContract.Presenter{
     }
 
     @Override
+    public void like(final int position,int id) {
+        if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {
+            view.showError(AppUtils.getApp().getResources().getString(R.string.no_network_tips));
+            return;
+        }
+        view.showLoading();
+        try{
+            HttpProxy.likeContent(id,new CommonDataCallback() {
+                @Override
+                public void callback(int result, Object o, Object o1) {
+                    view.closeLoading();
+                    if (result == HConstant.SUCCESS) {
+                        view.onLikeSuccess(position, (String) o);
+                    }else if(result == HConstant.FAIL
+                            ||result == HConstant.ERROR
+                    ){
+                        handleErrs((String) o);
+                    }
+                }
+            });
+        }catch(Exception e){
+            e.printStackTrace();
+            handleErrs(e.toString());
+        }
+    }
+
+    @Override
     public void like(int id) {
         if (!NetUtils.isNetworkAvailable(AppUtils.getApp())) {
             view.showError(AppUtils.getApp().getResources().getString(R.string.no_network_tips));

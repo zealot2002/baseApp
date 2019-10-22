@@ -231,4 +231,9 @@ public class ContentDetailActivity extends BaseTitleAndBottomBarActivity
             rlMsg.setVisibility(View.GONE);
         }
     }
+
+    @Override
+    public void onLikeSuccess(int position, String likeNum) {
+
+    }
 }

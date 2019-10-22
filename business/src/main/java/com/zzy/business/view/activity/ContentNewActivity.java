@@ -181,4 +181,9 @@ public class ContentNewActivity extends BaseTitleAndBottomBarActivity
         ToastUtils.showShort("成功");
         finish();
     }
+
+    @Override
+    public void onLikeSuccess(int position, String likeNum) {
+
+    }
 }

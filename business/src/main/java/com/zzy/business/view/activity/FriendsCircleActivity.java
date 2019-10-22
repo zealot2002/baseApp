@@ -50,7 +50,8 @@ import java.util.List;
  * 创业朋友圈
  */
 public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity implements
-        View.OnClickListener, MessagePicturesLayout.Callback, ImageWatcher.OnPictureLongPressListener , ContentContract.View, OnRefreshListener {
+        View.OnClickListener, MessagePicturesLayout.Callback, ImageWatcher.OnPictureLongPressListener ,
+        ContentContract.View, OnRefreshListener {
     private Button btnNew;
 
     private ImageWatcher vImageWatcher;
@@ -240,7 +241,7 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
 
                 @Override
                 public void onLike(int position) {
-                    presenter.like(Integer.valueOf(dataList.get(position).getId()));
+                    presenter.like(position,Integer.valueOf(dataList.get(position).getId()));
                 }
             },this));
             rvDataList.setAdapter(adapter);
@@ -339,6 +340,13 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
         ToastUtils.showShort("成功");
         isLikeOp = true;
         reload(true);
+    }
+
+    @Override
+    public void onLikeSuccess(int position, String likeNum) {
+        ToastUtils.showShort("成功");
+        dataList.get(position).setLikeNum(likeNum);
+        adapter.notifyDataSetChanged();
     }
 
     @Override

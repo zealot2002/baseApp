@@ -210,6 +210,12 @@ public class ContentListActivity extends BaseTitleAndBottomBarActivity
     public void onSuccess() {
 
     }
+
+    @Override
+    public void onLikeSuccess(int position, String likeNum) {
+
+    }
+
     private void reset() {
         pageNum = 1;
         isLoadOver = false;

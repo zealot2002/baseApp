@@ -60,7 +60,7 @@ public class FriendDelegate implements ItemViewDelegate<FriendsCircle> {
             TextView tNickname =  holder.itemView.findViewById(R.id.t_nickname);
             TextView tTime = holder.itemView.findViewById(R.id.t_time);
             TextView tvCommentNum = holder.itemView.findViewById(R.id.tvCommentNum);
-            TextView tvLikeNum = holder.itemView.findViewById(R.id.tvLikeNum);
+            final TextView tvLikeNum = holder.itemView.findViewById(R.id.tvLikeNum);
             TextView tvReport = holder.itemView.findViewById(R.id.tvReport);
             final TextView tContent = holder.itemView.findViewById(R.id.t_content);
             final TextView tvExpand = holder.itemView.findViewById(R.id.t_all);

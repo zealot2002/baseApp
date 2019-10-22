@@ -6,6 +6,7 @@
             android:name=".view.activity.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/welcome_full_screen"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
             >
         </activity>
 
