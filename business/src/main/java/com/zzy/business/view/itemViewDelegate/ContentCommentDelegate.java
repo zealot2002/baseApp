@@ -11,6 +11,8 @@ import com.zzy.common.model.bean.Comment;
 import com.zzy.common.utils.CommonUtils;
 import com.zzy.common.widget.recycleAdapter.ItemViewDelegate;
 import com.zzy.common.widget.recycleAdapter.ViewHolder;
+import com.zzy.commonlib.log.MyLog;
+import com.zzy.commonlib.utils.ToastUtils;
 
 public class ContentCommentDelegate implements ItemViewDelegate<Comment> {
     public interface Listener{
@@ -49,7 +51,6 @@ public class ContentCommentDelegate implements ItemViewDelegate<Comment> {
             tvUser.setText(bean.getUserName());
             tvContent.setText(bean.getContent());
 
-
             //如果帖子有作者留言，那么显示作者留言
             if(!TextUtils.isEmpty(bean.getReplyContent())){
                 tvOwner.setVisibility(View.VISIBLE);
@@ -80,8 +81,11 @@ public class ContentCommentDelegate implements ItemViewDelegate<Comment> {
                 tvReply.setVisibility(View.GONE);
             }
 
+            MyLog.e(" loadImage ______ 1 : "+bean.getUserHeadUrl());
             ImageLoader.loadImage(ivPic,bean.getUserHeadUrl());
+            MyLog.e(" loadImage ______ 2");
         }catch (Exception e){
+            ToastUtils.showLong(e.toString());
             e.printStackTrace();
         }
     }

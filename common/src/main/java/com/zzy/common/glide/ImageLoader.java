@@ -6,6 +6,7 @@ import android.support.annotation.DrawableRes;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DecodeFormat;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.zzy.common.R;
@@ -45,14 +46,16 @@ public class ImageLoader {
             }
         }
         loadImageWithPlaceHolder(context, imageView, imageUrl, placeholderRes, errorRes);
-
     }
 
     public static void loadImage(Context context, ImageView imageView, String imageUrl) {
         try {
             Glide.with(context)
                     .load(imageUrl)
-                    .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                    .apply(new RequestOptions()
+                            .format(DecodeFormat.PREFER_RGB_565)
+                            .disallowHardwareConfig()
+                            .diskCacheStrategy(DiskCacheStrategy.RESOURCE))
                     .into(imageView);
         } catch (Exception e) {
             e.printStackTrace();

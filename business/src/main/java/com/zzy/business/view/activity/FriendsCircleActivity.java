@@ -172,6 +172,16 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
 //        etMsg.requestFocus();
 //    }
 
+    private void gotoDetail(int position){
+        try{
+            Bundle bundle = new Bundle();
+            bundle.putInt(ParamConstants.ID,Integer.valueOf(dataList.get(position).getId()));
+            startActivity(FriendsDetailActivity.class,bundle);
+        }catch (Exception e){
+            e.printStackTrace();
+            ToastUtils.showLong(e.toString());
+        }
+    }
     private void setupViews() {
         if(smartRefreshLayout == null){
             smartRefreshLayout = findViewById(R.id.smartRefreshLayout);
@@ -228,15 +238,7 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
 
                 @Override
                 public void onComment(int position) {
-//                    //go to detail
-//                    try{
-//                        Bundle bundle = new Bundle();
-//                        bundle.putInt(ParamConstants.ID,Integer.valueOf(dataList.get(position).getId()));
-//                        startActivity(FriendsDetailActivity.class,bundle);
-//                    }catch (Exception e){
-//                        e.printStackTrace();
-//                        ToastUtils.showLong(e.toString());
-//                    }
+                    gotoDetail(position);
                 }
 
                 @Override
@@ -249,15 +251,7 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
             adapter.setOnItemChildClickListener(R.id.rootView, new OnItemChildClickListener() {
                 @Override
                 public void onItemChildClick(ViewHolder viewHolder, Object data, int position) {
-                    //go to detail
-                    try{
-                        Bundle bundle = new Bundle();
-                        bundle.putInt(ParamConstants.ID,Integer.valueOf(dataList.get(position).getId()));
-                        startActivity(FriendsDetailActivity.class,bundle);
-                    }catch (Exception e){
-                        e.printStackTrace();
-                        ToastUtils.showLong(e.toString());
-                    }
+                    gotoDetail(position);
                 }
             });
 //

@@ -11,6 +11,7 @@ import com.zzy.common.constants.SPConstants;
 import com.zzy.common.job.AJobCreator;
 import com.zzy.common.utils.CommonUtils;
 import com.zzy.commonlib.CommonLibHelper;
+import com.zzy.commonlib.log.LogcatHelper;
 import com.zzy.commonlib.log.MyLog;
 import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.commonlib.utils.ProcessUtils;

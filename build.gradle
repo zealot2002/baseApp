@@ -3,8 +3,8 @@
 buildscript {
     ext {
         gradle_tool = "3.0.1"
-        versionCode = 12
-        versionName = "1.1.8"
+        versionCode = 13
+        versionName = "1.1.9"
         buildToolsVersion = "26.0.2"
         compileSdkVersion = 26
         minSdkVersion = 19
@@ -26,7 +26,7 @@ buildscript {
 
         thridLibs = [
                 'walle'             : '1.1.4',
-                'ACommonLib'        : '0.6.0',
+                'ACommonLib'        : '0.6.1',
                 'server_center'     : '0.1.6',
                 'flySp'             : '0.1.5',
                 'job'               : '1.2.6',

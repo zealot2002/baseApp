@@ -472,7 +472,7 @@
                     android:textColorHint="@color/white"
                     android:textSize="14sp"
                     android:background="@null"
-                    android:inputType="number"
+                    android:inputType=""
                     />
                 <View
                     android:layout_width="match_parent"

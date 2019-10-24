@@ -8,6 +8,7 @@
             android:theme="@style/activity_theme"
             android:windowSoftInputMode="adjustPan"
             android:hardwareAccelerated="false"
+
             />
         <activity
             android:name=".view.activity.ContentNewActivity"

@@ -145,7 +145,7 @@ public class RegisterActivity extends BaseAppActivity implements View.OnClickLis
         );
         etIdNo.setFilters(new InputFilter[]{
                 new EmojiExcludeFilter(),
-                new LengthFilter(200)}
+                new LengthFilter(50)}
         );
 
         etAddress.setFilters(new InputFilter[]{

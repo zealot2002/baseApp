@@ -22,12 +22,14 @@ import com.zzy.business.view.itemViewDelegate.ContentCommentDelegate;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.constants.CommonConstants;
 import com.zzy.common.constants.ParamConstants;
+import com.zzy.common.utils.AndroidBug5497Workaround;
 import com.zzy.common.utils.CommonUtils;
 import com.zzy.common.utils.InputFilter.EmojiExcludeFilter;
 import com.zzy.common.utils.InputFilter.LengthFilter;
 import com.zzy.common.widget.PopupEditDialog;
 import com.zzy.common.widget.recycleAdapter.MyMultiRecycleAdapter;
 import com.zzy.common.widget.recycleAdapter.OnLoadMoreListener;
+import com.zzy.commonlib.log.MyLog;
 import com.zzy.commonlib.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -57,6 +59,7 @@ public class ContentDetailActivity extends BaseTitleAndBottomBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try{
+            AndroidBug5497Workaround.assistActivity(findViewById(android.R.id.content));
             id = getIntent().getIntExtra(ParamConstants.ID,0);
             type = getIntent().getIntExtra(ParamConstants.TYPE, CommonConstants.CONTENT_HELP);
             if(CommonConstants.CONTENT_HELP == type){
@@ -156,13 +159,7 @@ public class ContentDetailActivity extends BaseTitleAndBottomBarActivity
             }));
             rvCommentList.setAdapter(adapter);
         }
-        rvCommentList.post(new Runnable() {
-            @Override
-            public void run() {
-                adapter.setNewData(bean.getCommentList());
-            }
-        });
-
+        adapter.setNewData(bean.getCommentList());
     }
 
     @Override
@@ -198,6 +195,7 @@ public class ContentDetailActivity extends BaseTitleAndBottomBarActivity
     }
 
     private void showRlMsg(int msgType){
+        MyLog.e(" showRlMsg _______1");
         this.msgType = msgType;
         rlMsg.setVisibility(View.VISIBLE);
         etMsg.requestFocus();
