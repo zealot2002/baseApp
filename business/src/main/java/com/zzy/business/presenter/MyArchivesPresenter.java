@@ -7,9 +7,8 @@ import com.zzy.business.contract.MyArchivesContract;
 import com.zzy.common.model.HttpProxy;
 import com.zzy.common.model.bean.Archives;
 import com.zzy.common.model.bean.Image;
-import com.zzy.common.model.jsonParser.ImageParser;
 import com.zzy.common.network.CommonDataCallback;
-import com.zzy.common.utils.FileUploader;
+import com.zzy.common.utils.FileHandler;
 import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.http.HInterface;
 import com.zzy.commonlib.log.MyLog;
@@ -96,7 +95,7 @@ public class MyArchivesPresenter implements MyArchivesContract.Presenter{
                 });
                 return;
             }
-            new FileUploader().post(bean.getImgList(), new HInterface.DataCallback() {
+            new FileHandler().post(bean.getImgList(), new HInterface.DataCallback() {
                 @Override
                 public void requestCallback(int result, Object data, Object tagData) {
                     MyLog.e("result:" +data.toString());

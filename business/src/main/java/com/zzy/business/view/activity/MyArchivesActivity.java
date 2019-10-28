@@ -22,9 +22,12 @@ import com.zzy.common.adapter.RecyclerItemClickListener;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.model.bean.Archives;
 import com.zzy.common.model.bean.Image;
+import com.zzy.common.utils.FileHandler;
 import com.zzy.common.utils.InputFilter.EmojiExcludeFilter;
 import com.zzy.common.utils.InputFilter.LengthFilter;
 import com.zzy.common.widget.TagEditDialog;
+import com.zzy.commonlib.http.HConstant;
+import com.zzy.commonlib.http.HInterface;
 import com.zzy.commonlib.log.MyLog;
 import com.zzy.commonlib.utils.ToastUtils;
 import com.zzy.business.R;
@@ -109,10 +112,35 @@ public class MyArchivesActivity extends BaseTitleAndBottomBarActivity
         tvIsCompany.setText(bean.getIsCompany());
 
     }
-
+    private void prepareImage() {
+        if(bean.getImgList().isEmpty()){
+            setupPhotoPicker();
+            return;
+        }
+        showLoading();
+        List<String> urlList = new ArrayList<>();
+        for(Image image:bean.getImgList()){
+            urlList.add(image.getPath());
+        }
+        new FileHandler().savePicToLocal(urlList, new HInterface.DataCallback() {
+            @Override
+            public void requestCallback(int result, Object data, Object tagData) {
+                closeLoading();
+                if (result == HConstant.SUCCESS) {
+                    List<String> imgNames = (List<String>) data;
+                    selectedPhotos.addAll(imgNames);
+                    setupPhotoPicker();
+                }else if(result == HConstant.FAIL){
+                    ToastUtils.showLong((String) data);
+                }
+            }
+        });
+    }
     private void showNext() {
+        prepareImage();
         lFirst.setVisibility(View.GONE);
         lNext.setVisibility(View.VISIBLE);
+        btnYes = findViewById(R.id.btnYes);
 
         userTypeList = new ArrayList<>();
         userTypeList.add("企业");
@@ -124,16 +152,16 @@ public class MyArchivesActivity extends BaseTitleAndBottomBarActivity
         adapter4.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinnerUserType = findViewById(R.id.spinnerUserType);
         spinnerUserType.setAdapter(adapter4);
-        spinnerUserType.setSelection(0);
 
         lPersonal = findViewById(R.id.lPersonal);
 
         lCompany = findViewById(R.id.lCompany);
         etCompanyName = findViewById(R.id.etCompanyName);
         etCompanyScope = findViewById(R.id.etCompanyScope);
-        setupPhotoPicker();
 
-        btnYes = findViewById(R.id.btnYes);
+        etCompanyName.setText(bean.getCompanyName());
+        etCompanyScope.setText(bean.getCompanyScope());
+
         rgIsCompany = findViewById(R.id.rgIsCompany);
         rgIsCompany.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -142,24 +170,27 @@ public class MyArchivesActivity extends BaseTitleAndBottomBarActivity
                 lPersonal.setVisibility(checkedId == R.id.btnYes?View.GONE:View.VISIBLE);
             }
         });
+
+        if(bean.getUserType().equals("企业")){
+            spinnerUserType.setSelection(0);
+            rgIsCompany.check(R.id.btnYes);
+        }else{
+            rgIsCompany.check(R.id.btnNo);
+            if(bean.getUserType().equals("个人创业者")){
+                spinnerUserType.setSelection(1);
+            }else if(bean.getUserType().equals("低收入农户")){
+                spinnerUserType.setSelection(2);
+            }else if(bean.getUserType().equals("种植养殖农户")){
+                spinnerUserType.setSelection(3);
+            }else if(bean.getUserType().equals("其他")){
+                spinnerUserType.setSelection(4);
+            }
+        }
+
         btnOk = findViewById(R.id.btnOk);
         btnOk.setOnClickListener(this);
         tagLayout = findViewById(R.id.tagLayout);
-//        tagLayout.setTagCheckListener(new TagView.OnTagCheckListener() {
-//            @Override
-//            public void onTagCheck(final int position, String s, boolean b) {
-//                MyLog.e("onTagCheck position : "+position);
-//                if(b && tagLayout.getCheckedTags().size()>5){
-//                    ToastUtils.showShort("最多可选6个标签");
-//                    tagLayout.postDelayed(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            ((TagView)tagLayout.getChildAt(position)).setChecked(false);
-//                        }
-//                    },10);
-//                }
-//            }
-//        });
+
         tagAdd = findViewById(R.id.tagAdd);
         tagAdd.setOnClickListener(this);
 
@@ -244,7 +275,6 @@ public class MyArchivesActivity extends BaseTitleAndBottomBarActivity
                             PhotoPicker.builder()
                                     .setPhotoCount(6)
                                     .setShowCamera(true)
-                                    .setPreviewEnabled(false)
                                     .setSelected(selectedPhotos)
                                     .start(MyArchivesActivity.this);
                         } else {
@@ -310,6 +340,7 @@ public class MyArchivesActivity extends BaseTitleAndBottomBarActivity
             for(String s:tagLayout.getCheckedTags()){
                 bean.getSkills().add(s);
             }
+            bean.getImgList().clear();
             for(String s:selectedPhotos){
                 Image image = new Image();
                 image.setPath(s);

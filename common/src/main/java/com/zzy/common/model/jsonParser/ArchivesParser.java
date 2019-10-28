@@ -2,6 +2,7 @@ package com.zzy.common.model.jsonParser;
 
 import com.zzy.common.constants.HttpConstants;
 import com.zzy.common.model.bean.Archives;
+import com.zzy.common.model.bean.Image;
 import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.http.HInterface;
 import com.zzy.commonlib.log.MyLog;
@@ -45,6 +46,11 @@ public class ArchivesParser implements HInterface.JsonParser {
                     JSONObject infoObj = imgArray.getJSONObject(i);
                     bean.getSkills().add(infoObj.getString("USER_SKILL"));
                 }
+            }
+            JSONArray imgArray = dataObj.getJSONArray("IMAGES");
+            for(int i=0;i<imgArray.length();i++) {
+                JSONObject infoObj = imgArray.getJSONObject(i);
+                bean.getImgList().add(new Image(HttpConstants.SERVER_ADDRESS+"/"+infoObj.getString("PIC_ADDR")));
             }
             return new Object[]{HConstant.SUCCESS,bean};
         } else {

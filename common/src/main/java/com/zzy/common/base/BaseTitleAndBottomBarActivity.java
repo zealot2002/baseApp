@@ -53,6 +53,12 @@ public abstract class BaseTitleAndBottomBarActivity extends BaseAppActivity impl
         });
     }
 
+    protected void setOnBackClickListener(View.OnClickListener listener){
+        if(rlBack!=null){
+            rlBack.setOnClickListener(listener);
+        }
+    }
+
     protected void setTitle(String title) {
         if (tvTitle != null)
             tvTitle.setText(title);

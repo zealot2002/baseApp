@@ -36,7 +36,7 @@ public class ExpertDelegate implements ItemViewDelegate<HelpClass.Parter> {
         try{
             ivPic = holder.itemView.findViewById(R.id.ivPic);
 
-            ImageLoader.loadImage(ivPic,bean.headUrl);
+            ImageLoader.loadImage(ivPic,bean.headUrl,R.mipmap.default_head);
         }catch (Exception e){
             e.printStackTrace();
         }

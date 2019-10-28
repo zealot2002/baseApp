@@ -73,7 +73,6 @@ public class MyLogNewActivity extends BaseTitleAndBottomBarActivity
 
     @Override
     public void onSuccess() {
-        ToastUtils.showShort("成功");
         finish();
     }
 }

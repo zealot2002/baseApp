@@ -1,26 +1,21 @@
 package com.zzy.login.presenter;
 import android.support.annotation.NonNull;
 
-import com.zzy.common.constants.HttpConstants;
 import com.zzy.common.constants.SPConstants;
 import com.zzy.common.model.HttpProxy;
 import com.zzy.common.model.bean.Archives;
 import com.zzy.common.model.bean.Image;
 import com.zzy.common.model.bean.User;
-import com.zzy.common.model.jsonParser.ImageParser;
 import com.zzy.common.network.CommonDataCallback;
-import com.zzy.common.utils.FileUploader;
+import com.zzy.common.utils.FileHandler;
 import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.http.HInterface;
 import com.zzy.commonlib.log.MyLog;
 import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.commonlib.utils.NetUtils;
 import com.zzy.commonlib.utils.SPUtils;
-import com.zzy.flysp.core.spHelper.SPHelper;
 import com.zzy.login.R;
 import com.zzy.login.contract.LoginContract;
-
-import org.json.JSONException;
 
 import java.util.List;
 
@@ -140,7 +135,7 @@ public class LoginPresenter implements LoginContract.Presenter{
                 });
                 return;
             }
-            new FileUploader().post(bean.getImgList(), new HInterface.DataCallback() {
+            new FileHandler().post(bean.getImgList(), new HInterface.DataCallback() {
                 @Override
                 public void requestCallback(int result, Object data, Object tagData) {
                     MyLog.e("result:" +data.toString());

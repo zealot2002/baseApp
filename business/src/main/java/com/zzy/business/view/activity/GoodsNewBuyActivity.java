@@ -1,8 +1,6 @@
 package com.zzy.business.view.activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -10,34 +8,25 @@ import android.text.InputFilter;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.zzy.business.R;
 import com.zzy.business.contract.GoodsContract;
 import com.zzy.business.presenter.GoodsPresenter;
-import com.zzy.business.view.adapter.GridMenuListAdapter;
 import com.zzy.common.adapter.PhotoAdapter;
 import com.zzy.common.adapter.RecyclerItemClickListener;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
-import com.zzy.common.base.BaseToolbarActivity;
 import com.zzy.common.constants.CommonConstants;
-import com.zzy.common.constants.HttpConstants;
 import com.zzy.common.constants.ParamConstants;
 import com.zzy.common.model.HttpProxy;
 import com.zzy.common.model.bean.Goods;
 import com.zzy.common.model.bean.Image;
-import com.zzy.common.model.bean.Menu;
 import com.zzy.common.network.CommonDataCallback;
-import com.zzy.common.utils.FileUploader;
+import com.zzy.common.utils.FileHandler;
 import com.zzy.common.utils.InputFilter.EmojiExcludeFilter;
 import com.zzy.common.utils.InputFilter.LengthFilter;
-import com.zzy.common.utils.InputFilter.SpecialExcludeFilter;
 import com.zzy.common.widget.MyEditText;
 import com.zzy.commonlib.http.HConstant;
-import com.zzy.commonlib.http.HInterface;
-import com.zzy.commonlib.log.MyLog;
-import com.zzy.commonlib.utils.AppUtils;
-import com.zzy.commonlib.utils.NetUtils;
+import com.zzy.commonlib.http.HInterface.DataCallback;
 import com.zzy.commonlib.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -116,10 +105,10 @@ public class GoodsNewBuyActivity extends BaseTitleAndBottomBarActivity
         btnDel = findViewById(R.id.btnDel);
         btnDel.setOnClickListener(this);
 
-        setupPhotoPicker();
         if(type == CommonConstants.MY_GOODS_BUY){
             fillValue();
         }
+        prepareImage();
     }
 
     private void fillValue() {
@@ -136,6 +125,7 @@ public class GoodsNewBuyActivity extends BaseTitleAndBottomBarActivity
 
     private void setupPhotoPicker() {
         RecyclerView recyclerView = findViewById(R.id.rvPhotoPicker);
+
         photoAdapter = new PhotoAdapter(this, selectedPhotos);
 
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(3,
@@ -167,6 +157,32 @@ public class GoodsNewBuyActivity extends BaseTitleAndBottomBarActivity
                 }));
 
     }
+
+    private void prepareImage() {
+        if(bean.getImgList().isEmpty()){
+            setupPhotoPicker();
+            return;
+        }
+        showLoading();
+        List<String> urlList = new ArrayList<>();
+        for(Image image:bean.getImgList()){
+            urlList.add(image.getPath());
+        }
+        new FileHandler().savePicToLocal(urlList, new DataCallback() {
+            @Override
+            public void requestCallback(int result, Object data, Object tagData) {
+                closeLoading();
+                if (result == HConstant.SUCCESS) {
+                    List<String> imgNames = (List<String>) data;
+                    selectedPhotos.addAll(imgNames);
+                    setupPhotoPicker();
+                }else if(result == HConstant.FAIL){
+                    ToastUtils.showLong((String) data);
+                }
+            }
+        });
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -246,7 +262,6 @@ public class GoodsNewBuyActivity extends BaseTitleAndBottomBarActivity
 
     @Override
     public void onSuccess() {
-        ToastUtils.showShort("成功");
         finish();
     }
 }

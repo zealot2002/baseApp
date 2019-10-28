@@ -33,7 +33,30 @@ public class ImageLoader {
         loadImage(context, imageView, imageUrl);
 
     }
+    public static void loadImage(ImageView imageView, String imageUrl,int placeholderRes) {
+        if (imageView == null) {
+            return;
+        }
+        Context context = imageView.getContext();
+        if (context instanceof Activity) {
+            if (((Activity) context).isFinishing()) {
+                return;
+            }
+        }
+        try {
+            Glide.with(context)
+                    .load(imageUrl)
+                    .apply(new RequestOptions()
+                            .format(DecodeFormat.PREFER_RGB_565)
+                            .disallowHardwareConfig()
+                            .placeholder(placeholderRes)
+                            .diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                    .into(imageView);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+    }
 
     public static void loadImageWithPlaceHolder(ImageView imageView, String imageUrl, @DrawableRes int placeholderRes, @DrawableRes int errorRes) {
         if (imageView == null) {

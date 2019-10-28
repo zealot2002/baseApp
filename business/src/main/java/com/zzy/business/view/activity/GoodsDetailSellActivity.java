@@ -26,6 +26,7 @@ import com.zzy.business.utils.InnerUtils;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.constants.ParamConstants;
 import com.zzy.common.network.CommonDataCallback;
+import com.zzy.common.utils.AndroidBug5497Workaround;
 import com.zzy.common.utils.InputFilter.EmojiExcludeFilter;
 import com.zzy.common.utils.InputFilter.LengthFilter;
 import com.zzy.common.widget.BannerHolderView;
@@ -67,6 +68,7 @@ public class GoodsDetailSellActivity extends BaseTitleAndBottomBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try{
+            AndroidBug5497Workaround.assistActivity(findViewById(android.R.id.content));
             setTitle("商品详情");
             id = getIntent().getIntExtra(ParamConstants.ID,0);
             presenter = new GoodsPresenter(this);

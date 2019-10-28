@@ -24,9 +24,12 @@ import com.zzy.common.constants.ParamConstants;
 import com.zzy.common.model.bean.Goods;
 import com.zzy.common.model.bean.Image;
 import com.zzy.common.model.bean.Menu;
+import com.zzy.common.utils.FileHandler;
 import com.zzy.common.utils.InputFilter.EmojiExcludeFilter;
 import com.zzy.common.utils.InputFilter.LengthFilter;
 import com.zzy.common.widget.MyEditText;
+import com.zzy.commonlib.http.HConstant;
+import com.zzy.commonlib.http.HInterface;
 import com.zzy.commonlib.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -114,10 +117,34 @@ public class GoodsNewSellActivity extends BaseTitleAndBottomBarActivity
         btnDel.setOnClickListener(this);
 
         setupTagView();
-        setupPhotoPicker();
         if(type == CommonConstants.MY_GOODS_SELL){
             fillValue();
         }
+        prepareImage();
+    }
+    private void prepareImage() {
+        if(bean.getImgList().isEmpty()){
+            setupPhotoPicker();
+            return;
+        }
+        showLoading();
+        List<String> urlList = new ArrayList<>();
+        for(Image image:bean.getImgList()){
+            urlList.add(image.getPath());
+        }
+        new FileHandler().savePicToLocal(urlList, new HInterface.DataCallback() {
+            @Override
+            public void requestCallback(int result, Object data, Object tagData) {
+                closeLoading();
+                if (result == HConstant.SUCCESS) {
+                    List<String> imgNames = (List<String>) data;
+                    selectedPhotos.addAll(imgNames);
+                    setupPhotoPicker();
+                }else if(result == HConstant.FAIL){
+                    ToastUtils.showLong((String) data);
+                }
+            }
+        });
     }
     private void fillValue() {
         etName.setText(bean.getName());
@@ -282,7 +309,6 @@ public class GoodsNewSellActivity extends BaseTitleAndBottomBarActivity
 
     @Override
     public void onSuccess() {
-        ToastUtils.showShort("成功");
         finish();
     }
 }

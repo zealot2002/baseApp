@@ -1,4 +1,5 @@
 package com.zzy.business.view.activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -8,6 +9,7 @@ import android.view.View;
 
 import com.zzy.business.R;
 import com.zzy.business.contract.PioneerContract;
+import com.zzy.common.constants.CommonConstants;
 import com.zzy.common.model.bean.Menu;
 import com.zzy.common.model.bean.Pioneer;
 import com.zzy.business.presenter.PioneerPresenter;
@@ -15,6 +17,7 @@ import com.zzy.business.view.adapter.GridMenuListAdapter;
 import com.zzy.business.view.itemViewDelegate.PioneerDelegate;
 import com.zzy.common.base.BaseTitleAndBottomBarActivity;
 import com.zzy.common.constants.ParamConstants;
+import com.zzy.common.model.bean.PioneerService;
 import com.zzy.common.widget.recycleAdapter.MyMultiRecycleAdapter;
 import com.zzy.common.widget.recycleAdapter.OnItemChildClickListener;
 import com.zzy.common.widget.recycleAdapter.OnLoadMoreListener;
@@ -29,6 +32,7 @@ import java.util.List;
  */
 public class PioneerListActivity extends BaseTitleAndBottomBarActivity
         implements View.OnClickListener, PioneerContract.View {
+    private static final int REQUEST_CODE = 500;
     private PioneerContract.Presenter presenter;
     private RecyclerView rvMenuList,rvDataList;
 
@@ -40,8 +44,9 @@ public class PioneerListActivity extends BaseTitleAndBottomBarActivity
     private int pageNum = 1;
     private OnLoadMoreListener onLoadMoreListener;
     private MyMultiRecycleAdapter adapter;
-    private boolean isLoadOver = false;
+    private boolean isLoadOver = false,isReload = true;
     private List<Pioneer> dataList = new ArrayList<>();
+    private int curPosition = 0;
     /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,10 +92,14 @@ public class PioneerListActivity extends BaseTitleAndBottomBarActivity
             adapter.setOnItemChildClickListener(R.id.rootView, new OnItemChildClickListener() {
                 @Override
                 public void onItemChildClick(ViewHolder viewHolder, Object data, int position) {
+                    curPosition = position;
+                    Intent it = new Intent();
                     Bundle bundle = new Bundle();
                     bundle.putInt(ParamConstants.ID,dataList.get(position).getId());
                     bundle.putString(ParamConstants.TYPE,menuList.get(menuIndex).getName());
-                    startActivity(PioneerDetailActivity.class,bundle);
+                    it.setClass(PioneerListActivity.this,PioneerDetailActivity.class);
+                    it.putExtras(bundle);
+                    startActivityForResult(it,REQUEST_CODE);
                 }
             });
             rvDataList.setAdapter(adapter);
@@ -98,32 +107,54 @@ public class PioneerListActivity extends BaseTitleAndBottomBarActivity
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(REQUEST_CODE == requestCode && resultCode == RESULT_OK){
+            if (data != null) {
+                String lookNum = data.getStringExtra(ParamConstants.COUNT);
+                dataList.get(curPosition).setLookNum(lookNum);
+                adapter.notifyDataSetChanged();
+            }
+        }
+    }
+
+    @Override
     public void updateUI(Object o) {
         super.updateUI(o);
         try{
-            if(pageNum!=1){
-                appendList((List<Pioneer>) o);
+            List<Pioneer> list = (List<Pioneer>) o;
+            if(list == null){
                 return;
             }
-            dataList.addAll((List<Pioneer>) o);
             setupViews();
-            adapter.notifyDataSetChanged();
+            if(isReload){
+                isReload = false;
+                reset();
+                if(rvDataList!=null){
+                    rvDataList.scrollToPosition(0);
+                }
+
+                dataList.addAll(list);
+                adapter.notifyDataSetChanged();
+            }else {
+                adapter.setLoadMoreData(list);
+            }
+
+            if(list.isEmpty()
+                    ||list.size()< CommonConstants.PAGE_SIZE
+            ){
+                rvDataList.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.loadEnd();
+                    }
+                },10);
+                isLoadOver = true;
+            }
         }catch (Exception e){
             e.printStackTrace();
             ToastUtils.showShort(e.toString());
         }
-    }
-    private void appendList(List<Pioneer> list) {
-        if(list == null
-                ||list.isEmpty()
-        ){
-            adapter.loadEnd();
-        }
-        if(list.isEmpty()){
-            isLoadOver = true;
-            return;
-        }
-        adapter.setLoadMoreData(list);
     }
 
     @Override
@@ -132,7 +163,17 @@ public class PioneerListActivity extends BaseTitleAndBottomBarActivity
 
     @Override
     public void reload(boolean bShow) {
+        isReload = true;
+        pageNum = 1;
+        presenter.getList(menuList.get(menuIndex).getName(),pageNum);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        if(menuList!=null){
+//            reload(true);
+//        }
     }
 
     @Override
@@ -161,7 +202,8 @@ public class PioneerListActivity extends BaseTitleAndBottomBarActivity
                 @Override
                 public void onItemClicked(int position) {
                     refreshMenu(position);
-                    reset();
+                    isReload = true;
+                    pageNum = 1;
                     presenter.getList(menuList.get(menuIndex).getName(),pageNum);
                 }
             });

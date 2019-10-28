@@ -5,6 +5,9 @@ public class HttpConstants {
     // 测试环境
     public static String SERVER_ADDRESS = "http://grecode.gnway.cc:82";
 
+    //生产环境
+//    public static String SERVER_ADDRESS = "http://125.124.110.91:8081";
+
     public static String FILE_SERVER_URL = SERVER_ADDRESS+"/forum_pic/upload.do";
     public static String HEAD_FILE_SERVER_URL = SERVER_ADDRESS+"/upload.do";
     // 生产环境
@@ -19,11 +22,6 @@ public class HttpConstants {
 
     /*************************************************************************************************************/
     public static final String UPLOAD_FILE = "/forum_pic/upload.do";
-
-
-    //
-
-
 
 
     /**************************    特色东坑 *******************************/

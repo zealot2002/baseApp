@@ -1,5 +1,7 @@
 package com.zzy.business.view.activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
@@ -32,6 +34,7 @@ public class PioneerDetailActivity extends BaseTitleAndBottomBarActivity
     private WebView webView;
     private int id;
     private Pioneer bean;
+    private boolean isReload = false;
     /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,12 @@ public class PioneerDetailActivity extends BaseTitleAndBottomBarActivity
             id = getIntent().getIntExtra(ParamConstants.ID,0);
             presenter = new PioneerPresenter(this);
             presenter.getDetail(id);
+            setOnBackClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    handleBack();
+                }
+            });
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -64,6 +73,18 @@ public class PioneerDetailActivity extends BaseTitleAndBottomBarActivity
     }
 
     private void setupViews() {
+        if(isReload){
+            isReload = false;
+            try{
+                tvLikeNum.setText("赞 ("+bean.getLikeNum()+")");
+                tvLikeNum.setTextColor(bean.isLike()?
+                        getResources().getColor(R.color.deep_blue)
+                        :getResources().getColor(R.color.text_gray));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return;
+        }
         tvTitle = findViewById(R.id.rootView).findViewById(R.id.tvTitle);
         btnStudy = findViewById(R.id.btnStudy);
         webView = findViewById(R.id.webView);
@@ -87,6 +108,26 @@ public class PioneerDetailActivity extends BaseTitleAndBottomBarActivity
         btnStudy.setOnClickListener(this);
     }
 
+    private void handleBack(){
+        try{
+            Intent it = new Intent();
+            it.putExtra(ParamConstants.COUNT,bean.getLookNum());
+            setResult(RESULT_OK,it);
+            finish();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            handleBack();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.rlLike){
@@ -99,6 +140,7 @@ public class PioneerDetailActivity extends BaseTitleAndBottomBarActivity
     @Override
     public void reload(boolean bShow) {
         presenter.getDetail(id);
+        isReload = true;
     }
 
     @Override

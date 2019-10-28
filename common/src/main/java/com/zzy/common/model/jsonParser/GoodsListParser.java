@@ -48,7 +48,11 @@ public class GoodsListParser implements HInterface.JsonParser {
                 }
 
                 if(infoObj.has("SALE_GRADE")){
-                    bean.setScore(getScore(infoObj.getString("SALE_GRADE")));
+                    try{
+                        bean.setScore(Float.valueOf(infoObj.getString("SALE_GRADE")));
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }
                 bean.getImgList().add(new Image(HttpConstants.SERVER_ADDRESS+"/"+infoObj.getString("PIC_ADDR")));
                 dataList.add(bean);
@@ -58,21 +62,5 @@ public class GoodsListParser implements HInterface.JsonParser {
             String msg = obj.getString(HttpConstants.ERROR_MESSAGE);
             return new Object[]{HConstant.ERROR, msg};
         }
-    }
-
-    private int getScore(String s){
-        int score = 5;
-        if("非常差".equals(s)){
-            score = 1;
-        }else if("较差".equals(s)){
-            score = 2;
-        }else if("一般".equals(s)){
-            score = 3;
-        }else if("较好".equals(s)){
-            score = 4;
-        }else if("非常好".equals(s)){
-            score = 5;
-        }
-        return score;
     }
 }

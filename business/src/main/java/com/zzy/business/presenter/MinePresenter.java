@@ -6,15 +6,13 @@ import com.zzy.business.contract.MineContract;
 import com.zzy.common.model.HttpProxy;
 import com.zzy.common.model.bean.Image;
 import com.zzy.common.network.CommonDataCallback;
-import com.zzy.common.utils.FileUploader;
+import com.zzy.common.utils.FileHandler;
 import com.zzy.commonlib.core.ThreadPool;
 import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.http.HInterface;
 import com.zzy.commonlib.log.MyLog;
 import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.commonlib.utils.NetUtils;
-
-import org.json.JSONException;
 
 public class MinePresenter implements MineContract.Presenter{
     private final MineContract.View view;
@@ -71,7 +69,7 @@ public class MinePresenter implements MineContract.Presenter{
                 @Override
                 public void run() {
                     try {
-                        new FileUploader().postHeadPic(image.getPath(), new HInterface.DataCallback() {
+                        new FileHandler().postHeadPic(image.getPath(), new HInterface.DataCallback() {
                             @Override
                             public void requestCallback(int result, Object data, Object tagData) {
                                 MyLog.e("result:" +data.toString());
