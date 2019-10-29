@@ -13,6 +13,8 @@ import com.zzy.commonlib.utils.ToastUtils;
 import com.zzy.login.R;
 import com.zzy.login.contract.LoginContract;
 import com.zzy.login.presenter.LoginPresenter;
+import com.zzy.sc.core.serverCenter.SCM;
+import com.zzy.servercentre.ActionConstants;
 
 import java.util.List;
 
@@ -106,6 +108,11 @@ public class ResetPasswordActivity extends BaseAppActivity implements View.OnCli
     @Override
     public void onSuccess() {
         ToastUtils.showShort("成功");
+        try {
+            SCM.getInstance().req(ResetPasswordActivity.this, ActionConstants.LOGOUT_ACTION);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         finish();
     }
 

@@ -16,7 +16,7 @@ public class ActionConstants {
     /* login */
     public static final String ENTRY_LOGIN_ACTIVITY_ACTION = "entryLogin";
     public static final String ENTRY_RESET_PW_ACTIVITY_ACTION = "entryResetPw";
-
+    public static final String LOGOUT_ACTION = "logout";
     /* mine */
     public static final String ENTRY_MY_MAIN_ACTIVITY_ACTION = "entryMyMain";
 
@@ -46,7 +46,6 @@ public class ActionConstants {
     public static final String ENTRY_CREATE_GESTURES_PWD_ACTIVITY_ACTION = "createGesture";
     public static final String ENTRY_MODIFY_LOGIN_PWD_ACTIVITY_ACTION = "updateLoginPwd";
     public static final String ENTRY_GESTURES_PWD_ACTIVITY_ACTION = "entryGesturesPwdActivity";
-    public static final String LOGOUT_ACTION = "logout";
     public static final String CLEAR_LOGIN_DATA_ACTION = "clearLoginData";
 
     /* user start*/

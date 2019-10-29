@@ -3,6 +3,7 @@ import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -17,16 +18,24 @@ import com.zzy.common.utils.InputFilter.SpecialExcludeFilter;
 import com.zzy.common.widget.MyEditText;
 import com.zzy.commonlib.utils.ToastUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import fr.ganfra.materialspinner.MaterialSpinner;
+
 /**
  * 我要招聘
  */
 public class JobNewActivity extends BaseTitleAndBottomBarActivity implements View.OnClickListener , JobContract.View {
     private Job bean;
-    private EditText etCompanyName,etJobName,etAddress,etHeadcount,etEducation,
+    private EditText etCompanyName,etJobName,etAddress,etHeadcount,
             etSalaryMin,etSalaryMax,etPhone,etContact;
     private MyEditText etJobContent,etJobRequirements;
     private Button btnOk;
     private JobContract.Presenter presenter;
+    private List<String> educationList;
+    private MaterialSpinner spinnerEducation;
+
     /***********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,13 +60,14 @@ public class JobNewActivity extends BaseTitleAndBottomBarActivity implements Vie
         etJobName = findViewById(R.id.etJobName);
         etAddress = findViewById(R.id.etAddress);
         etHeadcount = findViewById(R.id.etHeadcount);
-        etEducation = findViewById(R.id.etEducation);
         etSalaryMin = findViewById(R.id.etSalaryMin);
         etSalaryMax = findViewById(R.id.etSalaryMax);
         etPhone = findViewById(R.id.etPhone);
         etContact = findViewById(R.id.etContact);
         etJobContent = findViewById(R.id.etJobContent);
         etJobRequirements = findViewById(R.id.etJobRequirements);
+        spinnerEducation = findViewById(R.id.spinnerEducation);
+        repairEducationList();
 
         etHeadcount.setFilters(new InputFilter[]{
                 new EmojiExcludeFilter(),
@@ -73,10 +83,6 @@ public class JobNewActivity extends BaseTitleAndBottomBarActivity implements Vie
                 new LengthFilter(200)}
         );
         etAddress.setFilters(new InputFilter[]{
-                new EmojiExcludeFilter(),
-                new LengthFilter(200)}
-        );
-        etEducation.setFilters(new InputFilter[]{
                 new EmojiExcludeFilter(),
                 new LengthFilter(200)}
         );
@@ -97,6 +103,26 @@ public class JobNewActivity extends BaseTitleAndBottomBarActivity implements Vie
         btnOk.setOnClickListener(this);
     }
 
+    private void repairEducationList() {
+
+        educationList = new ArrayList<>();
+        educationList.add("学历不限");
+        educationList.add("小学");
+        educationList.add("初中");
+        educationList.add("中专");
+        educationList.add("高中");
+        educationList.add("大专");
+        educationList.add("本科");
+        educationList.add("研究生");
+        educationList.add("硕士");
+        educationList.add("博士");
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, educationList);
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spinnerEducation = findViewById(R.id.spinnerEducation);
+        spinnerEducation.setAdapter(adapter);
+        spinnerEducation.setSelection(0);
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -104,7 +130,7 @@ public class JobNewActivity extends BaseTitleAndBottomBarActivity implements Vie
             if(v.getId() == R.id.btnOk){
                 bean.setJobRequirements(etJobRequirements.getText().toString().trim());
                 bean.setJobContent(etJobContent.getText().toString().trim());
-                bean.setEducation(etEducation.getText().toString().trim());
+                bean.setEducation(educationList.get(spinnerEducation.getSelectedItemPosition()));
                 bean.setPhone(etPhone.getText().toString().trim());
                 bean.setContact(etContact.getText().toString().trim());
                 bean.setAddress(etAddress.getText().toString().trim());
@@ -150,6 +176,14 @@ public class JobNewActivity extends BaseTitleAndBottomBarActivity implements Vie
                 }
                 if(TextUtils.isEmpty(bean.getJobContent())){
                     ToastUtils.showShort("请填写岗位要求");
+                    return;
+                }
+                if(TextUtils.isEmpty(bean.getSalaryMin())){
+                    ToastUtils.showShort("请填写起始薪资");
+                    return;
+                }
+                if(TextUtils.isEmpty(bean.getSalaryMax())){
+                    ToastUtils.showShort("请填写最高薪资");
                     return;
                 }
                 if(Float.valueOf(bean.getSalaryMin())>Float.valueOf(bean.getSalaryMax())){

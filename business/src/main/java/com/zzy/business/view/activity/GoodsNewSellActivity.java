@@ -279,6 +279,31 @@ public class GoodsNewSellActivity extends BaseTitleAndBottomBarActivity
                 image.setName(s.substring(s.lastIndexOf('/')));
                 bean.getImgList().add(image);
             }
+
+            if(TextUtils.isEmpty(bean.getName())){
+                ToastUtils.showShort("请填写标题");
+                return;
+            }
+            if(TextUtils.isEmpty(bean.getContact())){
+                ToastUtils.showShort("请填写联系人");
+                return;
+            }
+            if(TextUtils.isEmpty(bean.getPhone())){
+                ToastUtils.showShort("请填写联系电话");
+                return;
+            }
+            if(TextUtils.isEmpty(bean.getAddress())){
+                ToastUtils.showShort("请填写地址");
+                return;
+            }
+            if(TextUtils.isEmpty(bean.getDesc())){
+                ToastUtils.showShort("请填写物品描述");
+                return;
+            }
+            if(TextUtils.isEmpty(bean.getPrice())){
+                ToastUtils.showShort("请填写价格");
+                return;
+            }
             if(type == CommonConstants.MY_GOODS_SELL){
                 presenter.update(CommonConstants.GOODS_SELL,bean);
             }else {

@@ -164,5 +164,7 @@ public class MyPioneeringDetailActivity extends BaseTitleAndBottomBarActivity
 
     @Override
     public void onSuccess() {
+        finish();
     }
+
 }

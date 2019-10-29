@@ -236,6 +236,35 @@ public class GoodsNewBuyActivity extends BaseTitleAndBottomBarActivity
                 image.setName(s.substring(s.lastIndexOf('/')));
                 bean.getImgList().add(image);
             }
+            if(TextUtils.isEmpty(bean.getName())){
+                ToastUtils.showShort("请填写标题");
+                return;
+            }
+            if(TextUtils.isEmpty(bean.getPhone())){
+                ToastUtils.showShort("请填写联系电话");
+                return;
+            }
+            if(TextUtils.isEmpty(bean.getContact())){
+                ToastUtils.showShort("请填写联系人");
+                return;
+            }
+            if(TextUtils.isEmpty(bean.getDesc())){
+                ToastUtils.showShort("请填写物品描述");
+                return;
+            }
+            if(TextUtils.isEmpty(bean.getStartPrice())){
+                ToastUtils.showShort("请填写起始价格");
+                return;
+            }
+            if(TextUtils.isEmpty(bean.getEndPrice())){
+                ToastUtils.showShort("请填写最高价格");
+                return;
+            }
+            if(Float.valueOf(bean.getStartPrice())>Float.valueOf(bean.getEndPrice())){
+                ToastUtils.showShort("起始价格不得大于最高价格");
+                return;
+            }
+
             if(type == CommonConstants.MY_GOODS_BUY){
                 presenter.update(CommonConstants.GOODS_BUY,bean);
             }else {

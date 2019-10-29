@@ -143,18 +143,22 @@
                 android:layout_centerVertical="true"
                 android:text="学历要求 :   "
                 />
-            <EditText
-                android:id="@+id/etEducation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
+            <fr.ganfra.materialspinner.MaterialSpinner
+                android:id="@+id/spinnerEducation"
                 android:layout_toRightOf="@+id/tvEducation"
-                android:layout_centerVertical="true"
-                android:textColorHint="@color/white"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                android:background="@null"
+                android:layout_marginLeft="5dp"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                app:ms_multiline="false"
+                app:ms_enableFloatingLabel="false"
+                app:ms_enableErrorLabel="false"
+                app:ms_baseColor="@android:color/transparent"
+                app:ms_arrowColor="@color/white"
+                app:ms_arrowSize="16dp"
+                app:ms_alignLabels="false"
                 />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line2_height"
