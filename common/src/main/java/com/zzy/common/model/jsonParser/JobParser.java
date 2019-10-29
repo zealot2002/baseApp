@@ -38,6 +38,8 @@ public class JobParser implements HInterface.JsonParser {
 
             bean.setJobContent(dataObj.getString("JOB_REQUIREMENT"));
             bean.setJobRequirements(dataObj.getString("PERSON_REQUIREMENT"));
+            bean.setState(dataObj.getString("RECRUITMENT_STATE"));
+
 
             return new Object[]{HConstant.SUCCESS,bean};
         } else {

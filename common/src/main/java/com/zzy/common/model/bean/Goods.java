@@ -12,6 +12,7 @@ import java.util.List;
 public class Goods implements Serializable {
     private int id;
     private String userId;
+    private String state;
     private String name;
     private String price;
     private String phone;
@@ -139,5 +140,13 @@ public class Goods implements Serializable {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }

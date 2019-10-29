@@ -112,6 +112,12 @@ public class MyJobDetailActivity extends BaseTitleAndBottomBarActivity implement
         btnStop = findViewById(R.id.btnStop);
         btnUpdate.setOnClickListener(this);
         btnStop.setOnClickListener(this);
+
+        if(!TextUtils.isEmpty(bean.getState())
+                &&bean.getState().equals("完成")){
+            btnUpdate.setVisibility(View.GONE);
+            btnStop.setVisibility(View.GONE);
+        }
     }
     @Override
     public void updateUI(Object o) {

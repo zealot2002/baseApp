@@ -185,7 +185,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvPhotoPicker"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300px"
             android:layout_marginTop="10dp"
             />
         <!--完成-->
@@ -215,5 +215,8 @@
             android:layout_marginBottom="@dimen/bottom_margin"
             android:visibility="gone"
             />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"/>
     </LinearLayout>
 </ScrollView>

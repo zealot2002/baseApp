@@ -16,6 +16,7 @@ public class Pioneering {
     private String contact;
     private String phone;
     private String headUrl;
+    private String state;
     private List<String> skills = new ArrayList<>();
 
     public Pioneering() {
@@ -89,5 +90,13 @@ public class Pioneering {
 
     public void setSkills(List<String> skills) {
         this.skills = skills;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }

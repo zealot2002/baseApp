@@ -215,6 +215,11 @@
                 />
         </RelativeLayout>
 
+        <TextView
+            style="@style/tv_style_white_14"
+            android:text="注：编辑人才画像标签请在“我的-我的档案”中进行操作"
+            android:layout_marginTop="10dp"
+            />
 
         <!--举报-->
         <TextView

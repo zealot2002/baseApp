@@ -5,6 +5,7 @@ import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.InputFilter;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -108,6 +109,13 @@ public class GoodsNewBuyActivity extends BaseTitleAndBottomBarActivity
         if(type == CommonConstants.MY_GOODS_BUY){
             fillValue();
         }
+
+        if(!TextUtils.isEmpty(bean.getState())
+                &&bean.getState().equals("成交")){
+            btnOk.setVisibility(View.GONE);
+            btnDel.setVisibility(View.GONE);
+        }
+
         prepareImage();
     }
 

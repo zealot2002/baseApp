@@ -30,6 +30,8 @@ public class PioneeringParser implements HInterface.JsonParser {
             if(dataObj.has("MOBILE_NO")) bean.setPhone(dataObj.getString("MOBILE_NO"));
             if(dataObj.has("RELEASE_TEXT")) bean.setContent(dataObj.getString("RELEASE_TEXT"));
             if(dataObj.has("HEAD_PIC_ADDR")) bean.setHeadUrl(HttpConstants.SERVER_ADDRESS+"/"+dataObj.getString("HEAD_PIC_ADDR"));
+            if(dataObj.has("RECRUITMENT_STATE")) bean.setState(dataObj.getString("RECRUITMENT_STATE"));
+
 
             if(dataObj.has("SKILL_ARR")){
                 JSONArray array = dataObj.getJSONArray("SKILL_ARR");

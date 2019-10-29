@@ -228,7 +228,6 @@ public class GoodsDetailBuyActivity extends BaseTitleAndBottomBarActivity
 
     @Override
     public void onSuccess() {
-        ToastUtils.showShort("成功");
         reload(true);
         if(rlMsg!=null){
             rlMsg.setVisibility(View.GONE);

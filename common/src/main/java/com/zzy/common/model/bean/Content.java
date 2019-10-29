@@ -22,6 +22,7 @@ public class Content {
     private String content;
     private String likeNum;
     private String lookNum;
+    private String replyNum;
     private boolean isLike;
     private String type;
     private List<Image> imgList = new ArrayList<>();
@@ -162,5 +163,13 @@ public class Content {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getReplyNum() {
+        return replyNum;
+    }
+
+    public void setReplyNum(String replyNum) {
+        this.replyNum = replyNum;
     }
 }

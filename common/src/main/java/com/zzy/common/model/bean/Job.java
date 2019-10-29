@@ -22,6 +22,7 @@ public class Job implements Serializable {
     private String jobContent;
     private String jobRequirements;
     private String publishTime;
+    private String state;
 
     public Job() {}
 
@@ -135,5 +136,13 @@ public class Job implements Serializable {
 
     public void setSalaryMax(String salaryMax) {
         this.salaryMax = salaryMax;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }

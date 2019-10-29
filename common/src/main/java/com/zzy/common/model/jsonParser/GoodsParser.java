@@ -35,6 +35,8 @@ public class GoodsParser implements HInterface.JsonParser {
 
             if(dataObj.has("RELEASE_PEOPLE_ID")) bean.setUserId(dataObj.getString("RELEASE_PEOPLE_ID"));
 
+            if(dataObj.has("DEAL_STATE")) bean.setState(dataObj.getString("DEAL_STATE"));
+
             String type = "买";
             if(dataObj.has("SALE_TYPE")) type = dataObj.getString("SALE_TYPE");
             if(type.equals("买")){

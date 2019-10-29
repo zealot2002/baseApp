@@ -43,10 +43,10 @@ public class ContentDelegate implements ItemViewDelegate<Content> {
                 tvRight.setText("浏览:"+bean.getLookNum());
             }else if(CommonConstants.CONTENT_IDEA == type){
                 tvMiddle.setText("浏览:"+bean.getLookNum());
-                tvRight.setText("回复:"+bean.getCommentList().size());
+                tvRight.setText("回复:"+bean.getReplyNum());
             }else if(CommonConstants.CONTENT_EXPERIENCE == type){
                 tvMiddle.setText("浏览:"+bean.getLookNum());
-                tvRight.setText("回复:"+bean.getCommentList().size());
+                tvRight.setText("回复:"+bean.getReplyNum());
             }
         }catch (Exception e){
             e.printStackTrace();

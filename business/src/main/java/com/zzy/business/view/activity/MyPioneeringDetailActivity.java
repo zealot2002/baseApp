@@ -2,6 +2,7 @@ package com.zzy.business.view.activity;
 
 import android.os.Bundle;
 import android.text.InputFilter;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -93,6 +94,12 @@ public class MyPioneeringDetailActivity extends BaseTitleAndBottomBarActivity
         btnStop = findViewById(R.id.btnStop);
         btnStop.setOnClickListener(this);
 
+        if(!TextUtils.isEmpty(bean.getState())
+                &&bean.getState().equals("完成")){
+            btnUpdate.setVisibility(View.GONE);
+            btnStop.setVisibility(View.GONE);
+        }
+
         ImageLoader.loadImage(ivPic,bean.getHeadUrl());
         if(bean.getSkills().size() > 0){
             rlSkill1.setVisibility(View.VISIBLE);
@@ -157,6 +164,5 @@ public class MyPioneeringDetailActivity extends BaseTitleAndBottomBarActivity
 
     @Override
     public void onSuccess() {
-        ToastUtils.showShort("成功");
     }
 }

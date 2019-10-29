@@ -33,7 +33,7 @@ public class PioneeringListParser implements HInterface.JsonParser {
                 JSONObject infoObj = infoArray.getJSONObject(i);
                 Pioneering bean = new Pioneering();
                 bean.setId(infoObj.getInt("RECRUITMENT_ID"));
-                bean.setTitle(infoObj.getString("RELEASE_PERSON"));
+                bean.setTitle(infoObj.getString("RELEASE_PERSON")+"的求职信息");
                 bean.setDate(infoObj.getString("RELEASE_TIME"));
                 dataList.add(bean);
             }

@@ -120,6 +120,11 @@ public class GoodsNewSellActivity extends BaseTitleAndBottomBarActivity
         if(type == CommonConstants.MY_GOODS_SELL){
             fillValue();
         }
+        if(!TextUtils.isEmpty(bean.getState())
+                &&bean.getState().equals("成交")){
+            btnOk.setVisibility(View.GONE);
+            btnDel.setVisibility(View.GONE);
+        }
         prepareImage();
     }
     private void prepareImage() {

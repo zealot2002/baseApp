@@ -37,6 +37,7 @@ public class ContentListParser implements HInterface.JsonParser {
                 bean.setTitle(infoObj.getString("FORUM_NAME"));
                 bean.setDate(infoObj.getString("RELEASE_DATE"));
                 bean.setLookNum(infoObj.getString("TOTAL_BROWSE"));
+                bean.setReplyNum(infoObj.getInt("TOTAL_REPLY")+"");
                 dataList.add(bean);
             }
             return new Object[]{HConstant.SUCCESS,dataList};
