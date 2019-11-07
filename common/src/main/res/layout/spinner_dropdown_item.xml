@@ -9,4 +9,5 @@
     android:textColor="@color/white"
     android:background="@color/blue_gray"
     android:padding="5dp"
+    android:textSize="14sp"
     />

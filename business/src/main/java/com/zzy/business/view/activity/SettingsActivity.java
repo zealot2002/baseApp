@@ -87,7 +87,6 @@ public class SettingsActivity extends BaseTitleAndBottomBarActivity implements V
                         //clear token and userId
                         SPUtils.putString(AppUtils.getApp(), SPConstants.TOKEN,"");
                         SPUtils.putString(AppUtils.getApp(), SPConstants.USER_ID,"");
-                        ToastUtils.showShort("成功");
                         try {
                             SCM.getInstance().req(SettingsActivity.this,
                                     ActionConstants.ENTRY_LOGIN_ACTIVITY_ACTION);

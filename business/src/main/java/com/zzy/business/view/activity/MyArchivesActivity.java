@@ -358,7 +358,6 @@ public class MyArchivesActivity extends BaseTitleAndBottomBarActivity
 
     @Override
     public void onSuccess() {
-        ToastUtils.showShort("成功");
         finish();
     }
 

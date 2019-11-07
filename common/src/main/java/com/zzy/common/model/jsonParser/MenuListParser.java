@@ -28,14 +28,11 @@ public class MenuListParser implements HInterface.JsonParser {
         if (errorCode == HttpConstants.NO_ERROR) {
             JSONArray infoArray = obj.getJSONArray("data");
             List<Menu> dataList = new ArrayList<>();
-            Menu mAll = new Menu("全部",true);
-
-            dataList.add(mAll);
             for(int i=0;i<infoArray.length();i++) {
                 JSONObject infoObj = infoArray.getJSONObject(i);
                 Menu bean = new Menu();
                 bean.setName(infoObj.getString("STATUS_NAME"));
-                bean.setSelected(false);
+                bean.setSelected(i==0?true:false);
                 dataList.add(bean);
             }
             return new Object[]{HConstant.SUCCESS,dataList};

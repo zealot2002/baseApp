@@ -170,11 +170,11 @@ public class JobNewActivity extends BaseTitleAndBottomBarActivity implements Vie
                     ToastUtils.showShort("请填写联系人");
                     return;
                 }
-                if(TextUtils.isEmpty(bean.getJobRequirements())){
+                if(TextUtils.isEmpty(bean.getJobContent())){
                     ToastUtils.showShort("请填写工作要求");
                     return;
                 }
-                if(TextUtils.isEmpty(bean.getJobContent())){
+                if(TextUtils.isEmpty(bean.getJobRequirements())){
                     ToastUtils.showShort("请填写岗位要求");
                     return;
                 }

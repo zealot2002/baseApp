@@ -51,13 +51,15 @@ public class LoginActivity extends BaseAppActivity implements View.OnClickListen
                 }).onDenied(new Action<List<String>>() {
             @Override
             public void onAction(List<String> data) {
-                ToastUtils.showShort("您必须授权才能使用app");
-                etPhone.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        finish();
-                    }
-                },1000);
+                if (android.os.Build.VERSION.SDK_INT <= 28) {
+                    ToastUtils.showShort("您必须授权才能使用app");
+                    etPhone.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            finish();
+                        }
+                    },1000);
+                }
             }
         }).start();
     }

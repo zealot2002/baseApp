@@ -119,7 +119,7 @@ public class ImageViewerActivity extends BaseAppActivity implements View.OnClick
     private void gotoCrop() {
         Uri source = Uri.fromFile(new File(dataList.get(curPosition)));
         Uri destination = Uri.fromFile(new File(getCacheDir(),System.currentTimeMillis() +"_cropped.jpg"));
-            Crop.of(source, destination).withAspect(200,150).start(this);
+            Crop.of(source, destination).withAspect(370,300).start(this);
 //        Crop.of(source, destination).withAspect(281,150).start(this);
     }
     @Override

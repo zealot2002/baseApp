@@ -8,12 +8,14 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.hedgehog.ratingbar.RatingBar;
+import com.zhy.autolayout.utils.ScreenUtils;
 import com.zzy.business.R;
 import com.zzy.business.contract.GoodsContract;
 import com.zzy.business.presenter.GoodsPresenter;
@@ -175,8 +177,17 @@ public class GoodsDetailSellActivity extends BaseTitleAndBottomBarActivity
         rlMsg.setVisibility(View.VISIBLE);
         etMsg.requestFocus();
     }
+    private float getMatchHeight(){
+        //370*300
+        int[] wh = ScreenUtils.getScreenSize(this,false);
+        return wh[0]*300/370;
+    }
     private void updateBanner() {
         banner = findViewById(R.id.banner);
+        LinearLayout.LayoutParams linearParams =(LinearLayout.LayoutParams) banner.getLayoutParams();
+        linearParams.height = (int)getMatchHeight();
+        banner.setLayoutParams(linearParams);
+
         ArrayList<String> imgs = new ArrayList<>();
         for(int i=0;i<bean.getImgList().size();i++){
             imgs.add(bean.getImgList().get(i).getPath());
@@ -261,7 +272,6 @@ public class GoodsDetailSellActivity extends BaseTitleAndBottomBarActivity
 
     @Override
     public void onSuccess() {
-        ToastUtils.showShort("成功");
         reload(true);
         if(rlMsg!=null){
             rlMsg.setVisibility(View.GONE);

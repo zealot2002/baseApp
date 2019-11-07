@@ -331,14 +331,12 @@ public class FriendsCircleActivity extends BaseTitleAndBottomBarActivity impleme
 
     @Override
     public void onSuccess() {
-        ToastUtils.showShort("成功");
         isLikeOp = true;
         reload(true);
     }
 
     @Override
     public void onLikeSuccess(int position, String likeNum) {
-        ToastUtils.showShort("成功");
         dataList.get(position).setLikeNum(likeNum);
         adapter.notifyDataSetChanged();
     }

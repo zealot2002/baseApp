@@ -244,7 +244,7 @@
                     app:ms_enableErrorLabel="false"
                     app:ms_baseColor="@android:color/transparent"
                     app:ms_arrowColor="@color/white"
-                    app:ms_arrowSize="16dp"
+                    app:ms_arrowSize="12dp"
                     app:ms_alignLabels="false"
                     />
                 <View
@@ -281,7 +281,7 @@
                     app:ms_enableErrorLabel="false"
                     app:ms_baseColor="@android:color/transparent"
                     app:ms_arrowColor="@color/white"
-                    app:ms_arrowSize="16dp"
+                    app:ms_arrowSize="12dp"
                     app:ms_alignLabels="false"
                     />
                 <View
@@ -318,7 +318,7 @@
                     app:ms_enableErrorLabel="false"
                     app:ms_baseColor="@android:color/transparent"
                     app:ms_arrowColor="@color/white"
-                    app:ms_arrowSize="16dp"
+                    app:ms_arrowSize="12dp"
                     app:ms_alignLabels="false"
                     />
                 <View
@@ -603,7 +603,7 @@
                 app:ms_enableErrorLabel="false"
                 app:ms_baseColor="@android:color/transparent"
                 app:ms_arrowColor="@color/white"
-                app:ms_arrowSize="16dp"
+                app:ms_arrowSize="12dp"
                 app:ms_alignLabels="false"
                 />
             <View

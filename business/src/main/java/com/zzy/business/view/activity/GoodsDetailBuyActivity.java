@@ -8,11 +8,13 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
+import com.zhy.autolayout.utils.ScreenUtils;
 import com.zzy.business.R;
 import com.zzy.business.contract.GoodsContract;
 import com.zzy.business.view.itemViewDelegate.ContentCommentDelegate;
@@ -30,6 +32,7 @@ import com.zzy.common.widget.MyEditText;
 import com.zzy.common.widget.PopupEditDialog;
 import com.zzy.common.widget.recycleAdapter.MyMultiRecycleAdapter;
 import com.zzy.commonlib.utils.AppUtils;
+import com.zzy.commonlib.utils.PxUtils;
 import com.zzy.commonlib.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -105,7 +108,7 @@ public class GoodsDetailBuyActivity extends BaseTitleAndBottomBarActivity
         etName.setText(bean.getName());
         etContact.setText(bean.getContact());
         etPhone.setText(bean.getPhone());
-        etPrice.setText("¥"+bean.getStartPrice()+"-"+bean.getEndPrice());
+        etPrice.setText("¥"+bean.getStartPrice()+" - ¥"+bean.getEndPrice());
 
         etDesc.setText(bean.getDesc());
         updateBanner();
@@ -142,8 +145,18 @@ public class GoodsDetailBuyActivity extends BaseTitleAndBottomBarActivity
         rlMsg.setVisibility(View.VISIBLE);
         etMsg.requestFocus();
     }
+    private float getMatchHeight(){
+        //370*300
+        int[] wh = ScreenUtils.getScreenSize(this,false);
+        return wh[0]*300/370;
+    }
     private void updateBanner() {
         banner = findViewById(R.id.banner);
+
+        LinearLayout.LayoutParams linearParams =(LinearLayout.LayoutParams) banner.getLayoutParams();
+        linearParams.height = (int)getMatchHeight();
+        banner.setLayoutParams(linearParams);
+
         ArrayList<String> imgs = new ArrayList<>();
         for(int i=0;i<bean.getImgList().size();i++){
             imgs.add(bean.getImgList().get(i).getPath());
@@ -156,7 +169,7 @@ public class GoodsDetailBuyActivity extends BaseTitleAndBottomBarActivity
                     }
                     @Override
                     public int getLayoutId() {
-                        return R.layout.banner_item;
+                        return R.layout.banner_item_fitxy;
                     }
                 }, imgs);
     }

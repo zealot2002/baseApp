@@ -1,5 +1,6 @@
 package com.zzy.home.view.activity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
@@ -17,6 +19,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.yanzhenjie.permission.Action;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.Permission;
+import com.zhy.autolayout.utils.ScreenUtils;
 import com.zzy.business.view.activity.ContentListActivity;
 import com.zzy.business.view.activity.FriendsCircleActivity;
 import com.zzy.business.view.activity.GoodsListActivity;
@@ -114,13 +117,24 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
                 }).onDenied(new Action<List<String>>() {
             @Override
             public void onAction(List<String> data) {
-                ToastUtils.showShort("您必须授权才能使用app");
-                smartRefreshLayout.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        finish();
+                if (android.os.Build.VERSION.SDK_INT <= 28) {
+                    ToastUtils.showShort("您必须授权才能使用app");
+                    smartRefreshLayout.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            finish();
+                        }
+                    },1000);
+                }else{
+                    if(!haveChecked){
+                        haveChecked = true;
+                        try {
+                            SCM.getInstance().req(HomeActivity.this, ActionConstants.CHECK_UPDATE_ACTION);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
-                },1000);
+                }
             }
         }).start();
     }
@@ -252,13 +266,20 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
     protected void onDestroy() {
         super.onDestroy();
     }
-
+    private float getMatchHeight(){
+        //370*300
+        int[] wh = ScreenUtils.getScreenSize(this,false);
+        return wh[0]*132/370;
+    }
     private void updateBanner() {
         List<String> list = new ArrayList<>();
         for(Banner banner:ctx.getBannerList()){
             list.add(banner.getImgUrl());
         }
         banner = findViewById(R.id.banner);
+        LinearLayout.LayoutParams linearParams =(LinearLayout.LayoutParams) banner.getLayoutParams();
+        linearParams.height = (int)getMatchHeight();
+        banner.setLayoutParams(linearParams);
         banner.setPages(
                 new CBViewHolderCreator() {
                     @Override

@@ -107,7 +107,6 @@ public class ResetPasswordActivity extends BaseAppActivity implements View.OnCli
 
     @Override
     public void onSuccess() {
-        ToastUtils.showShort("成功");
         try {
             SCM.getInstance().req(ResetPasswordActivity.this, ActionConstants.LOGOUT_ACTION);
         } catch (Exception e) {

@@ -21,7 +21,7 @@
                 android:id="@+id/tvName"
                 style="@style/tv_style_white_14"
                 android:layout_centerVertical="true"
-                android:text="标        题 :"
+                android:text="标        题:"
                 />
             <EditText
                 android:id="@+id/etName"
@@ -51,7 +51,7 @@
                 android:id="@+id/tvContact"
                 style="@style/tv_style_white_14"
                 android:layout_centerVertical="true"
-                android:text="联  系  人 :"
+                android:text="联  系  人:"
                 />
             <EditText
                 android:id="@+id/etContact"
@@ -81,7 +81,7 @@
                 android:id="@+id/tvPhone"
                 style="@style/tv_style_white_14"
                 android:layout_centerVertical="true"
-                android:text="联系电话 :"
+                android:text="联系电话:"
                 />
             <EditText
                 android:id="@+id/etPhone"
@@ -113,7 +113,7 @@
                 android:id="@+id/tvAddress"
                 style="@style/tv_style_white_14"
                 android:layout_centerVertical="true"
-                android:text="地         址 :"
+                android:text="地         址:"
                 />
             <EditText
                 android:id="@+id/etAddress"
@@ -143,7 +143,7 @@
                 android:id="@+id/tvPrice"
                 style="@style/tv_style_white_14"
                 android:layout_centerVertical="true"
-                android:text="价        格 :"
+                android:text="价        格:"
                 />
             <EditText
                 android:id="@+id/etPrice"

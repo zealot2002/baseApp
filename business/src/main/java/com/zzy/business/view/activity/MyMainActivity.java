@@ -137,7 +137,7 @@ public class MyMainActivity extends BaseTitleAndBottomBarActivity
         }else if(v.getId() == R.id.ivUserHead){
             PhotoPicker.builder()
                     .setPhotoCount(1)
-                    .setShowCamera(false)
+                    .setShowCamera(true)
                     .setPreviewEnabled(false)
                     .start(MyMainActivity.this);
         }

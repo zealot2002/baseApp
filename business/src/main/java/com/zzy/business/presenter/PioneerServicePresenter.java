@@ -50,9 +50,7 @@ public class PioneerServicePresenter implements PioneerServiceContract.Presenter
                 public void callback(int result, Object o, Object o1) {
                     view.closeLoading();
                     if (result == HConstant.SUCCESS) {
-                        //remove all
                         List<Menu> menuList = (List<Menu>) o;
-                        menuList.remove(0);
                         view.updateMenuList(menuList);
                         //continue to get first list
                         getList(menuList.get(0).getName(),1);

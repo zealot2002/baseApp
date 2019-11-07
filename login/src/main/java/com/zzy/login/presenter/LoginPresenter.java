@@ -104,7 +104,7 @@ public class LoginPresenter implements LoginContract.Presenter{
         view.showLoading();
         try{
             if(!bean.getIsCompany().equals("是")){
-                HttpProxy.updateArchives(bean,new CommonDataCallback() {
+                HttpProxy.register2(bean,new CommonDataCallback() {
                     @Override
                     public void callback(int result, Object o, Object o1) {
                         view.closeLoading();
@@ -120,7 +120,7 @@ public class LoginPresenter implements LoginContract.Presenter{
                 return;
             }
             if(bean.getImgList().isEmpty()){
-                HttpProxy.updateArchives(bean,new CommonDataCallback() {
+                HttpProxy.register2(bean,new CommonDataCallback() {
                     @Override
                     public void callback(int result, Object o, Object o1) {
                         view.closeLoading();
@@ -142,7 +142,7 @@ public class LoginPresenter implements LoginContract.Presenter{
                     if (result == HConstant.SUCCESS) {
                         bean.setImgList((List<Image>) data);
                         try {
-                            HttpProxy.updateArchives(bean,new CommonDataCallback() {
+                            HttpProxy.register2(bean,new CommonDataCallback() {
                                 @Override
                                 public void callback(int result, Object o, Object o1) {
                                     view.closeLoading();

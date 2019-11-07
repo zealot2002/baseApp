@@ -17,8 +17,10 @@ android {
         ndk {
             // 选择要添加的对应cpu类型的.so库
 
-            abiFilters 'armeabi'
+            abiFilters 'x86', 'armeabi','armeabi-v7a','arm64-v8a','x86_64'
         }
+
+
 
         // AutoLayoutParams
         manifestPlaceholders = [
@@ -34,7 +36,6 @@ android {
             }
         }
     }
-
 
     //配置keystore签名
     signingConfigs {
@@ -79,6 +80,15 @@ android {
         exclude 'META-INF/NOTICE.txt'
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/LICENSE.txt'
+    }
+
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'x86', 'armeabi-v7a','x86_64'
+            universalApk true
+        }
     }
 }
 

@@ -58,7 +58,7 @@ public class GoodsDelegate implements ItemViewDelegate<Goods> {
                 tvPrice.setText("¥"+bean.getPrice());
             }else{
                 //买
-                tvPrice.setText("¥"+bean.getStartPrice()+"-"+bean.getEndPrice());
+                tvPrice.setText("¥"+bean.getStartPrice()+" - ¥"+bean.getEndPrice());
             }
             ImageLoader.loadImage(ivPic,bean.getImgList().get(0).getPath());
         }catch (Exception e){

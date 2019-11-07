@@ -21,13 +21,13 @@
                 android:id="@+id/tvContact"
                 style="@style/tv_style_white_14"
                 android:layout_centerVertical="true"
-                android:text="联  系  人 :   "
+                android:text="联  系  人:"
                 />
             <EditText
                 android:id="@+id/etContact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
+                android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/tvContact"
                 android:layout_centerVertical="true"
                 android:textColorHint="@color/white"
@@ -51,13 +51,13 @@
                 android:id="@+id/tvPhone"
                 style="@style/tv_style_white_14"
                 android:layout_centerVertical="true"
-                android:text="联系电话 :   "
+                android:text="联系电话:"
                 />
             <EditText
                 android:id="@+id/etPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
+                android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/tvPhone"
                 android:layout_centerVertical="true"
                 android:textColorHint="@color/white"

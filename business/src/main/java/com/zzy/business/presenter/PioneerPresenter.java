@@ -48,9 +48,10 @@ public class PioneerPresenter implements PioneerContract.Presenter{
                 public void callback(int result, Object o, Object o1) {
                     view.closeLoading();
                     if (result == HConstant.SUCCESS) {
-                        view.updateMenuList((List<Menu>) o);
+                        List<Menu> menus = (List<Menu>) o;
+                        view.updateMenuList(menus);
                         //continue to get first list
-                        getList("全部",1);
+                        getList(menus.get(0).getName(),1);
                     }else if(result == HConstant.FAIL
                             ||result == HConstant.ERROR
                     ){

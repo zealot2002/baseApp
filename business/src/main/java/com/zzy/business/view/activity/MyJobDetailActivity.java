@@ -213,11 +213,11 @@ public class MyJobDetailActivity extends BaseTitleAndBottomBarActivity implement
                 ToastUtils.showShort("请填写联系人");
                 return;
             }
-            if(TextUtils.isEmpty(bean.getJobRequirements())){
+            if(TextUtils.isEmpty(bean.getJobContent())){
                 ToastUtils.showShort("请填写工作要求");
                 return;
             }
-            if(TextUtils.isEmpty(bean.getJobContent())){
+            if(TextUtils.isEmpty(bean.getJobRequirements())){
                 ToastUtils.showShort("请填写岗位要求");
                 return;
             }
@@ -243,6 +243,6 @@ public class MyJobDetailActivity extends BaseTitleAndBottomBarActivity implement
 
     @Override
     public void onSuccess() {
-        ToastUtils.showShort("成功");
+        finish();
     }
 }
