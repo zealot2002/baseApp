@@ -8,5 +8,6 @@
     android:ellipsize="marquee"
     android:textAlignment="inherit"
     android:textColor="@color/white"
+    android:textSize="12sp"
     android:layout_marginRight="3dp"
     />
