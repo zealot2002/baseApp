@@ -22,7 +22,12 @@ import com.yanzhenjie.permission.Permission;
 import com.zhy.autolayout.utils.ScreenUtils;
 import com.zzy.business.view.activity.ContentListActivity;
 import com.zzy.business.view.activity.FriendsCircleActivity;
+import com.zzy.business.view.activity.GetRichInfoDetailActivity;
+import com.zzy.business.view.activity.GoodsDetailBuyActivity;
+import com.zzy.business.view.activity.GoodsDetailSellActivity;
 import com.zzy.business.view.activity.GoodsListActivity;
+import com.zzy.business.view.activity.JobDetailActivity;
+import com.zzy.business.view.activity.PioneerDetailActivity;
 import com.zzy.business.view.activity.PioneeringListActivity;
 import com.zzy.business.view.activity.PioneerServiceActivity;
 import com.zzy.business.view.activity.PioneerListActivity;
@@ -34,6 +39,7 @@ import com.zzy.business.view.other.SpeedyLinearLayoutManager;
 import com.zzy.common.base.BaseAppActivity;
 import com.zzy.common.constants.CommonConstants;
 import com.zzy.common.constants.ParamConstants;
+import com.zzy.common.model.bean.GetRichInfo;
 import com.zzy.common.utils.StatusBarUtils;
 import com.zzy.common.widget.BannerHolderView;
 import com.zzy.common.widget.LoadingHelper;
@@ -43,6 +49,7 @@ import com.zzy.commonlib.utils.ToastUtils;
 import com.zzy.home.R;
 import com.zzy.home.contract.HomeContract;
 import com.zzy.home.model.bean.Banner;
+import com.zzy.home.model.bean.News;
 import com.zzy.home.model.wrapper.HomeCtx;
 import com.zzy.home.presenter.HomePresenter;
 import com.zzy.home.view.adapter.NewsListAdapter;
@@ -187,7 +194,22 @@ public class HomeActivity extends BaseAppActivity implements View.OnClickListene
         newsListAdapter.setOnItemClickedListener(new NewsListAdapter.Listener() {
             @Override
             public void onItemClicked(int position) {
-//                ToastUtils.showShort(position);
+                if(position!=0){
+                    position = position%ctx.getNewsList().size();
+                }
+
+                News bean = ctx.getNewsList().get(position);
+                Bundle bundle = new Bundle();
+                bundle.putInt(ParamConstants.ID,bean.getId());
+
+                if(bean.getType().equals("致富信息")){
+                    startActivity(GetRichInfoDetailActivity.class,bundle);
+                }else if(bean.getType().equals("创业先锋")){
+                    startActivity(PioneerDetailActivity.class,bundle);
+                }else if(bean.getType().equals("政策汇编")){
+                    bundle.putString(ParamConstants.TITLE,"政策汇编");
+                    startActivity(GetRichInfoDetailActivity.class,bundle);
+                }
             }
         });
         rvNewsList.postDelayed(mRunnable,500);

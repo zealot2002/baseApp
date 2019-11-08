@@ -1,16 +1,17 @@
 package com.zzy.home.model.bean;
 
 public class News {
-    String id;
+    int id;
     String title;
     String publishTime;
     String from;
+    String type;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -36,5 +37,13 @@ public class News {
 
     public void setFrom(String from) {
         this.from = from;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

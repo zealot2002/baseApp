@@ -46,9 +46,10 @@ public class HomeDataParser implements HInterface.JsonParser {
                 JSONObject newsObj = dataObj.getJSONArray("NEWS").getJSONObject(i);
                 News news = new News();
                 if(newsObj.has("RELEASE_DEPT")) news.setFrom(newsObj.getString("RELEASE_DEPT"));
-                if(newsObj.has("NEWS_INFORMATION_ID")) news.setId(newsObj.getString("NEWS_INFORMATION_ID"));
+                if(newsObj.has("NEWS_INFORMATION_ID")) news.setId(newsObj.getInt("NEWS_INFORMATION_ID"));
                 if(newsObj.has("RELEASE_DATE")) news.setPublishTime(newsObj.getString("RELEASE_DATE"));
                 if(newsObj.has("NEWS_TITLE")) news.setTitle(newsObj.getString("NEWS_TITLE"));
+                if(newsObj.has("NEWS_TYPE")) news.setType(newsObj.getString("NEWS_TYPE"));
                 ctx.getNewsList().add(news);
             }
             if(dataObj.has("SCROLLIMAGE")){
