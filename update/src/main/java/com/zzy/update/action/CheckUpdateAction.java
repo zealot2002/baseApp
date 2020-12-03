@@ -29,7 +29,7 @@ public class CheckUpdateAction implements ScAction {
     private static final String TAG = "CheckUpdateAction";
 
     @Override
-    public void invoke(final Context context, Bundle bundle, String s, ScCallback scCallback) {
+    public void invoke(final Context context, Bundle bundle, String s, final ScCallback scCallback) {
         try {
             HttpProxy.checkVersion(new HInterface.DataCallback() {
                 @Override
@@ -40,6 +40,9 @@ public class CheckUpdateAction implements ScAction {
                                 || updateBean.getDownloadUrl().isEmpty()
                         ) {
                             ToastUtils.showShort("更新地址为空，暂时无法更新");
+                            if(scCallback!=null){
+                                scCallback.onCallback(false,null,"");
+                            }
                             return;
                         }
                         showUpdateDialog((Activity) context, updateBean);

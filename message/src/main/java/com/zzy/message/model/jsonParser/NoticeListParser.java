@@ -1,9 +1,9 @@
-package com.zzy.home.model.jsonParser.main;
+package com.zzy.message.model.jsonParser;
 
+import com.zzy.common.bean.NoticeBean;
 import com.zzy.common.constants.HttpConstants;
 import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.http.HInterface;
-import com.zzy.home.model.bean.main.NoticeBean;
 
 import org.json.JSONArray;
 import org.json.JSONException;

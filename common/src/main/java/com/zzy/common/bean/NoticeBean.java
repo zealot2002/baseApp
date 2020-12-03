@@ -1,16 +1,22 @@
-package com.zzy.home.model.bean.main;
+package com.zzy.common.bean;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
 
 /**
  * @author zzy
  * @date 2018/11/30
  */
 
-public class NoticeBean {
+public class NoticeBean implements Serializable {
     private String title;
     private String content;
     private String time;
     private int titleTextSize;
     private String titleTextColor;
+
 
     public String getTitle() {
         return title;
@@ -51,4 +57,5 @@ public class NoticeBean {
     public void setTitleTextColor(String titleTextColor) {
         this.titleTextColor = titleTextColor;
     }
+
 }

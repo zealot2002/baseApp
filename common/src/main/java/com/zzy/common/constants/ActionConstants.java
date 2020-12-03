@@ -17,6 +17,10 @@ public class ActionConstants {
     /*app update*/
     public static final String CHECK_UPDATE_ACTION = "checkUpdate";
 
+    /*  message */
+    public static final String GET_MESSAGE_LIST_ACTION = "getMessageList";
+    public static final String ENTRY_MESSAGE_ACTIVITY_ACTION = "entryMessageActivity";
+
     /* helper */
     public static final String GET_H5_PROTOCOLS_ACTION = "getH5ProtocolsAction";
     public static final String GET_POPUP_CONTENT_ACTION = "getPopupContentAction";

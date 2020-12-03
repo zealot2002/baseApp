@@ -92,9 +92,12 @@ dependencies {
     implementation "com.android.support:appcompat-v7:${supportLibraryVersion}"
 
     implementation project(':common')
-    implementation project(':helper')
-    implementation project(':home')
     implementation project(':welcome')
+    implementation project(':home')
+    implementation project(':message')
+
+    implementation project(':helper')
+
     implementation project(':login')
     implementation project(':user')
     implementation project(':other')

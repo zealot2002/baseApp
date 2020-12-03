@@ -1,0 +1,45 @@
+<resources>
+
+    <string name="other_feedback_hint">请写下您的宝贵意见或建议</string>
+    <string name="other_feedback_ed_hint">请留下您的联系方式QQ/手机/邮箱</string>
+    <string name="other_commit">提交</string>
+
+    <!--反馈-->
+    <string name="other_toast_feedback_error_contact">请输入正确的联系方式</string>
+    <string name="other_mine_zxkf">在线客服</string>
+    <string name="other_mine_service_num">服务/投诉电话</string>
+    <string name="other_service_tel">95713</string>
+    <string name="other_mine_service_email">客服邮箱</string>
+
+    <!-- 风险评测 -->
+    <string name="other_my_invest_type_text2">建议可以选择风险等级\n%s的借款人</string>
+    <string name="other_my_invest_type_text5">若您的信息发生变化，请及时重测， \n并时刻关注您的风险 承受能力与产品的匹配情况</string>
+    <string name="other_test_again">重新测评</string>
+
+    <!--恒丰银行-->
+    <string name="other_ktgzbank">恒易融已与恒丰银行合作进行资金存管。\n为了您的资金安全，请先开通存管账户。</string>
+    <string name="other_change_card_button">变更银行预留手机号</string>
+    <string name="other_change_card_tip">温馨提示：\n若您在银行变更过此银行卡预留的手机号，请点击‘变更银行预留手机号’按钮，进行同步更新，以确保您的业务不受影响。</string>
+
+    <!--关于我们-->
+    <string name="other_hyr">恒易融</string>
+    <string name="other_about_introduce">
+        恒易融平台（www.hengyirong.com）是由北京恒昌利通投资管理有限公司（简称恒昌利通）管理运营，向借款人及出借人（客户）提供服务的网络借贷信息中介平台。平台主要为客户提供信息搜集、信息公布、资信评估、信息交互、借贷撮合等服务。
+    </string>
+    <string name="other_about_us">关于我们</string>
+    <string name="other_weixin_title">官方微信</string>
+    <string name="other_weixin_desc">hengyirong2014</string>
+    <string name="other_weibo_title">官方微博</string>
+    <string name="other_weibo_desc">http://weibo.com/hengyirong</string>
+    <string name="other_kefu_title">服务/投诉电话</string>
+    <string name="other_private_protocol">隐私协议</string>
+    <string name="other_kefu_tel">95713</string>
+    <string name="other_kefu_time">客服工作时间：9:00-19:00</string>
+
+    <!--优惠券-->
+    <string name="other_can_used">可使用</string>
+    <string name="other_not_used">已失效</string>
+    <string name="other_used_numbers">张可用</string>
+    <string name="other_have_no_reward">暂无奖励信息</string>
+
+</resources>

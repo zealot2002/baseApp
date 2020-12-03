@@ -1,7 +1,11 @@
 package com.zzy.home.presenter;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 
+import com.zzy.common.bean.NoticeBean;
+import com.zzy.common.constants.ActionConstants;
+import com.zzy.common.constants.ParamConstants;
 import com.zzy.common.network.CommonDataCallback;
 import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.utils.AppUtils;
@@ -10,9 +14,11 @@ import com.zzy.commonlib.utils.ToastUtils;
 import com.zzy.home.contract.MainContract;
 import com.zzy.home.model.HttpProxy;
 import com.zzy.home.model.bean.main.BannerBean;
-import com.zzy.home.model.bean.main.NoticeBean;
 import com.zzy.home.model.wrapper.HfCtx;
+import com.zzy.sc.core.serverCenter.SCM;
+import com.zzy.sc.core.serverCenter.ScCallback;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -85,20 +91,23 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     private void getNoticeList() throws Exception {
-        HttpProxy.getNoticeList(new CommonDataCallback() {
-            @Override
-            public void callback(int result, Object o, Object o1) {
-                if(result == HConstant.SUCCESS) {
-                    hfCtx.setNoticeList((List<NoticeBean>) o);
-                    updateUI();
+        try {
+            SCM.getInstance().req(AppUtils.getApp(), ActionConstants.GET_MESSAGE_LIST_ACTION, new ScCallback() {
+                @Override
+                public void onCallback(boolean b, Bundle data, String tag) {
+                    if(b) {
+                        List<NoticeBean> list = (List<NoticeBean>)data.getSerializable(ParamConstants.OBJECT);
+                        hfCtx.setNoticeList(list);
+                        updateUI();
+                    }
+                    else {
+                        handleErrs();
+                    }
                 }
-                else if(result == HConstant.FAIL
-                        || result == HConstant.ERROR
-                ) {
-                    handleErrs();
-                }
-            }
-        });
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void handleErrs() {

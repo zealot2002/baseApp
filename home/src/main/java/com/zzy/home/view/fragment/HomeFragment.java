@@ -17,6 +17,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.sunfusheng.marqueeview.MarqueeView;
 import com.zzy.common.base.BaseLoadingFragment;
+import com.zzy.common.bean.NoticeBean;
 import com.zzy.common.constants.ActionConstants;
 import com.zzy.common.constants.BusConstants;
 import com.zzy.common.constants.ParamConstants;
@@ -26,7 +27,6 @@ import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.home.R;
 import com.zzy.home.contract.MainContract;
 import com.zzy.home.model.bean.main.BannerBean;
-import com.zzy.home.model.bean.main.NoticeBean;
 import com.zzy.home.model.wrapper.HfCtx;
 import com.zzy.home.presenter.MainPresenter;
 import com.zzy.sc.core.serverCenter.SCM;
@@ -131,11 +131,13 @@ public class HomeFragment extends BaseLoadingFragment implements MainContract.Vi
                     Bundle bundle = new Bundle();
                     NoticeBean noticeBean = hfCtx.getNoticeList().get(position);
                     bundle.putString(ParamConstants.TITLE, noticeBean.getTitle());
-                    bundle.putString(ParamConstants.CONTENT, noticeBean.getContent());
-                    bundle.putString(ParamConstants.TIME, noticeBean.getTime());
-                    bundle.putInt(ParamConstants.TEXT_SIZE, noticeBean.getTitleTextSize());
-                    bundle.putString(ParamConstants.TEXT_COLOR, noticeBean.getTitleTextColor());
-                    SCM.getInstance().req(AppUtils.getApp(), ActionConstants.ENTRY_NOTICE_DETAIL_ACTIVITY_ACTION, bundle);
+//                    bundle.putString(ParamConstants.CONTENT, noticeBean.getContent());
+//                    bundle.putString(ParamConstants.TIME, noticeBean.getTime());
+//                    bundle.putInt(ParamConstants.TEXT_SIZE, noticeBean.getTitleTextSize());
+//                    bundle.putString(ParamConstants.TEXT_COLOR, noticeBean.getTitleTextColor());
+
+//                    SCM.getInstance().req(AppUtils.getApp(), ActionConstants.ENTRY_NOTICE_DETAIL_ACTIVITY_ACTION, bundle);
+                    SCM.getInstance().req(AppUtils.getApp(), ActionConstants.ENTRY_MESSAGE_ACTIVITY_ACTION, bundle);
                 } catch(Exception e) {
                     e.printStackTrace();
                 }

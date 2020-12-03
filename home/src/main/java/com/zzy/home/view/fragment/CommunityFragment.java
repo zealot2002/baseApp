@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zzy.common.base.BaseLoadingFragment;
+import com.zzy.common.constants.BusConstants;
+import com.zzy.commonlib.core.BusHelper;
 import com.zzy.home.R;
 
 /**
@@ -37,6 +39,12 @@ public class CommunityFragment extends BaseLoadingFragment {
         CommunityFragment fragment = new CommunityFragment();
         return fragment;
     }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+    }
+
     @Override
     protected int getLayoutId() {
         return R.layout.home_community_fragment;
