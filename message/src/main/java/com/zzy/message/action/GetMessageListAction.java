@@ -53,4 +53,9 @@ public class GetMessageListAction implements ScAction {
                 scCallback.onCallback(false, null, e.toString());
         }
     }
+
+    @Override
+    public void cancel() {
+        //need cancel http req
+    }
 }

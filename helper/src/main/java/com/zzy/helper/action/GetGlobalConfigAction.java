@@ -47,4 +47,9 @@ public class GetGlobalConfigAction implements ScAction {
             }
         });
     }
+
+    @Override
+    public void cancel() {
+
+    }
 }

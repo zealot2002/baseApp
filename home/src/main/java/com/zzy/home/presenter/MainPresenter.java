@@ -57,6 +57,11 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     public void end() {
         // TODO: need cancel req
+        try {
+            SCM.getInstance().cancel(ActionConstants.GET_MESSAGE_LIST_ACTION);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

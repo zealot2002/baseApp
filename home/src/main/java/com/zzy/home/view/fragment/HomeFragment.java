@@ -154,7 +154,7 @@ public class HomeFragment extends BaseLoadingFragment implements MainContract.Vi
             return;
         }
         banner.setVisibility(View.VISIBLE);
-        banner.setData(R.layout.banner_item, hfCtx.getBannerList(), null);
+        banner.setData(R.layout.home_banner_item, hfCtx.getBannerList(), null);
         banner.setDelegate(new BGABanner.Delegate<ImageView, BannerBean>() {
             @Override
             public void onBannerItemClick(BGABanner banner, ImageView itemView, BannerBean item, int position) {

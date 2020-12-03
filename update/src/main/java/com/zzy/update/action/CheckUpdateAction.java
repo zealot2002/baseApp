@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.zzy.annotations.ScActionAnnotation;
+import com.zzy.common.constants.HttpConstants;
 import com.zzy.common.constants.ParamConstants;
 import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.http.HInterface;
@@ -54,6 +55,11 @@ public class CheckUpdateAction implements ScAction {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void cancel() {
+//        HttpProxy.cancel(HttpConstants.APP_UPDATE);
     }
 
 /*    private void downloadFile(Context context,UpdateBean updateBean) {

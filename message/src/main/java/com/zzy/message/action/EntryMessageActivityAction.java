@@ -29,4 +29,9 @@ public class EntryMessageActivityAction implements ScAction {
             scCallback.onCallback(true, new Bundle(), "");
         }
     }
+
+    @Override
+    public void cancel() {
+        //do nothing..
+    }
 }

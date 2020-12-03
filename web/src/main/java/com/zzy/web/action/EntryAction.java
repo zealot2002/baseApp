@@ -59,4 +59,9 @@ public class EntryAction implements ScAction {
             scCallback.onCallback(true, new Bundle(), "");
         }
     }
+
+    @Override
+    public void cancel() {
+
+    }
 }
