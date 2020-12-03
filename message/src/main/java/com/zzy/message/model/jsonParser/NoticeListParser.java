@@ -1,6 +1,6 @@
 package com.zzy.message.model.jsonParser;
 
-import com.zzy.common.bean.NoticeBean;
+import com.zzy.common.bean.message.NoticeBean;
 import com.zzy.common.constants.HttpConstants;
 import com.zzy.commonlib.http.HConstant;
 import com.zzy.commonlib.http.HInterface;

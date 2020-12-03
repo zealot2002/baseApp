@@ -1,6 +1,6 @@
 package com.zzy.home.model.wrapper;
 
-import com.zzy.common.bean.NoticeBean;
+import com.zzy.common.bean.message.NoticeBean;
 import com.zzy.home.model.bean.main.BannerBean;
 
 import java.util.ArrayList;

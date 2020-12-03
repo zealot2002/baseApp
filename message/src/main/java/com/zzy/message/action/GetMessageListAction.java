@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.zzy.message.model.HttpProxy;
 import com.zzy.annotations.ScActionAnnotation;
-import com.zzy.common.bean.NoticeBean;
+import com.zzy.common.bean.message.NoticeBean;
 import com.zzy.common.constants.ActionConstants;
 import com.zzy.common.constants.ParamConstants;
 import com.zzy.commonlib.http.HConstant;

@@ -17,7 +17,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.sunfusheng.marqueeview.MarqueeView;
 import com.zzy.common.base.BaseLoadingFragment;
-import com.zzy.common.bean.NoticeBean;
+import com.zzy.common.bean.message.NoticeBean;
 import com.zzy.common.constants.ActionConstants;
 import com.zzy.common.constants.BusConstants;
 import com.zzy.common.constants.ParamConstants;
@@ -154,7 +154,7 @@ public class HomeFragment extends BaseLoadingFragment implements MainContract.Vi
             return;
         }
         banner.setVisibility(View.VISIBLE);
-        banner.setData(R.layout.home_banner_item, hfCtx.getBannerList(), null);
+        banner.setData(R.layout.banner_item, hfCtx.getBannerList(), null);
         banner.setDelegate(new BGABanner.Delegate<ImageView, BannerBean>() {
             @Override
             public void onBannerItemClick(BGABanner banner, ImageView itemView, BannerBean item, int position) {

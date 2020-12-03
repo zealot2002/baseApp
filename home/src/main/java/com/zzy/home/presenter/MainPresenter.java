@@ -3,7 +3,7 @@ package com.zzy.home.presenter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
-import com.zzy.common.bean.NoticeBean;
+import com.zzy.common.bean.message.NoticeBean;
 import com.zzy.common.constants.ActionConstants;
 import com.zzy.common.constants.ParamConstants;
 import com.zzy.common.network.CommonDataCallback;
@@ -18,7 +18,6 @@ import com.zzy.home.model.wrapper.HfCtx;
 import com.zzy.sc.core.serverCenter.SCM;
 import com.zzy.sc.core.serverCenter.ScCallback;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 

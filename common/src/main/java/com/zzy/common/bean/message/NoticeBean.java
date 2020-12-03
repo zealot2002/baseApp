@@ -1,4 +1,4 @@
-package com.zzy.common.bean;
+package com.zzy.common.bean.message;
 
 import android.os.Parcel;
 import android.os.Parcelable;
