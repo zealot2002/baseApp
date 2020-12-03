@@ -84,7 +84,6 @@ public class MessageActivity extends BaseToolbarActivity implements View.OnClick
                 ToastUtils.showShort("首页需要刷新");
             }
         }catch (Exception e){
-//            MyLog.d(e.toString());
             e.printStackTrace();
         }
     }
