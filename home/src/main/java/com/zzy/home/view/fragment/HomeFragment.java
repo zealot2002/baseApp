@@ -158,9 +158,7 @@ public class HomeFragment extends BaseLoadingFragment implements MainContract.Vi
         banner.setDelegate(new BGABanner.Delegate<ImageView, BannerBean>() {
             @Override
             public void onBannerItemClick(BGABanner banner, ImageView itemView, BannerBean item, int position) {
-//                if(item.getLinkUrl().isEmpty()) {
-//                    return;
-//                }
+//
                 try {
                     String tmpUrl = "http://www.baidu.com";
                     Bundle bundle = new Bundle();
