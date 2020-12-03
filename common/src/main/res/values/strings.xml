@@ -33,6 +33,7 @@
     <string name="toast_221_bank_account">您尚未开通银行存管账户，请点击头像，在账户设置-存管账户中进行开通</string>
 
     <string name="toast_223_bank_account">您尚未激活银行存管账户，请点击存管账户激活</string>
+    <string name="server_error">请求失败</string>
 
 
 </resources>

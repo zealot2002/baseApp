@@ -16,7 +16,7 @@ import com.zzy.commonlib.utils.ProcessUtils;
 import com.zzy.commonlib.utils.ToastUtils;
 import com.zzy.flysp.core.spHelper.SPHelper;
 import com.zzy.sc.core.serverCenter.SCM;
-import com.zzy.servercentre.ActionConstants;
+import com.zzy.common.constants.ActionConstants;
 
 public class MyDelegate implements ApplicationDelegate {
 
@@ -31,8 +31,6 @@ public class MyDelegate implements ApplicationDelegate {
         SCM.getInstance().init(application);
         /* auto layout */
         AutoLayoutConifg.getInstance().useDeviceSize().init(application);
-        /* log */
-        MyLog.setLogEnable(true);
 
         ToastUtils.setGravity(Gravity.CENTER, 0, 0);
 

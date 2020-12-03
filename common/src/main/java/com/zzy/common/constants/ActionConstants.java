@@ -1,4 +1,4 @@
-package com.zzy.servercentre;
+package com.zzy.common.constants;
 
 /**
  * Created by haoran on 2018/11/15.

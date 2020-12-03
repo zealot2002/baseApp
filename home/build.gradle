@@ -31,4 +31,9 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':common')
+
+    //banner
+    api 'cn.bingoogolapple:bga-banner:2.2.4@aar'
+    //俗名：可垂直跑、可水平跑的跑马灯
+    api 'com.sunfusheng:marqueeview:1.3.3'
 }

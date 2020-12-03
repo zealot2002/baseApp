@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/smartRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <cn.bingoogolapple.bgabanner.BGABanner
+                android:id="@+id/banner"
+                style="@style/home_bannerStyle"
+                android:layout_width="750px"
+                android:layout_height="430px"
+                app:banner_pointAutoPlayAble="true"
+                app:banner_pointContainerBackground="@android:color/transparent"
+                app:banner_transitionEffect="defaultEffect" />
+
+            <com.sunfusheng.marqueeview.MarqueeView
+                android:id="@+id/marqueeView"
+                android:layout_width="280dp"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="80px"
+                android:layout_marginTop="50dp"
+                app:mvAnimDuration="1000"
+                app:mvDirection="bottom_to_top"
+                app:mvInterval="3000"
+                app:mvSingleLine="true"
+                app:mvTextColor="@color/text_black"
+                app:mvTextSize="14sp" />
+        </LinearLayout>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</RelativeLayout>
+

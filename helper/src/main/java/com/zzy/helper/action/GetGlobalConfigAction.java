@@ -11,7 +11,7 @@ import com.zzy.flysp.core.spHelper.SPHelper;
 import com.zzy.helper.model.HttpProxy;
 import com.zzy.sc.core.serverCenter.ScAction;
 import com.zzy.sc.core.serverCenter.ScCallback;
-import com.zzy.servercentre.ActionConstants;
+import com.zzy.common.constants.ActionConstants;
 
 import org.json.JSONObject;
 

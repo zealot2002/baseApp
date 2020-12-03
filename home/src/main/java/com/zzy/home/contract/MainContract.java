@@ -1,7 +1,7 @@
 package com.zzy.home.contract;
 
+import com.zzy.common.base.BasePresenter;
 import com.zzy.commonlib.base.BaseLoadingView;
-import com.zzy.commonlib.base.BasePresenter;
 
 
 

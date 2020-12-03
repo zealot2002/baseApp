@@ -230,7 +230,7 @@ public class MyWebActivity extends BaseAppActivity implements View.OnClickListen
     protected void onDestroy() {
         super.onDestroy();
         androidInterface = null;
-        AppUtils.exitApp(this);
+//        AppUtils.exitApp(this);
     }
 
     @Override

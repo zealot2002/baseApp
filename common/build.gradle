@@ -51,6 +51,10 @@ dependencies {
     //banner
     compile 'cn.bingoogolapple:bga-banner:2.2.4@aar'
 
-    // server-center
-    api project(':servercentre')
+    //服务中心 start
+    api "com.github.zealot2002:serverCentre:${thridLibs.server_center}"
+    api files('libs/scmProcessors.jar')
+    api files('libs/scmAnnotations.jar')
+    api "com.squareup:javapoet:${thridLibs.javapoet}"
+    //服务中心 end
 }

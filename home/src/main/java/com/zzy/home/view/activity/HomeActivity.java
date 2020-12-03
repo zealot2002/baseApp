@@ -10,6 +10,7 @@ import com.zzy.commonlib.utils.ToastUtils;
 import com.zzy.home.R;
 import com.zzy.home.base.BaseHomeActivity;
 import com.zzy.home.view.fragment.CommunityFragment;
+import com.zzy.home.view.fragment.HomeFragment;
 
 
 /**
@@ -26,9 +27,9 @@ public class HomeActivity extends BaseHomeActivity{
     @Override
     protected TabContext getTabContext() {
         TabContext tabContext = new TabContext();
-        TabBean tab1 = new TabBean("驾校",R.mipmap.home_school_icon_normal,R.mipmap.home_school_icon_selected);
-        TabBean tab2 = new TabBean("考试",R.mipmap.home_exam_icon_normal,R.mipmap.home_exam_icon_selected);
-        TabBean tab3 = new TabBean("社区",R.mipmap.home_community_icon_normal,R.mipmap.home_community_icon_selected);
+        TabBean tab1 = new TabBean("首页",R.mipmap.home_school_icon_normal,R.mipmap.home_school_icon_selected);
+        TabBean tab2 = new TabBean("发现",R.mipmap.home_exam_icon_normal,R.mipmap.home_exam_icon_selected);
+        TabBean tab3 = new TabBean("拍卖",R.mipmap.home_community_icon_normal,R.mipmap.home_community_icon_selected);
         TabBean tab4 = new TabBean("我的",R.mipmap.home_mine_icon_normal,R.mipmap.home_mine_icon_selected);
         tabContext.getTabBeanList().add(tab1);
         tabContext.getTabBeanList().add(tab2);
@@ -38,8 +39,12 @@ public class HomeActivity extends BaseHomeActivity{
         tabContext.setNormalTextColorId(R.color.home_tab_text_color_normal);
         tabContext.setCheckedTextColorId(R.color.home_tab_text_color_checked);
 
-        tabContext.setFragments(new Fragment[]{new CommunityFragment(),
-                new CommunityFragment(),new CommunityFragment(),new CommunityFragment()});
+        tabContext.setFragments(new Fragment[]{
+                HomeFragment.getInstance(),
+                CommunityFragment.getInstance(),
+                CommunityFragment.getInstance(),
+                CommunityFragment.getInstance(),
+                });
         return tabContext;
     }
 

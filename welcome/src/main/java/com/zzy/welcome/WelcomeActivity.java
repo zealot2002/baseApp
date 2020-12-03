@@ -10,7 +10,7 @@ import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.flysp.core.spHelper.SPHelper;
 import com.zzy.sc.core.serverCenter.SCM;
 import com.zzy.sc.core.serverCenter.ScCallback;
-import com.zzy.servercentre.ActionConstants;
+import com.zzy.common.constants.ActionConstants;
 
 
 /**
@@ -25,7 +25,7 @@ public class WelcomeActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.welcome_activity_welcome);
+        setContentView(R.layout.welcome_activity_splash);
         handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -70,5 +70,12 @@ public class WelcomeActivity extends BaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacks(null);
+        handler = null;
     }
 }

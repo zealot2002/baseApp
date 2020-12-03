@@ -33,6 +33,10 @@ public class CommunityFragment extends BaseLoadingFragment {
 //        presenter.getPageData(context, pageCode,true,1);
     }
 
+    public static CommunityFragment getInstance() {
+        CommunityFragment fragment = new CommunityFragment();
+        return fragment;
+    }
     @Override
     protected int getLayoutId() {
         return R.layout.home_community_fragment;

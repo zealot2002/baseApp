@@ -8,7 +8,7 @@ import com.zzy.annotations.ScActionAnnotation;
 import com.zzy.home.view.activity.HomeActivity;
 import com.zzy.sc.core.serverCenter.ScAction;
 import com.zzy.sc.core.serverCenter.ScCallback;
-import com.zzy.servercentre.ActionConstants;
+import com.zzy.common.constants.ActionConstants;
 
 
 /**

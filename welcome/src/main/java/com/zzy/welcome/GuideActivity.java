@@ -13,7 +13,7 @@ import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.flysp.core.spHelper.SPHelper;
 import com.zzy.sc.core.serverCenter.SCM;
 import com.zzy.sc.core.serverCenter.ScCallback;
-import com.zzy.servercentre.ActionConstants;
+import com.zzy.common.constants.ActionConstants;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -100,7 +100,6 @@ dependencies {
     implementation project(':other')
     implementation project(':web')
     implementation project(':update')
-    implementation project(':servercentre')
 
 }
 

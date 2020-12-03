@@ -1,6 +1,13 @@
 package com.zzy.common.utils;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.telephony.TelephonyManager;
 import android.util.Log;
+
+import com.meituan.android.walle.WalleChannelReader;
 import com.zzy.common.constants.SPConstants;
 import com.zzy.flysp.core.spHelper.SPHelper;
 
@@ -8,8 +15,39 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public final class CommonUtils {
+    //"MI 5;xiaomi;99000855259808"
+    public static String getDeviceInfo(Context context) throws Exception {
+        StringBuilder sb = new StringBuilder();
+        sb.append(android.os.Build.MODEL);
+        sb.append(";");
+        sb.append(WalleChannelReader.getChannel(context));
+        sb.append(";");
+        sb.append(getImei(context));
+        sb.append(";");
+        sb.append(android.os.Build.VERSION.RELEASE);
+        return sb.toString();
+    }
 
-
+    public static final String getImei(Context context) {
+        try {
+            //实例化TelephonyManager对象
+            TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            //获取IMEI号
+            if(ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                return "";
+            }
+            String imei = telephonyManager.getDeviceId();
+            //在次做个验证，也不是什么时候都能获取到的啊
+            if(imei == null) {
+                imei = "";
+            }
+            return imei;
+        } catch(Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
     public static String getLendMinMoney(){
         String ret = "10000";
         try{
