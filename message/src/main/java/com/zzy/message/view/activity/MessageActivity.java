@@ -10,6 +10,7 @@ import com.zzy.common.constants.BusConstants;
 import com.zzy.common.constants.ParamConstants;
 import com.zzy.common.widget.LoadingHelper;
 import com.zzy.commonlib.core.BusHelper;
+import com.zzy.commonlib.log.MyLog;
 import com.zzy.commonlib.utils.AppUtils;
 import com.zzy.commonlib.utils.ToastUtils;
 import com.zzy.message.R;
@@ -83,6 +84,7 @@ public class MessageActivity extends BaseToolbarActivity implements View.OnClick
                 ToastUtils.showShort("首页需要刷新");
             }
         }catch (Exception e){
+//            MyLog.d(e.toString());
             e.printStackTrace();
         }
     }
